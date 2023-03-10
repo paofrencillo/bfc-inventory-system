@@ -44,7 +44,13 @@
       <img src="../../dist/img/carousel-pics/c-pic7.jpg" alt="">
     </div>
     <div class="carousel-item">
-      <img src="../../dist/img/carousel-pics/c-pic3.jpeg" alt="">
+      <img src="../../dist/img/carousel-pics/c-pic8.jpg" alt="">
+    </div>
+    <div class="carousel-item">
+      <img src="../../dist/img/carousel-pics/c-pic9.jpg" alt="">
+    </div>
+    <div class="carousel-item">
+      <img src="../../dist/img/carousel-pics/c-pic10.jpg" alt="">
     </div>
   </div>
  
@@ -52,7 +58,7 @@
 <img src="../../dist/img/bfc-logo-1.png" alt="" style="position: absolute; top: 0; left: 0; z-index: 100; width: 200px;">
 <div class="login-box"  style="position: fixed;">
   <!-- /.login-logo -->
-  <div class="card card-outline card-primary">
+  <div id="login-card" class="card card-outline card-primary" style="background-color: rgba(216, 221, 236, 0.75) !important;">
     <div class="card-header text-center">
       <a href="../examples/login-v2.html" class="">
         <img src="../../dist/img/valuemed-logo.png" alt="" style="width: 90%;">
@@ -63,13 +69,21 @@
     </div>
     <div class="card-body">
       <form action="../../index3.html" method="post">
+        <div class="input-group mb-2">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+          <input type="text" class="form-control" placeholder="Username">
+        </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
+          <input type="password" class="form-control" placeholder="Password">
         </div>
           <!-- /.col -->
         <div class="text-center d-flex justify-content-center align align-items-center">
@@ -80,7 +94,7 @@
       </form>
       <!-- /.social-auth-links -->
 
-      <p class="m-2 ml-3">
+      <p class="d-flex justify-content-center">
         <a href="../examples/recover-password-v2.html"> <u>  Reset Password  </u></a>
       </p>
     </div>
