@@ -66,7 +66,14 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
+  position: relative;
+}
+
+.carousel-item > img {
+  opacity: 0.75;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -4824,6 +4831,8 @@ input[type="button"].btn-block {
   background-clip: border-box;
   border: 0 solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  
+  
 }
 
 .card > hr {
@@ -34971,28 +34980,30 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
 
 .login-page,
 .register-page {
-  -ms-flex-align: center;
-  align-items: center;
+  -ms-flex-align: end;
+  align-items: end;
   background-color: #e9ecef;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
   flex-direction: column;
   height: 100vh;
-  -ms-flex-pack: center;
+  -ms-flex-pack: end;
   justify-content: center;
 }
 
 .login-box,
 .register-box {
   width: 360px;
+  margin-right: 10%;
 }
 
 @media (max-width: 576px) {
   .login-box,
   .register-box {
-    margin-top: .5rem;
-    width: 90%;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
   }
 }
 
