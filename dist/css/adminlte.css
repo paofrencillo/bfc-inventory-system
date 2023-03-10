@@ -70,7 +70,6 @@ body {
 }
 
 .carousel-item > img {
-  opacity: 0.70;
   width: 100vw;
   height: 100vh;
   object-fit: cover;
