@@ -30,6 +30,9 @@
     <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Select2 -->
+   <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+   <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -215,8 +218,14 @@
                         <td>200</td>
                         <td>25%</td>
                         <td>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">UPDATE</button>
-                            <button type="button" class="btn btn-secondary">DETAILS</button>
+                          <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                            <i class="fas fa-pencil-alt"></i>
+                            Edit Details
+                          </button>
+                          <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                            <i class="fas fa-eye"></i>
+                            View Details
+                          </button>
                         </td>
                     </tr>
                     <tr>
@@ -226,8 +235,14 @@
                         <td>200</td>
                         <td>40%</td>
                         <td>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">UPDATE</button>
-                            <button type="button" class="btn btn-secondary">DETAILS</button>
+                          <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                            <i class="fas fa-pencil-alt"></i>
+                            Edit Details
+                          </button>
+                          <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                            <i class="fas fa-eye"></i>
+                            View Details
+                          </button>
                         </td>
                     </tr>
                     <tr>
@@ -237,8 +252,14 @@
                         <td>200</td>
                         <td>35%</td>
                         <td>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">UPDATE</button>
-                            <button type="button" class="btn btn-secondary">DETAILS</button>
+                          <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                            <i class="fas fa-pencil-alt"></i>
+                            Edit Details
+                          </button>
+                          <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                            <i class="fas fa-eye"></i>
+                            View Details
+                          </button>
                         </td>
                     </tr>
                     </tbody>
@@ -252,7 +273,7 @@
         </div>
 
 
-        <div class="modal fade" id="addnew">
+        <!-- <div class="modal fade" id="addnew">
             <div class="modal-dialog modal-dialog-centered modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
@@ -294,12 +315,20 @@
                                     <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();">
                                 </div>
                             </div>     
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="supp">Supplier:</label>
-                                    <input type="text" class="form-control " id="supp">
-                                </div>
-                            </div>       
+                            <div class="col-sm-6">
+                              <div class="form-group">
+                                  <label for="supp">Supplier:</label>
+                                  <select class="form-control select2bs4" style="width: 100%;">
+                                    <option selected="selected" disabled>Please Select Supplier</option>
+                                    <option>Supplier A</option>
+                                    <option>Supplier B</option>
+                                    <option>Supplier C</option>
+                                    <option>Supplier D</option>
+                                    <option>Supplier E</option>
+                                    <option>Supplier F</option>
+                                  </select>
+                              </div>
+                            </div>      
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="exp">Expiration Date:</label>
@@ -320,10 +349,8 @@
                   <button type="button" class="btn btn-primary">Add Product</button>
                 </div>
               </div>
-              <!-- /.modal-content -->
             </div>
-            <!-- /.modal-dialog -->
-        </div>
+        </div> -->
         <!-- /.modal -->
 
         <div class="modal fade" id="update">
@@ -362,18 +389,26 @@
                                     <input type="number" class="form-control " id="allo">
                                 </div>
                             </div>        
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label for="lot">Lot Number:</label>
                                     <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();">
                                 </div>
                             </div>     
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="supp">Supplier:</label>
-                                    <input type="text" class="form-control " id="supp">
-                                </div>
-                            </div>       
+                            <div class="col-sm-5">
+                              <div class="form-group">
+                                  <label for="supp">Supplier:</label>
+                                  <select class="form-control select2bs4" style="width: 100%;">
+                                    <option selected="selected" disabled>Please Select Supplier</option>
+                                    <option>Supplier A</option>
+                                    <option>Supplier B</option>
+                                    <option>Supplier C</option>
+                                    <option>Supplier D</option>
+                                    <option>Supplier E</option>
+                                    <option>Supplier F</option>
+                                  </select>
+                              </div>
+                            </div>           
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="exp">Expiration Date:</label>
@@ -398,7 +433,87 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-        <!-- /.modal -->
+        <!-- /.modal for details -->
+        <div class="modal fade" id="view">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">VIEW DETAILS</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <form>
+                      <div class="row">     
+                          <div class="col-sm-4">
+                              <div class="form-group">
+                                  <label for="barcode">Barcode:</label>
+                                  <input type="text" class="form-control " id="barcode" readonly>
+                                  </div>
+                          </div>
+                          <div class="col-sm-8">
+                              <div class="form-group">
+                                  <label for="prod">Product Description:</label>
+                                  <input type="text" class="form-control " id="prod" readonly>
+                              </div>
+                          </div>
+                          <div class="col-sm-2">
+                              <div class="form-group">
+                                  <label for="stock">Stock:</label>
+                                  <input type="number" class="form-control " id="stock" readonly>
+                              </div>
+                          </div>
+                          <div class="col-sm-2">
+                              <div class="form-group">
+                                  <label for="allo">Allocation:</label>
+                                  <input type="number" class="form-control " id="allo" readonly>
+                              </div>
+                          </div>        
+                          <div class="col-sm-3">
+                              <div class="form-group">
+                                  <label for="lot">Lot Number:</label>
+                                  <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();" readonly>
+                              </div>
+                          </div>     
+                          <div class="col-sm-5">
+                            <div class="form-group">
+                                <label for="supp">Supplier:</label>
+                                <select class="form-control select2bs4" style="width: 100%;" disabled>
+                                  <option selected="selected" disabled>Please Select Supplier</option>
+                                  <option>Supplier A</option>
+                                  <option>Supplier B</option>
+                                  <option>Supplier C</option>
+                                  <option>Supplier D</option>
+                                  <option>Supplier E</option>
+                                  <option>Supplier F</option>
+                                </select>
+                            </div>
+                          </div>            
+                          <div class="col-sm-6">
+                              <div class="form-group">
+                                  <label for="exp">Expiration Date:</label>
+                                  <input type="date" class="form-control " id="exp" readonly>
+                              </div>
+                          </div>   
+                          <div class="col-sm-6">
+                              <div class="form-group">
+                                  <label for="supp">Entry Date:</label>
+                                  <input type="date" class="form-control " id="supp" readonly>
+                              </div>
+                          </div>        
+                      </div>                       
+                  </form>
+              </div>
+              <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+      </div>
 
       </section>
     </div>
@@ -468,6 +583,8 @@
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
+<!-- Select2 -->
+<script src="plugins/select2/js/select2.full.min.js"></script>
 <script>
     $(function () {
       $("#example1").DataTable({
@@ -475,10 +592,18 @@
         "responsive": true, 
         "lengthChange": true, 
         "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-      
+        "buttons": ["copy", "csv", "excel", "pdf", "print"]}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
+
+    $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+      })
+    })
   </script>
 </body>
 </html>
