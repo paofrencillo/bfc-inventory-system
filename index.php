@@ -1,3 +1,7 @@
+<?php
+ include('connection.php');
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,7 +64,7 @@
   <!-- /.login-logo -->
   <div id="login-card" class="card card-outline card-primary" style="background-color: rgba(216, 221, 236, 0.75) !important;">
     <div class="card-header text-center">
-      <a href="../examples/login-v2.html" class="">
+      <a href="../LoginBFC.html" class="">
         <img src="../../dist/img/valuemed-logo.png" alt="" style="width: 90%;">
         <div class="text-blue">
           Inventory System
@@ -68,14 +72,14 @@
       </a>
     </div>
     <div class="card-body">
-      <form action="../../index3.html" method="post">
+      <form action="functions.php" method="post">
         <div class="input-group mb-2">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
             </div>
           </div>
-          <input type="text" class="form-control" placeholder="Username">
+          <input type="text" class="form-control" name="username" placeholder="Username">
         </div>
         <div class="input-group mb-3">
           <div class="input-group-append">
@@ -83,7 +87,7 @@
               <span class="fas fa-lock"></span>
             </div>
           </div>
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" name="password" placeholder="Password">
         </div>
           <!-- /.col -->
         <div class="text-center d-flex justify-content-center align align-items-center">
