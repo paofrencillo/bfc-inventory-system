@@ -26,7 +26,7 @@ if(isset($_POST['signin'])) {
     }else {
        $error = "Your Login Name or Password is invalid";
        ?>
-       <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+       <script src="plugins\sweetalert2\sweetalert2.all.js"></script>
        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
        <script>
        $(document).ready(function(){
