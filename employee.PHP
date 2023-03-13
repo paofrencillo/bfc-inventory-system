@@ -32,8 +32,12 @@
   <!-- Daterange picker -->
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
-  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
   <link rel="icon" type="image/png" href="/dist/img/normal_BFC_logo_latest.png">
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -44,23 +48,24 @@
   </div>
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-light navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="starter.php" class="nav-link">Home</a>
+        <a href="starter.html" class="nav-link">Home</a>
       </li>
     </ul>
+
   </nav>
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-light-blue elevation-4">
     <!-- Brand Logo -->
-    <a href="starter.php" class="brand-link">
+    <a href="starter.html" class="brand-link">
       <img src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AdminBFC</span>
     </a>
@@ -73,8 +78,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="starter.php" class="nav-link active">
+          <li class="nav-item">
+            <a href="starter.html" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -82,7 +87,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link ">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Manage Inventory
@@ -92,13 +97,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="inventory.php" class="nav-link ">
+                <a href="inventory.html" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Inventory</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="masterlist.php" class="nav-link">
+                <a href="masterlist.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Masterlist</p>
                 </a>
@@ -116,21 +121,21 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="prod-in.php" class="nav-link">
+                <a href="prod-in.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product In</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="prod-out.php" class="nav-link">
+                <a href="prod-out.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product Out</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-cog"></i>
               <p>
                 Settings
@@ -140,25 +145,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="employee.php" class="nav-link ">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="employee.html" class="nav-link active">
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Employee Accounts</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="franchisee.php" class="nav-link">
+                <a href="franchisee.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Franchisee List</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="supplier.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Supplier</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="admin.php" class="nav-link">
+                <a href="admin.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Change Password </p>
                 </a>
@@ -188,65 +193,142 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
+            <h1 class="m-0">Employee Accounts</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
-
-      <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-          <div class="col-lg-4 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>150<sup style="font-size: 20px"> Items</sup></h3>
-
-                <p>Product In</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-ios-download-outline"></i>
-              </div>
-              <a href="prod-in.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <div class="col-12">
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="#" class="h1"><b>Add</b> Account</a>
             </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-4 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3>53<sup style="font-size: 20px"> Items</sup></h3>
-
-                <p>Product Out</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-ios-upload-outline"></i>
-              </div>
-              <a href="prod-out.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <div class="card-body text-right">
+              <p class="login-box-msg">Enroll New Employee Account</p>
+              <form action="functions.php" method="post">
+                <div class="input-group mb-3">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-address-card"></span>
+                    </div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Username" name="username">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-user"></span>
+                    </div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Name" name="name">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-user-lock"></span>
+                    </div>
+                  </div>
+                  <input type="password" class="form-control" placeholder="Default Password" name="password">
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary" name="signup" >Add Account</button>
+                </div>
+              </form>
             </div>
-          </div>
-         
-          <div class="col-lg-4 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>700<sup style="font-size: 20px"> Items</sup></h3>
-
-                <p>Total Product Registered</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-barcode"></i>
-              </div>
-              <a href="inventory.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
+            <!-- /.card-body -->
         </div>
         <!-- /.row -->
       </div>
+    
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="example1" class="table table-bordered table-hover dt-center">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Password</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1023156MHJHMHM</td>
+                        <td>Robust12S</td>
+                        <td>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">EDIT</button>
+                            <button type="button" class="btn btn-danger">DELETE</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>421544256</td>
+                        <td>Cetirizine10S</td>
+                        <td>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">EDIT</button>
+                            <button type="button" class="btn btn-danger">DELETE</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>421544256</td>
+                        <td>Mefenamic500mg (Generic)</td>
+                        <td>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">EDIT</button>
+                            <button type="button" class="btn btn-danger">DELETE</button>
+                        </td>
+                    </tr>
+                    </tbody>
 
+                    </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- /.modal -->
+
+        <div class="modal fade" id="update">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">EDIT ACCOUNT DETAILS</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">     
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="name">Name:</label>
+                                    <input type="text" class="form-control " id="name">
+                                    </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <label for="pass">Password:</label>
+                                    <input type="text" class="form-control " id="pass">
+                                </div>
+                            </div>                     
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary">Update</button>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+      </section>
     </div>
     <!-- /.content-header -->
   </div>
@@ -297,9 +379,34 @@
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
+<script>
+    $(function () {
+      $("#example1").DataTable({
+        "columnDefs": [{"className": "dt-center", "targets": "_all"}],
+        "responsive": true, 
+        "lengthChange": true, 
+        "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      
+    });
+  </script>
 </body>
 </html>
