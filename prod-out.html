@@ -217,9 +217,10 @@
                     <tr>
                         <th>Barcode</th>
                         <th>Product Description</th>
-                        <th>Stock</th>
-                        <th>Allocation</th>
-                        <th>S/A %</th>
+                        <th>Quantity</th>
+                        <th>Lot number</th>
+                        <th>MRF number</th>
+                        <th>Remarks</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -230,6 +231,7 @@
                         <td>50</td>
                         <td>200</td>
                         <td>25%</td>
+                        <td></td>
                         <td>
                           <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
                             <i class="fas fa-pencil-alt"></i>
@@ -247,6 +249,7 @@
                         <td>80</td>
                         <td>200</td>
                         <td>40%</td>
+                        <td></td>
                         <td>
                           <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
                             <i class="fas fa-pencil-alt"></i>
@@ -264,6 +267,7 @@
                         <td>70</td>
                         <td>200</td>
                         <td>35%</td>
+                        <td></td>
                         <td>
                           <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
                             <i class="fas fa-pencil-alt"></i>
@@ -316,13 +320,13 @@
                                     <input type="number" class="form-control " id="quan" value="0">
                                 </div>
                             </div>     
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label for="lot">Lot Number:</label>
                                     <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();">
                                 </div>
                             </div>     
-                            <div class="col-sm-6">
+                            <div class="col-sm-5">
                               <div class="form-group">
                                   <label for="supp">Supplier:</label>
                                   <select class="form-control select2bs4" style="width: 100%;">
@@ -335,7 +339,13 @@
                                     <option>Supplier F</option>
                                   </select>
                               </div>
-                            </div>           
+                            </div>  
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                  <label for="remarks">Remarks:</label>
+                                  <input type="text" class="form-control " id="remarks">
+                              </div>
+                          </div>           
                             <div class="col-sm-6">
                               <div class="form-group">
                                   <label for="supp">Branch Code:</label>
@@ -406,16 +416,10 @@
                             </div>
                             <div class="col-sm-2">
                                 <div class="form-group">
-                                    <label for="stock">Stock:</label>
-                                    <input type="number" class="form-control " id="stock">
+                                    <label for="qty">Quantity:</label>
+                                    <input type="number" class="form-control " id="qty">
                                 </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label for="allo">Allocation:</label>
-                                    <input type="number" class="form-control " id="allo">
-                                </div>
-                            </div>        
+                            </div>      
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="lot">Lot Number:</label>
@@ -424,18 +428,24 @@
                             </div>     
                             <div class="col-sm-4">
                               <div class="form-group">
-                                <label for="supp">Supplier:</label>
+                                <label for="supp">Branch Code:</label>
                                 <select class="form-control select2bs4" style="width: 100%;">
-                                  <option selected="selected" disabled>Please Select Supplier</option>
-                                  <option>Supplier A</option>
-                                  <option>Supplier B</option>
-                                  <option>Supplier C</option>
-                                  <option>Supplier D</option>
-                                  <option>Supplier E</option>
-                                  <option>Supplier F</option>
+                                  <option selected="selected" disabled>Please Select Branch Code</option>
+                                  <option>Branch A</option>
+                                  <option>Branch B</option>
+                                  <option>Branch C</option>
+                                  <option>Branch D</option>
+                                  <option>Branch E</option>
+                                  <option>Branch F</option>
                                 </select>
                               </div>
-                            </div>             
+                            </div>    
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                  <label for="remark">Remarks:</label>
+                                  <input type="number" class="form-control " id="remark">
+                              </div>
+                          </div>           
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="exp">Expiration Date:</label>
@@ -488,16 +498,10 @@
                           </div>
                           <div class="col-sm-2">
                               <div class="form-group">
-                                  <label for="stock">Stock:</label>
+                                  <label for="stock">Quantity:</label>
                                   <input type="number" class="form-control " id="stock" readonly>
                               </div>
-                          </div>
-                          <div class="col-sm-2">
-                              <div class="form-group">
-                                  <label for="allo">Allocation:</label>
-                                  <input type="number" class="form-control " id="allo" readonly>
-                              </div>
-                          </div>        
+                          </div>      
                           <div class="col-sm-4">
                               <div class="form-group">
                                   <label for="lot">Lot Number:</label>
@@ -506,9 +510,9 @@
                           </div>     
                           <div class="col-sm-4">
                             <div class="form-group">
-                              <label for="supp">Supplier:</label>
+                              <label for="supp">Branch Code:</label>
                               <select class="form-control select2bs4" style="width: 100%;" disabled>
-                                <option selected="selected" disabled>Please Select Supplier</option>
+                                <option selected="selected" disabled>Please Select Branch</option>
                                 <option>Supplier A</option>
                                 <option>Supplier B</option>
                                 <option>Supplier C</option>
