@@ -23,10 +23,10 @@ if(isset($_POST['signin'])) {
     if($count == 1) {
         // If result matched $myusername and $mypassword, table row must be 1 row
         if (password_verify($mypassword, $getData['pass'])){
-            if ($getData['is_superuser'] == 'admin'){
+            if ($getData['is_superuser'] == '1'){
                 $_SESSION['login_user'] = $getData;
                 header('location:starter.php');
-            }else if ($row['is_superuser'] == 'employee'){
+            }else if ($row['is_superuser'] == '0'){
                 $_SESSION['login_user'] = $row;
                 header('location:z-dashboard.html');
             }else{
