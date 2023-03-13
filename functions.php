@@ -201,7 +201,7 @@ if (isset($_POST['pass_admin'])) {
         </script>
         <?php
     }else{
-        $conn->query("UPDATE users SET pass='".password_hash($pass, PASSWORD_BCRYPT)."' WHERE id='$id_pass'") or die($conn->error);
+        $conn->query("UPDATE users SET pass='".password_hash($pass, PASSWORD_BCRYPT)."' WHERE user_id='$id_pass'") or die($conn->error);
         session_destroy();
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
