@@ -194,6 +194,12 @@
             <div class="card-header text-center">
                 <a href="#" class="h1"><b>Account</b> Settings</a>
             </div>
+            <?php 
+                $check_name =  $_SESSION['login_user']['user'];
+                $query = "SELECT * FROM users WHERE user='$check_name'";
+                $result = mysqli_query($conn, $query);
+                while ($row = mysqli_fetch_array($result)) {
+            ?>
             <div class="card-body text-right">
               <p class="login-box-msg">Change Password</p>
               <form action="functions.php" method="post">
@@ -213,14 +219,13 @@
                   </div>
                   <input type="password" class="form-control" placeholder="Confirm Password" name="confirmpass">
                 </div>
-                
-                <!-- /.col -->
+            
                 <div class="col-12">
-                  <a type="submit" class="btn btn-primary btn-md" >Save Changes</a>
+                  <input type="hidden" name="id_password" value="<?php echo $row['id'] ?>">
+                  <button type="submit" class="btn btn-primary btn-md" name="pass_admin" >Save Changes</button>
                 </div>
-                <!-- /.col -->
-                
               </form>
+              <?php } ?>
             </div>
             <!-- /.card-body -->
         </div>

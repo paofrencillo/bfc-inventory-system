@@ -17,48 +17,97 @@ if(isset($_POST['signin'])) {
     $sql = "SELECT * FROM users WHERE user = '$myusername'";
     $result = mysqli_query($conn,$sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-    // $active = $row['active'];
     
     $count = mysqli_num_rows($result);
     
-
-    // If result matched $myusername and $mypassword, table row must be 1 row
-    if (password_verify($mypassword, $getData['pass'])){
-        if ($getData['is_superuser'] == '1'){
-            $_SESSION['login_user'] = $getData;
-            header('location:starter.php');
-        }else if ($row['is_superuser'] == '0'){
-            $_SESSION['login_user'] = $row;
-            header('location:z-dashboard.html');
+    if($count == 1) {
+        // If result matched $myusername and $mypassword, table row must be 1 row
+        if (password_verify($mypassword, $getData['pass'])){
+            if ($getData['is_superuser'] == 'admin'){
+                $_SESSION['login_user'] = $getData;
+                header('location:starter.php');
+            }else if ($row['is_superuser'] == 'employee'){
+                $_SESSION['login_user'] = $row;
+                header('location:z-dashboard.html');
+            }else{
+                ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                $(document).ready(function(){
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Username and/or Password is incorrect',
+                        text: 'Something went wrong!',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                        }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "index.php";
+                            }else{
+                                window.location.href = "index.php";
+                            }
+                        })
+                        
+                    })
+            
+                </script>
+                <?php
+            }
+        }else{
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+            $(document).ready(function(){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'Username and/or Password is incorrect',
+                    text: 'Something went wrong!',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "index.php";
+                        }else{
+                            window.location.href = "index.php";
+                        }
+                    })
+                    
+                })
+        
+            </script>
+            <?php
         }
-    }  
-    }else {
-       $error = "Your Login Name or Password is invalid";
-       ?>
-       <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-       <script>
-       $(document).ready(function(){
-               Swal.fire({
-               icon: 'error',
-               title: 'Username and/or Password is incorrect',
-               text: 'Something went wrong!',
-               confirmButtonColor: '#3085d6',
-               confirmButtonText: 'Okay'
-               }).then((result) => {
-               if (result.isConfirmed) {
-                   window.location.href = "index.php";
-                   }else{
-                       window.location.href = "index.php";
-                   }
-               })
-               
-           })
-   
-       </script>
-       <?php
+    
+    }else{
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+        $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'Username and/or Password is incorrect',
+                text: 'Something went wrong!',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "index.php";
+                    }else{
+                        window.location.href = "index.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
     }
 
+    
+}
 
 #REGISTER ACCOUNT
 if (isset($_POST['signup'])) {
@@ -126,9 +175,9 @@ if (isset($_POST['signup'])) {
 #CHANGE PASSWORD ADMIN
 if (isset($_POST['pass_admin'])) {
     $id_pass = $_POST['id_password'];
-    $password1 = $_POST['pass1'];
-    $password2 = $_POST['pass2'];
-    if ($password1 != $password2){
+    $pass = $_POST['password'];
+    $pass2 = $_POST['confirmpass'];
+    if ($pass != $pass2){
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -141,9 +190,9 @@ if (isset($_POST['pass_admin'])) {
                 confirmButtonText: 'Okay'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "_profile.php";
+                    window.location.href = "admin.php";
                     }else{
-                        window.location.href = "_profile.php";
+                        window.location.href = "admin.php";
                     }
                 })
                 
@@ -152,7 +201,7 @@ if (isset($_POST['pass_admin'])) {
         </script>
         <?php
     }else{
-        $conn->query("UPDATE admin SET password='".password_hash($password1, PASSWORD_DEFAULT)."' WHERE id='$id_pass'") or die($conn->error);
+        $conn->query("UPDATE users SET pass='".password_hash($pass, PASSWORD_BCRYPT)."' WHERE id='$id_pass'") or die($conn->error);
         session_destroy();
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
