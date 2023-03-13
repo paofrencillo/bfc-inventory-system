@@ -1,3 +1,11 @@
+<?php
+    include('connection.php');
+    session_start();
+    if (!isset($_SESSION['login_user']['user'])) {
+      header("Location: index.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -158,7 +166,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="/pages/examples/login-v2.html" class="nav-link">
+            <a href="functions.php?logout" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Logout

@@ -1,5 +1,6 @@
 <?php
  include('connection.php');
+ session_start();
 
 ?>
 <!DOCTYPE html>
@@ -12,11 +13,11 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.css">
+  <link rel="stylesheet" href="dist/css/adminlte.css">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   
@@ -27,45 +28,45 @@
 <div class="carousel slide" data-ride="carousel" data-interval="3500">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="../../dist/img/carousel-pics/c-pic1.jpg" alt="">
+      <img src="dist/img/carousel-pics/c-pic1.jpg" alt="">
     </div>
     <div class="carousel-item">
-      <img src="../../dist/img/carousel-pics/c-pic2.png" alt="">
+      <img src="dist/img/carousel-pics/c-pic2.png" alt="">
     </div>
     <div class="carousel-item">
-      <img src="../../dist/img/carousel-pics/c-pic3.jpeg" alt="">
+      <img src="dist/img/carousel-pics/c-pic3.jpeg" alt="">
     </div>
     <div class="carousel-item">
-      <img src="../../dist/img/carousel-pics/c-pic4.jpeg" alt="">
+      <img src="dist/img/carousel-pics/c-pic4.jpeg" alt="">
     </div>
     <div class="carousel-item">
-      <img src="../../dist/img/carousel-pics/c-pic5.jpeg" alt="">
+      <img src="dist/img/carousel-pics/c-pic5.jpeg" alt="">
     </div>
     <div class="carousel-item">
-      <img src="../../dist/img/carousel-pics/c-pic6.jpg" alt="">
+      <img src="dist/img/carousel-pics/c-pic6.jpg" alt="">
     </div>
     <div class="carousel-item">
-      <img src="../../dist/img/carousel-pics/c-pic7.jpg" alt="">
+      <img src="dist/img/carousel-pics/c-pic7.jpg" alt="">
     </div>
     <div class="carousel-item">
-      <img src="../../dist/img/carousel-pics/c-pic8.jpg" alt="">
+      <img src="dist/img/carousel-pics/c-pic8.jpg" alt="">
     </div>
     <div class="carousel-item">
-      <img src="../../dist/img/carousel-pics/c-pic9.jpg" alt="">
+      <img src="dist/img/carousel-pics/c-pic9.jpg" alt="">
     </div>
     <div class="carousel-item">
-      <img src="../../dist/img/carousel-pics/c-pic10.jpg" alt="">
+      <img src="dist/img/carousel-pics/c-pic10.jpg" alt="">
     </div>
   </div>
  
 </div>
-<img src="../../dist/img/bfc-logo-1.png" alt="" style="position: absolute; top: 0; left: 0; z-index: 100; width: 200px;">
+<img src="dist/img/bfc-logo-1.png" alt="" style="position: absolute; top: 0; left: 0; z-index: 100; width: 200px;">
 <div class="login-box"  style="position: fixed;">
   <!-- /.login-logo -->
   <div id="login-card" class="card card-outline card-primary" style="background-color: rgba(216, 221, 236, 0.75) !important;">
     <div class="card-header text-center">
-      <a href="../LoginBFC.html" class="">
-        <img src="../../dist/img/valuemed-logo.png" alt="" style="width: 90%;">
+      <a href="LoginBFC.html" class="">
+        <img src="dist/img/valuemed-logo.png" alt="" style="width: 90%;">
         <div class="text-blue">
           Inventory System
         </div>
@@ -91,7 +92,7 @@
         </div>
           <!-- /.col -->
         <div class="text-center d-flex justify-content-center align align-items-center">
-          <button type="submit" class="btn btn-primary btn-block">Submit</button>
+          <button type="submit" class="btn btn-primary btn-block" name="signin">Submit</button>
         </div>
           <!-- /.col -->
         </div>
@@ -99,7 +100,7 @@
       <!-- /.social-auth-links -->
 
       <p class="d-flex justify-content-center">
-        <a href="../examples/recover-password-v2.html"> <u>  Reset Password  </u></a>
+        <a href="examples/recover-password-v2.html"> <u>  Reset Password  </u></a>
       </p>
     </div>
     <!-- /.card-body -->
@@ -109,11 +110,11 @@
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
 
 </body>
 </html>
