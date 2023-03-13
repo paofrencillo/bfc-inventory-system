@@ -100,7 +100,7 @@
       <!-- /.social-auth-links -->
 
       <p class="d-flex justify-content-center">
-        <a href="examples/recover-password-v2.html"> <u>  Reset Password  </u></a>
+        <a href="examples/recover-password-v2.php"> <u>  Reset Password  </u></a>
       </p>
     </div>
     <!-- /.card-body -->

@@ -123,6 +123,62 @@ if (isset($_POST['signup'])) {
     }
 }
 
+#CHANGE PASSWORD ADMIN
+if (isset($_POST['pass_admin'])) {
+    $id_pass = $_POST['id_password'];
+    $password1 = $_POST['pass1'];
+    $password2 = $_POST['pass2'];
+    if ($password1 != $password2){
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'warning',
+                title: 'Your password does not match',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "_profile.php";
+                    }else{
+                        window.location.href = "_profile.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }else{
+        $conn->query("UPDATE admin SET password='".password_hash($password1, PASSWORD_DEFAULT)."' WHERE id='$id_pass'") or die($conn->error);
+        session_destroy();
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'success',
+                title: 'Successfully Updated your Password',
+                text: 'Please login your new created password',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "index.php";
+                    }else{
+                        window.location.href = "index.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }
+}
 
 #LOGOUT
 if (isset($_GET['logout'])) {

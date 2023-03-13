@@ -6,12 +6,13 @@
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminBFC | Dashboard</title>
+  <title>AdminBFC | Settings</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -32,12 +33,8 @@
   <!-- Daterange picker -->
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
-  <link rel="icon" type="image/png" href="/dist/img/normal_BFC_logo_latest.png">
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <link rel="icon" type="image/png" href="/dist/img/normal_BFC_logo_latest.png">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -58,7 +55,6 @@
         <a href="starter.php" class="nav-link">Home</a>
       </li>
     </ul>
-
   </nav>
   <!-- /.navbar -->
 
@@ -78,8 +74,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="starter.php" class="nav-link">
+          <li class="nav-item ">
+            <a href="starter.php" class="nav-link ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -145,33 +141,33 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="employee.php" class="nav-link active">
-                  <i class="far fa-dot-circle nav-icon"></i>
+                <a href="employee.php" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
                   <p>Employee Accounts</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="franchisee.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon "></i>
                   <p>Franchisee List</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="supplier.php" class="nav-link">
+                <a href="supplier.php" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Supplier</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="admin.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+              <li class="nav-item active">
+                <a href="#" class="nav-link">
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Change Password </p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item">
-            <a href="functions.php?logout" class="nav-link">
+            <a href="/pages/examples/login-v2.php" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Logout
@@ -190,145 +186,46 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Employee Accounts</h1>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+
+      <!-- Main content -->
+    <section class="content row">
       <div class="col-12">
-        <div class="card card-outline card-primary">
+        <div class="card card-outline card-primary ">
             <div class="card-header text-center">
-                <a href="#" class="h1"><b>Add</b> Account</a>
+                <a href="#" class="h1"><b>Account</b> Settings</a>
             </div>
             <div class="card-body text-right">
-              <p class="login-box-msg">Enroll New Employee Account</p>
+              <p class="login-box-msg">Change Password</p>
               <form action="functions.php" method="post">
                 <div class="input-group mb-3">
                   <div class="input-group-append">
                     <div class="input-group-text">
-                      <span class="fas fa-address-card"></span>
+                      <span class="fas fa-lock"></span>
                     </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Username" name="username">
+                  <input type="password" class="form-control" placeholder="Password" name="password">
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-append">
                     <div class="input-group-text">
-                      <span class="fas fa-user"></span>
+                      <span class="fas fa-lock"></span>
                     </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Name" name="name">
+                  <input type="password" class="form-control" placeholder="Confirm Password" name="confirmpass">
                 </div>
-                <div class="input-group mb-3">
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-user-lock"></span>
-                    </div>
-                  </div>
-                  <input type="password" class="form-control" placeholder="Default Password" name="password">
-                </div>
+                
+                <!-- /.col -->
                 <div class="col-12">
-                  <button type="submit" class="btn btn-primary" name="signup" >Add Account</button>
+                  <a type="submit" class="btn btn-primary btn-md" >Save Changes</a>
                 </div>
+                <!-- /.col -->
+                
               </form>
             </div>
             <!-- /.card-body -->
         </div>
         <!-- /.row -->
       </div>
-    
-      <section class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-12">
-              <div class="card">
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <table id="example1" class="table table-bordered table-hover dt-center">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Password</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1023156MHJHMHM</td>
-                        <td>Robust12S</td>
-                        <td>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">EDIT</button>
-                            <button type="button" class="btn btn-danger">DELETE</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>421544256</td>
-                        <td>Cetirizine10S</td>
-                        <td>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">EDIT</button>
-                            <button type="button" class="btn btn-danger">DELETE</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>421544256</td>
-                        <td>Mefenamic500mg (Generic)</td>
-                        <td>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">EDIT</button>
-                            <button type="button" class="btn btn-danger">DELETE</button>
-                        </td>
-                    </tr>
-                    </tbody>
-
-                    </table>
-                </div>
-                <!-- /.card-body -->
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- /.modal -->
-
-        <div class="modal fade" id="update">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">EDIT ACCOUNT DETAILS</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="row">     
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="name">Name:</label>
-                                    <input type="text" class="form-control " id="name">
-                                    </div>
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="form-group">
-                                    <label for="pass">Password:</label>
-                                    <input type="text" class="form-control " id="pass">
-                                </div>
-                            </div>                     
-                    </form>
-                </div>
-                <div class="modal-footer justify-content-between">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-primary">Update</button>
-                </div>
-              </div>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
-
-      </section>
     </div>
     <!-- /.content-header -->
   </div>
@@ -379,34 +276,9 @@
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.js"></script>
-<!-- DataTables  & Plugins -->
-<script src="plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="plugins/jszip/jszip.min.js"></script>
-<script src="plugins/pdfmake/pdfmake.min.js"></script>
-<script src="plugins/pdfmake/vfs_fonts.js"></script>
-<script src="plugins/datatables-buttons/js/buttons.php5.min.js"></script>
-<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
-<script>
-    $(function () {
-      $("#example1").DataTable({
-        "columnDefs": [{"className": "dt-center", "targets": "_all"}],
-        "responsive": true, 
-        "lengthChange": true, 
-        "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-      
-    });
-  </script>
 </body>
 </html>
