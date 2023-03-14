@@ -321,10 +321,8 @@ if (isset($_POST['modify_franchisee'])) {
                     }else{
                         window.location.href = "franchisee.php";
                     }
-                })
-                
+                })      
             })
-    
         </script>
         <?php
     }else{
@@ -344,10 +342,58 @@ if (isset($_POST['modify_franchisee'])) {
                     }else{
                         window.location.href = "franchisee.php";
                     }
-                })
-                
+                })   
             })
-    
+        </script>
+        <?php
+    }
+}
+
+#DELETE FRANCHISEE 
+if (isset($_POST['delete_franchisee'])) {
+    $franchisee_modify = $_POST['franchisee_modify'];
+
+    if ($franchisee_modify != null){
+        $conn->query("DELETE FROM branches WHERE id='$franchisee_modify';") or die($conn->error);
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'success',
+                title: 'Successfully Deleted',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "franchisee.php";
+                    }else{
+                        window.location.href = "franchisee.php";
+                    }
+                })      
+            })
+        </script>
+        <?php
+    }else{
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'An Error Occured',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "franchisee.php";
+                    }else{
+                        window.location.href = "franchisee.php";
+                    }
+                })   
+            })
         </script>
         <?php
     }

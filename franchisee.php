@@ -293,60 +293,63 @@ if (!isset($_SESSION['login_user']['user'])) {
                         <td><?php echo $row2['employee_name'] ?></td>
                      
                         <td>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update<?php echo $row['code'] ?>">EDIT</button>
-                              <!-- /.modal -->
-                              <div class="modal fade" id="update<?php echo $row['code'] ?>">
-                                  <div class="modal-dialog modal-dialog-centered modal-lg">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h4 class="modal-title">UPDATE FRANCHISEE DETAILS</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                      </div>
-                                      <div class="modal-body">
-                                        <form action="functions.php" method="POST">
-                                          <div class="row">     
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="branch">Branch Code</label>
-                                                    <input type="text" class="form-control" id="branch" name="branch" value="<?php echo $row['code'] ?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
+                            <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['code']?>">
+                              <i class="fas fa-pencil-alt"></i>
+                              Edit
+                            </button>
+                            <!-- /.modal -->
+                            <div class="modal fade" id="update<?php echo $row['code'] ?>">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h4 class="modal-title">UPDATE FRANCHISEE DETAILS</h4>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <form action="functions.php" method="POST">
+                                        <div class="row">     
+                                          <div class="col-md-6">
                                               <div class="form-group">
-                                                  <label for="name">Name</label>
-                                                  <input type="text" class="form-control " id="name" name="name" value="<?php echo $row['name'] ?>">
+                                                  <label for="branch">Branch Code</label>
+                                                  <input type="text" class="form-control" id="branch" name="branch" value="<?php echo $row['code'] ?>">
                                               </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                              <div class="form-group">
-                                                  <label for="company">Company</label>
-                                                  <input type="text" class="form-control " id="company" name="company" value="<?php echo $row['company'] ?>">
-                                              </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                              <div class="form-group">
-                                                  <label for="add">Address</label>
-                                                  <input type="text" class="form-control " id="add" name="add" value="<?php echo $row['address'] ?>">
-                                              </div>
-                                            </div>
-                                          </div>                       
-
-                                          <div class="modal-footer justify-content-between">
-                                            <input type="hidden" name="franchisee_modify" value="<?php echo $row['id'] ?>">
-                                            <input type="hidden" name="last_user" value="<?php echo $row2['user_id'] ?>">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                            <button type="submit" class="btn btn-primary" name="modify_franchisee">Save Changes</button>
                                           </div>
-                                        </form>
-                                      </div>
+                                          <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="name">Name</label>
+                                                <input type="text" class="form-control " id="name" name="name" value="<?php echo $row['name'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="company">Company</label>
+                                                <input type="text" class="form-control " id="company" name="company" value="<?php echo $row['company'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="add">Address</label>
+                                                <input type="text" class="form-control " id="add" name="add" value="<?php echo $row['address'] ?>">
+                                            </div>
+                                          </div>
+                                        </div>                       
+
+                                        <div class="modal-footer">
+                                          <input type="hidden" name="franchisee_modify" value="<?php echo $row['id'] ?>">
+                                          <input type="hidden" name="last_user" value="<?php echo $row2['user_id'] ?>">
+                                          <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->
+                                          <button type="submit" class="btn btn-danger" name="delete_franchisee">Delete</button>
+                                          <button type="submit" class="btn btn-primary" name="modify_franchisee">Save Changes</button>
+                                        </div>
+                                      </form>
                                     </div>
                                   </div>
-                              </div>
-                              <!-- /.modal -->
-                            <button type="button" class="btn btn-secondary">DELETE</button>
-                        </td>
+                                </div>
+                            </div>
+                            <!-- /.modal -->
+                        </td> 
                     </tr>
                     <?php } ?>
                     <?php } ?>
