@@ -169,7 +169,7 @@ if (!isset($_SESSION['login_user']['user'])) {
               </ul>
             </li>
             <li class="nav-item">
-              <a href="/pages/examples/login-v2.php" class="nav-link">
+              <a href="functions.php?logout" class="nav-link">
                 <i class="nav-icon fas fa-sign-out-alt"></i>
                 <p>
                   Logout

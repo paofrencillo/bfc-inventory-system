@@ -229,6 +229,130 @@ if (isset($_POST['pass_admin'])) {
     }
 }
 
+#Add Franchisee
+if (isset($_POST['franchise'])) {
+    $branchcode = $_POST['branchcode'];
+    $name = $_POST['name'];
+    $company = $_POST['company'];
+    $address = $_POST['address'];
+    $id_lastuser = $_POST['id_lastuser'];
+
+    $sql = "SELECT * FROM branches WHERE (code='$branchcode');";
+    $result = mysqli_query($conn, $sql);
+
+
+    if(!$result->num_rows > 0){
+        $conn->query("INSERT INTO branches (code, name, company, address, last_edited_by)
+        VALUES('$branchcode', '$name', '$company', '$address', '$id_lastuser')") or die($conn->error);
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'success',
+                title: 'Successfully Registered',
+                text: 'Franchisee successfully added',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "franchisee.php";
+                    }else{
+                        window.location.href = "franchisee.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }else{
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'Ooops...',
+                text: 'Franchisee is already exist',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "franchisee.php";
+                    }else{
+                        window.location.href = "franchisee.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }
+}
+
+#MODIFY RANCHISEE 
+if (isset($_POST['modify_franchisee'])) {
+    // $franchisee_modify = $_POST['franchisee_modify'];
+    $branch = $_POST['branch'];
+    $name = $_POST['name'];
+    $company = $_POST['company'];
+    $add = $_POST['add'];
+    $last_user = $_POST['last_user'];
+
+    if ($branch != null){
+        $conn->query("UPDATE branches SET name='$name', company='$company', address='$add', last_edited_by='$last_user') WHERE code='$branch'") or die($conn->error);
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'success',
+                title: 'Successfully Updated',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "franchisee.php";
+                    }else{
+                        window.location.href = "franchisee.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }else{
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'An Error Occured',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "franchisee.php";
+                    }else{
+                        window.location.href = "franchisee.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }
+}
+
 #LOGOUT
 if (isset($_GET['logout'])) {
     session_destroy();

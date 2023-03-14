@@ -12,7 +12,6 @@ Highly customizable and easy to use. Fits many screen resolutions from small mob
 
 **Preview on [AdminLTE.io](https://adminlte.io/themes/v3)**
 
-## Looking for Premium Templates?
 
 AdminLTE.io just opened a new premium templates page. Hand picked to ensure the best quality and the most affordable
 prices. Visit <https://adminlte.io/premium> for more information.

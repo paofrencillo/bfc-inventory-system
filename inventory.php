@@ -1,11 +1,3 @@
-<?php
-    include('connection.php');
-    session_start();
-    if (!isset($_SESSION['login_user']['user'])) {
-      header("Location: index.php");
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,6 +30,9 @@
     <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Select2 -->
+   <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+   <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -55,7 +50,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="starter.php" class="nav-link">Home</a>
+        <a href="starter.html" class="nav-link">Home</a>
       </li>
     </ul>
 
@@ -65,7 +60,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-light-blue elevation-4">
     <!-- Brand Logo -->
-    <a href="starter.php" class="brand-link">
+    <a href="starter.html" class="brand-link">
       <img src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AdminBFC</span>
     </a>
@@ -79,13 +74,14 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item ">
-            <a href="starter.php" class="nav-link">
+            <a href="starter.html" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
+
           <li class="nav-item menu-open ">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-edit"></i>
@@ -97,19 +93,20 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="inventory.php" class="nav-link ">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="inventory.html" class="nav-link active">
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Inventory</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="masterlist.php" class="nav-link active">
-                  <i class="far fa-dot-circle nav-icon"></i>
+                <a href="masterlist.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
                   <p>Masterlist</p>
                 </a>
               </li>
             </ul>
           </li>
+
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-truck"></i>
@@ -121,13 +118,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="prod-in.php" class="nav-link">
+                <a href="prod-in.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product In</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="prod-out.php" class="nav-link">
+                <a href="prod-out.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product Out</p>
                 </a>
@@ -145,25 +142,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="employee.php" class="nav-link ">
+                <a href="employee.html" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Employee Accounts</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="franchisee.php" class="nav-link">
+                <a href="franchisee.html" class="nav-link">
                   <i class="far fa-circle nav-icon "></i>
                   <p>Franchisee List</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="supplier.php" class="nav-link ">
+                <a href="supplier.html" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Supplier</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="admin.php" class="nav-link">
+                <a href="admin.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Change Password </p>
                 </a>
@@ -171,7 +168,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="functions.php?logout" class="nav-link">
+            <a href="/pages/examples/login-v2.html" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Logout
@@ -193,14 +190,14 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Masterlist</h1>
+            <h1 class="m-0">Inventory</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     
       <section class="content">
         <div class="container-fluid">
-            <div class="card">
+            <!-- <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Enroll New Products</h3>
                 </div>
@@ -209,87 +206,86 @@
                         <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addnew"><i class="fas fa-plus-circle"></i> ADD NEW PRODUCT</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
             
           <div class="row">
             <div class="col-12">
               <div class="card">
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="example1" class="table table-bordered table-hover dt-center projects">
+                    <table id="example1" class="table table-bordered table-hover dt-center">
                     <thead>
                     <tr>
                         <th>Barcode</th>
                         <th>Product Description</th>
-                        <th>Last Edited</th>
+                        <th>Stock</th>
+                        <th>Allocation</th>
+                        <th>S/A %</th>
                         <th>Action</th>
                     </tr>
                     </thead>
-                      <tbody>
-                        <tr>
-                            <td>1023156MHJHMHM</td>
-                            <td>Robust 100Mg 12S</td>
-                            <td class="font-italic">User1 | Mar. 08, 2023</td>
-                            <td>
-                              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                                <i class="fas fa-pencil-alt"></i>
-                                Edit Details
-                              </button>
-                              <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                                <i class="fas fa-eye"></i>
-                                View Details
-                              </button>
-                              <button class="btn btn-danger btn-sm" >
-                                <i class="fas fa-trash"></i>
-                                Delete
-                              </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>421544256</td>
-                            <td>Cetirizine 10Mg 10S</td>
-                            <td class="font-italic">User1 | Mar. 08, 2023</td>
-                            <td>
-                              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                                <i class="fas fa-pencil-alt"></i>
-                                Edit Details
-                              </button>
-                              <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                                <i class="fas fa-eye"></i>
-                                View Details
-                              </button>
-                              <button class="btn btn-danger btn-sm">
-                                <i class="fas fa-trash"></i>
-                                Delete
-                              </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>421544256</td>
-                            <td>Mefenamic Acid 500mg (Generic)</td>
-                            <td class="font-italic">User1 | Mar. 08, 2023</td>
-                            <td>
-                              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                                <i class="fas fa-pencil-alt"></i>
-                                Edit Details
-                              </button>
-                              <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                                <i class="fas fa-eye"></i>
-                                View Details
-                              </button>
-                              <button class="btn btn-danger btn-sm">
-                                <i class="fas fa-trash"></i>
-                                Delete
-                              </button>
-                            </td>
-                        </tr>
-                      </tbody> 
+                    <tbody>
+                    <tr>
+                        <td>1023156MHJHMHM</td>
+                        <td>Robust 100Mg 12S</td>
+                        <td>50</td>
+                        <td>200</td>
+                        <td>25%</td>
+                        <td>
+                          <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                            <i class="fas fa-pencil-alt"></i>
+                            Edit Details
+                          </button>
+                          <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                            <i class="fas fa-eye"></i>
+                            View Details
+                          </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>421544256</td>
+                        <td>Cetirizine 10Mg 10S</td>
+                        <td>80</td>
+                        <td>200</td>
+                        <td>40%</td>
+                        <td>
+                          <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                            <i class="fas fa-pencil-alt"></i>
+                            Edit Details
+                          </button>
+                          <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                            <i class="fas fa-eye"></i>
+                            View Details
+                          </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>421544256</td>
+                        <td>Mefenamic Acid 500mg (Generic)</td>
+                        <td>70</td>
+                        <td>200</td>
+                        <td>35%</td>
+                        <td>
+                          <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                            <i class="fas fa-pencil-alt"></i>
+                            Edit Details
+                          </button>
+                          <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                            <i class="fas fa-eye"></i>
+                            View Details
+                          </button>
+                        </td> 
+                    </tr>
+                    </tbody>
+
                     </table>
                 </div>
+                <!-- /.card-body -->
               </div>
             </div>
           </div>
         </div>
+
 
         <div class="modal fade" id="addnew">
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -301,43 +297,62 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                    <form action="enroll.php" name="enroll_form" id="enroll_form" method="post" enctype="multipart/form-data">
+                    <form>
                         <div class="row">     
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="barcode">Barcode:</label>
-                                    <input type="text" class="form-control" name="barcode" id="barcode" required>
+                                    <input type="text" class="form-control " id="barcode">
                                     </div>
                             </div>
                             <div class="col-sm-8">
                                 <div class="form-group">
                                     <label for="prod">Product Description:</label>
-                                    <input type="text" class="form-control" name="description" id="description" required>
+                                    <input type="text" class="form-control " id="prod">
                                 </div>
                             </div>
-                            <div class="col-sm-12">
-                              <div class="custom-file form-group">
-                                <input type="file" class="custom-file-input" id="imageFile" accept=".png,.jpeg,.jpeg" name="imageFile"> 
-                                <label class="custom-file-label" for="imageFile">Choose file</label>
-                              </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="stock">Stock:</label>
+                                    <input type="number" class="form-control " id="stock">
+                                </div>
                             </div>
-                            <div class="col-sm-12">
-                              <h6 class="text-success font-weight-bold mt-2 d-none" id="enroll_success_text">
-                                Product enrolled successfully!
-                              </h6>
-                              <h6 class="text-danger font-weight-bold mt-2 d-none" id="enroll_error_text">
-                                Product enrollment failed. Try again.
-                              </h6>
-                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="allo">Allocation:</label>
+                                    <input type="number" class="form-control " id="allo">
+                                </div>
+                            </div>        
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="lot">Lot Number:</label>
+                                    <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();">
+                                </div>
+                            </div>     
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="supp">Supplier:</label>
+                                    <input type="text" class="form-control " id="supp">
+                                </div>
+                            </div>       
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="exp">Expiration Date:</label>
+                                    <input type="date" class="form-control " id="exp" >
+                                </div>
+                            </div>   
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="supp">Entry Date:</label>
+                                    <input type="date" class="form-control " id="supp" disabled>
+                                </div>
+                            </div>        
                         </div>                       
-                   
-                
-                <div class="modal-footer justify-content-between px-0 mx-0">
-                  <input type="hidden" name="employee_id" id="employee_id" value="<?php echo $_SESSION['login_user']['user_id'];?>">
-                  <button type="button" class="btn btn-default mx-0" data-dismiss="modal">Cancel</button>
-                  <input type="submit" name="add_product" class="btn btn-primary mx-0" value="Add Product">
+                    </form>
                 </div>
-                </form>
+                <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary">Add Product</button>
                 </div>
               </div>
               <!-- /.modal-content -->
@@ -359,28 +374,61 @@
                     <form>
                         <div class="row">     
                             <div class="col-sm-4">
-                              <div class="form-group">
-                                <label for="barcode">Barcode:</label>
-                                <input type="text" class="form-control " id="barcode">
-                              </div>
+                                <div class="form-group">
+                                    <label for="barcode">Barcode:</label>
+                                    <input type="text" class="form-control " id="barcode" readonly>
+                                    </div>
                             </div>
                             <div class="col-sm-8">
+                                <div class="form-group">
+                                    <label for="prod">Product Description:</label>
+                                    <input type="text" class="form-control " id="prod">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="stock">Stock:</label>
+                                    <input type="number" class="form-control " id="stock">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="allo">Allocation:</label>
+                                    <input type="number" class="form-control " id="allo">
+                                </div>
+                            </div>        
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="lot">Lot Number:</label>
+                                    <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();">
+                                </div>
+                            </div>     
+                            <div class="col-sm-5">
                               <div class="form-group">
-                                <label for="prod">Product Description:</label>
-                                <input type="text" class="form-control " id="prod">
+                                  <label for="supp">Supplier:</label>
+                                  <select class="form-control select2bs4" style="width: 100%;">
+                                    <option selected="selected" disabled>Please Select Supplier</option>
+                                    <option>Supplier A</option>
+                                    <option>Supplier B</option>
+                                    <option>Supplier C</option>
+                                    <option>Supplier D</option>
+                                    <option>Supplier E</option>
+                                    <option>Supplier F</option>
+                                  </select>
                               </div>
-                            </div>
-                            <div class="col-sm-4">
-                              <div class="custom-file form-group">
-                                <input type="file" class="custom-file-input" id="customFile" accept="image/*"> 
-                                <label class="custom-file-label" for="customFile">Choose file</label>
-                              </div>
-                            </div>
-                            <div class="col-sm-8">
-                              <div class="position-relative" style="min-height: 180px;">
-                                <img src="dist/img/photo2.png" alt="Photo 3" class="img-fluid">           
-                              </div>
-                            </div>
+                            </div>         
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="exp">Expiration Date:</label>
+                                    <input type="date" class="form-control " id="exp" >
+                                </div>
+                            </div>   
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="supp">Entry Date:</label>
+                                    <input type="date" class="form-control " id="supp">
+                                </div>
+                            </div>        
                         </div>                       
                     </form>
                 </div>
@@ -393,7 +441,7 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-
+        <!-- /.modal for details -->
         <div class="modal fade" id="view">
           <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -407,41 +455,73 @@
                   <form>
                       <div class="row">     
                           <div class="col-sm-4">
-                            <div class="form-group">
-                              <label for="barcode">Barcode:</label>
-                              <input type="text" class="form-control " id="barcode" readonly>
-                            </div>
+                              <div class="form-group">
+                                  <label for="barcode">Barcode:</label>
+                                  <input type="text" class="form-control " id="barcode" readonly>
+                                  </div>
                           </div>
                           <div class="col-sm-8">
+                              <div class="form-group">
+                                  <label for="prod">Product Description:</label>
+                                  <input type="text" class="form-control " id="prod" readonly>
+                              </div>
+                          </div>
+                          <div class="col-sm-2">
+                              <div class="form-group">
+                                  <label for="stock">Stock:</label>
+                                  <input type="number" class="form-control " id="stock" readonly>
+                              </div>
+                          </div>
+                          <div class="col-sm-2">
+                              <div class="form-group">
+                                  <label for="allo">Allocation:</label>
+                                  <input type="number" class="form-control " id="allo" readonly>
+                              </div>
+                          </div>        
+                          <div class="col-sm-3">
+                              <div class="form-group">
+                                  <label for="lot">Lot Number:</label>
+                                  <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();" readonly>
+                              </div>
+                          </div>     
+                          <div class="col-sm-5">
                             <div class="form-group">
-                              <label for="prod">Product Description:</label>
-                              <input type="text" class="form-control " id="prod" readonly>
+                                <label for="supp">Supplier:</label>
+                                <select class="form-control select2bs4" style="width: 100%;" disabled>
+                                  <option selected="selected" disabled>Please Select Supplier</option>
+                                  <option>Supplier A</option>
+                                  <option>Supplier B</option>
+                                  <option>Supplier C</option>
+                                  <option>Supplier D</option>
+                                  <option>Supplier E</option>
+                                  <option>Supplier F</option>
+                                </select>
                             </div>
-                          </div>
-                          <!-- <div class="col-sm-4">
-                            <div class="custom-file form-group">
-                              <input type="file" class="custom-file-input" id="customFile" accept="image/*" dis> 
-                              <label class="custom-file-label" for="customFile">Choose file</label>
-                            </div>
-                          </div> -->
-                          <div class="col-sm-12">
-                            <div class="position-relative" style="min-height: 180px;">
-                              <img src="dist/img/photo2.png" alt="Photo 3" class="img-fluid">           
-                            </div>
-                          </div>
+                          </div>    
+                          <div class="col-sm-6">
+                              <div class="form-group">
+                                  <label for="exp">Expiration Date:</label>
+                                  <input type="date" class="form-control " id="exp" readonly >
+                              </div>
+                          </div>   
+                          <div class="col-sm-6">
+                              <div class="form-group">
+                                  <label for="supp">Entry Date:</label>
+                                  <input type="date" class="form-control " id="supp" readonly>
+                              </div>
+                          </div>        
                       </div>                       
                   </form>
               </div>
               <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <!-- <button type="button" class="btn btn-primary">Update</button> -->
+                
               </div>
             </div>
             <!-- /.modal-content -->
           </div>
           <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
+      </div>
 
       </section>
     </div>
@@ -511,53 +591,27 @@
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
-<!-- bs-custom-file-input -->
-<script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<!-- Select2 -->
+<script src="plugins/select2/js/select2.full.min.js"></script>
 <script>
-      $(".custom-file-input").on("change", function() {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-      });
-      $("#enroll_form").on("submit", function(e) {
-        e.preventDefault();
-        $.ajax({
-          type: "POST",
-          url: "enroll.php",
-          data: new FormData(this),
-          contentType: false,
-          processData:false,
-          cache: false,
-          success: function(data) {
-            $('#enroll_success_text').removeClass('d-none');
-            $('#enroll_error_text').addClass('d-none');
-            $('#enroll_success_text').fadeOut(5000, 'swing');
-            $('#barcode').val('');
-            $('#description').val('');
-            $('#imageFile').val('');
-          },
-          error: function(xhr, status, error) {
-            $('#enroll_error_text').removeClass('d-none');
-            $('#enroll_success_text').addClass('d-none');
-            $('#enroll_error_text').fadeOut(5000, 'swing');
-            $('#barcode').val('');
-            $('#description').val('');
-            $('#imageFile').val('');
-          }
-        });
-      });
- 
     $(function () {
       $("#example1").DataTable({
         "columnDefs": [{"className": "dt-center", "targets": "_all"}],
         "responsive": true, 
         "lengthChange": true, 
         "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        "buttons": ["copy", "csv", "excel", "pdf", "print"]}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
+
     $(function () {
-      bsCustomFileInput.init();
-    });
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+      })
+    })
   </script>
 </body>
 </html>
