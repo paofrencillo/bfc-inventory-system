@@ -294,17 +294,17 @@ if (isset($_POST['franchise'])) {
     }
 }
 
-#MODIFY RANCHISEE 
+#MODIFY FRANCHISEE 
 if (isset($_POST['modify_franchisee'])) {
-    // $franchisee_modify = $_POST['franchisee_modify'];
+    $franchisee_modify = $_POST['franchisee_modify'];
     $branch = $_POST['branch'];
     $name = $_POST['name'];
     $company = $_POST['company'];
     $add = $_POST['add'];
     $last_user = $_POST['last_user'];
 
-    if ($branch != null){
-        $conn->query("UPDATE branches SET name='$name', company='$company', address='$add', last_edited_by='$last_user') WHERE code='$branch'") or die($conn->error);
+    if ($franchisee_modify != null){
+        $conn->query("UPDATE branches SET code='$branch', name='$name', company='$company', address='$add', last_edited_by='$last_user' WHERE id='$franchisee_modify';") or die($conn->error);
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
