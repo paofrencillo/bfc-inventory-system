@@ -301,29 +301,32 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                    <form action="enroll.php" method="post">
+                    <form action="enroll.php" name="enroll_form" id="enroll_form" method="post" enctype="multipart/form-data">
                         <div class="row">     
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="barcode">Barcode:</label>
-                                    <input type="text" class="form-control" name="barcode" id="barcode">
+                                    <input type="text" class="form-control" name="barcode" id="barcode" required>
                                     </div>
                             </div>
                             <div class="col-sm-8">
                                 <div class="form-group">
                                     <label for="prod">Product Description:</label>
-                                    <input type="text" class="form-control" name="description" id="description">
+                                    <input type="text" class="form-control" name="description" id="description" required>
                                 </div>
                             </div>
                             <div class="col-sm-12">
                               <div class="custom-file form-group">
-                                <input type="file" class="custom-file-input" id="customFile" accept="image/*"> 
-                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                <input type="file" class="custom-file-input" id="imageFile" accept=".png,.jpeg,.jpeg" name="imageFile"> 
+                                <label class="custom-file-label" for="imageFile">Choose file</label>
                               </div>
                             </div>
                             <div class="col-sm-12">
                               <h6 class="text-success font-weight-bold mt-2 d-none" id="enroll_success_text">
                                 Product enrolled successfully!
+                              </h6>
+                              <h6 class="text-danger font-weight-bold mt-2 d-none" id="enroll_error_text">
+                                Product enrollment failed. Try again.
                               </h6>
                             </div>
                         </div>                       
@@ -332,7 +335,7 @@
                 <div class="modal-footer justify-content-between px-0 mx-0">
                   <input type="hidden" name="employee_id" id="employee_id" value="<?php echo $_SESSION['login_user']['user_id'];?>">
                   <button type="button" class="btn btn-default mx-0" data-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-primary mx-0" name="enroll" id="enroll"> Add Product </button>
+                  <input type="submit" name="add_product" class="btn btn-primary mx-0" value="Add Product">
                 </div>
                 </form>
                 </div>
@@ -511,26 +514,38 @@
 <!-- bs-custom-file-input -->
 <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <script>
-      $('#enroll').on('click', ()=> {
-      $.ajax({
-      type: "POST",
-      url: "enroll.php",
-      data: {
-        enroll: true,
-        barcode: $('#barcode').val(),
-        decription: $('#decription').val(),
-        employee_id: $('#employee_id').val()
-        //image
-      },
-      cache: false,
-      success: function(data) {
-        alert(data);
-      },
-      error: function(xhr, status, error) {
-        console.error(xhr);
-      }
-    });
-    });
+      $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+      });
+      $("#enroll_form").on("submit", function(e) {
+        e.preventDefault();
+        $.ajax({
+          type: "POST",
+          url: "enroll.php",
+          data: new FormData(this),
+          contentType: false,
+          processData:false,
+          cache: false,
+          success: function(data) {
+            $('#enroll_success_text').removeClass('d-none');
+            $('#enroll_error_text').addClass('d-none');
+            $('#enroll_success_text').fadeOut(5000, 'swing');
+            $('#barcode').val('');
+            $('#description').val('');
+            $('#imageFile').val('');
+          },
+          error: function(xhr, status, error) {
+            $('#enroll_error_text').removeClass('d-none');
+            $('#enroll_success_text').addClass('d-none');
+            $('#enroll_error_text').fadeOut(5000, 'swing');
+            $('#barcode').val('');
+            $('#description').val('');
+            $('#imageFile').val('');
+          }
+        });
+      });
+ 
     $(function () {
       $("#example1").DataTable({
         "columnDefs": [{"className": "dt-center", "targets": "_all"}],
