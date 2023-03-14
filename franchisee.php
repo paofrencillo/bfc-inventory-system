@@ -260,49 +260,47 @@ if (!isset($_SESSION['login_user']['user'])) {
               <div class="card">
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="example1" class="table table-bordered table-hover dt-center">
+                    <table id="example1" class="table table-bordered table-hover dt-center text-center">
                     <thead>
                     <tr>
                         <th>Branch Code</th>
                         <th>Name</th>
                         <th>Company</th>
                         <th>Address</th>
+                        <th>Last Edited By</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
+                    <?php 
+                        $query = "SELECT * FROM branches";
+                        $result = mysqli_query($conn, $query);
+                        $check_row = mysqli_num_rows($result);
+                        while ($row = mysqli_fetch_array($result)) {
+                          $last_user = $row['last_edited_by'];
+                    ?>
                     <tr>
-                        <td>1</td>
-                        <td>Jane Doe</td>
-                        <td>XXX Company</td>
-                        <td>256 Alice St. Meycauayan, Bulacan</td>
-                        <td>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">EDIT</button>
-                            <button type="button" class="btn btn-secondary">DELETE</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>John Doe</td>
-                        <td>XYZ Company</td>
-                        <td>589 George St. Imus, Cavite</td>
-                        <td>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">EDIT</button>
-                            <button type="button" class="btn btn-secondary">DELETE</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Ana Doe</td>
-                        <td>VMB Company</td>
-                        <td>25th Alice St. Sta.Mesa, Manila</td>
-                        <td>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">EDIT</button>
-                            <button type="button" class="btn btn-secondary">DELETE</button>
-                        </td>
-                    </tr>
-                    </tbody>
+                        <td><?php echo $row['code'] ?></td>
+                        <td><?php echo $row['name'] ?></td>
+                        <td><?php echo $row['company'] ?></td>
+                        <td><?php echo $row['address'] ?></td>
 
+                        <?php
+                            $query2 = "SELECT * FROM users WHERE user_id ='$last_user'";
+                            $result2 = mysqli_query($conn, $query2);
+                            while ($row2 = mysqli_fetch_array($result2)) {
+                        ?>
+                        <td><?php echo $row2['employee_name'] ?></td>
+                     
+                        <td>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">EDIT</button>
+                            <button type="button" class="btn btn-secondary">DELETE</button>
+                        </td>
+                    </tr>
+                    <?php } ?>
+                    <?php } ?>
+                    </tbody>
+               
                     </table>
                 </div>
                 <!-- /.card-body -->
