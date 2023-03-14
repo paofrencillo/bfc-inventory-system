@@ -1,12 +1,3 @@
-<?php
-include('connection.php');
-session_start();
-if (!isset($_SESSION['login_user']['user'])) {
-  header("Location: index.php");
-}
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,7 +47,7 @@ if (!isset($_SESSION['login_user']['user'])) {
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="starter.php" class="nav-link">Home</a>
+        <a href="starter.html" class="nav-link">Home</a>
       </li>
     </ul>
 
@@ -66,7 +57,7 @@ if (!isset($_SESSION['login_user']['user'])) {
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-light-blue elevation-4">
     <!-- Brand Logo -->
-    <a href="starter.php" class="brand-link">
+    <a href="starter.html" class="brand-link">
       <img src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AdminBFC</span>
     </a>
@@ -80,7 +71,7 @@ if (!isset($_SESSION['login_user']['user'])) {
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="starter.php" class="nav-link">
+            <a href="starter.html" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -98,13 +89,13 @@ if (!isset($_SESSION['login_user']['user'])) {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="inventory.php" class="nav-link ">
+                <a href="inventory.html" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Inventory</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="masterlist.php" class="nav-link">
+                <a href="masterlist.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Masterlist</p>
                 </a>
@@ -122,13 +113,13 @@ if (!isset($_SESSION['login_user']['user'])) {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="prod-in.php" class="nav-link">
+                <a href="prod-in.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product In</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="prod-out.php" class="nav-link">
+                <a href="prod-out.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product Out</p>
                 </a>
@@ -146,25 +137,25 @@ if (!isset($_SESSION['login_user']['user'])) {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="employee.php" class="nav-link ">
+                <a href="employee.html" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Employee Accounts</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i class="far fa-dot-circle nav-icon "></i>
+                <a href="franchisee.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
                   <p>Franchisee List</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="supplier.php" class="nav-link ">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="#" class="nav-link active">
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Supplier</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="admin.php" class="nav-link">
+                <a href="admin.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Change Password </p>
                 </a>
@@ -172,7 +163,7 @@ if (!isset($_SESSION['login_user']['user'])) {
             </ul>
           </li>
           <li class="nav-item">
-            <a href="functions.php?logout" class="nav-link">
+            <a href="/pages/examples/login-v2.html" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Logout
@@ -194,59 +185,33 @@ if (!isset($_SESSION['login_user']['user'])) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Franchiser List</h1>
+            <h1 class="m-0">Supplier List</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
       <div class="col-12">
-        <div class="card card-outline card-primary ">
+        <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="#" class="h1"><b>Add</b> Franchisee</a>
+                <a href="#" class="h1"><b>Add</b> Supplier</a>
             </div>
             <div class="card-body text-right">
-              <p class="login-box-msg">Enroll New Franchisee</p>
-              <!-- add new franchise -->
-              <?php
-              $check_name =  $_SESSION['login_user']['user'];
-              $query = "SELECT * FROM users WHERE user='$check_name'";
-              $result = mysqli_query($conn, $query);
-              while ($row = mysqli_fetch_array($result)) {
-              ?>
-              <form action="functions.php" method="post">
-                <div class="input-group mb-3" >
+              <p class="login-box-msg">Enroll New Supplier</p>
+              <form action="#" method="post">
+                <div class="input-group mb-3">
                   <div class="input-group-append">
                     <div class="input-group-text">
-                      <span class="fas fa-hashtag"></span>
+                      <span class="fas fa-truck"></span>
                     </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Branch Code" name="branchcode">
-                  <div class="input-group-append"  style="padding-left: 10px;">
-                    <div class="input-group-text">
-                      <span class="fas fa-user"></span>
-                    </div>
-                  </div>
-                  <input type="text" class="form-control" placeholder="Name" name="name">
+                  <input type="text" class="form-control" placeholder="Enter name of Supplier">
                 </div>
-                <div class="input-group mb-3" >
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-building"></span>
-                    </div>
+                  <!-- /.col -->
+                  <div class="col-12">
+                    <a type="submit" class="btn btn-primary " >Add Supplier</a>
                   </div>
-                  <input type="text" class="form-control"  placeholder="Company" name="company">
-                  <div class="input-group-append"  style="padding-left: 10px;">
-                    <div class="input-group-text">
-                      <span class="fas fa-map-marker"></span>
-                    </div>
-                  </div>
-                  <input type="text" class="form-control" placeholder="Address" name="address">
-                </div>
-                <div class="col-12">
-                <input type="hidden" name="id_lastuser" value="<?php echo $row['user_id'] ?>">
-                  <button type="submit" class="btn btn-primary" name="franchise" >Add Franchise</button>
-                </div>
+                  <!-- /.col -->
+                
               </form>
-              <?php } ?>
             </div>
             <!-- /.card-body -->
         </div>
@@ -260,97 +225,41 @@ if (!isset($_SESSION['login_user']['user'])) {
               <div class="card">
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="example1" class="table table-bordered table-hover dt-center text-center">
+                    <table id="example1" class="table table-bordered table-hover dt-center">
                     <thead>
                     <tr>
-                        <th>Branch Code</th>
-                        <th>Name</th>
-                        <th>Company</th>
-                        <th>Address</th>
-                        <th>Last Edited By</th>
+                        <th>ID #</th>
+                        <th>Fullname</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <?php 
-                        $query = "SELECT * FROM branches";
-                        $result = mysqli_query($conn, $query);
-                        $check_row = mysqli_num_rows($result);
-                        while ($row = mysqli_fetch_array($result)) {
-                          $last_user = $row['last_edited_by'];
-                    ?>
                     <tr>
-                        <td><?php echo $row['code'] ?></td>
-                        <td><?php echo $row['name'] ?></td>
-                        <td><?php echo $row['company'] ?></td>
-                        <td><?php echo $row['address'] ?></td>
-
-                        <?php
-                            $query2 = "SELECT * FROM users WHERE user_id ='$last_user'";
-                            $result2 = mysqli_query($conn, $query2);
-                            while ($row2 = mysqli_fetch_array($result2)) {
-                        ?>
-                        <td><?php echo $row2['employee_name'] ?></td>
-                     
+                        <td>1</td>
+                        <td>Jane Doe</td>
                         <td>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update<?php echo $row['code'] ?>">EDIT</button>
-                              <!-- /.modal -->
-                              <div class="modal fade" id="update<?php echo $row['code'] ?>">
-                                  <div class="modal-dialog modal-dialog-centered modal-lg">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h4 class="modal-title">UPDATE FRANCHISEE DETAILS</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                      </div>
-                                      <div class="modal-body">
-                                        <form action="functions.php" method="POST">
-                                          <div class="row">     
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="branch">Branch Code</label>
-                                                    <input type="text" class="form-control" id="branch" name="branch" value="<?php echo $row['code'] ?>" readonly>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                              <div class="form-group">
-                                                  <label for="name">Name</label>
-                                                  <input type="text" class="form-control " id="name" name="name" value="<?php echo $row['name'] ?>">
-                                              </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                              <div class="form-group">
-                                                  <label for="company">Company</label>
-                                                  <input type="text" class="form-control " id="company" name="company" value="<?php echo $row['company'] ?>">
-                                              </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                              <div class="form-group">
-                                                  <label for="add">Address</label>
-                                                  <input type="text" class="form-control " id="add" name="add" value="<?php echo $row['address'] ?>">
-                                              </div>
-                                            </div>
-                                          </div>                       
-
-                                          <div class="modal-footer justify-content-between">
-                                            <!-- <input type="hidden" name="franchisee_modify" value="<?php echo $row['code'] ?>"> -->
-                                            <input type="hidden" name="last_user" value="<?php echo $row2['user_id'] ?>">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                            <button type="submit" class="btn btn-primary" name="modify_franchisee">Save Changes</button>
-                                          </div>
-                                        </form>
-                                      </div>
-                                    </div>
-                                  </div>
-                              </div>
-                              <!-- /.modal -->
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">EDIT</button>
                             <button type="button" class="btn btn-secondary">DELETE</button>
                         </td>
                     </tr>
-                    <?php } ?>
-                    <?php } ?>
-                    </tbody> 
+                    <tr>
+                        <td>2</td>
+                        <td>John Doe</td>
+                        <td>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">EDIT</button>
+                            <button type="button" class="btn btn-secondary">DELETE</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Ana Doe</td>
+                        <td>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">EDIT</button>
+                            <button type="button" class="btn btn-secondary">DELETE</button>
+                        </td>
+                    </tr>
+                    </tbody>
+
                     </table>
                 </div>
                 <!-- /.card-body -->
@@ -359,7 +268,39 @@ if (!isset($_SESSION['login_user']['user'])) {
           </div>
         </div>
 
+        <!-- /.modal -->
 
+        <div class="modal fade" id="update">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">     
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control " id="name">
+                                    </div>
+                            </div>
+                        </div>                       
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary">Save Changes</button>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
 
       </section>
     </div>
