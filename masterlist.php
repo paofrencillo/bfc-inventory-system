@@ -226,64 +226,45 @@
                     </tr>
                     </thead>
                       <tbody>
-                        <tr>
-                            <td>1023156MHJHMHM</td>
-                            <td>Robust 100Mg 12S</td>
-                            <td class="font-italic">User1 | Mar. 08, 2023</td>
-                            <td>
-                              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                                <i class="fas fa-pencil-alt"></i>
-                                Edit Details
-                              </button>
-                              <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                                <i class="fas fa-eye"></i>
-                                View Details
-                              </button>
-                              <button class="btn btn-danger btn-sm" >
-                                <i class="fas fa-trash"></i>
-                                Delete
-                              </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>421544256</td>
-                            <td>Cetirizine 10Mg 10S</td>
-                            <td class="font-italic">User1 | Mar. 08, 2023</td>
-                            <td>
-                              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                                <i class="fas fa-pencil-alt"></i>
-                                Edit Details
-                              </button>
-                              <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                                <i class="fas fa-eye"></i>
-                                View Details
-                              </button>
-                              <button class="btn btn-danger btn-sm">
-                                <i class="fas fa-trash"></i>
-                                Delete
-                              </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>421544256</td>
-                            <td>Mefenamic Acid 500mg (Generic)</td>
-                            <td class="font-italic">User1 | Mar. 08, 2023</td>
-                            <td>
-                              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                                <i class="fas fa-pencil-alt"></i>
-                                Edit Details
-                              </button>
-                              <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                                <i class="fas fa-eye"></i>
-                                View Details
-                              </button>
-                              <button class="btn btn-danger btn-sm">
-                                <i class="fas fa-trash"></i>
-                                Delete
-                              </button>
-                            </td>
-                        </tr>
-                      </tbody> 
+                      <?php 
+                        $query = "SELECT * FROM product_masterlist ORDER BY last_edited_on DESC;";
+                        $result = mysqli_query($conn, $query);
+                        while ($row = mysqli_fetch_array($result)) {
+                          $last_user = $row['last_edited_by'];
+                          $date = date_create($row["last_edited_on"]);
+                          $date = date_format($date, "d/m/Y H:i");
+                    ?>
+                    <tr>
+                      <td><?php echo $row["barcode"] ?></td>
+                      <td><?php echo $row["description"] ?></td>
+                      <td class="font-italic">
+                        <small>
+                          <?php
+                            $query2 = "SELECT * FROM users WHERE user_id ='$last_user'";
+                            $result2 = mysqli_query($conn, $query2);
+                            while ($row2 = mysqli_fetch_array($result2)) {
+                              echo $row2['employee_name'] . ' | ' . $date;
+                            }
+                          ?>
+                        </small>
+                      </td>
+                      <td>
+                        <button class="btn btn-secondary btn-sm" data-id="<?php echo $row["barcode"];?>" data-option="view" data-toggle="modal" data-target="#view" onclick="viewModal(this);">
+                          <i class="fas fa-eye"></i>
+                          View Details
+                        </button>
+                        <button class="btn btn-info btn-sm" data-id="<?php echo $row["barcode"];?>" data-option="update" data-toggle="modal" data-target="#update" onclick="viewModal(this);">
+                          <i class="fas fa-pencil-alt"></i>
+                          Edit Details
+                        </button>
+                        <button class="btn btn-danger btn-sm" data-id="<?php echo $row["barcode"];?>" data-option="delete" onclick="viewModal(this);">
+                          <i class="fas fa-trash"></i>
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                    <?php } ?>
+                    </tbody> 
                     </table>
                 </div>
               </div>
@@ -346,6 +327,47 @@
         </div>
         <!-- /.modal -->
 
+        <div class="modal fade" id="view">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">VIEW PRODUCT DETAILS</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">     
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="barcode">Barcode:</label>
+                      <input type="text" class="form-control " id="barcode" readonly>
+                    </div>
+                  </div>
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <label for="prod">Product Description:</label>
+                      <input type="text" class="form-control " id="prod" readonly>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <div class="position-relative" style="min-height: 180px;">
+                      <img src="dist/img/photo2.png" alt="Photo 3" class="img-fluid">           
+                    </div>
+                  </div>
+                </div>                       
+              </div>
+              <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Update</button> -->
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
         <div class="modal fade" id="update">
             <div class="modal-dialog modal-dialog-centered modal-lg">
               <div class="modal-content">
@@ -393,55 +415,6 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-
-        <div class="modal fade" id="view">
-          <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                  <form>
-                      <div class="row">     
-                          <div class="col-sm-4">
-                            <div class="form-group">
-                              <label for="barcode">Barcode:</label>
-                              <input type="text" class="form-control " id="barcode" readonly>
-                            </div>
-                          </div>
-                          <div class="col-sm-8">
-                            <div class="form-group">
-                              <label for="prod">Product Description:</label>
-                              <input type="text" class="form-control " id="prod" readonly>
-                            </div>
-                          </div>
-                          <!-- <div class="col-sm-4">
-                            <div class="custom-file form-group">
-                              <input type="file" class="custom-file-input" id="customFile" accept="image/*" dis> 
-                              <label class="custom-file-label" for="customFile">Choose file</label>
-                            </div>
-                          </div> -->
-                          <div class="col-sm-12">
-                            <div class="position-relative" style="min-height: 180px;">
-                              <img src="dist/img/photo2.png" alt="Photo 3" class="img-fluid">           
-                            </div>
-                          </div>
-                      </div>                       
-                  </form>
-              </div>
-              <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <!-- <button type="button" class="btn btn-primary">Update</button> -->
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
 
       </section>
     </div>
@@ -514,44 +487,66 @@
 <!-- bs-custom-file-input -->
 <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <script>
+      function viewModal(el) {
+        $.ajax({
+          type: "POST",
+          url: "enroll.php",
+          data: {"barcode": el.getAttribute("data-id")},
+          success: function(data) {
+            console.log(JSON.parse(data));
+          },
+          error: function(xhr, status, error) {
+            console.log(status);
+          }
+        })
+      }
+
       $(".custom-file-input").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
       });
+
+      
       $("#enroll_form").on("submit", function(e) {
         e.preventDefault();
         $.ajax({
           type: "POST",
           url: "enroll.php",
-          data: new FormData(document.getElementById("enroll_form")),
+          data: new FormData(this),
           contentType: false,
           processData:false,
           cache: false,
-          beforeSend: ()=> {
-            console.log(new FormData(document.getElementById("enroll_form")));
-          },
           success: function(data) {
+            console.log(data);
             $('#enroll_success_text').removeClass('d-none');
-            $('#enroll_error_text').addClass('d-none');
-            $('#enroll_success_text').fadeOut(5000, 'swing');
+            setTimeout(()=> {
+              $('#enroll_success_text').addClass('d-none');
+            }, 3000)
             $('#barcode').val('');
             $('#description').val('');
             $('#imageFile').val('');
+            var fileName = $('.custom-file-input').val().split("\\").pop();
+            $('.custom-file-input').siblings(".custom-file-label").addClass("selected").html(fileName);
           },
           error: function(xhr, status, error) {
+            console.log(status);
             $('#enroll_error_text').removeClass('d-none');
-            $('#enroll_success_text').addClass('d-none');
-            $('#enroll_error_text').fadeOut(5000, 'swing');
+            setTimeout(()=> {
+              $('#enroll_error_text').addClass('d-none');
+            }, 3000)
             $('#barcode').val('');
             $('#description').val('');
             $('#imageFile').val('');
+            var fileName = $('.custom-file-input').val().split("\\").pop();
+            $('.custom-file-input').siblings(".custom-file-label").addClass("selected").html(fileName);
           }
         });
       });
  
     $(function () {
       $("#example1").DataTable({
-        "columnDefs": [{"className": "dt-center", "targets": "_all"}],
+        "order": [],
+        "columnDefs": [{"className": "dt-center", "targets": "no_sort", "orderable": false}],
         "responsive": true, 
         "lengthChange": true, 
         "autoWidth": false,
