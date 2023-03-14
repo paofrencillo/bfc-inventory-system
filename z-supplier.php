@@ -1,11 +1,10 @@
 <?php
 include('connection.php');
 session_start();
-if (!isset($_SESSION['login_user']['user'])) {
+if (!isset($_SESSION['login_user2']['user'])) {
   header("Location: index.php");
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +55,7 @@ if (!isset($_SESSION['login_user']['user'])) {
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="starter.php" class="nav-link">Home</a>
+        <a href="z-dashboard.php" class="nav-link">Home</a>
       </li>
     </ul>
 
@@ -66,7 +65,7 @@ if (!isset($_SESSION['login_user']['user'])) {
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-light-blue elevation-4">
     <!-- Brand Logo -->
-    <a href="starter.php" class="brand-link">
+    <a href="z-dashboard.php" class="brand-link">
       <img src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AdminBFC</span>
     </a>
@@ -80,7 +79,7 @@ if (!isset($_SESSION['login_user']['user'])) {
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="starter.php" class="nav-link">
+            <a href="z-dashboard.php" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -88,7 +87,7 @@ if (!isset($_SESSION['login_user']['user'])) {
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link ">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Manage Inventory
@@ -98,13 +97,13 @@ if (!isset($_SESSION['login_user']['user'])) {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="inventory.php" class="nav-link ">
+                <a href="z-inventory.php" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Inventory</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="masterlist.php" class="nav-link">
+                <a href="z-masterlist.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Masterlist</p>
                 </a>
@@ -122,13 +121,13 @@ if (!isset($_SESSION['login_user']['user'])) {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="prod-in.php" class="nav-link">
+                <a href="z-prod-in.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product In</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="prod-out.php" class="nav-link">
+                <a href="z-prod-out.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product Out</p>
                 </a>
@@ -145,30 +144,20 @@ if (!isset($_SESSION['login_user']['user'])) {
               </p>
             </a>
             <ul class="nav nav-treeview">
+             
               <li class="nav-item">
-                <a href="employee.php" class="nav-link ">
+                <a href="z-franchisee.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Employee Accounts</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i class="far fa-dot-circle nav-icon "></i>
                   <p>Franchisee List</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="supplier.php" class="nav-link ">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="#" class="nav-link active">
+                  <i class="far fa-dot-circle nav-icon"></i>
                   <p>Supplier</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="admin.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Change Password </p>
-                </a>
-              </li>
+  
             </ul>
           </li>
           <li class="nav-item">
@@ -194,64 +183,45 @@ if (!isset($_SESSION['login_user']['user'])) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Franchiser List</h1>
+            <h1 class="m-0">Supplier List</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
       <div class="col-12">
-        <div class="card card-outline card-primary ">
-            <div class="card-header text-center">
-                <a href="#" class="h1"><b>Add</b> Franchisee</a>
-            </div>
-            <div class="card-body text-right">
-              <p class="login-box-msg">Enroll New Franchisee</p>
-              <!-- add new franchise -->
-              <?php
-              $check_name =  $_SESSION['login_user']['user'];
-              $query = "SELECT * FROM users WHERE user='$check_name'";
-              $result = mysqli_query($conn, $query);
-              while ($row = mysqli_fetch_array($result)) {
-              ?>
+        <div class="card card-outline card-primary">
+          <div class="card-header text-center">
+            <a href="#" class="h1"><b>Add</b> Supplier</a>
+          </div>
+          <div class="card-body text-right">
+            <p class="login-box-msg">Enroll New Supplier</p>
+            <?php
+            $check_name =  $_SESSION['login_user2']['user'];
+            $query = "SELECT * FROM users WHERE user='$check_name'";
+            $result = mysqli_query($conn, $query);
+            while ($row = mysqli_fetch_array($result)) {
+            ?>
               <form action="functions.php" method="post">
-                <div class="input-group mb-3" >
+                <div class="input-group mb-3">
                   <div class="input-group-append">
                     <div class="input-group-text">
-                      <span class="fas fa-hashtag"></span>
+                      <span class="fas fa-truck"></span>
                     </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Branch Code" name="branchcode" autocomplete="off" required>
-                  <div class="input-group-append"  style="padding-left: 10px;">
-                    <div class="input-group-text">
-                      <span class="fas fa-user"></span>
-                    </div>
-                  </div>
-                  <input type="text" class="form-control" placeholder="Name" name="name" autocomplete="off" required>
+                  <input type="text" class="form-control" name="supplier_name" placeholder="Enter name of Supplier" autocomplete="off" required>
                 </div>
-                <div class="input-group mb-3" >
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-building"></span>
-                    </div>
-                  </div>
-                  <input type="text" class="form-control"  placeholder="Company" name="company" autocomplete="off" required>
-                  <div class="input-group-append"  style="padding-left: 10px;">
-                    <div class="input-group-text">
-                      <span class="fas fa-map-marker-alt"></span>
-                    </div>
-                  </div>
-                  <input type="text" class="form-control" placeholder="Address" name="address" autocomplete="off" required>
-                </div>
+                <!-- /.col -->
                 <div class="col-12">
                   <input type="hidden" name="id_lastuser" value="<?php echo $row['user_id'] ?>">
-                  <button type="submit" class="btn btn-primary" name="franchise" >Add Franchise</button>
+                  <button type="submit" class="btn btn-primary" name="supplier2">Add Supplier</button>
                 </div>
               </form>
-              <?php } ?>
-            </div>
-            <!-- /.card-body -->
+            <?php } ?>
+          </div>
+          <!-- /.card-body -->
         </div>
         <!-- /.row -->
       </div>
+    
       <section class="content">
         <div class="container-fluid">
           <div class="row">
@@ -259,100 +229,79 @@ if (!isset($_SESSION['login_user']['user'])) {
               <div class="card">
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <table id="example1" class="table table-bordered table-hover dt-center text-center">
+                  <table id="example1" class="table table-bordered table-hover dt-center">
                     <thead>
-                    <tr>
-                        <th>Branch Code</th>
-                        <th>Name</th>
-                        <th>Company</th>
-                        <th>Address</th>
+                      <tr>
+                        <th>ID #</th>
+                        <th>Supplier Name</th>
                         <th>Last Edited By</th>
                         <th>Action</th>
-                    </tr>
+                      </tr>
                     </thead>
                     <tbody>
-                    <?php 
-                        $check_user =  $_SESSION['login_user']['user_id'];
-                        $query = "SELECT * FROM branches";
-                        $result = mysqli_query($conn, $query);
-                        $check_row = mysqli_num_rows($result);
-                        while ($row = mysqli_fetch_array($result)) {
-                          $last_user = $row['last_edited_by'];
-                    ?>
-                    <tr>
-                        <td><?php echo $row['code'] ?></td>
-                        <td><?php echo $row['name'] ?></td>
-                        <td><?php echo $row['company'] ?></td>
-                        <td><?php echo $row['address'] ?></td>
+                      <?php
+                      $check_user =  $_SESSION['login_user2']['user_id'];
+                      $query = "SELECT * FROM suppliers";
+                      $result = mysqli_query($conn, $query);
+                      $check_row = mysqli_num_rows($result);
+                      while ($row = mysqli_fetch_array($result)) {
+                        $last_user = $row['last_edited_by'];
+                      ?>
+                        <tr>
+                          <td><?php echo $row['supplier_id'] ?></td>
+                          <td><?php echo $row['supplier_name'] ?></td>
+                          <?php
+                          $query2 = "SELECT * FROM users WHERE user_id ='$last_user'";
+                          $result2 = mysqli_query($conn, $query2);
+                          while ($row2 = mysqli_fetch_array($result2)) {
+                          ?>
 
-                        <?php
-                            $query2 = "SELECT * FROM users WHERE user_id ='$last_user'";
-                            $result2 = mysqli_query($conn, $query2);
-                            while ($row2 = mysqli_fetch_array($result2)) {
-                        ?>
-                        <td><?php echo $row2['employee_name'] ?></td>         
-                        <td>
-                            <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['code']?>">
-                              <i class="fas fa-pencil-alt"></i>
-                              Edit
-                            </button>
-                            <!-- /.modal -->
-                            <div class="modal fade" id="update<?php echo $row['code'] ?>">
+                            <td><?php echo $row2['employee_name'] ?></td>
+                            <td>
+                              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['supplier_id'] ?>">
+                                <i class="fas fa-pencil-alt"></i>
+                                Edit
+                              </button>
+                              <!-- /.modal -->
+                              <div class="modal fade" id="update<?php echo $row['supplier_id'] ?>">
                                 <div class="modal-dialog modal-dialog-centered modal-lg">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h4 class="modal-title">UPDATE FRANCHISEE DETAILS</h4>
+                                      <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                       </button>
                                     </div>
                                     <div class="modal-body">
                                       <form action="functions.php" method="POST">
-                                        <div class="row">     
-                                          <div class="col-md-6">
-                                              <div class="form-group">
-                                                  <label for="branch">Branch Code</label>
-                                                  <input type="text" class="form-control" id="branch" name="branch" value="<?php echo $row['code'] ?>" autocomplete="off">
-                                              </div>
-                                          </div>
-                                          <div class="col-md-6">
+                                        <div class="row">
+                                          <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="name">Name</label>
-                                                <input type="text" class="form-control " id="name" name="name" value="<?php echo $row['name'] ?>" autocomplete="off">
+                                              <label for="name">Name</label>
+                                              <input type="text" class="form-control " id="name" name="supplier_name" value="<?php echo $row['supplier_name'] ?>" required>
                                             </div>
                                           </div>
-                                          <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="company">Company</label>
-                                                <input type="text" class="form-control " id="company" name="company" value="<?php echo $row['company'] ?>" autocomplete="off">
-                                            </div>
-                                          </div>
-                                          <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="add">Address</label>
-                                                <input type="text" class="form-control " id="add" name="add" value="<?php echo $row['address'] ?>" autocomplete="">
-                                            </div>
-                                          </div>
-                                        </div>                       
-
+                                        </div>
                                         <div class="modal-footer">
-                                          <input type="hidden" name="franchisee_modify" value="<?php echo $row['id'] ?>">
-                                          <input type="hidden" name="last_user" value="<?php echo $check_user?>">
+                                          <input type="hidden" name="supplier_modify" value="<?php echo $row['supplier_id'] ?>">
+                                          <input type="hidden" name="last_user" value="<?php echo $check_user ?>">
                                           <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->
-                                          <button type="submit" class="btn btn-danger" name="delete_franchisee">Delete</button>
-                                          <button type="submit" class="btn btn-primary" name="modify_franchisee">Save Changes</button>
+                                          <button type="submit" class="btn btn-danger" name="delete_supplier2">Delete</button>
+                                          <button type="submit" class="btn btn-primary" name="modify_supplier2">Save Changes</button>
                                         </div>
                                       </form>
                                     </div>
                                   </div>
+                                  <!-- /.modal-content -->
                                 </div>
-                            </div>
-                            <!-- /.modal -->
-                        </td> 
-                    </tr>
+                                <!-- /.modal-dialog -->
+                              </div>
+                              <!-- /.modal -->
+                            </td>
+                        </tr>
+                      <?php } ?>
                     <?php } ?>
-                    <?php } ?>
-                    </tbody> 
+                    </tbody>
                   </table>
                 </div>
                 <!-- /.card-body -->
@@ -439,6 +388,6 @@ if (!isset($_SESSION['login_user']['user'])) {
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
       
     });
-</script>
+  </script>
 </body>
 </html>

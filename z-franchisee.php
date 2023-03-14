@@ -1,14 +1,14 @@
 <?php
 include('connection.php');
 session_start();
-if (!isset($_SESSION['login_user']['user'])) {
+if (!isset($_SESSION['login_user2']['user'])) {
   header("Location: index.php");
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,165 +40,156 @@ if (!isset($_SESSION['login_user']['user'])) {
   <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
+  <div class="wrapper">
 
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTELogo" height="500" width="500">
-  </div>
-
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="starter.php" class="nav-link">Home</a>
-      </li>
-    </ul>
-
-  </nav>
-  <!-- /.navbar -->
-
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-light-blue elevation-4">
-    <!-- Brand Logo -->
-    <a href="starter.php" class="brand-link">
-      <img src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminBFC</span>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="starter.php" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Manage Inventory
-                <i class="fas fa-angle-left right "></i>
-                <!-- <span class="badge badge-info right">6</span> -->
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="inventory.php" class="nav-link ">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inventory</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="masterlist.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Masterlist</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-truck"></i>
-              <p>
-                Product In/Out
-                <i class="fas fa-angle-left right"></i>
-                <!-- <span class="badge badge-info right">6</span> -->
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="prod-in.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Product In</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="prod-out.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Product Out</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-cog"></i>
-              <p>
-                Settings
-                <i class="fas fa-angle-left right"></i>
-                <!-- <span class="badge badge-info right">6</span> -->
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="employee.php" class="nav-link ">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Employee Accounts</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i class="far fa-dot-circle nav-icon "></i>
-                  <p>Franchisee List</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="supplier.php" class="nav-link ">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Supplier</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="admin.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Change Password </p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="functions.php?logout" class="nav-link">
-              <i class="nav-icon fas fa-sign-out-alt"></i>
-              <p>
-                Logout
-              </p>
-            </a>
-          </li>
-          
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
+    <!-- Preloader -->
+    <div class="preloader flex-column justify-content-center align-items-center">
+      <img class="animation__shake" src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTELogo" height="500" width="500">
     </div>
-    <!-- /.sidebar -->
-  </aside>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Franchiser List</h1>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-      <div class="col-12">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      <!-- Left navbar links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="z-dashboard.php" class="nav-link">Home</a>
+        </li>
+      </ul>
+
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-light-blue elevation-4">
+      <!-- Brand Logo -->
+      <a href="z-dashboard.php" class="brand-link">
+        <img src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">AdminBFC</span>
+      </a>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+            <li class="nav-item">
+              <a href="z-dashboard.php" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Dashboard
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-edit"></i>
+                <p>
+                  Manage Inventory
+                  <i class="fas fa-angle-left right "></i>
+                  <!-- <span class="badge badge-info right">6</span> -->
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="z-inventory.php" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Inventory</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="z-masterlist.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Masterlist</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                  Product In/Out
+                  <i class="fas fa-angle-left right"></i>
+                  <!-- <span class="badge badge-info right">6</span> -->
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="z-prod-in.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Product In</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="z-prod-out.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Product Out</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item menu-open">
+              <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-cog"></i>
+                <p>
+                  Settings
+                  <i class="fas fa-angle-left right"></i>
+                  <!-- <span class="badge badge-info right">6</span> -->
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+
+                <li class="nav-item">
+                  <a href="#" class="nav-link active">
+                    <i class="far fa-dot-circle nav-icon "></i>
+                    <p>Franchisee List</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="z-supplier.php" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Supplier</p>
+                  </a>
+                </li>
+
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="functions.php?logout" class="nav-link">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p>
+                  Logout
+                </p>
+              </a>
+            </li>
+
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Franchiser List</h1>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+        <div class="col-12">
         <div class="card card-outline card-primary ">
             <div class="card-header text-center">
                 <a href="#" class="h1"><b>Add</b> Franchisee</a>
@@ -207,7 +198,7 @@ if (!isset($_SESSION['login_user']['user'])) {
               <p class="login-box-msg">Enroll New Franchisee</p>
               <!-- add new franchise -->
               <?php
-              $check_name =  $_SESSION['login_user']['user'];
+              $check_name =  $_SESSION['login_user2']['user'];
               $query = "SELECT * FROM users WHERE user='$check_name'";
               $result = mysqli_query($conn, $query);
               while ($row = mysqli_fetch_array($result)) {
@@ -243,7 +234,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                 </div>
                 <div class="col-12">
                   <input type="hidden" name="id_lastuser" value="<?php echo $row['user_id'] ?>">
-                  <button type="submit" class="btn btn-primary" name="franchise" >Add Franchise</button>
+                  <button type="submit" class="btn btn-primary" name="franchise2" >Add Franchise</button>
                 </div>
               </form>
               <?php } ?>
@@ -272,7 +263,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                     </thead>
                     <tbody>
                     <?php 
-                        $check_user =  $_SESSION['login_user']['user_id'];
+                        $check_user =  $_SESSION['login_user2']['user_id'];
                         $query = "SELECT * FROM branches";
                         $result = mysqli_query($conn, $query);
                         $check_row = mysqli_num_rows($result);
@@ -339,8 +330,8 @@ if (!isset($_SESSION['login_user']['user'])) {
                                           <input type="hidden" name="franchisee_modify" value="<?php echo $row['id'] ?>">
                                           <input type="hidden" name="last_user" value="<?php echo $check_user?>">
                                           <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->
-                                          <button type="submit" class="btn btn-danger" name="delete_franchisee">Delete</button>
-                                          <button type="submit" class="btn btn-primary" name="modify_franchisee">Save Changes</button>
+                                          <button type="submit" class="btn btn-danger" name="delete_franchisee2">Delete</button>
+                                          <button type="submit" class="btn btn-primary" name="modify_franchisee2">Save Changes</button>
                                         </div>
                                       </form>
                                     </div>
@@ -355,7 +346,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                     </tbody> 
                   </table>
                 </div>
-                <!-- /.card-body -->
+              <!-- /.card-body -->
               </div>
             </div>
           </div>
@@ -429,16 +420,20 @@ if (!isset($_SESSION['login_user']['user'])) {
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
 <script>
-    $(function () {
-      $("#example1").DataTable({
-        "columnDefs": [{"className": "dt-center", "targets": "_all"}],
-        "responsive": true, 
-        "lengthChange": true, 
-        "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-      
-    });
+  $(function() {
+    $("#example1").DataTable({
+      "columnDefs": [{
+        "className": "dt-center",
+        "targets": "_all"
+      }],
+      "responsive": true,
+      "lengthChange": true,
+      "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+  });
 </script>
 </body>
+
 </html>
