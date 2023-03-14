@@ -229,6 +229,70 @@ if (isset($_POST['pass_admin'])) {
     }
 }
 
+#Add Franchisee
+if (isset($_POST['franchise'])) {
+    $franchisee = $_POST['franchisee'];
+    $name = $_POST['name'];
+    $company = $_POST['company'];
+    $address = $_POST['address'];
+
+    $sql = "SELECT * FROM branches WHERE (user='$user') OR (employee_name='$name');";
+    $result = mysqli_query($conn, $sql);
+
+
+    if(!$result->num_rows > 0){
+        $conn->query("INSERT INTO users (employee_name, user, pass)
+        VALUES('$name', '$user','".password_hash($pass, PASSWORD_BCRYPT)."')") or die($conn->error);
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'success',
+                title: 'Successfully Registered',
+                text: 'Employee account successfully added',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "employee.php";
+                    }else{
+                        window.location.href = "employee.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }else{
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'User is already registered',
+                text: 'Employee account is already exist',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "employee.php";
+                    }else{
+                        window.location.href = "employee.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }
+}
+
 #LOGOUT
 if (isset($_GET['logout'])) {
     session_destroy();

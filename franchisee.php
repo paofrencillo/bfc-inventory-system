@@ -56,7 +56,7 @@ if (!isset($_SESSION['login_user']['user'])) {
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="starter.html" class="nav-link">Home</a>
+        <a href="starter.php" class="nav-link">Home</a>
       </li>
     </ul>
 
@@ -66,7 +66,7 @@ if (!isset($_SESSION['login_user']['user'])) {
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-light-blue elevation-4">
     <!-- Brand Logo -->
-    <a href="starter.html" class="brand-link">
+    <a href="starter.php" class="brand-link">
       <img src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AdminBFC</span>
     </a>
@@ -80,7 +80,7 @@ if (!isset($_SESSION['login_user']['user'])) {
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="starter.html" class="nav-link">
+            <a href="starter.php" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -98,13 +98,13 @@ if (!isset($_SESSION['login_user']['user'])) {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="inventory.html" class="nav-link ">
+                <a href="inventory.php" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Inventory</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="masterlist.html" class="nav-link">
+                <a href="masterlist.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Masterlist</p>
                 </a>
@@ -122,13 +122,13 @@ if (!isset($_SESSION['login_user']['user'])) {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="prod-in.html" class="nav-link">
+                <a href="prod-in.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product In</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="prod-out.html" class="nav-link">
+                <a href="prod-out.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product Out</p>
                 </a>
@@ -146,7 +146,7 @@ if (!isset($_SESSION['login_user']['user'])) {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="employee.html" class="nav-link ">
+                <a href="employee.php" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Employee Accounts</p>
                 </a>
@@ -158,13 +158,13 @@ if (!isset($_SESSION['login_user']['user'])) {
                 </a>
               </li>
               <li class="nav-item">
-                <a href="supplier.html" class="nav-link ">
+                <a href="supplier.php" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Supplier</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="admin.html" class="nav-link">
+                <a href="admin.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Change Password </p>
                 </a>
@@ -206,20 +206,20 @@ if (!isset($_SESSION['login_user']['user'])) {
             <div class="card-body text-right">
               <p class="login-box-msg">Enroll New Franchisee</p>
               <!-- add new franchise -->
-              <form action="#" method="post">
+              <form action="functions.php" method="post">
                 <div class="input-group mb-3" >
                   <div class="input-group-append">
                     <div class="input-group-text">
                       <span class="fas fa-hashtag"></span>
                     </div>
                   </div>
-                  <input type="text" class="form-control"  placeholder="Branch Code">
+                  <input type="text" class="form-control" placeholder="Branch Code" name="franchisee">
                   <div class="input-group-append"  style="padding-left: 10px;">
                     <div class="input-group-text">
                       <span class="fas fa-user"></span>
                     </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Name">
+                  <input type="text" class="form-control" placeholder="Name" name="name">
                 </div>
                 <div class="input-group mb-3" >
                   <div class="input-group-append">
@@ -227,16 +227,16 @@ if (!isset($_SESSION['login_user']['user'])) {
                       <span class="fas fa-building"></span>
                     </div>
                   </div>
-                  <input type="text" class="form-control"  placeholder="Company">
+                  <input type="text" class="form-control"  placeholder="Company" name="company">
                   <div class="input-group-append"  style="padding-left: 10px;">
                     <div class="input-group-text">
                       <span class="fas fa-map-marker"></span>
                     </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Address">
+                  <input type="text" class="form-control" placeholder="Address" name="address">
                 </div>
                 <div class="col-12">
-                  <a type="submit" class="btn btn-primary"  >Add Franchise</a>
+                  <a type="submit" class="btn btn-primary" name="franchise" >Add Franchise</a>
                 </div>
               </form>
             </div>
