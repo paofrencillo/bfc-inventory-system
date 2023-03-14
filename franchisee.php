@@ -310,7 +310,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="branch">Branch Code</label>
-                                                    <input type="text" class="form-control" id="branch" name="branch" value="<?php echo $row['code'] ?>" readonly>
+                                                    <input type="text" class="form-control" id="branch" name="branch" value="<?php echo $row['code'] ?>">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -334,7 +334,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                                           </div>                       
 
                                           <div class="modal-footer justify-content-between">
-                                            <!-- <input type="hidden" name="franchisee_modify" value="<?php echo $row['code'] ?>"> -->
+                                            <input type="hidden" name="franchisee_modify" value="<?php echo $row['id'] ?>">
                                             <input type="hidden" name="last_user" value="<?php echo $row2['user_id'] ?>">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                             <button type="submit" class="btn btn-primary" name="modify_franchisee">Save Changes</button>
