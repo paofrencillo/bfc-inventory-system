@@ -231,18 +231,19 @@ if (isset($_POST['pass_admin'])) {
 
 #Add Franchisee
 if (isset($_POST['franchise'])) {
-    $franchisee = $_POST['franchisee'];
+    $branchcode = $_POST['branchcode'];
     $name = $_POST['name'];
     $company = $_POST['company'];
     $address = $_POST['address'];
+    $id_lastuser = $_POST['id_lastuser'];
 
-    $sql = "SELECT * FROM branches WHERE (user='$user') OR (employee_name='$name');";
+    $sql = "SELECT * FROM branches WHERE (code='$branchcode');";
     $result = mysqli_query($conn, $sql);
 
 
     if(!$result->num_rows > 0){
-        $conn->query("INSERT INTO users (employee_name, user, pass)
-        VALUES('$name', '$user','".password_hash($pass, PASSWORD_BCRYPT)."')") or die($conn->error);
+        $conn->query("INSERT INTO branches (code, name, company, address, last_edited_by)
+        VALUES('$branchcode', '$name', '$company', '$address', '$id_lastuser')") or die($conn->error);
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -251,14 +252,14 @@ if (isset($_POST['franchise'])) {
                 Swal.fire({
                 icon: 'success',
                 title: 'Successfully Registered',
-                text: 'Employee account successfully added',
+                text: 'Franchisee successfully added',
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Okay'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "employee.php";
+                    window.location.href = "franchisee.php";
                     }else{
-                        window.location.href = "employee.php";
+                        window.location.href = "franchisee.php";
                     }
                 })
                 
@@ -274,8 +275,8 @@ if (isset($_POST['franchise'])) {
             $(document).ready(function(){
                 Swal.fire({
                 icon: 'error',
-                title: 'User is already registered',
-                text: 'Employee account is already exist',
+                title: 'Ooops...',
+                text: 'Franchisee is already exist',
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Okay'
                 }).then((result) => {

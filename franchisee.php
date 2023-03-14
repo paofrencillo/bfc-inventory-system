@@ -206,6 +206,12 @@ if (!isset($_SESSION['login_user']['user'])) {
             <div class="card-body text-right">
               <p class="login-box-msg">Enroll New Franchisee</p>
               <!-- add new franchise -->
+              <?php
+              $check_name =  $_SESSION['login_user']['user'];
+              $query = "SELECT * FROM users WHERE user='$check_name'";
+              $result = mysqli_query($conn, $query);
+              while ($row = mysqli_fetch_array($result)) {
+              ?>
               <form action="functions.php" method="post">
                 <div class="input-group mb-3" >
                   <div class="input-group-append">
@@ -213,7 +219,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                       <span class="fas fa-hashtag"></span>
                     </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Branch Code" name="franchisee">
+                  <input type="text" class="form-control" placeholder="Branch Code" name="branchcode">
                   <div class="input-group-append"  style="padding-left: 10px;">
                     <div class="input-group-text">
                       <span class="fas fa-user"></span>
@@ -236,9 +242,11 @@ if (!isset($_SESSION['login_user']['user'])) {
                   <input type="text" class="form-control" placeholder="Address" name="address">
                 </div>
                 <div class="col-12">
-                  <a type="submit" class="btn btn-primary" name="franchise" >Add Franchise</a>
+                <input type="hidden" name="id_lastuser" value="<?php echo $row['user_id'] ?>">
+                  <button type="submit" class="btn btn-primary" name="franchise" >Add Franchise</button>
                 </div>
               </form>
+              <?php } ?>
             </div>
             <!-- /.card-body -->
         </div>
