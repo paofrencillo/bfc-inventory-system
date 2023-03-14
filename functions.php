@@ -281,9 +281,9 @@ if (isset($_POST['franchise'])) {
                 confirmButtonText: 'Okay'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "employee.php";
+                    window.location.href = "franchisee.php";
                     }else{
-                        window.location.href = "employee.php";
+                        window.location.href = "franchisee.php";
                     }
                 })
                 
