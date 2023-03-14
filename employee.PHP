@@ -213,7 +213,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                       <span class="fas fa-address-card"></span>
                     </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Username" name="username" autocomplete="off">
+                  <input type="text" class="form-control" placeholder="Username" name="username" autocomplete="off" required>
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-append">
@@ -221,15 +221,15 @@ if (!isset($_SESSION['login_user']['user'])) {
                       <span class="fas fa-user"></span>
                     </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Name" name="name" autocomplete="off">
+                  <input type="text" class="form-control" placeholder="Name" name="name" autocomplete="off" required>
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-append">
                     <div class="input-group-text">
-                      <span class="fas fa-user-lock"></span>
+                      <span class="fas fa-lock"></span>
                     </div>
                   </div>
-                  <input type="password" class="form-control" placeholder="Default Password" name="password" autocomplete="off">
+                  <input type="password" class="form-control" placeholder="Default Password" name="password" autocomplete="off" required>
                 </div>
                 <div class="col-12">
                   <button type="submit" class="btn btn-primary" name="signup">Add Account</button>
@@ -259,7 +259,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                       <tbody>
                         <?php
                         $check_user =  $_SESSION['login_user']['user_id'];
-                        $query = "SELECT * FROM users";
+                        $query = "SELECT * FROM users WHERE is_superuser='0'";
                         $result = mysqli_query($conn, $query);
                         $check_row = mysqli_num_rows($result);
                         while ($row = mysqli_fetch_array($result)) {
@@ -270,14 +270,14 @@ if (!isset($_SESSION['login_user']['user'])) {
                             <td>
                               <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['user_id'] ?>">
                                 <i class="fas fa-pencil-alt"></i>
-                                Edit
+                                Edit Details
                               </button>
                               <!-- /.modal -->
                               <div class="modal fade" id="update<?php echo $row['user_id'] ?>">
                                 <div class="modal-dialog modal-dialog-centered modal-lg">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h4 class="modal-title">CHANGE PASSWORD</h4>
+                                      <h4 class="modal-title">EDIT ACCOUNT DETAILS</h4>
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                       </button>
@@ -287,49 +287,24 @@ if (!isset($_SESSION['login_user']['user'])) {
                                         <div class="row">
                                           <div class="col-sm-6">
                                             <div class="form-group">
-                                              <label for="name">Password</label>
-                                              <input type="password" class="form-control " id="password1" placeholder="Enter New Password" autocomplete="off">
-                                            </div>
-                                          </div>
-                                          <div class="col-sm-6">
-                                            <div class="form-group">
-                                              <label for="name">Confirm Password</label>
-                                              <input type="password" class="form-control " id="password2" placeholder="Enter Confirm Password" autocomplete="off">
-                                            </div>
-                                          </div>
-                                      </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-primary" name="modifypass_employee">Change Password</button>
-                                    </div>
-
-                                    <div class="modal-header">
-                                      <h4 class="modal-title">EDIT ACCOUNT DETAILS</h4>
-
-                                    </div>
-                                    <div class="modal-body">
-                                      <form action="functions.php" method="POST">
-                                        <div class="row">
-                                          <div class="col-sm-6">
-                                            <div class="form-group">
                                               <label for="name">Name</label>
-                                              <input type="text" class="form-control " id="name" autocomplete="off" value="<?php echo $row['employee_name'] ?>">
+                                              <input type="text" class="form-control " id="employee_name" name="employee_name" autocomplete="off" value="<?php echo $row['employee_name'] ?>">
                                             </div>
                                           </div>
                                           <div class="col-sm-6">
                                             <div class="form-group">
                                               <label for="name">Username</label>
-                                              <input type="text" class="form-control " id="name" autocomplete="off" value="<?php echo $row['user'] ?>">
+                                              <input type="text" class="form-control " id="user" name="user" autocomplete="off" value="<?php echo $row['user'] ?>">
                                             </div>
                                           </div>
-                                      </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->
-                                      <button type="submit" class="btn btn-danger" name="delete_employee">Delete</button>
-                                      <button type="button" class="btn btn-primary" name="modify_employee">Update</button>
-                                    </div>
-
+                                        </div>
+                                        <div class="modal-footer">
+                                          <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->
+                                          <input type="hidden" name="employee_modify" value="<?php echo $row['user_id'] ?>">
+                                          <button type="submit" class="btn btn-danger" name="delete_employee">Delete</button>
+                                          <button type="submit" class="btn btn-primary" name="modify_employee">Update Details</button>
+                                        </div>
+                                    </form>
                                   </div>
                                   <!-- /.modal-content -->
                                 </div>
@@ -431,6 +406,7 @@ if (!isset($_SESSION['login_user']['user'])) {
 
     });
   </script>
+  
 </body>
 
 </html>

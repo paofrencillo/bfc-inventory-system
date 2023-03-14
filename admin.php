@@ -202,33 +202,33 @@ if (!isset($_SESSION['login_user']['user'])) {
               $result = mysqli_query($conn, $query);
               while ($row = mysqli_fetch_array($result)) {
               ?>
-                <div class="card-body text-right">
-                  <p class="login-box-msg">Change Password</p>
-                  <form action="functions.php" method="post">
-                    <div class="input-group mb-3">
-                      <div class="input-group-append">
-                        <div class="input-group-text">
-                          <span class="fas fa-lock"></span>
-                        </div>
+              <div class="card-body text-right">
+                <p class="login-box-msg">Change Password</p>
+                <form action="functions.php" method="post">
+                  <div class="input-group mb-3">
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
                       </div>
-                      <input type="password" class="form-control" placeholder="Password" name="password">
                     </div>
-                    <div class="input-group mb-3">
-                      <div class="input-group-append">
-                        <div class="input-group-text">
-                          <span class="fas fa-lock"></span>
-                        </div>
+                    <input type="password" class="form-control" placeholder="Password" name="password" required>
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
                       </div>
-                      <input type="password" class="form-control" placeholder="Confirm Password" name="confirmpass">
                     </div>
+                    <input type="password" class="form-control" placeholder="Confirm Password" name="confirmpass" required>
+                  </div>
 
-                    <div class="col-12">
-                      <input type="hidden" name="id_password" value="<?php echo $row['user_id'] ?>">
-                      <button type="submit" class="btn btn-primary btn-md" name="pass_admin">Save Changes</button>
-                    </div>
-                  </form>
-                <?php } ?>
-                </div>
+                  <div class="col-12">
+                    <input type="hidden" name="id_password" value="<?php echo $row['user_id'] ?>">
+                    <button type="submit" class="btn btn-primary btn-md" name="pass_admin">Save Changes</button>
+                  </div>
+                </form>
+              <?php } ?>
+              </div>
                 <!-- /.card-body -->
             </div>
             <!-- /.row -->
@@ -287,6 +287,7 @@ if (!isset($_SESSION['login_user']['user'])) {
   <script src="dist/js/demo.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="dist/js/pages/dashboard.js"></script>
-</body>
 
+
+</body>
 </html>

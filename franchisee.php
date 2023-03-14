@@ -219,13 +219,13 @@ if (!isset($_SESSION['login_user']['user'])) {
                       <span class="fas fa-hashtag"></span>
                     </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Branch Code" name="branchcode">
+                  <input type="text" class="form-control" placeholder="Branch Code" name="branchcode" autocomplete="off" required>
                   <div class="input-group-append"  style="padding-left: 10px;">
                     <div class="input-group-text">
                       <span class="fas fa-user"></span>
                     </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Name" name="name">
+                  <input type="text" class="form-control" placeholder="Name" name="name" autocomplete="off" required>
                 </div>
                 <div class="input-group mb-3" >
                   <div class="input-group-append">
@@ -233,13 +233,13 @@ if (!isset($_SESSION['login_user']['user'])) {
                       <span class="fas fa-building"></span>
                     </div>
                   </div>
-                  <input type="text" class="form-control"  placeholder="Company" name="company">
+                  <input type="text" class="form-control"  placeholder="Company" name="company" autocomplete="off" required>
                   <div class="input-group-append"  style="padding-left: 10px;">
                     <div class="input-group-text">
-                      <span class="fas fa-map-marker"></span>
+                      <span class="fas fa-map-marker-alt"></span>
                     </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Address" name="address">
+                  <input type="text" class="form-control" placeholder="Address" name="address" autocomplete="off" required>
                 </div>
                 <div class="col-12">
                 <input type="hidden" name="id_lastuser" value="<?php echo $row['user_id'] ?>">
@@ -313,25 +313,25 @@ if (!isset($_SESSION['login_user']['user'])) {
                                           <div class="col-md-6">
                                               <div class="form-group">
                                                   <label for="branch">Branch Code</label>
-                                                  <input type="text" class="form-control" id="branch" name="branch" value="<?php echo $row['code'] ?>">
+                                                  <input type="text" class="form-control" id="branch" name="branch" value="<?php echo $row['code'] ?>" autocomplete="off">
                                               </div>
                                           </div>
                                           <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="name">Name</label>
-                                                <input type="text" class="form-control " id="name" name="name" value="<?php echo $row['name'] ?>">
+                                                <input type="text" class="form-control " id="name" name="name" value="<?php echo $row['name'] ?>" autocomplete="off">
                                             </div>
                                           </div>
                                           <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="company">Company</label>
-                                                <input type="text" class="form-control " id="company" name="company" value="<?php echo $row['company'] ?>">
+                                                <input type="text" class="form-control " id="company" name="company" value="<?php echo $row['company'] ?>" autocomplete="off">
                                             </div>
                                           </div>
                                           <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="add">Address</label>
-                                                <input type="text" class="form-control " id="add" name="add" value="<?php echo $row['address'] ?>">
+                                                <input type="text" class="form-control " id="add" name="add" value="<?php echo $row['address'] ?>" autocomplete="">
                                             </div>
                                           </div>
                                         </div>                       

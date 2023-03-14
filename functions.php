@@ -109,7 +109,7 @@ if(isset($_POST['signin'])) {
     
 }
 
-#REGISTER ACCOUNT
+#ADD EMPLOYEE ACCOUNT
 if (isset($_POST['signup'])) {
     $user = $_POST['username'];
     $name = $_POST['name'];
@@ -172,37 +172,15 @@ if (isset($_POST['signup'])) {
     }
 }
 
-#CHANGE PASSWORD ADMIN
-if (isset($_POST['pass_admin'])) {
-    $id_pass = $_POST['id_password'];
-    $pass = $_POST['password'];
-    $pass2 = $_POST['confirmpass'];
-    if ($pass != $pass2){
-        ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function(){
-                Swal.fire({
-                icon: 'warning',
-                title: 'Your password does not match',
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'Okay'
-                }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "admin.php";
-                    }else{
-                        window.location.href = "admin.php";
-                    }
-                })
-                
-            })
-    
-        </script>
-        <?php
-    }else{
-        $conn->query("UPDATE users SET pass='".password_hash($pass, PASSWORD_BCRYPT)."' WHERE user_id='$id_pass'") or die($conn->error);
-        session_destroy();
+#MODIFY EMPLOYEE
+if (isset($_POST['modify_employee'])) {
+    $employee_modify = $_POST['employee_modify'];
+    $employee_name = $_POST['employee_name'];
+    $user = $_POST['user'];
+
+
+    if ($employee_modify != null){
+        $conn->query("UPDATE users SET employee_name='$employee_name', user='$user' WHERE user_id='$employee_modify';") or die($conn->error);
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -210,20 +188,88 @@ if (isset($_POST['pass_admin'])) {
             $(document).ready(function(){
                 Swal.fire({
                 icon: 'success',
-                title: 'Successfully Updated your Password',
-                text: 'Please login your new created password',
+                title: 'Successfully Updated',
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Okay'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "index.php";
+                    window.location.href = "employee.php";
                     }else{
-                        window.location.href = "index.php";
+                        window.location.href = "employee.php";
                     }
-                })
-                
+                })      
             })
-    
+        </script>
+        <?php
+    }else{
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'An Error Occured',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "employee.php";
+                    }else{
+                        window.location.href = "employee.php";
+                    }
+                })   
+            })
+        </script>
+        <?php
+    }
+}
+
+#DELETE FRANCHISEE 
+if (isset($_POST['delete_employee'])) {
+    $employee_modify = $_POST['employee_modify'];
+
+    if ($employee_modify != null){
+        $conn->query("DELETE FROM users WHERE user_id='$employee_modify';") or die($conn->error);
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'success',
+                title: 'Successfully Deleted',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "employee.php";
+                    }else{
+                        window.location.href = "employee.php";
+                    }
+                })      
+            })
+        </script>
+        <?php
+    }else{
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'An Error Occured',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "employee.php";
+                    }else{
+                        window.location.href = "employee.php";
+                    }
+                })   
+            })
         </script>
         <?php
     }
@@ -394,6 +440,63 @@ if (isset($_POST['delete_franchisee'])) {
                     }
                 })   
             })
+        </script>
+        <?php
+    }
+}
+
+#CHANGE PASSWORD ADMIN
+if (isset($_POST['pass_admin'])) {
+    $id_pass = $_POST['id_password'];
+    $pass = $_POST['password'];
+    $pass2 = $_POST['confirmpass'];
+    if ($pass != $pass2){
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'warning',
+                title: 'Your password does not match',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "admin.php";
+                    }else{
+                        window.location.href = "admin.php";
+                    }
+                })
+                
+            })
+    
+        </script>
+        <?php
+    }else{
+        $conn->query("UPDATE users SET pass='".password_hash($pass, PASSWORD_BCRYPT)."' WHERE user_id='$id_pass'") or die($conn->error);
+        session_destroy();
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'success',
+                title: 'Successfully Updated your Password',
+                text: 'Please login your new created password',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "index.php";
+                    }else{
+                        window.location.href = "index.php";
+                    }
+                })
+                
+            })
+    
         </script>
         <?php
     }
