@@ -291,8 +291,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                             $result2 = mysqli_query($conn, $query2);
                             while ($row2 = mysqli_fetch_array($result2)) {
                         ?>
-                        <td><?php echo $row2['employee_name'] ?></td>
-                     
+                        <td><?php echo $row2['employee_name'] ?></td>         
                         <td>
                             <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['code']?>">
                               <i class="fas fa-pencil-alt"></i>
@@ -355,16 +354,13 @@ if (!isset($_SESSION['login_user']['user'])) {
                     <?php } ?>
                     <?php } ?>
                     </tbody> 
-                    </table>
+                  </table>
                 </div>
                 <!-- /.card-body -->
               </div>
             </div>
           </div>
         </div>
-
-
-
       </section>
     </div>
     <!-- /.content-header -->

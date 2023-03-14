@@ -252,37 +252,95 @@ if (!isset($_SESSION['login_user']['user'])) {
                       <thead>
                         <tr>
                           <th>Name</th>
-                          <th>Password</th>
+                          <th>Username</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1023156MHJHMHM</td>
-                          <td>Robust12S</td>
-                          <td>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">EDIT</button>
-                            <button type="button" class="btn btn-danger">DELETE</button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>421544256</td>
-                          <td>Cetirizine10S</td>
-                          <td>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">EDIT</button>
-                            <button type="button" class="btn btn-danger">DELETE</button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>421544256</td>
-                          <td>Mefenamic500mg (Generic)</td>
-                          <td>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">EDIT</button>
-                            <button type="button" class="btn btn-danger">DELETE</button>
-                          </td>
-                        </tr>
-                      </tbody>
+                        <?php
+                        $check_user =  $_SESSION['login_user']['user_id'];
+                        $query = "SELECT * FROM users";
+                        $result = mysqli_query($conn, $query);
+                        $check_row = mysqli_num_rows($result);
+                        while ($row = mysqli_fetch_array($result)) {
+                        ?>
+                          <tr>
+                            <td><?php echo $row['employee_name'] ?></td>
+                            <td><?php echo $row['user'] ?></td>
+                            <td>
+                              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['user_id'] ?>">
+                                <i class="fas fa-pencil-alt"></i>
+                                Edit
+                              </button>
+                              <!-- /.modal -->
+                              <div class="modal fade" id="update<?php echo $row['user_id'] ?>">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h4 class="modal-title">CHANGE PASSWORD</h4>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <form action="functions.php" method="POST">
+                                        <div class="row">
+                                          <div class="col-sm-6">
+                                            <div class="form-group">
+                                              <label for="name">Password</label>
+                                              <input type="password" class="form-control " id="password1" placeholder="Enter New Password" autocomplete="off">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-6">
+                                            <div class="form-group">
+                                              <label for="name">Confirm Password</label>
+                                              <input type="password" class="form-control " id="password2" placeholder="Enter Confirm Password" autocomplete="off">
+                                            </div>
+                                          </div>
+                                      </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-primary" name="modifypass_employee">Change Password</button>
+                                    </div>
 
+                                    <div class="modal-header">
+                                      <h4 class="modal-title">EDIT ACCOUNT DETAILS</h4>
+
+                                    </div>
+                                    <div class="modal-body">
+                                      <form action="functions.php" method="POST">
+                                        <div class="row">
+                                          <div class="col-sm-6">
+                                            <div class="form-group">
+                                              <label for="name">Name</label>
+                                              <input type="text" class="form-control " id="name" autocomplete="off" value="<?php echo $row['employee_name'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-6">
+                                            <div class="form-group">
+                                              <label for="name">Username</label>
+                                              <input type="text" class="form-control " id="name" autocomplete="off" value="<?php echo $row['user'] ?>">
+                                            </div>
+                                          </div>
+                                      </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->
+                                      <button type="submit" class="btn btn-danger" name="delete_employee">Delete</button>
+                                      <button type="button" class="btn btn-primary" name="modify_employee">Update</button>
+                                    </div>
+
+                                  </div>
+                                  <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                              </div>
+                              <!-- /.modal -->
+
+                            </td>
+                          </tr>
+                        <?php } ?>
+                      </tbody>
                     </table>
                   </div>
                   <!-- /.card-body -->
@@ -290,46 +348,6 @@ if (!isset($_SESSION['login_user']['user'])) {
               </div>
             </div>
           </div>
-
-          <!-- /.modal -->
-
-          <div class="modal fade" id="update">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">EDIT ACCOUNT DETAILS</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label for="name">Name:</label>
-                          <input type="text" class="form-control " id="name">
-                        </div>
-                      </div>
-                      <div class="col-sm-8">
-                        <div class="form-group">
-                          <label for="pass">Password:</label>
-                          <input type="text" class="form-control " id="pass">
-                        </div>
-                      </div>
-                  </form>
-                </div>
-                <div class="modal-footer justify-content-between">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-primary">Update</button>
-                </div>
-              </div>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-          </div>
-          <!-- /.modal -->
-
         </section>
       </div>
       <!-- /.content-header -->
