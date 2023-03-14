@@ -1,3 +1,11 @@
+<?php
+include('connection.php');
+session_start();
+if (!isset($_SESSION['login_user']['user'])) {
+  header("Location: index.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,7 +55,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="starter.html" class="nav-link">Home</a>
+        <a href="starter.php" class="nav-link">Home</a>
       </li>
     </ul>
 
@@ -57,7 +65,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-light-blue elevation-4">
     <!-- Brand Logo -->
-    <a href="starter.html" class="brand-link">
+    <a href="starter.php" class="brand-link">
       <img src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AdminBFC</span>
     </a>
@@ -71,7 +79,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="starter.html" class="nav-link">
+            <a href="starter.php" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -89,13 +97,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="inventory.html" class="nav-link ">
+                <a href="inventory.php" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Inventory</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="masterlist.html" class="nav-link">
+                <a href="masterlist.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Masterlist</p>
                 </a>
@@ -113,13 +121,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="prod-in.html" class="nav-link">
+                <a href="prod-in.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product In</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="prod-out.html" class="nav-link">
+                <a href="prod-out.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product Out</p>
                 </a>
@@ -137,13 +145,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="employee.html" class="nav-link ">
+                <a href="employee.php" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Employee Accounts</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="franchisee.html" class="nav-link">
+                <a href="franchisee.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Franchisee List</p>
                 </a>
@@ -155,7 +163,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="admin.html" class="nav-link">
+                <a href="admin.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Change Password </p>
                 </a>
@@ -163,7 +171,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="/pages/examples/login-v2.html" class="nav-link">
+            <a href="functions.php?logout" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Logout
@@ -196,22 +204,28 @@
             </div>
             <div class="card-body text-right">
               <p class="login-box-msg">Enroll New Supplier</p>
-              <form action="#" method="post">
+              <?php
+              $check_name =  $_SESSION['login_user']['user'];
+              $query = "SELECT * FROM users WHERE user='$check_name'";
+              $result = mysqli_query($conn, $query);
+              while ($row = mysqli_fetch_array($result)) {
+              ?>
+              <form action="functions.php" method="post">
                 <div class="input-group mb-3">
                   <div class="input-group-append">
                     <div class="input-group-text">
                       <span class="fas fa-truck"></span>
                     </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Enter name of Supplier">
+                  <input type="text" class="form-control" name="supplier_name" placeholder="Enter name of Supplier" autocomplete="off" required>
                 </div>
-                  <!-- /.col -->
-                  <div class="col-12">
-                    <a type="submit" class="btn btn-primary " >Add Supplier</a>
-                  </div>
-                  <!-- /.col -->
-                
+                <!-- /.col -->
+                <div class="col-12">
+                  <input type="hidden" name="id_lastuser" value="<?php echo $row['user_id'] ?>">
+                  <button type="submit" class="btn btn-primary" name="supplier" >Add Supplier</button>
+                </div>         
               </form>
+              <?php } ?>
             </div>
             <!-- /.card-body -->
         </div>
@@ -229,79 +243,82 @@
                     <thead>
                     <tr>
                         <th>ID #</th>
-                        <th>Fullname</th>
+                        <th>Supplier Name</th>
+                        <th>Last Edited By</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
+                    <?php 
+                        $check_user =  $_SESSION['login_user']['user_id'];
+                        $query = "SELECT * FROM suppliers";
+                        $result = mysqli_query($conn, $query);
+                        $check_row = mysqli_num_rows($result);
+                        while ($row = mysqli_fetch_array($result)) {
+                          $last_user = $row['last_edited_by'];
+                    ?>
                     <tr>
-                        <td>1</td>
-                        <td>Jane Doe</td>
+                        <td><?php echo $row['supplier_id']?></td>
+                        <td><?php echo $row['supplier_name']?></td>
+                        <?php
+                            $query2 = "SELECT * FROM users WHERE user_id ='$last_user'";
+                            $result2 = mysqli_query($conn, $query2);
+                            while ($row2 = mysqli_fetch_array($result2)) {
+                        ?>
+                   
+                        <td><?php echo $row2['employee_name']?></td>
                         <td>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">EDIT</button>
-                            <button type="button" class="btn btn-secondary">DELETE</button>
+                        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['supplier_id']?>">
+                              <i class="fas fa-pencil-alt"></i>
+                              Edit
+                            </button>
+                            <!-- /.modal -->
+                            <div class="modal fade" id="update<?php echo $row['supplier_id']?>">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <form action="functions.php" method="POST">
+                                        <div class="row">     
+                                            <div class="col-md-12">
+                                              <div class="form-group">
+                                                <label for="name">Name</label>
+                                                <input type="text" class="form-control " id="name" name="supplier_name" value="<?php echo $row['supplier_name'] ?>" required>
+                                              </div>
+                                            </div>
+                                        </div>                       
+                                        <div class="modal-footer">
+                                            <input type="hidden" name="supplier_modify" value="<?php echo $row['supplier_id'] ?>">
+                                            <input type="hidden" name="last_user" value="<?php echo $check_user?>">
+                                            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->
+                                            <button type="submit" class="btn btn-danger" name="delete_supplier">Delete</button>
+                                            <button type="submit" class="btn btn-primary" name="modify_supplier">Save Changes</button>
+                                        </div>                  
+                                      </form>
+                                    </div>
+                                  </div>
+                                  <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
                         </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>John Doe</td>
-                        <td>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">EDIT</button>
-                            <button type="button" class="btn btn-secondary">DELETE</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Ana Doe</td>
-                        <td>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#update">EDIT</button>
-                            <button type="button" class="btn btn-secondary">DELETE</button>
-                        </td>
-                    </tr>
+                    <?php } ?>
+                    <?php } ?>
                     </tbody>
-
-                    </table>
+                  </table>
                 </div>
                 <!-- /.card-body -->
               </div>
             </div>
           </div>
         </div>
-
-        <!-- /.modal -->
-
-        <div class="modal fade" id="update">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="row">     
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" class="form-control " id="name">
-                                    </div>
-                            </div>
-                        </div>                       
-                    </form>
-                </div>
-                <div class="modal-footer justify-content-between">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-primary">Save Changes</button>
-                </div>
-              </div>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
-
       </section>
     </div>
     <!-- /.content-header -->

@@ -242,7 +242,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                   <input type="text" class="form-control" placeholder="Address" name="address" autocomplete="off" required>
                 </div>
                 <div class="col-12">
-                <input type="hidden" name="id_lastuser" value="<?php echo $row['user_id'] ?>">
+                  <input type="hidden" name="id_lastuser" value="<?php echo $row['user_id'] ?>">
                   <button type="submit" class="btn btn-primary" name="franchise" >Add Franchise</button>
                 </div>
               </form>
