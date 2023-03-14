@@ -21,7 +21,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_product"])) {
             $name = "$description" . '.' . $ext; // rename image file
             $path = "../dist/img/product-imgs/"; // image upload path
             $pathname = $pathname . $name; // image upload path
-            move_uploaded_file($_FILES["imageFile"]["name"], $path);
+            move_uploaded_file($_FILES["imageFile"]["tmp_name"], $path);
         }
     }
 
@@ -31,7 +31,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_product"])) {
                 VALUES ('$barcode', '$description', '$pathname', $last_edited_by,  '$last_edited_on');");
 
     if(!mysqli_error($conn)) {
-        echo json_encode($image);
+        echo json_encode('success');
         exit;
     }
 }

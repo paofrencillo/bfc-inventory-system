@@ -523,10 +523,13 @@
         $.ajax({
           type: "POST",
           url: "enroll.php",
-          data: new FormData(this),
+          data: new FormData(document.getElementById("enroll_form")),
           contentType: false,
           processData:false,
           cache: false,
+          beforeSend: ()=> {
+            console.log(new FormData(document.getElementById("enroll_form")));
+          },
           success: function(data) {
             $('#enroll_success_text').removeClass('d-none');
             $('#enroll_error_text').addClass('d-none');
