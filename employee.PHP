@@ -213,7 +213,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                       <span class="fas fa-address-card"></span>
                     </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Username" name="username">
+                  <input type="text" class="form-control" placeholder="Username" name="username" autocomplete="off">
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-append">
@@ -221,7 +221,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                       <span class="fas fa-user"></span>
                     </div>
                   </div>
-                  <input type="text" class="form-control" placeholder="Name" name="name">
+                  <input type="text" class="form-control" placeholder="Name" name="name" autocomplete="off">
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-append">
@@ -229,7 +229,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                       <span class="fas fa-user-lock"></span>
                     </div>
                   </div>
-                  <input type="password" class="form-control" placeholder="Default Password" name="password">
+                  <input type="password" class="form-control" placeholder="Default Password" name="password" autocomplete="off">
                 </div>
                 <div class="col-12">
                   <button type="submit" class="btn btn-primary" name="signup">Add Account</button>

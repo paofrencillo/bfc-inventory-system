@@ -120,8 +120,8 @@ if (isset($_POST['signup'])) {
 
 
     if(!$result->num_rows > 0){
-        $conn->query("INSERT INTO users (employee_name, user, pass)
-        VALUES('$name', '$user','".password_hash($pass, PASSWORD_BCRYPT)."')") or die($conn->error);
+        $conn->query("INSERT INTO users (employee_name, user, pass, is_superuser)
+        VALUES('$name', '$user','".password_hash($pass, PASSWORD_BCRYPT)."', 0)") or die($conn->error);
         ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

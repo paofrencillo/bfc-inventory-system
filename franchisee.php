@@ -273,6 +273,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                     </thead>
                     <tbody>
                     <?php 
+                        $check_user =  $_SESSION['login_user']['user_id'];
                         $query = "SELECT * FROM branches";
                         $result = mysqli_query($conn, $query);
                         $check_row = mysqli_num_rows($result);
@@ -338,7 +339,7 @@ if (!isset($_SESSION['login_user']['user'])) {
 
                                         <div class="modal-footer">
                                           <input type="hidden" name="franchisee_modify" value="<?php echo $row['id'] ?>">
-                                          <input type="hidden" name="last_user" value="<?php echo $row2['user_id'] ?>">
+                                          <input type="hidden" name="last_user" value="<?php echo $check_user?>">
                                           <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->
                                           <button type="submit" class="btn btn-danger" name="delete_franchisee">Delete</button>
                                           <button type="submit" class="btn btn-primary" name="modify_franchisee">Save Changes</button>
