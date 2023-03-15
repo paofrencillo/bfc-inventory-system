@@ -1,11 +1,3 @@
-<?php
-include('connection.php');
-session_start();
-if (!isset($_SESSION['login_user2']['user'])) {
-  header("Location: index.php");
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,9 +30,9 @@ if (!isset($_SESSION['login_user2']['user'])) {
     <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-   <!-- Select2 -->
-   <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
-   <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -58,29 +50,19 @@ if (!isset($_SESSION['login_user2']['user'])) {
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="z-dashboard.php" class="nav-link">Home</a>
+        <a href="starter.html" class="nav-link">Home</a>
       </li>
     </ul>
-    <?php
-      $check_user =  $_SESSION['login_user2']['employee_name'];
-      $check_user2 =  $_SESSION['login_user2']['user'];
-    ?>
-      <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Navbar Search -->
-      <li class="nav-item">
-        <h4 class="nav-link font-weight-bold" style="color:black">Welcome! <?php echo $check_user ?></h4>
-      </li>
-    </ul>
+
   </nav>
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-light-blue elevation-4">
     <!-- Brand Logo -->
-    <a href="z-dashboard.php" class="brand-link">
+    <a href="starter.html" class="brand-link">
       <img src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Hello! <?php echo $check_user2 ?></span>
+      <span class="brand-text font-weight-light">AdminBFC</span>
     </a>
 
     <!-- Sidebar -->
@@ -92,7 +74,7 @@ if (!isset($_SESSION['login_user2']['user'])) {
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="z-dashboard.php" class="nav-link">
+            <a href="starter.html" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -100,7 +82,7 @@ if (!isset($_SESSION['login_user2']['user'])) {
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link ">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Manage Inventory
@@ -110,13 +92,13 @@ if (!isset($_SESSION['login_user2']['user'])) {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="z-inventory.php" class="nav-link ">
+                <a href="inventory.html" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Inventory</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="z-masterlist.php" class="nav-link">
+                <a href="masterlist.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Masterlist</p>
                 </a>
@@ -134,7 +116,7 @@ if (!isset($_SESSION['login_user2']['user'])) {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="z-prod-in.php" class="nav-link">
+                <a href="prod-in.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product In</p>
                 </a>
@@ -157,20 +139,30 @@ if (!isset($_SESSION['login_user2']['user'])) {
               </p>
             </a>
             <ul class="nav nav-treeview">
-
               <li class="nav-item">
-                <a href="z-franchisee.php" class="nav-link">
+                <a href="employee.html" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Employee Accounts</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="franchisee.html" class="nav-link">
                   <i class="far fa-circle nav-icon "></i>
                   <p>Franchisee List</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="z-supplier.php" class="nav-link ">
+                <a href="supplier.html" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Supplier</p>
                 </a>
               </li>
-
+              <li class="nav-item">
+                <a href="admin.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Change Password </p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
@@ -225,9 +217,10 @@ if (!isset($_SESSION['login_user2']['user'])) {
                     <tr>
                         <th>Barcode</th>
                         <th>Product Description</th>
-                        <th>Stock</th>
-                        <th>Allocation</th>
-                        <th>S/A %</th>
+                        <th>Quantity</th>
+                        <th>Lot number</th>
+                        <th>MRF number</th>
+                        <th>Remarks</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -238,6 +231,7 @@ if (!isset($_SESSION['login_user2']['user'])) {
                         <td>50</td>
                         <td>200</td>
                         <td>25%</td>
+                        <td></td>
                         <td>
                           <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
                             <i class="fas fa-pencil-alt"></i>
@@ -255,6 +249,7 @@ if (!isset($_SESSION['login_user2']['user'])) {
                         <td>80</td>
                         <td>200</td>
                         <td>40%</td>
+                        <td></td>
                         <td>
                           <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
                             <i class="fas fa-pencil-alt"></i>
@@ -272,6 +267,7 @@ if (!isset($_SESSION['login_user2']['user'])) {
                         <td>70</td>
                         <td>200</td>
                         <td>35%</td>
+                        <td></td>
                         <td>
                           <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
                             <i class="fas fa-pencil-alt"></i>
@@ -324,13 +320,13 @@ if (!isset($_SESSION['login_user2']['user'])) {
                                     <input type="number" class="form-control " id="quan" value="0">
                                 </div>
                             </div>     
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label for="lot">Lot Number:</label>
                                     <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();">
                                 </div>
                             </div>     
-                            <div class="col-sm-6">
+                            <div class="col-sm-5">
                               <div class="form-group">
                                   <label for="supp">Supplier:</label>
                                   <select class="form-control select2bs4" style="width: 100%;">
@@ -343,7 +339,13 @@ if (!isset($_SESSION['login_user2']['user'])) {
                                     <option>Supplier F</option>
                                   </select>
                               </div>
-                            </div>      
+                            </div>  
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                  <label for="remarks">Remarks:</label>
+                                  <input type="text" class="form-control " id="remarks">
+                              </div>
+                          </div>           
                             <div class="col-sm-6">
                               <div class="form-group">
                                   <label for="supp">Branch Code:</label>
@@ -392,7 +394,7 @@ if (!isset($_SESSION['login_user2']['user'])) {
             <div class="modal-dialog modal-dialog-centered modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
+                  <h4 class="modal-title">VIEW PRODUCT DETAILS</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -414,16 +416,10 @@ if (!isset($_SESSION['login_user2']['user'])) {
                             </div>
                             <div class="col-sm-2">
                                 <div class="form-group">
-                                    <label for="stock">Stock:</label>
-                                    <input type="number" class="form-control " id="stock">
+                                    <label for="qty">Quantity:</label>
+                                    <input type="number" class="form-control " id="qty">
                                 </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label for="allo">Allocation:</label>
-                                    <input type="number" class="form-control " id="allo">
-                                </div>
-                            </div>        
+                            </div>      
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="lot">Lot Number:</label>
@@ -432,18 +428,24 @@ if (!isset($_SESSION['login_user2']['user'])) {
                             </div>     
                             <div class="col-sm-4">
                               <div class="form-group">
-                                <label for="supp">Supplier:</label>
+                                <label for="supp">Branch Code:</label>
                                 <select class="form-control select2bs4" style="width: 100%;">
-                                  <option selected="selected" disabled>Please Select Supplier</option>
-                                  <option>Supplier A</option>
-                                  <option>Supplier B</option>
-                                  <option>Supplier C</option>
-                                  <option>Supplier D</option>
-                                  <option>Supplier E</option>
-                                  <option>Supplier F</option>
+                                  <option selected="selected" disabled>Please Select Branch Code</option>
+                                  <option>Branch A</option>
+                                  <option>Branch B</option>
+                                  <option>Branch C</option>
+                                  <option>Branch D</option>
+                                  <option>Branch E</option>
+                                  <option>Branch F</option>
                                 </select>
                               </div>
-                            </div>       
+                            </div>    
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                  <label for="remark">Remarks:</label>
+                                  <input type="number" class="form-control " id="remark">
+                              </div>
+                          </div>           
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="exp">Expiration Date:</label>
@@ -474,7 +476,7 @@ if (!isset($_SESSION['login_user2']['user'])) {
           <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title">VIEW PRODUCT DETAILS</h4>
+                <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -496,16 +498,10 @@ if (!isset($_SESSION['login_user2']['user'])) {
                           </div>
                           <div class="col-sm-2">
                               <div class="form-group">
-                                  <label for="stock">Stock:</label>
+                                  <label for="stock">Quantity:</label>
                                   <input type="number" class="form-control " id="stock" readonly>
                               </div>
-                          </div>
-                          <div class="col-sm-2">
-                              <div class="form-group">
-                                  <label for="allo">Allocation:</label>
-                                  <input type="number" class="form-control " id="allo" readonly>
-                              </div>
-                          </div>        
+                          </div>      
                           <div class="col-sm-4">
                               <div class="form-group">
                                   <label for="lot">Lot Number:</label>
@@ -514,9 +510,9 @@ if (!isset($_SESSION['login_user2']['user'])) {
                           </div>     
                           <div class="col-sm-4">
                             <div class="form-group">
-                              <label for="supp">Supplier:</label>
+                              <label for="supp">Branch Code:</label>
                               <select class="form-control select2bs4" style="width: 100%;" disabled>
-                                <option selected="selected" disabled>Please Select Supplier</option>
+                                <option selected="selected" disabled>Please Select Branch</option>
                                 <option>Supplier A</option>
                                 <option>Supplier B</option>
                                 <option>Supplier C</option>
@@ -550,6 +546,7 @@ if (!isset($_SESSION['login_user2']['user'])) {
           </div>
           <!-- /.modal-dialog -->
         </div>
+      <!-- /.modal -->
 
       </section>
     </div>
@@ -640,6 +637,6 @@ if (!isset($_SESSION['login_user2']['user'])) {
       theme: 'bootstrap4'
       })
     })
-</script>
+  </script>
 </body>
 </html>
