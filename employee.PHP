@@ -309,13 +309,13 @@ if (!isset($_SESSION['login_user']['user'])) {
                                           <button type="submit" class="btn btn-outline-danger" name="delete_employee">Delete</button>
                                           <button type="submit" class="btn btn-primary" name="modify_employee">Update Details</button>
                                         </div>
-                                    </form>
+                                      </form>
+                                    </div>
+                                    <!-- /.modal-content -->
                                   </div>
-                                  <!-- /.modal-content -->
+                                  <!-- /.modal-dialog -->
                                 </div>
-                                <!-- /.modal-dialog -->
-                              </div>
-                              <!-- /.modal -->
+                                <!-- /.modal -->
 
                             </td>
                           </tr>
@@ -411,7 +411,7 @@ if (!isset($_SESSION['login_user']['user'])) {
 
     });
   </script>
-  
+
 </body>
 
 </html>
