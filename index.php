@@ -67,12 +67,12 @@ session_start();
     <!-- /.login-logo -->
     <div id="login-card" class="card card-outline card-primary" style="background-color: rgba(216, 221, 236, 0.75) !important;">
       <div class="card-header text-center">
-        <a href="index.php" class="">
+        <div href="index.php" class="">
           <img src="dist/img/valuemed-logo.png" alt="" style="width: 90%;">
           <div class="text-blue">
             Inventory System
           </div>
-        </a>
+        </div>
       </div>
       <div class="card-body">
         <form action="functions.php" method="post">

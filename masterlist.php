@@ -140,7 +140,6 @@
               <p>
                 Settings
                 <i class="fas fa-angle-left right"></i>
-                <!-- <span class="badge badge-info right">6</span> -->
               </p>
             </a>
             <ul class="nav nav-treeview">
@@ -177,8 +176,7 @@
                 Logout
               </p>
             </a>
-          </li>
-          
+          </li>      
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -216,11 +214,12 @@
               <div class="card">
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="example1" class="table table-bordered table-hover dt-center projects">
+                    <table id="example1" class="table table-bordered table-hover projects">
                     <thead>
-                    <tr>
+                    <tr class=text-center>
                         <th>Barcode</th>
                         <th>Product Description</th>
+                        <th>Category</th>
                         <th>Last Edited</th>
                         <th>Action</th>
                     </tr>
@@ -234,9 +233,10 @@
                           $date = date_create($row["last_edited_on"]);
                           $date = date_format($date, "d/m/Y H:i");
                     ?>
-                    <tr>
+                    <tr class="text-center">
                       <td><?php echo $row["barcode"] ?></td>
                       <td><?php echo $row["description"] ?></td>
+                      <td><?php echo $row["category"] ?></td>
                       <td class="font-italic">
                         <small>
                           <?php
@@ -251,15 +251,11 @@
                       <td>
                         <button class="btn btn-secondary btn-sm" data-id="<?php echo $row["barcode"];?>" data-option="view" data-toggle="modal" data-target="#view" onclick="viewModal(this);">
                           <i class="fas fa-eye"></i>
-                          View Details
+                          Details
                         </button>
                         <button class="btn btn-info btn-sm" data-id="<?php echo $row["barcode"];?>" data-option="update" data-toggle="modal" data-target="#update" onclick="viewModal(this);">
                           <i class="fas fa-pencil-alt"></i>
-                          Edit Details
-                        </button>
-                        <button class="btn btn-danger btn-sm" data-id="<?php echo $row["barcode"];?>" data-option="delete" onclick="viewModal(this);">
-                          <i class="fas fa-trash"></i>
-                          Delete
+                          Edit
                         </button>
                       </td>
                     </tr>
@@ -341,18 +337,18 @@
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label for="barcode">Barcode:</label>
-                      <input type="text" class="form-control " id="barcode" readonly>
+                      <input type="text" class="form-control " id="barcode-view" readonly>
                     </div>
                   </div>
                   <div class="col-sm-8">
                     <div class="form-group">
                       <label for="prod">Product Description:</label>
-                      <input type="text" class="form-control " id="prod" readonly>
+                      <input type="text" class="form-control " id="desc-view" readonly>
                     </div>
                   </div>
                   <div class="col-sm-12">
                     <div class="position-relative" style="min-height: 180px;">
-                      <img src="dist/img/photo2.png" alt="Photo 3" class="img-fluid">           
+                      <img alt="Photo 3" class="img-fluid" id="img-view">           
                     </div>
                   </div>
                 </div>                       
@@ -383,13 +379,13 @@
                             <div class="col-sm-4">
                               <div class="form-group">
                                 <label for="barcode">Barcode:</label>
-                                <input type="text" class="form-control " id="barcode">
+                                <input type="text" class="form-control " id="barcode-update">
                               </div>
                             </div>
                             <div class="col-sm-8">
                               <div class="form-group">
                                 <label for="prod">Product Description:</label>
-                                <input type="text" class="form-control " id="prod">
+                                <input type="text" class="form-control " id="desc-update">
                               </div>
                             </div>
                             <div class="col-sm-4">
@@ -406,8 +402,8 @@
                         </div>                       
                     </form>
                 </div>
-                <div class="modal-footer justify-content-between">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <div class="modal-footer justify-content-end">
+                  <button type="button" class="btn btn-outline-danger mr-2">Delete</button>
                   <button type="button" class="btn btn-primary">Update</button>
                 </div>
               </div>
@@ -486,76 +482,6 @@
 <script src="dist/js/pages/dashboard.js"></script>
 <!-- bs-custom-file-input -->
 <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-<script>
-      function viewModal(el) {
-        $.ajax({
-          type: "POST",
-          url: "enroll.php",
-          data: {"barcode": el.getAttribute("data-id")},
-          success: function(data) {
-            console.log(JSON.parse(data));
-          },
-          error: function(xhr, status, error) {
-            console.log(status);
-          }
-        })
-      }
-
-      $(".custom-file-input").on("change", function() {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-      });
-
-      
-      $("#enroll_form").on("submit", function(e) {
-        e.preventDefault();
-        $.ajax({
-          type: "POST",
-          url: "enroll.php",
-          data: new FormData(this),
-          contentType: false,
-          processData:false,
-          cache: false,
-          success: function(data) {
-            console.log(data);
-            $('#enroll_success_text').removeClass('d-none');
-            setTimeout(()=> {
-              $('#enroll_success_text').addClass('d-none');
-            }, 3000)
-            $('#barcode').val('');
-            $('#description').val('');
-            $('#imageFile').val('');
-            var fileName = $('.custom-file-input').val().split("\\").pop();
-            $('.custom-file-input').siblings(".custom-file-label").addClass("selected").html(fileName);
-          },
-          error: function(xhr, status, error) {
-            console.log(status);
-            $('#enroll_error_text').removeClass('d-none');
-            setTimeout(()=> {
-              $('#enroll_error_text').addClass('d-none');
-            }, 3000)
-            $('#barcode').val('');
-            $('#description').val('');
-            $('#imageFile').val('');
-            var fileName = $('.custom-file-input').val().split("\\").pop();
-            $('.custom-file-input').siblings(".custom-file-label").addClass("selected").html(fileName);
-          }
-        });
-      });
- 
-    $(function () {
-      $("#example1").DataTable({
-        "order": [],
-        "columnDefs": [{"className": "dt-center", "targets": "no_sort", "orderable": false}],
-        "responsive": true, 
-        "lengthChange": true, 
-        "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    });
-    $(function () {
-      bsCustomFileInput.init();
-    });
-  </script>
+<script type="text/javascript" src="js/masterlist/masterlist.js"></script>
 </body>
 </html>
