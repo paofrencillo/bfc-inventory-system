@@ -203,6 +203,11 @@ if (!isset($_SESSION['login_user']['user'])) {
           <div class="card card-outline card-primary">
             <div class="card-header text-center">
               <a href="#" class="h1"><b>Add</b> Account</a>
+              <div class="card-tools">
+                <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
             </div>
             <div class="card-body text-right">
               <p class="login-box-msg">Enroll New Employee Account</p>
