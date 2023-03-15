@@ -192,97 +192,149 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Inventory</h1>
+              <h1 class="m-0">Inventory Tables</h1>
             </div><!-- /.col -->
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
-
         <section class="content">
           <div class="container-fluid">
-            <!-- <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Enroll New Products</h3>
-                </div>
-                <div class="card-body">
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addnew"><i class="fas fa-plus-circle"></i> ADD NEW PRODUCT</button>
-                    </div>
-                </div>
-            </div> -->
-
             <div class="row">
               <div class="col-12">
-                <div class="card">
-                  <!-- /.card-header -->
-                  <div class="card-body">
-                    <table id="example1" class="table table-bordered table-hover dt-center">
-                      <thead>
-                        <tr>
-                          <th>Barcode</th>
-                          <th>Product Description</th>
-                          <th>Stock</th>
-                          <th>Allocation</th>
-                          <th>S/A %</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1023156MHJHMHM</td>
-                          <td>Robust 100Mg 12S</td>
-                          <td>50</td>
-                          <td>200</td>
-                          <td>25%</td>
-                          <td>
-                            <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                              <i class="fas fa-pencil-alt"></i>
-                              Edit Details
-                            </button>
-                            <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                              <i class="fas fa-eye"></i>
-                              View Details
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>421544256</td>
-                          <td>Cetirizine 10Mg 10S</td>
-                          <td>80</td>
-                          <td>200</td>
-                          <td>40%</td>
-                          <td>
-                            <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                              <i class="fas fa-pencil-alt"></i>
-                              Edit Details
-                            </button>
-                            <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                              <i class="fas fa-eye"></i>
-                              View Details
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>421544256</td>
-                          <td>Mefenamic Acid 500mg (Generic)</td>
-                          <td>70</td>
-                          <td>200</td>
-                          <td>35%</td>
-                          <td>
-                            <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                              <i class="fas fa-pencil-alt"></i>
-                              Edit Details
-                            </button>
-                            <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                              <i class="fas fa-eye"></i>
-                              View Details
-                            </button>
-                          </td>
-                        </tr>
-                      </tbody>
+                <div class="card card-primary card-tabs">
+                <div class="card-header p-0 pt-1">
+                  <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#example11" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Pharma</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#example22" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Non-Pharma</a>
+                    </li>
 
-                    </table>
+                  </ul>
+                </div>
+                  <!-- /.card-header table 1 -->
+                  <div class="card-body">
+                    <div class="tab-content" id="custom-tabs-one-tabContent">
+                      <div class="tab-pane fade show active" id="example11" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                        <table id="example1" class="table table-bordered table-hover dt-center">
+                          <thead>
+                            <tr>
+                              <th>Barcode</th>
+                              <th>Product Description</th>
+                              <th>Stock</th>
+                              <th>Allocation</th>
+                              <th>S/A %</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>1023156MHJHMHM</td>
+                              <td>Robust 100Mg 12S</td>
+                              <td>50</td>
+                              <td>200</td>
+                              <td>25%</td>
+                              <td>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                                  <i class="fas fa-pencil-alt"></i>
+                                  Edit Details
+                                </button>
+                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                                  <i class="fas fa-eye"></i>
+                                  View Details
+                                </button>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>421544256</td>
+                              <td>Cetirizine 10Mg 10S</td>
+                              <td>80</td>
+                              <td>200</td>
+                              <td>40%</td>
+                              <td>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                                  <i class="fas fa-pencil-alt"></i>
+                                  Edit Details
+                                </button>
+                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                                  <i class="fas fa-eye"></i>
+                                  View Details
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+
+                        </table>
+                      </div>
+                      <div class="tab-pane fade" id="example22" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                        <table id="example2" class="table table-bordered table-hover dt-center">
+                          <thead>
+                            <tr>
+                              <th>Barcode</th>
+                              <th>Product Description</th>
+                              <th>Stock</th>
+                              <th>Allocation</th>
+                              <th>S/A %</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>1023156MHJHMHM</td>
+                              <td>Robust 100Mg 12S</td>
+                              <td>50</td>
+                              <td>200</td>
+                              <td>25%</td>
+                              <td>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                                  <i class="fas fa-pencil-alt"></i>
+                                  Edit Details
+                                </button>
+                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                                  <i class="fas fa-eye"></i>
+                                  View Details
+                                </button>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>421544256</td>
+                              <td>Cetirizine 10Mg 10S</td>
+                              <td>80</td>
+                              <td>200</td>
+                              <td>40%</td>
+                              <td>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                                  <i class="fas fa-pencil-alt"></i>
+                                  Edit Details
+                                </button>
+                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                                  <i class="fas fa-eye"></i>
+                                  View Details
+                                </button>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>421544256</td>
+                              <td>Mefenamic Acid 500mg (Generic)</td>
+                              <td>70</td>
+                              <td>200</td>
+                              <td>35%</td>
+                              <td>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                                  <i class="fas fa-pencil-alt"></i>
+                                  Edit Details
+                                </button>
+                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                                  <i class="fas fa-eye"></i>
+                                  View Details
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>                   
+                    </div>
                   </div>
-                  <!-- /.card-body -->
                 </div>
               </div>
             </div>
@@ -607,6 +659,19 @@
         "autoWidth": false,
         "buttons": ["copy", "csv", "excel", "pdf", "print"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+
+    $(function() {
+      $("#example2").DataTable({
+        "columnDefs": [{
+          "className": "dt-center",
+          "targets": "_all"
+        }],
+        "responsive": true,
+        "lengthChange": true,
+        "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print"]
+      }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
     });
 
     $(function() {
