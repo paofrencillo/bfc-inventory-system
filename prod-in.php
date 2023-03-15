@@ -233,11 +233,11 @@ if (!isset($_SESSION['login_user']['user'])) {
                           <td>
                             <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
                               <i class="fas fa-pencil-alt"></i>
-                              Edit Details
+                              Edit
                             </button>
                             <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
                               <i class="fas fa-eye"></i>
-                              View Details
+                              Details
                             </button>
                           </td>
                         </tr>
@@ -250,11 +250,11 @@ if (!isset($_SESSION['login_user']['user'])) {
                           <td>
                             <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
                               <i class="fas fa-pencil-alt"></i>
-                              Edit Details
+                              Edit
                             </button>
                             <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
                               <i class="fas fa-eye"></i>
-                              View Details
+                              Details
                             </button>
                           </td>
                         </tr>
@@ -267,11 +267,11 @@ if (!isset($_SESSION['login_user']['user'])) {
                           <td>
                             <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
                               <i class="fas fa-pencil-alt"></i>
-                              Edit Details
+                              Edit
                             </button>
                             <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
                               <i class="fas fa-eye"></i>
-                              View Details
+                              Details
                             </button>
                           </td>
                         </tr>

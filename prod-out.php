@@ -217,77 +217,166 @@ if (!isset($_SESSION['login_user']['user'])) {
             
           <div class="row">
             <div class="col-12">
-              <div class="card">
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <table id="example1" class="table table-bordered table-hover dt-center">
-                    <thead>
-                    <tr>
-                        <th>Barcode</th>
-                        <th>Product Description</th>
-                        <th>Quantity</th>
-                        <th>Lot number</th>
-                        <th>MRF number</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1023156MHJHMHM</td>
-                        <td>Robust 100Mg 12S</td>
-                        <td>50</td>
-                        <td>200</td>
-                        <td>25%</td>
-                        <td>
-                          <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                            <i class="fas fa-pencil-alt"></i>
-                            Edit Details
-                          </button>
-                          <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                            <i class="fas fa-eye"></i>
-                            View Details
-                          </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>421544256</td>
-                        <td>Cetirizine 10Mg 10S</td>
-                        <td>80</td>
-                        <td>200</td>
-                        <td>40%</td>
-                        <td>
-                          <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                            <i class="fas fa-pencil-alt"></i>
-                            Edit Details
-                          </button>
-                          <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                            <i class="fas fa-eye"></i>
-                            View Details
-                          </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>421544256</td>
-                        <td>Mefenamic Acid 500mg (Generic)</td>
-                        <td>70</td>
-                        <td>200</td>
-                        <td>35%</td>
-                        <td>
-                          <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                            <i class="fas fa-pencil-alt"></i>
-                            Edit Details
-                          </button>
-                          <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                            <i class="fas fa-eye"></i>
-                            View Details
-                          </button>
-                        </td>
-                    </tr>
-                    </tbody>
+              <div class="card card-primary card-tabs">
+                <div class="card-header p-0 pt-1">
+                  <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#example11" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Pre-Order</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#example22" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Dispatch History</a>
+                    </li>
 
-                    </table>
+                  </ul>
                 </div>
-                <!-- /.card-body -->
+                <!-- /.card-header table 1 -->
+                <div class="card-body">
+                  <div class="tab-content" id="custom-tabs-one-tabContent">
+                    <div class="tab-pane fade show active" id="example11" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                      <div class="card-tools">
+                        <ul class="pagination pagination-sm">
+                          <button class="btn btn-success btn-md" data-toggle="modal" data-target="#dispatch">
+                            <i class="fas fa-pencil-alt"></i>
+                            Dispatch Items
+                          </button>
+                        </ul>
+                      </div>
+                      <table id="example1" class="table table-bordered table-hover dt-center">
+                        <thead>
+                          <tr>
+                              <th>Barcode</th>
+                              <th>Product Description</th>
+                              <th>Quantity</th>
+                              <th>Lot No.</th>
+                              <th>Branch Code/Name</th>
+                              <th>MRF</th>
+                              <th>Inv/Order No.</th>
+                              <th>Remarks</th>
+                              <th>Action</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                              <td>10231562432</td>
+                              <td>Robust 100Mg 12S</td>
+                              <td>50</td>
+                              <td>200</td>
+                              <td>23422/Sean</td>
+                              <td>3498</td>
+                              <td>10351</td>
+                              <td>AI</td>
+                              <td>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                                  <i class="fas fa-pencil-alt"></i>
+                                  Edit
+                                </button>
+                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                                  <i class="fas fa-eye"></i>
+                                  Details
+                                </button>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>10231562322</td>
+                              <td>Cetirizine 10Mg 10S</td>
+                              <td>34</td>
+                              <td>200</td>
+                              <td>23422/Sean</td>
+                              <td>3498</td>
+                              <td>10351</td>
+                              <td>AI</td>
+                              <td>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                                  <i class="fas fa-pencil-alt"></i>
+                                  Edit
+                                </button>
+                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                                  <i class="fas fa-eye"></i>
+                                  Details
+                                </button>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>10231562322</td>
+                              <td>Salbutamol 2Mg Tab 100s (Ventomax)</td>
+                              <td>56</td>
+                              <td>200</td>
+                              <td>23422/Sean</td>
+                              <td>3498</td>
+                              <td>10351</td>
+                              <td></td>
+                              <td>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                                  <i class="fas fa-pencil-alt"></i>
+                                  Edit
+                                </button>
+                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                                  <i class="fas fa-eye"></i>
+                                  Details
+                                </button>
+                              </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="tab-pane fade" id="example22" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                      <table id="example2" class="table table-bordered table-hover dt-center">
+                        <thead>
+                          <tr>
+                              <th>Barcode</th>
+                              <th>Product Description</th>
+                              <th>Quantity</th>
+                              <th>Lot No.</th>
+                              <th>Branch Code/Name</th>
+                              <th>MRF</th>
+                              <th>Inv/Order No.</th>
+                              <th>Action</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                              <td>10231562322</td>
+                              <td>Cetirizine 10Mg 10S</td>
+                              <td>34</td>
+                              <td>200</td>
+                              <td>23422/Sean</td>
+                              <td>3498</td>
+                              <td>10351</td>
+                              <td>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                                  <i class="fas fa-pencil-alt"></i>
+                                  Edit
+                                </button>
+                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                                  <i class="fas fa-eye"></i>
+                                  Details
+                                </button>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>10231562322</td>
+                              <td>Salbutamol 2Mg Tab 100s (Ventomax)</td>
+                              <td>56</td>
+                              <td>200</td>
+                              <td>23422/Sean</td>
+                              <td>3498</td>
+                              <td>10351</td>
+                              <td>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                                  <i class="fas fa-pencil-alt"></i>
+                                  Edit
+                                </button>
+                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                                  <i class="fas fa-eye"></i>
+                                  Details
+                                </button>
+                              </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>                   
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -342,17 +431,35 @@ if (!isset($_SESSION['login_user']['user'])) {
                                       $check_row = mysqli_num_rows($result);
                                       while ($row = mysqli_fetch_array($result)) {
                                     ?>
-                                    <option value="<?php echo $row['code']?>"><?php echo $row['code']?>, <?php echo $row['company']?>/<?php echo $row['name']?></option>
+                                    <option value="<?php echo $row['code']?>"><?php echo $row['code']?>/<?php echo $row['name']?></option>
                                     <?php } ?>
                                   </select>
                               </div>
+                            </div>  
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label for="barcode">MRF:</label>
+                                <input type="number" class="form-control " id="barcode">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                  <label for="barcode">Inv/Order No:</label>
+                                  <input type="number" class="form-control " id="barcode">
+                                </div>
                             </div>    
-                            <div class="col-sm-6">
+                            <div class="col-sm-5">
                                 <div class="form-group">
                                     <label for="exp">Expiration Date:</label>
                                     <input type="date" class="form-control " id="exp" >
                                 </div>
-                            </div>   
+                            </div> 
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                  <label for="barcode">Remarks:</label>
+                                  <input type="text" class="form-control " id="barcode">
+                                </div>
+                            </div>  
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="supp">Entry Date:</label>
@@ -383,7 +490,7 @@ if (!isset($_SESSION['login_user']['user'])) {
             <div class="modal-dialog modal-dialog-centered modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">VIEW PRODUCT DETAILS</h4>
+                  <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -427,28 +534,46 @@ if (!isset($_SESSION['login_user']['user'])) {
                                       $check_row = mysqli_num_rows($result);
                                       while ($row = mysqli_fetch_array($result)) {
                                     ?>
-                                    <option value="<?php echo $row['code']?>"><?php echo $row['code']?>, <?php echo $row['company']?>/<?php echo $row['name']?></option>
+                                    <option value="<?php echo $row['code']?>"><?php echo $row['code']?>/<?php echo $row['name']?></option>
                                     <?php } ?>
                                   </select>
                               </div>
-                            </div>              
-                            <div class="col-sm-6">
+                            </div>  
+                            <div class="col-sm-2">
+                              <div class="form-group">
+                                <label for="barcode">MRF:</label>
+                                <input type="number" class="form-control " id="barcode">
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                  <label for="barcode">Inv/Order No:</label>
+                                  <input type="number" class="form-control " id="barcode">
+                                </div>
+                            </div>    
+                            <div class="col-sm-5">
                                 <div class="form-group">
                                     <label for="exp">Expiration Date:</label>
                                     <input type="date" class="form-control " id="exp" >
                                 </div>
-                            </div>   
-                            <div class="col-sm-6">
+                            </div> 
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                  <label for="barcode">Remarks:</label>
+                                  <input type="text" class="form-control " id="barcode">
+                                </div>
+                            </div>  
+                            <!-- <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="supp">Entry Date:</label>
                                     <input type="date" class="form-control " id="supp">
                                 </div>
-                            </div>        
+                            </div>         -->
                         </div>                       
                     </form>
                 </div>
-                <div class="modal-footer justify-content-between">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-danger">Delete</button>
                   <button type="button" class="btn btn-primary">Update</button>
                 </div>
               </div>
@@ -462,7 +587,7 @@ if (!isset($_SESSION['login_user']['user'])) {
           <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
+                <h4 class="modal-title">VIEW PRODUCT DETAILS</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -472,9 +597,9 @@ if (!isset($_SESSION['login_user']['user'])) {
                       <div class="row">     
                           <div class="col-sm-4">
                               <div class="form-group">
-                                  <label for="barcode">Barcode:</label>
-                                  <input type="text" class="form-control " id="barcode" readonly>
-                                  </div>
+                                <label for="barcode">Barcode:</label>
+                                <input type="text" class="form-control " id="barcode" readonly>
+                              </div>
                           </div>
                           <div class="col-sm-8">
                               <div class="form-group">
@@ -494,7 +619,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                                   <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();" readonly>
                               </div>
                           </div>     
-                          <div class="col-sm-4">
+                          <div class="col-sm-6">
                             <div class="form-group">
                               <label for="supp">Branch Code:</label>
                               <select class="form-control select2bs4" style="width: 100%;" disabled>
@@ -507,32 +632,93 @@ if (!isset($_SESSION['login_user']['user'])) {
                                 <option>Supplier F</option>
                               </select>
                             </div>
-                          </div>            
-                          <div class="col-sm-6">
+                          </div>   
+                          <div class="col-sm-2">
+                              <div class="form-group">
+                                <label for="barcode">MRF:</label>
+                                <input type="text" class="form-control " id="barcode" readonly>
+                              </div>
+                          </div>
+                          <div class="col-sm-2">
+                              <div class="form-group">
+                                <label for="barcode">Inv/Order No:</label>
+                                <input type="text" class="form-control " id="barcode" readonly>
+                              </div>
+                          </div>         
+                          <div class="col-sm-5">
                               <div class="form-group">
                                   <label for="exp">Expiration Date:</label>
                                   <input type="date" class="form-control " id="exp" readonly>
                               </div>
                           </div>   
+                          <div class="col-sm-3">
+                            <div class="form-group">
+                              <label for="barcode">Remarks:</label>
+                              <input type="text" class="form-control " id="barcode" readonly>
+                            </div>
+                          </div>  
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="barcode">Endorse By:</label>
+                              <input type="text" class="form-control " id="barcode" readonly>
+                            </div>
+                          </div>  
                           <div class="col-sm-6">
                               <div class="form-group">
-                                  <label for="supp">Entry Date:</label>
+                                  <label for="supp">Endorsement Date:</label>
                                   <input type="date" class="form-control " id="supp" readonly>
                               </div>
                           </div>        
                       </div>                       
                   </form>
               </div>
-              <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Update</button>
-              </div>
             </div>
             <!-- /.modal-content -->
           </div>
           <!-- /.modal-dialog -->
         </div>
-      <!-- /.modal -->
+        <!-- /.modal -->
+
+        <div class="modal fade" id="dispatch">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">DISPATCH ITEMS</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">     
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="barcode">MRF:</label>
+                              <input type="text" class="form-control " id="barcode">
+                            </div>
+                          </div> 
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="barcode">Click to Search</label>
+                              <button class="btn btn-info btn-sm form-control" data-toggle="modal" data-target="#update">
+                                <i class="fas fa-eye"></i>
+                                Search
+                              </button>
+                            </div>
+                          </div>
+                        </div>                       
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary">Dispatch</button>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+        <!-- /.modal -->
 
       </section>
     </div>
@@ -611,7 +797,18 @@ if (!isset($_SESSION['login_user']['user'])) {
         "responsive": true, 
         "lengthChange": true, 
         "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print"]}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+
+    $(function () {
+      $("#example2").DataTable({
+        "columnDefs": [{"className": "dt-center", "targets": "_all"}],
+        "responsive": true, 
+        "lengthChange": true, 
+        "autoWidth": false,
+        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+      }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
     });
 
     $(function () {

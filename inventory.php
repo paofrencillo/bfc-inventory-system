@@ -201,17 +201,17 @@
             <div class="row">
               <div class="col-12">
                 <div class="card card-primary card-tabs">
-                <div class="card-header p-0 pt-1">
-                  <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
-                    <li class="nav-item">
-                      <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#example11" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Pharma</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#example22" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Non-Pharma</a>
-                    </li>
+                  <div class="card-header p-0 pt-1">
+                    <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#example11" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Pharma</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#example22" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Non-Pharma</a>
+                      </li>
 
-                  </ul>
-                </div>
+                    </ul>
+                  </div>
                   <!-- /.card-header table 1 -->
                   <div class="card-body">
                     <div class="tab-content" id="custom-tabs-one-tabContent">
