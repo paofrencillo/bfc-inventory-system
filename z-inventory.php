@@ -58,7 +58,7 @@ if (!isset($_SESSION['login_user2']['user'])) {
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="z-dashboard.html" class="nav-link">Home</a>
+        <a href="z-dashboard.php" class="nav-link">Home</a>
       </li>
     </ul>
     <?php
@@ -78,7 +78,7 @@ if (!isset($_SESSION['login_user2']['user'])) {
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-light-blue elevation-4">
     <!-- Brand Logo -->
-    <a href="z-dashboard.html" class="brand-link">
+    <a href="z-dashboard.php" class="brand-link">
       <img src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Hello! <?php echo $check_user2 ?></span>
     </a>
@@ -92,7 +92,7 @@ if (!isset($_SESSION['login_user2']['user'])) {
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item ">
-            <a href="z-dashboard.html" class="nav-link">
+            <a href="z-dashboard.php" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -110,13 +110,13 @@ if (!isset($_SESSION['login_user2']['user'])) {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="z-inventory.html" class="nav-link active">
+                <a href="z-inventory.php" class="nav-link active">
                   <i class="far fa-dot-circle nav-icon"></i>
                   <p>Inventory</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="z-masterlist.html" class="nav-link">
+                <a href="z-masterlist.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Masterlist</p>
                 </a>
@@ -134,13 +134,13 @@ if (!isset($_SESSION['login_user2']['user'])) {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="z-prod-in.html" class="nav-link">
+                <a href="z-prod-in.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product In</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="z-prod-out.html" class="nav-link">
+                <a href="z-prod-out.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product Out</p>
                 </a>
@@ -158,13 +158,13 @@ if (!isset($_SESSION['login_user2']['user'])) {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="z-franchisee.html" class="nav-link">
+                <a href="z-franchisee.php" class="nav-link">
                   <i class="far fa-circle nav-icon "></i>
                   <p>Franchisee List</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="z-supplier.html" class="nav-link ">
+                <a href="z-supplier.php" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Supplier</p>
                 </a>
@@ -213,163 +213,147 @@ if (!isset($_SESSION['login_user2']['user'])) {
           </div> -->
             
           <div class="row">
-            <div class="col-12">
-              <div class="card">
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <table id="example1" class="table table-bordered table-hover dt-center">
-                    <thead>
-                    <tr>
-                        <th>Barcode</th>
-                        <th>Product Description</th>
-                        <th>Stock</th>
-                        <th>Allocation</th>
-                        <th>S/A %</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1023156MHJHMHM</td>
-                        <td>Robust 100Mg 12S</td>
-                        <td>50</td>
-                        <td>200</td>
-                        <td>25%</td>
-                        <td>
-                          <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                            <i class="fas fa-pencil-alt"></i>
-                            Edit Details
-                          </button>
-                          <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                            <i class="fas fa-eye"></i>
-                            View Details
-                          </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>421544256</td>
-                        <td>Cetirizine 10Mg 10S</td>
-                        <td>80</td>
-                        <td>200</td>
-                        <td>40%</td>
-                        <td>
-                          <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                            <i class="fas fa-pencil-alt"></i>
-                            Edit Details
-                          </button>
-                          <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                            <i class="fas fa-eye"></i>
-                            View Details
-                          </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>421544256</td>
-                        <td>Mefenamic Acid 500mg (Generic)</td>
-                        <td>70</td>
-                        <td>200</td>
-                        <td>35%</td>
-                        <td>
-                          <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                            <i class="fas fa-pencil-alt"></i>
-                            Edit Details
-                          </button>
-                          <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                            <i class="fas fa-eye"></i>
-                            View Details
-                          </button>
-                        </td>
-                    </tr>
-                    </tbody>
+          <div class="col-12">
+              <div class="card card-primary card-tabs">
+                <div class="card-header p-0 pt-1">
+                  <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#example11" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Pharma</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#example22" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Non-Pharma</a>
+                    </li>
 
-                    </table>
+                  </ul>
                 </div>
-                <!-- /.card-body -->
+                  <!-- /.card-header table 1 -->
+                  <div class="card-body">
+                    <div class="tab-content" id="custom-tabs-one-tabContent">
+                      <div class="tab-pane fade show active" id="example11" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                        <table id="example1" class="table table-bordered table-hover dt-center">
+                          <thead>
+                            <tr>
+                              <th>Barcode</th>
+                              <th>Product Description</th>
+                              <th>Stock</th>
+                              <th>Allocation</th>
+                              <th>S/A %</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>1023156MHJHMHM</td>
+                              <td>Robust 100Mg 12S</td>
+                              <td>50</td>
+                              <td>200</td>
+                              <td>25%</td>
+                              <td>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                                  <i class="fas fa-pencil-alt"></i>
+                                  Edit Details
+                                </button>
+                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                                  <i class="fas fa-eye"></i>
+                                  View Details
+                                </button>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>421544256</td>
+                              <td>Cetirizine 10Mg 10S</td>
+                              <td>80</td>
+                              <td>200</td>
+                              <td>40%</td>
+                              <td>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                                  <i class="fas fa-pencil-alt"></i>
+                                  Edit Details
+                                </button>
+                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                                  <i class="fas fa-eye"></i>
+                                  View Details
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+
+                        </table>
+                      </div>
+                      <div class="tab-pane fade" id="example22" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                        <table id="example2" class="table table-bordered table-hover dt-center">
+                          <thead>
+                            <tr>
+                              <th>Barcode</th>
+                              <th>Product Description</th>
+                              <th>Stock</th>
+                              <th>Allocation</th>
+                              <th>S/A %</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                            <td>1023156MHJHMHM</td>
+                            <td>Robust 100Mg 12S</td>
+                            <td>50</td>
+                            <td>200</td>
+                            <td>25%</td>
+                            <td>
+                              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                                <i class="fas fa-pencil-alt"></i>
+                                Edit Details
+                              </button>
+                              <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                                <i class="fas fa-eye"></i>
+                                View Details
+                              </button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>421544256</td>
+                            <td>Cetirizine 10Mg 10S</td>
+                            <td>80</td>
+                            <td>200</td>
+                            <td>40%</td>
+                            <td>
+                              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                                <i class="fas fa-pencil-alt"></i>
+                                Edit Details
+                              </button>
+                              <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                                <i class="fas fa-eye"></i>
+                                View Details
+                              </button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>421544256</td>
+                            <td>Mefenamic Acid 500mg (Generic)</td>
+                            <td>70</td>
+                            <td>200</td>
+                            <td>35%</td>
+                            <td>
+                            <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                              <i class="fas fa-pencil-alt"></i>
+                              Edit Details
+                            </button>
+                            <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                              <i class="fas fa-eye"></i>
+                              View Details
+                            </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>                   
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-
-        <!-- <div class="modal fade" id="addnew">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">ENROLL NEW PRODUCTS</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="row">     
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="barcode">Barcode:</label>
-                                    <input type="text" class="form-control " id="barcode">
-                                    </div>
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="form-group">
-                                    <label for="prod">Product Description:</label>
-                                    <input type="text" class="form-control " id="prod">
-                                </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label for="stock">Stock:</label>
-                                    <input type="number" class="form-control " id="stock">
-                                </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label for="allo">Allocation:</label>
-                                    <input type="number" class="form-control " id="allo">
-                                </div>
-                            </div>        
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="lot">Lot Number:</label>
-                                    <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();">
-                                </div>
-                            </div>     
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label for="supp">Supplier:</label>
-                                  <select class="form-control select2bs4" style="width: 100%;">
-                                    <option selected="selected" disabled>Please Select Supplier</option>
-                                    <option>Supplier A</option>
-                                    <option>Supplier B</option>
-                                    <option>Supplier C</option>
-                                    <option>Supplier D</option>
-                                    <option>Supplier E</option>
-                                    <option>Supplier F</option>
-                                  </select>
-                              </div>
-                            </div>      
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="exp">Expiration Date:</label>
-                                    <input type="date" class="form-control " id="exp" >
-                                </div>
-                            </div>   
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="supp">Entry Date:</label>
-                                    <input type="date" class="form-control " id="supp" disabled>
-                                </div>
-                            </div>        
-                        </div>                       
-                    </form>
-                </div>
-                <div class="modal-footer justify-content-between">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-primary">Add Product</button>
-                </div>
-              </div>
-            </div>
-        </div> -->
-        <!-- /.modal -->
 
         <div class="modal fade" id="update">
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -611,6 +595,15 @@ if (!isset($_SESSION['login_user2']['user'])) {
         "lengthChange": true, 
         "autoWidth": false,
         "buttons": ["copy", "csv", "excel", "pdf", "print"]}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+
+    $(function () {
+      $("#example2").DataTable({
+        "columnDefs": [{"className": "dt-center", "targets": "_all"}],
+        "responsive": true, 
+        "lengthChange": true, 
+        "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print"]}).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
     });
 
     $(function () {

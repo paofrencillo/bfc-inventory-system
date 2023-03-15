@@ -58,7 +58,7 @@ if (!isset($_SESSION['login_user2']['user'])) {
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="z-dashboard.html" class="nav-link">Home</a>
+        <a href="z-dashboard.php" class="nav-link">Home</a>
       </li>
     </ul>
     <?php
@@ -78,7 +78,7 @@ if (!isset($_SESSION['login_user2']['user'])) {
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-light-blue elevation-4">
     <!-- Brand Logo -->
-    <a href="z-dashboard.html" class="brand-link">
+    <a href="z-dashboard.php" class="brand-link">
       <img src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Hello! <?php echo $check_user2 ?></span>
     </a>
@@ -92,7 +92,7 @@ if (!isset($_SESSION['login_user2']['user'])) {
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="z-dashboard.html" class="nav-link">
+            <a href="z-dashboard.php" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -110,13 +110,13 @@ if (!isset($_SESSION['login_user2']['user'])) {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="z-inventory.html" class="nav-link ">
+                <a href="z-inventory.php" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Inventory</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="z-masterlist.html" class="nav-link">
+                <a href="z-masterlist.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Masterlist</p>
                 </a>
@@ -134,7 +134,7 @@ if (!isset($_SESSION['login_user2']['user'])) {
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="z-prod-in.html" class="nav-link">
+                <a href="z-prod-in.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product In</p>
                 </a>
@@ -159,13 +159,13 @@ if (!isset($_SESSION['login_user2']['user'])) {
             <ul class="nav nav-treeview">
 
               <li class="nav-item">
-                <a href="z-franchisee.html" class="nav-link">
+                <a href="z-franchisee.php" class="nav-link">
                   <i class="far fa-circle nav-icon "></i>
                   <p>Franchisee List</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="z-supplier.html" class="nav-link ">
+                <a href="z-supplier.php" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Supplier</p>
                 </a>
