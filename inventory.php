@@ -52,7 +52,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="starter.html" class="nav-link">Home</a>
+          <a href="starter.php" class="nav-link">Home</a>
         </li>
       </ul>
 
@@ -62,7 +62,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-light-blue elevation-4">
       <!-- Brand Logo -->
-      <a href="starter.html" class="brand-link">
+      <a href="starter.php" class="brand-link">
         <img src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">AdminBFC</span>
       </a>
@@ -76,7 +76,7 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item ">
-              <a href="starter.html" class="nav-link">
+              <a href="starter.php" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Dashboard
@@ -95,13 +95,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="inventory.html" class="nav-link active">
+                  <a href="inventory.php" class="nav-link active">
                     <i class="far fa-dot-circle nav-icon"></i>
                     <p>Inventory</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="masterlist.html" class="nav-link">
+                  <a href="masterlist.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Masterlist</p>
                   </a>
@@ -120,13 +120,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="prod-in.html" class="nav-link">
+                  <a href="prod-in.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Product In</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="prod-out.html" class="nav-link">
+                  <a href="prod-out.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Product Out</p>
                   </a>
@@ -144,25 +144,25 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="employee.html" class="nav-link ">
+                  <a href="employee.php" class="nav-link ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Employee Accounts</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="franchisee.html" class="nav-link">
+                  <a href="franchisee.php" class="nav-link">
                     <i class="far fa-circle nav-icon "></i>
                     <p>Franchisee List</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="supplier.html" class="nav-link ">
+                  <a href="supplier.php" class="nav-link ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Supplier</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="admin.html" class="nav-link">
+                  <a href="admin.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Change Password </p>
                   </a>
@@ -500,7 +500,7 @@
             <div class="modal-dialog modal-dialog-centered modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
+                  <h4 class="modal-title">VIEW PRODUCT DETAILS</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
