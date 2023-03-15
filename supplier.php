@@ -217,21 +217,21 @@ if (!isset($_SESSION['login_user']['user'])) {
               $result = mysqli_query($conn, $query);
               while ($row = mysqli_fetch_array($result)) {
               ?>
-                <form action="functions.php" method="post">
-                  <div class="input-group mb-3">
-                    <div class="input-group-append">
-                      <div class="input-group-text">
-                        <span class="fas fa-truck"></span>
-                      </div>
+              <form action="functions.php" method="post">
+                <div class="input-group mb-3">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-truck"></span>
                     </div>
-                    <input type="text" class="form-control" name="supplier_name" placeholder="Enter name of Supplier" autocomplete="off" required>
                   </div>
-                  <!-- /.col -->
-                  <div class="col-12">
-                    <input type="hidden" name="id_lastuser" value="<?php echo $row['user_id'] ?>">
-                    <button type="submit" class="btn btn-primary" name="supplier">Add Supplier</button>
-                  </div>
-                </form>
+                  <input type="text" class="form-control" name="supplier_name" placeholder="Enter name of Supplier" autocomplete="off" required>
+                </div>
+                <!-- /.col -->
+                <div class="col-12">
+                  <input type="hidden" name="id_lastuser" value="<?php echo $row['user_id'] ?>">
+                  <button type="submit" class="btn btn-primary" name="supplier">Add Supplier</button>
+                </div>
+              </form>
               <?php } ?>
             </div>
             <!-- /.card-body -->
