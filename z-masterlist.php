@@ -1,3 +1,11 @@
+<?php
+include('connection.php');
+session_start();
+if (!isset($_SESSION['login_user2']['user'])) {
+  header("Location: index.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +58,17 @@
         <a href="z-dashboard.html" class="nav-link">Home</a>
       </li>
     </ul>
-
+    <?php
+      $check_user =  $_SESSION['login_user2']['employee_name'];
+      $check_user2 =  $_SESSION['login_user2']['user'];
+    ?>
+      <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search -->
+      <li class="nav-item">
+        <h4 class="nav-link font-weight-bold" style="color:black">Welcome! <?php echo $check_user ?></h4>
+      </li>
+    </ul>
   </nav>
   <!-- /.navbar -->
 
@@ -59,7 +77,7 @@
     <!-- Brand Logo -->
     <a href="z-dashboard.html" class="brand-link">
       <img src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminBFC</span>
+      <span class="brand-text font-weight-light">Hello! <?php echo $check_user2 ?></span>
     </a>
 
     <!-- Sidebar -->
