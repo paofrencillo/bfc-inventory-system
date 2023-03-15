@@ -306,7 +306,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                                         <div class="modal-footer">
                                           <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->
                                           <input type="hidden" name="employee_modify" value="<?php echo $row['user_id'] ?>">
-                                          <button type="submit" class="btn btn-danger" name="delete_employee">Delete</button>
+                                          <button type="submit" class="btn btn-outline-danger" name="delete_employee">Delete</button>
                                           <button type="submit" class="btn btn-primary" name="modify_employee">Update Details</button>
                                         </div>
                                     </form>

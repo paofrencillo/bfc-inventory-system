@@ -303,7 +303,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                                             <input type="hidden" name="supplier_modify" value="<?php echo $row['supplier_id'] ?>">
                                             <input type="hidden" name="last_user" value="<?php echo $check_user ?>">
                                             <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->
-                                            <button type="submit" class="btn btn-danger" name="delete_supplier">Delete</button>
+                                            <button type="submit" class="btn btn-outline-danger" name="delete_supplier">Delete</button>
                                             <button type="submit" class="btn btn-primary" name="modify_supplier">Save Changes</button>
                                           </div>
                                         </form>
