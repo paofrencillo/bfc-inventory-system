@@ -15,9 +15,13 @@
             $data = array(
                 "barcode"=>$row["barcode"],
                 "description"=>$row["description"],
+                "generic_name"=>$row["generic_name"],
+                "category"=>$row["category"],
                 "image"=>$row["image"]
             );
             echo json_encode($data);
         }
+    } else if(isset($_GET["refresh_table"])) {
+
     }
 ?>

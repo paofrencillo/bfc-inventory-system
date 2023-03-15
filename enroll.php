@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $category = $_POST["category"];
     $image = $_FILES["imageFile"];
     $last_edited_by = $_POST["employee_id"];
-    $last_edited_on = date("Y-m-d h:i:s");
+    $last_edited_on = date("Y-m-d H:i:s");
     $table = "product_masterlist";
 
     if($_FILES["imageFile"]["name"] != '') { //check if there is uploaded file
@@ -30,8 +30,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     #Insert new products in the database 
-    $conn->query("INSERT INTO `$table` (`barcode`, `description`, `category`, `image`, `last_edited_by`, `last_edited_on`)
-                VALUES ('$barcode', '$description', '$category', '$path', $last_edited_by,  '$last_edited_on');") or die ('Error Could Not Query');
+    $conn->query("INSERT INTO `$table` (`barcode`, `description`,  `generic_name`, `category`, `image`, `last_edited_by`, `last_edited_on`)
+                VALUES ('$barcode', '$description', '$generic_name', '$category', '$path', $last_edited_by,  '$last_edited_on');") or die ('Error Could Not Query');
 
     if(!mysqli_error($conn)) {
         // raise error

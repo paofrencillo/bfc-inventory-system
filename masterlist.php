@@ -43,9 +43,9 @@
 <div class="wrapper">
 
   <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
+  <!-- <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTELogo" height="500" width="500">
-  </div>
+  </div> -->
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -232,7 +232,7 @@
                         while ($row = mysqli_fetch_array($result)) {
                           $last_user = $row['last_edited_by'];
                           $date = date_create($row["last_edited_on"]);
-                          $date = date_format($date, "d/m/Y H:i");
+                          $date = date_format($date, "d/m/Y h:i");
                     ?>
                     <tr class="text-center">
                       <td><?php echo $row["barcode"] ?></td>
@@ -251,13 +251,9 @@
                         </small>
                       </td>
                       <td>
-                        <button class="btn btn-secondary btn-sm" data-id="<?php echo $row["barcode"];?>" data-toggle="modal" data-target="#view" onclick="viewModal(this);">
+                        <button class="btn btn-secondary btn-sm" data-id="<?php echo $row["barcode"];?>" data-toggle="modal" data-target="#details" onclick="viewModal(this);">
                           <i class="fas fa-eye"></i>
                           Details
-                        </button>
-                        <button class="btn btn-info btn-sm" data-id="<?php echo $row["barcode"];?>"  data-toggle="modal" data-target="#update" onclick="viewModal(this);">
-                          <i class="fas fa-pencil-alt"></i>
-                          Edit
                         </button>
                       </td>
                     </tr>
@@ -305,16 +301,16 @@
                         <label for="category">Select Category</label>
                         <select class="custom-select" id="inputGroupSelect01" name="category" id="category" required>
                           <option id="default-selected" selected disabled>--category--</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
+                          <option value="PHARMA">PHARMA</option>
+                          <option value="NON-PHARMA">NON-PHARMA</option>
+                          <option value="GENERIC">GENERIC</option>
                         </select>
                       </div>
                     </div>
                     <div class="col-sm-12">
                       <label>Image</label>
                       <div class="custom-file form-group">
-                        <input type="file" class="custom-file-input" id="imageFile" accept=".png,.jpeg,.jpeg" name="imageFile"> 
+                        <input type="file" class="custom-file-input" id="imageFile" accept=".png,.jpeg,.jpeg" name="imageFile" required> 
                         <label class="custom-file-label" for="imageFile" id="file-label">Choose Image</label>
                       </div>
                     </div>
@@ -341,7 +337,7 @@
         </div>
         <!-- /.modal -->
 
-        <div class="modal fade" id="view">
+        <div class="modal fade" id="details">
           <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
               <div class="modal-header">
@@ -351,28 +347,28 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form>
+                <form action="post_masterlist.php" name="update_form" id="update_form" method="post" enctype="multipart/form-data">
                   <div class="row">  
                     <div class="col-sm-5">
                       <div class="form-group">
                         <label for="barcode-modal">Barcode:</label>
-                        <input type="text" class="form-control modal-field" id="barcode-modal" readonly>
+                        <input type="text" class="form-control modal-field" name="barcode-modal" id="barcode-modal" readonly>
                       </div>
                     </div>
                     <div class="col-sm-7">
                       <div class="form-group">
                         <label for="desc-modal">Product Description:</label>
-                        <input type="text" class="form-control modal-field" id="desc-modal" readonly>
+                        <input type="text" class="form-control modal-field" name="desc-modal" id="desc-modal" readonly>
                       </div>
                     </div>
                     <div class="col-sm-5">
                       <div class="form-group">
                         <label for="gen-modal">Generic Name:</label>
-                        <input type="text" class="form-control modal-field" id="gen-modal" readonly>
+                        <input type="text" class="form-control modal-field" name="gen-modal" id="gen-modal" readonly>
                       </div>
                       <div class="form-group">
                         <label for="cat-modal">Category:</label>
-                        <input type="text" class="form-control modal-field" id="cat-modal" readonly>
+                        <input type="text" class="form-control modal-field" name="cat-modal" id="cat-modal" readonly>
                       </div>
                     </div>
                     <div class="col-sm-7">
@@ -380,18 +376,21 @@
                         <div class="w-100">
                           <label for="img-modal">Image:</label>
                         </div>
-                        <div class="custom-file form-group mb-2">
-                          <input type="file" class="custom-file-input modal-field" id="imageFile2" accept=".png,.jpeg,.jpeg" name="imageFile2"> 
+                        <div class="custom-file form-group mb-2 d-none" id="img-update-field">
+                          <input type="file" class="custom-file-input modal-field" id="imageFile2" accept=".png,.jpeg,.jpeg" name="imageFile2" readonly> 
                           <label class="custom-file-label" for="imageFile2" id="file-label2">Choose Image</label>
                         </div>
-                        <img alt="Product photo" class="img-fluid img-modal" style="height: 100%; width: 100%;">           
+                        <img alt="Product photo" class="img-fluid modal-field" id="img-modal" style="height: 100%; width: 100%;">           
                       </div>
                     </div>
                     <div class="modal-footer justify-content-between col-sm-12">
                       <button type="button" class="btn btn-outline-default">Delete</button>
-                      <button type="button" class="btn btn-primary" onclick="editDetails();">Update Details</button>
-                      <div class="justify-content-around d-none">
-                        <button type="reset" class="btn btn-default">Cancel</button>
+                      <button type="button" class="btn btn-primary" id="update-btn" onclick="editDetails(this);">
+                        <i class="fas fa-pencil-alt mr-2"></i>Update Details
+                      </button>
+                      <div class="justify-content-around d-none" id="save-cancel-btns">
+                        <input type="hidden" name="employee_id" id="employee-id-modal" value="<?php echo $_SESSION['login_user']['user_id'];?>">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="cancelUpdate(this);">Cancel</button>
                         <button type="submit" name="update_masterlist" class="btn btn-success">Save changes</button>
                       </div>
                     </div>
