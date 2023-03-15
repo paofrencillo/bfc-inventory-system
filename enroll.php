@@ -9,6 +9,8 @@ header("Content-Type: text/json; charset=utf8");
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     $barcode = $_POST["barcode"];
     $description = $_POST["description"];
+    $generic_name = $_POST["generic_name"];
+    $category = $_POST["category"];
     $image = $_FILES["imageFile"];
     $last_edited_by = $_POST["employee_id"];
     $last_edited_on = date("Y-m-d h:i:s");
@@ -28,10 +30,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     #Insert new products in the database 
-    $conn->query("INSERT INTO `$table` (`barcode`, `description`, `image`, `last_edited_by`, `last_edited_on`)
-                VALUES ('$barcode', '$description', '$path', $last_edited_by,  '$last_edited_on');") or die ('Error Could Not Query');
+    $conn->query("INSERT INTO `$table` (`barcode`, `description`, `category`, `image`, `last_edited_by`, `last_edited_on`)
+                VALUES ('$barcode', '$description', '$category', '$path', $last_edited_by,  '$last_edited_on');") or die ('Error Could Not Query');
 
     if(!mysqli_error($conn)) {
+        // raise error
         echo json_encode("success");
     }
 }

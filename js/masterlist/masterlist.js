@@ -1,25 +1,28 @@
 function viewModal(el) {
-    $.ajax({
-      type: "GET",
-      url: "get_masterlist.php",
-      data: {"barcode": String(el.getAttribute("data-id"))},
-      dataType: "JSON",
-      success: function(data) {
-        if (el.getAttribute("data-option") == "view") {
-          $("#barcode-view").val(data.barcode);
-          $("#desc-view").val(data.description);
-          $("#img-view").attr("src", data.image);
-        } else if (el.getAttribute("data-option") == "update") {
-          $("#barcode-update").val(data.barcode);
-          $("#desc-update").val(data.description);
-          $("#img-update").attr("src", data.image);
-        }
-      },
-      error: function(error) {
-        console.log(error);
-      }
-    })
-  }
+  $.ajax({
+    type: "GET",
+    url: "get_masterlist.php",
+    data: {"barcode": String(el.getAttribute("data-id"))},
+    dataType: "JSON",
+    success: function(data) {
+      $(".barcode-modal").val(data.barcode);
+      $(".desc-modal").val(data.description);
+      $(".gen-modal").val(data.generic_name);
+      $(".cat-modal").val(data.category);
+      $(".img-modal").attr("src", data.image);
+      
+    },
+    error: function(error) {
+      console.log(error);
+    }
+  })
+}
+
+function editDetails() {
+  // enable save and cancel button
+  // 
+
+}
 
   $(".custom-file-input").on("change", function() {
     var fileName = $(this).val().split("\\").pop();
@@ -35,17 +38,14 @@ function viewModal(el) {
       contentType: false,
       processData:false,
       cache: false,
-      success: function(data) {
-        console.log(data);
+      success: function() {
         $('#enroll_success_text').removeClass('d-none');
         setTimeout(()=> {
           $('#enroll_success_text').addClass('d-none');
         }, 3000)
         $('#barcode').val('');
         $('#description').val('');
-        $('#imageFile').val('');
-        var fileName = $('.custom-file-input').val().split("\\").pop();
-        $('.custom-file-input').siblings(".custom-file-label").addClass("selected").html(fileName);
+        $('#file-label').html("Choose Image");
       },
       error: function(xhr, status, error) {
         console.log(status);
@@ -55,9 +55,9 @@ function viewModal(el) {
         }, 3000)
         $('#barcode').val('');
         $('#description').val('');
+        // clear category
         $('#imageFile').val('');
-        var fileName = $('.custom-file-input').val().split("\\").pop();
-        $('.custom-file-input').siblings(".custom-file-label").addClass("selected").html(fileName);
+        $('#file-label').html("Choose Image");
       }
     });
   });
@@ -69,7 +69,7 @@ $(function () {
     "responsive": true, 
     "lengthChange": true, 
     "autoWidth": false,
-    "buttons": ["copy", "csv", "excel", "pdf", "print"]
+    // "buttons": ["copy", "csv", "excel", "pdf", "print"]
   }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 });
 $(function () {

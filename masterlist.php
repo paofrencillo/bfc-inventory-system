@@ -219,6 +219,7 @@
                     <tr class=text-center>
                         <th>Barcode</th>
                         <th>Product Description</th>
+                        <th>Generic Name</th>
                         <th>Category</th>
                         <th>Last Edited</th>
                         <th>Action</th>
@@ -236,6 +237,7 @@
                     <tr class="text-center">
                       <td><?php echo $row["barcode"] ?></td>
                       <td><?php echo $row["description"] ?></td>
+                      <td><?php echo $row["generic_name"] ?></td>
                       <td><?php echo $row["category"] ?></td>
                       <td class="font-italic">
                         <small>
@@ -249,11 +251,11 @@
                         </small>
                       </td>
                       <td>
-                        <button class="btn btn-secondary btn-sm" data-id="<?php echo $row["barcode"];?>" data-option="view" data-toggle="modal" data-target="#view" onclick="viewModal(this);">
+                        <button class="btn btn-secondary btn-sm" data-id="<?php echo $row["barcode"];?>" data-toggle="modal" data-target="#view" onclick="viewModal(this);">
                           <i class="fas fa-eye"></i>
                           Details
                         </button>
-                        <button class="btn btn-info btn-sm" data-id="<?php echo $row["barcode"];?>" data-option="update" data-toggle="modal" data-target="#update" onclick="viewModal(this);">
+                        <button class="btn btn-info btn-sm" data-id="<?php echo $row["barcode"];?>"  data-toggle="modal" data-target="#update" onclick="viewModal(this);">
                           <i class="fas fa-pencil-alt"></i>
                           Edit
                         </button>
@@ -269,57 +271,73 @@
         </div>
 
         <div class="modal fade" id="addnew">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">ENROLL NEW PRODUCTS</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <form action="enroll.php" name="enroll_form" id="enroll_form" method="post" enctype="multipart/form-data">
-                        <div class="row">     
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="barcode">Barcode:</label>
-                                    <input type="text" class="form-control" name="barcode" id="barcode" required>
-                                    </div>
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="form-group">
-                                    <label for="prod">Product Description:</label>
-                                    <input type="text" class="form-control" name="description" id="description" required>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                              <div class="custom-file form-group">
-                                <input type="file" class="custom-file-input" id="imageFile" accept=".png,.jpeg,.jpeg" name="imageFile"> 
-                                <label class="custom-file-label" for="imageFile">Choose file</label>
-                              </div>
-                            </div>
-                            <div class="col-sm-12">
-                              <h6 class="text-success font-weight-bold mt-2 d-none" id="enroll_success_text">
-                                Product enrolled successfully!
-                              </h6>
-                              <h6 class="text-danger font-weight-bold mt-2 d-none" id="enroll_error_text">
-                                Product enrollment failed. Try again.
-                              </h6>
-                            </div>
-                        </div>                       
-                   
-                
-                <div class="modal-footer justify-content-between px-0 mx-0">
-                  <input type="hidden" name="employee_id" id="employee_id" value="<?php echo $_SESSION['login_user']['user_id'];?>">
-                  <button type="button" class="btn btn-default mx-0" data-dismiss="modal">Cancel</button>
-                  <input type="submit" name="add_product" class="btn btn-primary mx-0" value="Add Product">
-                </div>
-                </form>
-                </div>
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">ENROLL NEW PRODUCT</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
-              <!-- /.modal-content -->
+              <div class="modal-body">
+                <form action="enroll.php" name="enroll_form" id="enroll_form" method="post" enctype="multipart/form-data">
+                  <div class="row">     
+                    <div class="col-sm-5">
+                      <div class="form-group">
+                        <label for="barcode">Barcode</label>
+                        <input type="text" class="form-control" name="barcode" id="barcode" required>
+                      </div>
+                    </div>
+                    <div class="col-sm-7">
+                      <div class="form-group">
+                        <label for="description">Product Description</label>
+                        <input type="text" class="form-control" name="description" id="description" required>
+                      </div>
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="form-group">
+                        <label for="generic_name">Generic Name</label>
+                        <input type="text" class="form-control" name="generic_name" id="generic_name" required>
+                      </div>
+                    </div>
+                    <div class="col-sm-7">
+                      <div class="form-group mb-3">
+                        <label for="category">Select Category</label>
+                        <select class="custom-select" id="inputGroupSelect01" name="category" id="category" required>
+                          <option id="default-selected" selected disabled>--category--</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <label>Image</label>
+                      <div class="custom-file form-group">
+                        <input type="file" class="custom-file-input" id="imageFile" accept=".png,.jpeg,.jpeg" name="imageFile"> 
+                        <label class="custom-file-label" for="imageFile" id="file-label">Choose Image</label>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <h6 class="text-success font-weight-bold mt-2 d-none" id="enroll_success_text">
+                        Product enrolled successfully!
+                      </h6>
+                      <h6 class="text-danger font-weight-bold mt-2 d-none" id="enroll_error_text">
+                        Product enrollment failed. Try again.
+                      </h6>
+                    </div>
+                  </div>                                  
+                  <div class="modal-footer justify-content-between px-0 mx-0">
+                    <input type="hidden" name="employee_id" id="employee_id" value="<?php echo $_SESSION['login_user']['user_id'];?>">
+                    <button type="button" class="btn btn-default mx-0" data-dismiss="modal">Cancel</button>
+                    <input type="submit" name="add_product" class="btn btn-primary mx-0" value="Add Product">
+                  </div>
+                </form>
+              </div>
             </div>
-            <!-- /.modal-dialog -->
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
 
@@ -333,85 +351,59 @@
                 </button>
               </div>
               <div class="modal-body">
-                <div class="row">     
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <label for="barcode">Barcode:</label>
-                      <input type="text" class="form-control " id="barcode-view" readonly>
+                <form>
+                  <div class="row">  
+                    <div class="col-sm-5">
+                      <div class="form-group">
+                        <label for="barcode-modal">Barcode:</label>
+                        <input type="text" class="form-control modal-field" id="barcode-modal" readonly>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-sm-8">
-                    <div class="form-group">
-                      <label for="prod">Product Description:</label>
-                      <input type="text" class="form-control " id="desc-view" readonly>
+                    <div class="col-sm-7">
+                      <div class="form-group">
+                        <label for="desc-modal">Product Description:</label>
+                        <input type="text" class="form-control modal-field" id="desc-modal" readonly>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-sm-12">
-                    <div class="position-relative" style="min-height: 180px;">
-                      <img alt="Photo 3" class="img-fluid" id="img-view">           
+                    <div class="col-sm-5">
+                      <div class="form-group">
+                        <label for="gen-modal">Generic Name:</label>
+                        <input type="text" class="form-control modal-field" id="gen-modal" readonly>
+                      </div>
+                      <div class="form-group">
+                        <label for="cat-modal">Category:</label>
+                        <input type="text" class="form-control modal-field" id="cat-modal" readonly>
+                      </div>
                     </div>
-                  </div>
-                </div>                       
-              </div>
-              <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <!-- <button type="button" class="btn btn-primary">Update</button> -->
-              </div>
+                    <div class="col-sm-7">
+                      <div class="position-relative">
+                        <div class="w-100">
+                          <label for="img-modal">Image:</label>
+                        </div>
+                        <div class="custom-file form-group mb-2">
+                          <input type="file" class="custom-file-input modal-field" id="imageFile2" accept=".png,.jpeg,.jpeg" name="imageFile2"> 
+                          <label class="custom-file-label" for="imageFile2" id="file-label2">Choose Image</label>
+                        </div>
+                        <img alt="Product photo" class="img-fluid img-modal" style="height: 100%; width: 100%;">           
+                      </div>
+                    </div>
+                    <div class="modal-footer justify-content-between col-sm-12">
+                      <button type="button" class="btn btn-outline-default">Delete</button>
+                      <button type="button" class="btn btn-primary" onclick="editDetails();">Update Details</button>
+                      <div class="justify-content-around d-none">
+                        <button type="reset" class="btn btn-default">Cancel</button>
+                        <button type="submit" name="update_masterlist" class="btn btn-success">Save changes</button>
+                      </div>
+                    </div>
+                  </div> 
+                </form>                           
+              </div> 
             </div>
             <!-- /.modal-content -->
           </div>
           <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
-
-        <div class="modal fade" id="update">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="row">     
-                            <div class="col-sm-4">
-                              <div class="form-group">
-                                <label for="barcode">Barcode:</label>
-                                <input type="text" class="form-control " id="barcode-update">
-                              </div>
-                            </div>
-                            <div class="col-sm-8">
-                              <div class="form-group">
-                                <label for="prod">Product Description:</label>
-                                <input type="text" class="form-control " id="desc-update">
-                              </div>
-                            </div>
-                            <div class="col-sm-4">
-                              <div class="custom-file form-group">
-                                <input type="file" class="custom-file-input" id="customFile" accept="image/*"> 
-                                <label class="custom-file-label" for="customFile">Choose file</label>
-                              </div>
-                            </div>
-                            <div class="col-sm-8">
-                              <div class="position-relative" style="min-height: 180px;">
-                                <img src="dist/img/photo2.png" alt="Photo 3" class="img-fluid">           
-                              </div>
-                            </div>
-                        </div>                       
-                    </form>
-                </div>
-                <div class="modal-footer justify-content-end">
-                  <button type="button" class="btn btn-outline-danger mr-2">Delete</button>
-                  <button type="button" class="btn btn-primary">Update</button>
-                </div>
-              </div>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-
       </section>
     </div>
     <!-- /.content-header -->
