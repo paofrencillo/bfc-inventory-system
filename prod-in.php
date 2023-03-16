@@ -301,43 +301,18 @@ if (!isset($_SESSION['login_user']['user'])) {
 
 
           <div class="modal fade" id="addnew">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-              <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl ">
+              <div class="modal-content ">
                 <div class="modal-header">
                   <h4 class="modal-title">RECEIVING ITEMS</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body">
-                  <form>
+                <form>
+                  <div class="modal-body">
                     <div class="row">
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label for="barcode">Barcode:</label>
-                          <input type="text" class="form-control " id="barcode">
-                        </div>
-                      </div>
-                      <div class="col-sm-8">
-                        <div class="form-group">
-                          <label for="prod">Product Description:</label>
-                          <input type="text" class="form-control " id="prod">
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="form-group">
-                          <label for="inputEstimatedBudget">Quantity:</label>
-                          <input type="number" class="form-control " id="inputEstimatedBudget" value="0">
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label for="lot">Lot Number:</label>
-                          <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();">
-                        </div>
-                      </div>
-                      
-                      <div class="col-sm-6">
+                      <div class="col-sm-12">
                         <div class="form-group">
                           <label for="supp">Supplier:</label>
                           <select class="form-control select2bs4" style="width: 100%;">
@@ -354,38 +329,132 @@ if (!isset($_SESSION['login_user']['user'])) {
                           </select>
                         </div>
                       </div>
-                      <div class="col-sm-6">
+                      
+                      <div class="col-sm-12">
                         <div class="form-group">
-                          <label for="exp">Expiration Date:</label>
-                          <input type="date" class="form-control " id="exp" >
+                          <!-- <table id="example4" class="table table-bordered table-hover dt-center">
+                            <thead>
+                              <tr>
+                                <th>Barcode</th>
+                                <th>Product Description</th>
+                                <th>Quantity</th>
+                                <th>Lot No.</th>
+                                <th>Exp. Date</th>
+                                <th>MRF</th>
+
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>asd</td>
+                                <td>asd</td>
+                                <td>asd</td>
+                                <td>asd</td>
+                                <td>asd</td>
+                              </tr>
+                              
+                              
+                            </tbody>
+                          </table> -->
+                          <div class="card-body table-responsive p-0" style="height: 200px;">
+                          <table class="table table-head-fixed text-center">
+                            <thead>
+                              <tr>
+                                <th>Barcode</th>
+                                <th>Product Description</th>
+                                <th>Quantity</th>
+                                <th>Lot No.</th>
+                                <th>Exp. Date</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <!-- <tr>
+                                <td>42428</td>
+                                <td>Mefenamic</td>
+                                <td>42</td>
+                                <td>2828</td>
+                                <td>03-25-2023</td>
+                              </tr> -->
+                            </tbody>
+                          </table>
                         </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <label for="supp">Entry Date:</label>
-                          <input type="date" class="form-control " id="supp" disabled>
                         </div>
                       </div>
                       
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="barcode">Barcode:</label>
+                          <input type="text" class="form-control " id="barcode" onmouseover="this.focus();">
+                        </div>
+                      </div>
+                      <div class="col-sm-5">
+                        <div class="form-group">
+                          <label for="prod">Product Description:</label>
+                          <input type="text" class="form-control " id="prod" readonly>
+                        </div>
+                      </div>
+                      <div class="col-sm-1">
+                        <div class="form-group">
+                          <label for="quan">Quantity:</label>
+                          <input type="number" class="form-control " id="quan" value="0">
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="lot">Lot Number:</label>
+                          <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();">
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="exp">Expiration Date:</label>
+                          <input type="date" class="form-control " id="exp">
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <?php
+                          $month = date('m');
+                          $day = date('d');
+                          $year = date('Y');
+                          
+                          $today = $year . '-' . $month . '-' . $day;
+                          ?>
+                        <div class="form-group">
+                          <label for="supp">Date Added:</label>
+                          <input type="date" class="form-control" id="supp" value="<?php echo $today;?>" readonly>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label for="barcode">Add Product</label>
+                          <a type="submit" class="btn btn-info form-control">
+                            <i class="fas fa-plus"></i>
+                            ADD
+                          </a>
+                        </div>
+                      </div>
                     </div>
-                  </form>
-                </div>
-                <div class="modal-footer justify-content-between">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-primary">Add Stock</button>
-                </div>
+                  </div>
+                  
+                  <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Add Stocks</button>
+                  </div>    
+
+                </form>
               </div>
               <!-- /.modal-content -->
             </div>
             <!-- /.modal-dialog -->
           </div>
           <!-- /.modal -->
+           
 
           <div class="modal fade" id="update">
             <div class="modal-dialog modal-dialog-centered modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">VIEW PRODUCT DETAILS</h4>
+                  <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
