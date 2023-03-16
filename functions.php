@@ -30,7 +30,7 @@ if (isset($_POST['signin'])) {
                 $_SESSION['login_user2'] = $row;
                 header('location:z-dashboard.php');
             } else {
-?>
+            ?>
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
                 <script>
@@ -957,7 +957,7 @@ if (isset($_POST['pass_admin'])) {
     } else {
         $conn->query("UPDATE users SET pass='" . password_hash($pass, PASSWORD_BCRYPT) . "' WHERE user_id='$id_pass'") or die($conn->error);
         session_destroy();
-    ?>
+        ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script>
@@ -978,7 +978,7 @@ if (isset($_POST['pass_admin'])) {
 
             })
         </script>
-<?php
+        <?php
     }
 }
 
@@ -987,4 +987,98 @@ if (isset($_GET['logout'])) {
     session_destroy();
     header('location:index.php');
 }
+
+#ADD PRODUCT OUT
+if (isset($_POST['addprodout'])) {
+    $barcode = $_POST['barcode'];
+    $description = $_POST['description'];
+    $quantity = $_POST['quantity'];
+    $lot = $_POST['lot'];
+    $branch = $_POST['branch'];
+    $mrf = $_POST['mrf'];
+    $order_num = $_POST['order_num'];
+    $exp_date = $_POST['exp_date'];
+    $remarks = $_POST['remarks'];
+    $endorsed_by = $_POST['endorsed_by'];
+    $endorsed_date = $_POST['endorsed_date'];
+
+
+    $sql = "SELECT * FROM endorse WHERE barcode='$barcode';";
+    $result = mysqli_query($conn, $sql);
+
+    if (!$result->num_rows > 0) {
+        $conn->query("INSERT INTO endorse (
+            barcode, 
+            description, 
+            quantity, 
+            lot, 
+            branch, 
+            mrf, 
+            order_num, 
+            exp_date, 
+            remarks, 
+            endorsed_by, 
+            endorsed_date)
+        VALUES(
+            '$barcode', 
+            '$description', 
+            '$quantity', 
+            '$lot', 
+            '$branch', 
+            '$mrf' , 
+            '$order_num',
+            '$exp_date',
+            '$remarks',
+            '$endorsed_by',
+            '$endorsed_date')") or die($conn->error);
+    ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Registered',
+                    text: 'Supplier successfully added',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "prod-out.php";
+                    } else {
+                        window.location.href = "prod-out.php";
+                    }
+                })
+
+            })
+        </script>
+    <?php
+    } else {
+    ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ooops...',
+                    text: 'Prod-out is already exist',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "prod-out.php";
+                    } else {
+                        window.location.href = "prod-out.php";
+                    }
+                })
+
+            })
+        </script>
+    <?php
+    }
+}
+
+
+
 ?>

@@ -382,13 +382,13 @@ if (!isset($_SESSION['login_user']['user'])) {
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <form>
+                <form action="functions.php" method="POST">
                   <div class="modal-body">
                     <div class="row">
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label for="supp">Branch Code:</label>
-                          <select class="form-control select2bs4" style="width: 100%;">
+                          <select class="form-control select2bs4" style="width: 100%;" name="branch">
                             <option selected="selected" disabled>Please Select Branch Code</option>
                             <?php
                             $check_user =  $_SESSION['login_user']['user_id'];
@@ -405,43 +405,19 @@ if (!isset($_SESSION['login_user']['user'])) {
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="barcode">MRF:</label>
-                          <input type="number" class="form-control " id="barcode">
+                          <input type="number" class="form-control " id="barcode" name="mrf">
                         </div>
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="barcode">Inv/Order No:</label>
-                          <input type="number" class="form-control " id="barcode">
+                          <input type="number" class="form-control " id="barcode" name="order_num">
                         </div>
                       </div>
                       <div class="col-sm-12">
                         <div class="form-group">
-                          <!-- <table id="example4" class="table table-bordered table-hover dt-center">
-                            <thead>
-                              <tr>
-                                <th>Barcode</th>
-                                <th>Product Description</th>
-                                <th>Quantity</th>
-                                <th>Lot No.</th>
-                                <th>Exp. Date</th>
-                                <th>MRF</th>
-
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>asd</td>
-                                <td>asd</td>
-                                <td>asd</td>
-                                <td>asd</td>
-                                <td>asd</td>
-                              </tr>
-                              
-                              
-                            </tbody>
-                          </table> -->
                           <div class="card-body table-responsive p-0" style="height: 200px;">
-                          <table class="table table-head-fixed text-center">
+                          <table class="table table-head-fixed text-center" id="myTable">
                             <thead>
                               <tr>
                                 <th>Barcode</th>
@@ -453,15 +429,14 @@ if (!isset($_SESSION['login_user']['user'])) {
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <!-- <td>42428</td>
+                              <!-- <tr>
+                                <td>42428</td>
                                 <td>Mefenamic</td>
                                 <td>42</td>
                                 <td>2828</td>
                                 <td>03-25-2023</td>
-                                <td></td> -->
-                              </tr>
-                              
+                                <td></td>
+                              </tr> -->
                             </tbody>
                           </table>
                         </div>
@@ -471,31 +446,31 @@ if (!isset($_SESSION['login_user']['user'])) {
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="barcode">Barcode:</label>
-                          <input type="text" class="form-control " id="barcode" onmouseover="this.focus();">
+                          <input type="text" class="form-control " id="barcode" onmouseover="this.focus();" name="barcode">
                         </div>
                       </div>
                       <div class="col-sm-5">
                         <div class="form-group">
                           <label for="prod">Product Description:</label>
-                          <input type="text" class="form-control " id="prod" readonly>
+                          <input type="text" class="form-control " id="prod" name="description" readonly>
                         </div>
                       </div>
                       <div class="col-sm-1">
                         <div class="form-group">
                           <label for="quan">Quantity:</label>
-                          <input type="number" class="form-control " id="quan">
+                          <input type="number" class="form-control " id="quan" name="quantity">
                         </div>
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="lot">Lot Number:</label>
-                          <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();">
+                          <input type="text" class="form-control" id="lot" name="lot" onkeyup="this.value = this.value.toUpperCase();">
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="exp">Expiration Date:</label>
-                          <input type="date" class="form-control " id="exp">
+                          <input type="date" class="form-control " id="exp" name="exp_date">
                         </div>
                       </div>
                       <?php
@@ -508,27 +483,30 @@ if (!isset($_SESSION['login_user']['user'])) {
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="supp">Endorse Date:</label>
-                          <input type="date" class="form-control " id="supp" value="<?php echo $today;?>" readonly>
+                          <input type="date" class="form-control " id="supp" name="endorsed_date" value="<?php echo $today;?>" readonly>
                         </div>
                       </div>
                       <div class="col-sm-2">
                         <div class="form-group">
-                          <label for="barcode">Remarks:</label>
-                          <input type="text" class="form-control " id="barcode">
+                          <label for="remarks">Remarks:</label>
+                          <input type="text" class="form-control " id="remarks" name="remarks">
                         </div>
                       </div>
+                      <?php
+                        $current_user =  $_SESSION['login_user']['employee_name'];
+                      ?>  
                       <div class="col-sm-2">
                         <div class="form-group">
-                          <label for="barcode">Add Product</label>
-                          <a type="submit" class="btn btn-info form-control">
+                          <input type="hidden" name="endorsed_by" value="<?php echo $current_user ?>">
+                          <label for="reloadBtn">Add Product</label>
+                          <button type="button" class="btn btn-info form-control" id="reloadBtn" name="addprodout">
                             <i class="fas fa-plus"></i>
                             ADD
-                          </a>
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
-                  
                   <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-primary">Endorse Products</button>
@@ -957,8 +935,41 @@ if (!isset($_SESSION['login_user']['user'])) {
       })
     })
   </script>
-
   
+  <!-- JavaScript code -->
+  <script>
+    // When the button is clicked, reload the data
+    document.getElementById('reloadBtn').addEventListener('click', function() {
+      // Create an AJAX request
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'get_prod-out.php');
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+            // Parse the JSON response
+            var data = JSON.parse(xhr.responseText);
+            // Clear the table
+            var tableBody = document.querySelector('#myTable tbody');
+            tableBody.innerHTML = '';
+            // Populate the table with the new data
+            data.forEach(function(row) {
+              var tr = document.createElement('tr');
+              tr.innerHTML = '<td>' + row.barcode + '</td><td>'
+                  + row.description + '</td><td>' 
+                  + row.quantity + '</td><td>' 
+                  + row.lot + '</td><td>' 
+                  + row.exp_date + '</td><td>' 
+                  + row.remarks + '</td>' 
+              tableBody.appendChild(tr);
+            });
+        }
+        else {
+            alert('Error: ' + xhr.status);
+        }
+      };
+      xhr.send();
+    });
+  </script>
+
 </body>
 
 </html>
