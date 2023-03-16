@@ -48,7 +48,7 @@
   </div> -->
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light justify-content-between">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -58,7 +58,21 @@
         <a href="starter.php" class="nav-link">Home</a>
       </li>
     </ul>
+    <h6 class="mb-0 mr-2">
+      <?php
+          date_default_timezone_set("Asia/Manila");  
+          $h = date('G');
+          $user = $_SESSION['login_user']['user'];
 
+          if ($h>=0 && $h<=11) {
+              echo "Good morning, $user";
+          } else if ($h>=12 && $h<=17) {
+              echo "Good afternoon, $user";
+          } else {
+              echo "Good evening, $user";
+          }
+      ?> 
+    </h6>
   </nav>
   <!-- /.navbar -->
 
@@ -276,7 +290,8 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form action="enroll.php" name="enroll_form" id="enroll_form" method="post" enctype="multipart/form-data">
+                <form name="enroll_form" id="enroll_form" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="action" value="enroll">
                   <div class="row">     
                     <div class="col-sm-5">
                       <div class="form-group">
@@ -326,7 +341,7 @@
                   <div class="modal-footer justify-content-between px-0 mx-0">
                     <input type="hidden" name="employee_id" id="employee_id" value="<?php echo $_SESSION['login_user']['user_id'];?>">
                     <button type="button" class="btn btn-default mx-0" data-dismiss="modal">Cancel</button>
-                    <input type="submit" name="add_product" class="btn btn-primary mx-0" value="Add Product">
+                    <button type="submit" class="btn btn-primary mx-0">Add Product</button>
                   </div>
                 </form>
               </div>
@@ -341,13 +356,14 @@
           <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title">VIEW PRODUCT DETAILS</h4>
+                <h4 class="modal-title">PRODUCT DETAILS</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <form action="post_masterlist.php" name="update_form" id="update_form" method="post" enctype="multipart/form-data">
+                <form name="update_masterlist_form" id="update_masterlist_form" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="action" value="update">
                   <div class="row">  
                     <div class="col-sm-5">
                       <div class="form-group">
@@ -368,7 +384,11 @@
                       </div>
                       <div class="form-group">
                         <label for="cat-modal">Category:</label>
-                        <input type="text" class="form-control modal-field" name="cat-modal" id="cat-modal" readonly>
+                        <select class="custom-select" name="cat-modal" id="cat-modal" disabled>
+                          <option value="PHARMA">PHARMA</option>
+                          <option value="NON-PHARMA">NON-PHARMA</option>
+                          <option value="GENERIC">GENERIC</option>
+                        </select>
                       </div>
                     </div>
                     <div class="col-sm-7">
@@ -383,19 +403,44 @@
                         <img alt="Product photo" class="img-fluid modal-field" id="img-modal" style="height: 100%; width: 100%;">           
                       </div>
                     </div>
-                    <div class="modal-footer justify-content-between col-sm-12">
-                      <button type="button" class="btn btn-outline-default">Delete</button>
+                    <h6 class="text-success font-weight-bold mt-2 d-none" id="update_success_text">
+                      Product updated successfully!
+                    </h6>
+                    <h6 class="text-danger font-weight-bold mt-2 d-none" id="update_error_text">
+                      Product update failed. Try again.
+                    </h6>
+                    <div class="modal-footer justify-content-between col-sm-12 mx-0 pb-0 px-0">
+                      <button type="button" class="btn btn-outline-secondary" id="delete-product-btn" data-toggle="modal" data-target="#delete-modal">Delete</button>
                       <button type="button" class="btn btn-primary" id="update-btn" onclick="editDetails(this);">
-                        <i class="fas fa-pencil-alt mr-2"></i>Update Details
+                        <i class="fas fa-pencil-alt"></i>Update Details
                       </button>
                       <div class="justify-content-around d-none" id="save-cancel-btns">
                         <input type="hidden" name="employee_id" id="employee-id-modal" value="<?php echo $_SESSION['login_user']['user_id'];?>">
                         <button type="button" class="btn btn-default" data-dismiss="modal" onclick="cancelUpdate(this);">Cancel</button>
-                        <button type="submit" name="update_masterlist" class="btn btn-success">Save changes</button>
+                        <button type="submit" class="btn btn-success">Save changes</button>
                       </div>
                     </div>
                   </div> 
-                </form>                           
+                </form>
+                <div class="modal fade" tabindex="-1" id="delete-modal" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-sm modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title font-weight-bold text-danger">Delete Product</h5>
+                        <button type="button" class="close close-modal-delete1" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p class="text-danger">Are you sure you want to delete this product in the inventory?</p>
+                      </div>
+                      <div class="modal-footer justify-content-end">
+                        <button type="button" class="btn btn-outline-secondary close-modal-delete2">Cancel</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteProduct();">Yes, Delete it</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>                        
               </div> 
             </div>
             <!-- /.modal-content -->

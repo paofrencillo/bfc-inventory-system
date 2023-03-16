@@ -1,3 +1,18 @@
+// //-------------- AUTOMATIC RELOAD TABLE (TRY LANGZZZ)
+// document.addEventListener('DOMContentLoaded', function () {
+//   $.ajax({
+//     type: "GET",
+//     url: "get_masterlist.php",
+//     data: {get_products: "get_products"},
+//     dataType: "html",
+//     success: function(data) {
+   
+//     },
+//     error: function(error) {
+//       console.error(error);
+//     }
+//   })
+// }, false);
 
 function viewModal(el) {
   $.ajax({
@@ -11,10 +26,10 @@ function viewModal(el) {
       $("#gen-modal").val(data.generic_name);
       $("#cat-modal").val(data.category);
       $("#img-modal").attr("src", data.image);
-      
+      $("#delete-product-btn").attr("data-product-barcode", data.barcode);   
     },
     error: function(error) {
-      console.log(error);
+      console.error(error);
     }
   })
 }
@@ -25,29 +40,66 @@ function editDetails(el) {
   $(el).addClass("d-none");
 
   modal_fields = document.getElementById("details").querySelectorAll("input");
+  $("#cat-modal").removeAttr("disabled")
   modal_fields.forEach(field => {
-    field.removeAttribute("readonly");
 
-    if (field.id == "barcode-modal" || field.id == "employee-id-modal") {
-      field.setAttribute("readonly", "");
+    if (field.id != "barcode-modal") {
+        field.removeAttribute("readonly");
+         
     } else if (field.id == "imageFile2") {
       $("#img-update-field").removeClass("d-none")
     }
   });
-  // show hidden fields
-  
-  // remove readonly/disable on modal input fields
-  // 
-
 }
 
+// ------ Cancel product update
 function cancelUpdate(el) {
   $("#save-cancel-btns").addClass("d-none");
-  $("#update-btn").removeClass("d-none");  
+  $("#update-btn").removeClass("d-none");
+
+  $("#cat-modal").attr("disabled", "")
+  modal_fields = document.getElementById("details").querySelectorAll("input");
+  modal_fields.forEach(field => {
+
+    if (field.id != "barcode-modal") {
+        field.setAttribute("readonly", "");
+         
+    } else if (field.id == "imageFile2") {
+      $("#img-update-field").addClass("d-none")
+    }
+  });
 }
 
+// ------ Delete product
+function deleteProduct() {
+  let barcode =  $("#delete-product-btn").attr("data-product-barcode");
+  $.ajax({
+    type: "POST",
+    url: "post_masterlist.php",
+    data: {action: 'delete', barcode: barcode},
+    cache: false,
+    success: function(data) {
+      location.reload();     
+    },
+    error: function(error) {
+      console.error(error);
+    }
+  
+  })
+  ;
+}
+
+// ------ Close Delete Modal
+$(".close-modal-delete1").on("click", ()=> {
+  $("#delete-modal").modal("hide");
+});
+
+$(".close-modal-delete2").on("click", ()=> {
+  $("#delete-modal").modal("hide");
+});
+
+// ------ Updating product image
 $("#imageFile2").on("change", (e)=> {
-  console.log(e.target.files[0]);
   let file = e.target.files[0];
   let url = URL.createObjectURL(file);
   $("#img-modal").attr("src", url);
@@ -58,11 +110,12 @@ $(".custom-file-input").on("change", function() {
   $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
 
+// ------ Enrolling new product
 $("#enroll_form").on("submit", function(e) {
   e.preventDefault();
   $.ajax({
     type: "POST",
-    url: "enroll.php",
+    url: "post_masterlist.php",
     data: new FormData(this),
     contentType: false,
     processData:false,
@@ -71,10 +124,10 @@ $("#enroll_form").on("submit", function(e) {
       $('#enroll_success_text').removeClass('d-none');
       setInterval(()=> {
         location.reload();
-      }, 1000)       
+      }, 1000)
     },
-    error: function(xhr, status, error) {
-      console.log(status);
+    error: function(error) {
+      console.error(error);
       $('#enroll_error_text').removeClass('d-none');
       setTimeout(()=> {
         $('#enroll_error_text').addClass('d-none');
@@ -84,6 +137,32 @@ $("#enroll_form").on("submit", function(e) {
       // clear category
       $('#imageFile').val('');
       $('#file-label').html("Choose Image");
+    }
+  });
+});
+
+
+$("#update_masterlist_form").on("submit", function(e) {
+  e.preventDefault();
+  $.ajax({
+    type: "POST",
+    url: "post_masterlist.php",
+    data: new FormData(this),
+    contentType: false,
+    processData:false,
+    cache: false,
+    success: function() {
+      $('#update_success_text').removeClass('d-none');
+      setInterval(()=> {
+        location.reload();
+      }, 1000)       
+    },
+    error: function(error) {
+      console.error(error);
+      $('#update_error_text').removeClass('d-none');
+      setTimeout(()=> {
+        $('#update_error_text').addClass('d-none');
+      }, 5000)
     }
   });
 });

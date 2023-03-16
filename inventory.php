@@ -1,3 +1,11 @@
+<?php
+    include('connection.php');
+    session_start();
+    if (!isset($_SESSION['login_user']['user'])) {
+      header("Location: index.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,12 +48,12 @@
   <div class="wrapper">
 
     <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
+    <!-- <div class="preloader flex-column justify-content-center align-items-center">
       <img class="animation__shake" src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTELogo" height="500" width="500">
-    </div>
+    </div> -->
 
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light justify-content-between">
       <!-- Left navbar links -->
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -55,7 +63,21 @@
           <a href="starter.php" class="nav-link">Home</a>
         </li>
       </ul>
+      <h6 class="mb-0 mr-2">
+        <?php
+          date_default_timezone_set("Asia/Manila");  
+          $h = date('G');
+          $user = $_SESSION['login_user']['user'];
 
+          if ($h>=0 && $h<=11) {
+              echo "Good morning, $user";
+          } else if ($h>=12 && $h<=17) {
+              echo "Good afternoon, $user";
+          } else {
+              echo "Good evening, $user";
+          }
+        ?> 
+      </h6>
     </nav>
     <!-- /.navbar -->
 

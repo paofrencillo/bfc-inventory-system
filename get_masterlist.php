@@ -21,7 +21,5 @@
             );
             echo json_encode($data);
         }
-    } else if(isset($_GET["refresh_table"])) {
-
     }
 ?>
