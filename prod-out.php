@@ -211,7 +211,7 @@ if (!isset($_SESSION['login_user']['user'])) {
               </div>
               <div class="card-body">
                 <div class="col-md-2">
-                  <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addnew"><i class="fas fa-plus-circle"></i> SEND STOCKS</button>
+                  <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addnew"><i class="fas fa-minus-circle"></i> ENDORSE PRODUCTS</button>
                 </div>
               </div>
               <!-- /.card-body -->
@@ -238,7 +238,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                         <div class="card-tools">
                           <ul class="pagination pagination-sm">
                             <button class="btn btn-success btn-md" data-toggle="modal" data-target="#dispatch">
-                              <i class="fas fa-pencil-alt"></i>
+                              <i class="fas fa-truck"></i>
                               Dispatch Items
                             </button>
                           </ul>
@@ -332,7 +332,9 @@ if (!isset($_SESSION['login_user']['user'])) {
                               <th>Branch Code/Name</th>
                               <th>MRF</th>
                               <th>Inv/Order No.</th>
-                              <th>Action</th>
+                              <th>Endorsed Date</th>
+                              <th>Date Released</th>
+                              <th>Endorsed By</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -344,16 +346,9 @@ if (!isset($_SESSION['login_user']['user'])) {
                               <td>23422/Sean</td>
                               <td>3498</td>
                               <td>10351</td>
-                              <td>
-                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                                  <i class="fas fa-pencil-alt"></i>
-                                  Edit
-                                </button>
-                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                                  <i class="fas fa-eye"></i>
-                                  Details
-                                </button>
-                              </td>
+                              <td>03-12-2023</td>
+                              <td>03-16-2023</td>
+                              <td>Ako si bnm</td>
                             </tr>
                             <tr>
                               <td>10231562322</td>
@@ -361,18 +356,11 @@ if (!isset($_SESSION['login_user']['user'])) {
                               <td>56</td>
                               <td>200</td>
                               <td>23422/Sean</td>
-                              <td>3498</td>
+                              <td>3499</td>
                               <td>10351</td>
-                              <td>
-                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                                  <i class="fas fa-pencil-alt"></i>
-                                  Edit
-                                </button>
-                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                                  <i class="fas fa-eye"></i>
-                                  Details
-                                </button>
-                              </td>
+                              <td>03-12-2023</td>
+                              <td>03-15-2023</td>
+                              <td>Ako si bnm</td>
                             </tr>
                           </tbody>
                         </table>
@@ -428,14 +416,14 @@ if (!isset($_SESSION['login_user']['user'])) {
                       </div>
                       <div class="col-sm-12">
                         <div class="form-group">
-                          <table id="example4" class="table table-bordered table-hover dt-center">
+                          <!-- <table id="example4" class="table table-bordered table-hover dt-center">
                             <thead>
                               <tr>
                                 <th>Barcode</th>
                                 <th>Product Description</th>
                                 <th>Quantity</th>
-
-                                <th>Branch Code</th>
+                                <th>Lot No.</th>
+                                <th>Exp. Date</th>
                                 <th>MRF</th>
 
                               </tr>
@@ -449,27 +437,53 @@ if (!isset($_SESSION['login_user']['user'])) {
                                 <td>asd</td>
                               </tr>
                               
+                              
+                            </tbody>
+                          </table> -->
+                          <div class="card-body table-responsive p-0" style="height: 200px;">
+                          <table class="table table-head-fixed text-center">
+                            <thead>
+                              <tr>
+                                <th>Barcode</th>
+                                <th>Product Description</th>
+                                <th>Quantity</th>
+                                <th>Lot No.</th>
+                                <th>Exp. Date</th>
+                                <th>Remarks</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <!-- <td>42428</td>
+                                <td>Mefenamic</td>
+                                <td>42</td>
+                                <td>2828</td>
+                                <td>03-25-2023</td>
+                                <td></td> -->
+                              </tr>
+                              
                             </tbody>
                           </table>
+                        </div>
                         </div>
                       </div>
                       
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="barcode">Barcode:</label>
-                          <input type="text" class="form-control " id="barcode">
+                          <input type="text" class="form-control " id="barcode" onmouseover="this.focus();">
                         </div>
                       </div>
                       <div class="col-sm-5">
                         <div class="form-group">
                           <label for="prod">Product Description:</label>
-                          <input type="text" class="form-control " id="prod">
+                          <input type="text" class="form-control " id="prod" readonly>
                         </div>
                       </div>
                       <div class="col-sm-1">
                         <div class="form-group">
                           <label for="quan">Quantity:</label>
-                          <input type="number" class="form-control " id="quan" value="0">
+                          <input type="number" class="form-control " id="quan">
                         </div>
                       </div>
                       <div class="col-sm-3">
@@ -484,10 +498,17 @@ if (!isset($_SESSION['login_user']['user'])) {
                           <input type="date" class="form-control " id="exp">
                         </div>
                       </div>
+                      <?php
+                        $month = date('m');
+                        $day = date('d');
+                        $year = date('Y');
+                        
+                        $today = $year . '-' . $month . '-' . $day;
+                      ?>
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="supp">Endorse Date:</label>
-                          <input type="date" class="form-control " id="supp" readonly>
+                          <input type="date" class="form-control " id="supp" value="<?php echo $today;?>" readonly>
                         </div>
                       </div>
                       <div class="col-sm-2">
@@ -510,7 +531,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                   
                   <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Deduct Stock</button>
+                    <button type="button" class="btn btn-primary">Endorse Products</button>
                   </div>    
 
                 </form>
@@ -728,8 +749,19 @@ if (!isset($_SESSION['login_user']['user'])) {
                     <div class="row">
                       <div class="col-sm-10">
                         <div class="form-group">
-                          <label for="barcode">MRF:</label>
-                          <input type="text" class="form-control " id="barcode">
+                          <label for="supp">Branch Code:</label>
+                          <select class="form-control select2bs4" style="width: 100%;">
+                            <option selected="selected" disabled>Please Select Branch Code</option>
+                            <?php
+                            $check_user =  $_SESSION['login_user']['user_id'];
+                            $query = "SELECT * FROM branches";
+                            $result = mysqli_query($conn, $query);
+                            $check_row = mysqli_num_rows($result);
+                            while ($row = mysqli_fetch_array($result)) {
+                            ?>
+                              <option value="<?php echo $row['code'] ?>"><?php echo $row['code'] ?>/<?php echo $row['name'] ?></option>
+                            <?php } ?>
+                          </select>
                         </div>
                       </div>
                       <div class="col-sm-2">
