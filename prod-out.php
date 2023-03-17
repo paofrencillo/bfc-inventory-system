@@ -1023,7 +1023,6 @@ if (!isset($_SESSION['login_user']['user'])) {
       xhr.send();
     }
       
-
     // Initial load of the table
     reloadTable();
 
@@ -1067,16 +1066,16 @@ if (!isset($_SESSION['login_user']['user'])) {
 
       // Get the values from the form
       var endorsed_by = $('#endorsed_by').val();
-      var branch = $('#branch').val();
+      var myTable = $('#myTable tbody tr').val();
       var mrf = $('#mrf').val();
       var order_num = $('#order_num').val();
 
-      if (mrf.length == 0 || order_num.length == 0){
+      if (mrf.length == 0 || order_num.length == 0 || $('#my-table tbody tr').length === 0){
         $(document).ready(function() {
           swal.fire({
             title: "error!",
             title: 'Something went wrong!',
-            text: "Make sure table is not empty",
+            text: "Make sure the table is not empty",
             icon: "error",
             confirmButtonText: "OK"
           });
