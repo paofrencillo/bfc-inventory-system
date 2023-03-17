@@ -48,7 +48,7 @@ if (!isset($_SESSION['login_user']['user'])) {
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed" >
   <div class="wrapper">
 
     <!-- Preloader -->
@@ -527,7 +527,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                   </div>
                   <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="endorse" name="endorse">Endorse Products</button>
+                    <button type="button" class="btn btn-primary" id="endorse" name="endorse" >Endorse Products</button>
                   </div>
 
                 </form>
@@ -1067,8 +1067,22 @@ if (!isset($_SESSION['login_user']['user'])) {
 
       // Get the values from the form
       var endorsed_by = $('#endorsed_by').val();
+      var branch = $('#branch').val();
+      var mrf = $('#mrf').val();
+      var order_num = $('#order_num').val();
 
-      $.ajax({
+      if (mrf.length == 0 || order_num.length == 0){
+        $(document).ready(function() {
+          swal.fire({
+            title: "error!",
+            title: 'Something went wrong!',
+            text: "Make sure table is not empty",
+            icon: "error",
+            confirmButtonText: "OK"
+          });
+        });
+      } else {
+        $.ajax({
           url: "get_prod-out.php",
           type: "GET",
           data: {"endorsed_by": $("#endorsed_by").val(), action: "endorse_product"},
@@ -1082,23 +1096,22 @@ if (!isset($_SESSION['login_user']['user'])) {
               icon: "success",
               confirmButtonText: "OK"
             });
-            
-            // Reload the table with the updated data
-            reloadTable();
-            // Reset the values of specific input fields
-            $('#branch').val('');
-            $('#mrf').val('');
-            $('#order_num').val('');
-            $('#barcode').val('');
-            $('#description').val('');
-            $('#quantity').val('');
-            $('#lot').val('');
-            $('#exp_date').val('');
-            $('#remarks').val('');
-        }
-      )});
+              // Reload the table with the updated data
+              reloadTable();
+              // Reset the values of specific input fields
+              $('#branch').val('');
+              $('#mrf').val('');
+              $('#order_num').val('');
+              $('#barcode').val('');
+              $('#description').val('');
+              $('#quantity').val('');
+              $('#lot').val('');
+              $('#exp_date').val('');
+              $('#remarks').val('');
+            }
+        )});
+      }
     });
-
   });
 
   </script>
