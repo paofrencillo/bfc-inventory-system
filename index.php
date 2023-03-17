@@ -1,8 +1,7 @@
 <?php
-include('connection.php');
-session_start();
-
+  include('templates/connection.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

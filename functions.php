@@ -1,5 +1,5 @@
 <?php
-include('connection.php');
+include('templates/connection.php');
 session_start();
 date_default_timezone_set('Asia/Manila');
 
@@ -25,7 +25,7 @@ if (isset($_POST['signin'])) {
         if (password_verify($mypassword, $getData['pass'])) {
             if ($getData['is_superuser'] == '1') {
                 $_SESSION['login_user'] = $getData;
-                header('location:starter.php');
+                header('location:dashboard.php');
             } else if ($row['is_superuser'] == '0') {
                 $_SESSION['login_user2'] = $row;
                 header('location:z-dashboard.php');

@@ -1,9 +1,7 @@
 <?php
-include('connection.php');
-session_start();
-if (!isset($_SESSION['login_user']['user'])) {
-  header("Location: index.php");
-}
+  include('templates/connection.php');
+  include('templates/session.php');
+
 ?>
 
 <!DOCTYPE html>

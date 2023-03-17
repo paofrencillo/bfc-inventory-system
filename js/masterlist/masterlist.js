@@ -52,6 +52,36 @@ function editDetails(el) {
   });
 }
 
+function removeAttrInputs() {
+  $("#description").removeAttr("disabled");
+  $("#generic_name").removeAttr("disabled");
+  $("#category").removeAttr("disabled");
+  $("#imageFile").removeAttr("disabled");
+
+  $("#description").val('');
+  $("#generic_name").val('');
+  $("#category").val('');
+  $("#file-label").html("Choose Image");
+  $("#imageFile").val("");
+}
+
+// ------ Delete product
+function deleteProduct() {
+  let barcode =  $("#delete-product-btn").attr("data-product-barcode");
+  $.ajax({
+    type: "POST",
+    url: "post_masterlist.php",
+    data: {action: 'delete', barcode: barcode},
+    cache: false,
+    success: function() {
+      location.reload();     
+    },
+    error: function(error) {
+      console.error(error);
+    }
+  });
+}
+
 // ------ Cancel product update
 $('#details').on('hidden.bs.modal', function (e) {
   $("#save-cancel-btns").addClass("d-none");
@@ -60,7 +90,6 @@ $('#details').on('hidden.bs.modal', function (e) {
   $("#cat-modal").attr("disabled", "")
   modal_fields = document.getElementById("details").querySelectorAll("input");
   modal_fields.forEach(field => {
-
     if (field.id != "barcode-modal") {
       field.setAttribute("readonly", "");
 
@@ -71,22 +100,13 @@ $('#details').on('hidden.bs.modal', function (e) {
   });
 })
 
-// ------ Delete product
-function deleteProduct() {
-  let barcode =  $("#delete-product-btn").attr("data-product-barcode");
-  $.ajax({
-    type: "POST",
-    url: "post_masterlist.php",
-    data: {action: 'delete', barcode: barcode},
-    cache: false,
-    success: function(data) {
-      location.reload();     
-    },
-    error: function(error) {
-      console.error(error);
-    }
-  });
-}
+// Cancel product enroll 
+$("#addnew").on('hidden.bs.modal', function(e) {
+  $("#barcode").val('');
+  $("#enroll_warning_text").addClass("d-none");
+  $("#enroll-btn").removeAttr("disabled");
+  removeAttrInputs();
+});
 
 // ------ Close Delete Modal
 $(".close-modal-delete1").on("click", ()=> {
@@ -111,26 +131,34 @@ $(".custom-file-input").on("change", function() {
 
 // ------ Check if product is already enrolled
 $("#barcode").on("change", ()=> {
-  console.log($("#barcode").val());
   $.ajax({
     type: "GET",
     url: "get_masterlist.php",
     data: {"barcode": $("#barcode").val(), action: "get_product"},
     dataType: "JSON",
     success: function(data) {
-      $("#barcode").attr("disabled", "");
-      $("#description").attr("disabled", "");
-      $("#generic_name").attr("disabled", "");
-      $("#category").attr("disabled", "");
-      $("#imageFile").attr("disabled", "");
-
-      $("#barcode").val(data.barcode);
-      $("#description").val(data.description);
-      $("#generic_name").val(data.generic_name);
-      $("#category").val(data.category);
-      let imgName = data.image;
-      let strip_imgName = imgName.replace("product-imgs/", '')
-      $("#file-label").substr(strip_imgName);
+      if (data != "Not found") {
+        $("#description").attr("disabled", "");
+        $("#generic_name").attr("disabled", "");
+        $("#category").attr("disabled", "");
+        $("#imageFile").attr("disabled", "");
+  
+        $("#barcode").val(data.barcode);
+        $("#description").val(data.description);
+        $("#generic_name").val(data.generic_name);
+        $("#category").val(data.category);
+        let imgName = data.image;
+        let strip_imgName = imgName.replace("product-imgs/", '')
+        $("#file-label").html(strip_imgName);
+        $("#enroll_warning_text").removeClass("d-none");
+        $("#enroll-btn").attr("disabled", "");
+      }
+      else {
+        $("#enroll_warning_text").addClass("d-none");
+        $("#enroll-btn").removeAttr("disabled");
+        document.getElementById("description").focus();
+        removeAttrInputs();
+      }
     },
     error: function(error) {
       console.error(error);
@@ -148,12 +176,11 @@ $("#enroll_form").on("submit", function(e) {
     contentType: false,
     processData:false,
     cache: false,
-    success: function(data) {
-      console.log(data)
+    success: function() {
       $('#enroll_success_text').removeClass('d-none');
-      // setInterval(()=> {
-      //   location.reload();
-      // }, 1000)
+      setInterval(()=> {
+        location.reload();
+      }, 1000)
     },
     error: function(error) {
       console.error(error);
