@@ -296,46 +296,6 @@ if (!isset($_SESSION['login_user']['user'])) {
                                 </button>
                               </td>
                             </tr>
-                            <tr>
-                              <td>10231562322</td>
-                              <td>Cetirizine 10Mg 10S</td>
-                              <td>34</td>
-                              <td>200</td>
-                              <td>23422/Sean</td>
-                              <td>3498</td>
-                              <td>10351</td>
-                              <td>AI</td>
-                              <td>
-                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                                  <i class="fas fa-pencil-alt"></i>
-                                  Edit
-                                </button>
-                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                                  <i class="fas fa-eye"></i>
-                                  Details
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>10231562322</td>
-                              <td>Salbutamol 2Mg Tab 100s (Ventomax)</td>
-                              <td>56</td>
-                              <td>200</td>
-                              <td>23422/Sean</td>
-                              <td>3498</td>
-                              <td>10351</td>
-                              <td></td>
-                              <td>
-                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                                  <i class="fas fa-pencil-alt"></i>
-                                  Edit
-                                </button>
-                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                                  <i class="fas fa-eye"></i>
-                                  Details
-                                </button>
-                              </td>
-                            </tr>
                           </tbody>
                         </table>
                       </div>
