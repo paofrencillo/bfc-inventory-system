@@ -48,9 +48,9 @@ if (!isset($_SESSION['login_user']['user'])) {
   <div class="wrapper">
 
     <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
+    <!-- <div class="preloader flex-column justify-content-center align-items-center">
       <img class="animation__shake" src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTELogo" height="500" width="500">
-    </div>
+    </div> -->
 
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light justify-content-between">
@@ -64,20 +64,20 @@ if (!isset($_SESSION['login_user']['user'])) {
         </li>
       </ul>
       <h6 class="mb-0 mr-2">
-      <?php
-        date_default_timezone_set("Asia/Manila");  
+        <?php
+        date_default_timezone_set("Asia/Manila");
         $h = date('G');
         $user = $_SESSION['login_user']['user'];
 
-        if ($h>=0 && $h<=11) {
-            echo "Good morning, $user";
-        } else if ($h>=12 && $h<=17) {
-            echo "Good afternoon, $user";
+        if ($h >= 0 && $h <= 11) {
+          echo "Good morning, $user";
+        } else if ($h >= 12 && $h <= 17) {
+          echo "Good afternoon, $user";
         } else {
-            echo "Good evening, $user";
+          echo "Good evening, $user";
         }
-      ?> 
-    </h6>
+        ?>
+      </h6>
     </nav>
     <!-- /.navbar -->
 
@@ -396,13 +396,13 @@ if (!isset($_SESSION['login_user']['user'])) {
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <form action="functions.php" method="POST">
+                <form id="addprodout">
                   <div class="modal-body">
                     <div class="row">
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label for="supp">Branch Code:</label>
-                          <select class="form-control select2bs4" style="width: 100%;" name="branch">
+                          <select class="form-control select2bs4" style="width: 100%;" name="branch" id="branch">
                             <option selected="selected" disabled>Please Select Branch Code</option>
                             <?php
                             $check_user =  $_SESSION['login_user']['user_id'];
@@ -418,32 +418,32 @@ if (!isset($_SESSION['login_user']['user'])) {
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
-                          <label for="barcode">MRF:</label>
-                          <input type="number" class="form-control " id="barcode" name="mrf">
+                          <label for="mrf">MRF:</label>
+                          <input type="number" class="form-control " id="mrf" name="mrf">
                         </div>
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
-                          <label for="barcode">Inv/Order No:</label>
-                          <input type="number" class="form-control " id="barcode" name="order_num">
+                          <label for="order_num">Inv/Order No:</label>
+                          <input type="number" class="form-control " id="order_num" name="order_num">
                         </div>
                       </div>
                       <div class="col-sm-12">
                         <div class="form-group">
                           <div class="card-body table-responsive p-0" style="height: 200px;">
-                          <table class="table table-head-fixed text-center" id="myTable">
-                            <thead>
-                              <tr>
-                                <th>Barcode</th>
-                                <th>Product Description</th>
-                                <th>Quantity</th>
-                                <th>Lot No.</th>
-                                <th>Exp. Date</th>
-                                <th>Remarks</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <!-- <tr>
+                            <table class="table table-head-fixed text-center" id="myTable">
+                              <thead>
+                                <tr>
+                                  <th>Barcode</th>
+                                  <th>Product Description</th>
+                                  <th>Quantity</th>
+                                  <th>Lot No.</th>
+                                  <th>Exp. Date</th>
+                                  <th>Remarks</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <!-- <tr>
                                 <td>42428</td>
                                 <td>Mefenamic</td>
                                 <td>42</td>
@@ -451,69 +451,69 @@ if (!isset($_SESSION['login_user']['user'])) {
                                 <td>03-25-2023</td>
                                 <td></td>
                               </tr> -->
-                            </tbody>
-                          </table>
-                        </div>
+                              </tbody>
+                            </table>
+                          </div>
                         </div>
                       </div>
-                      
+
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="barcode">Barcode:</label>
-                          <input type="text" class="form-control " id="barcode" onmouseover="this.focus();" name="barcode">
+                          <input type="text" class="form-control " id="barcode" onmouseover="this.focus();" name="barcode" required>
                         </div>
                       </div>
                       <div class="col-sm-5">
                         <div class="form-group">
-                          <label for="prod">Product Description:</label>
-                          <input type="text" class="form-control " id="prod" name="description" readonly>
+                          <label for="description">Product Description:</label>
+                          <input type="text" class="form-control " id="description" name="description" required>
                         </div>
                       </div>
                       <div class="col-sm-1">
                         <div class="form-group">
-                          <label for="quan">Quantity:</label>
-                          <input type="number" class="form-control " id="quan" name="quantity">
+                          <label for="quantity">Quantity:</label>
+                          <input type="number" class="form-control " id="quantity" name="quantity" required>
                         </div>
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="lot">Lot Number:</label>
-                          <input type="text" class="form-control" id="lot" name="lot" onkeyup="this.value = this.value.toUpperCase();">
+                          <input type="text" class="form-control" id="lot" name="lot" onkeyup="this.value = this.value.toUpperCase();" required>
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
-                          <label for="exp">Expiration Date:</label>
-                          <input type="date" class="form-control " id="exp" name="exp_date">
+                          <label for="exp_date">Expiration Date:</label>
+                          <input type="text" class="form-control " id="exp_date" name="exp_date" required>
                         </div>
                       </div>
                       <?php
-                        $month = date('m');
-                        $day = date('d');
-                        $year = date('Y');
-                        
-                        $today = $year . '-' . $month . '-' . $day;
+                      $month = date('m');
+                      $day = date('d');
+                      $year = date('Y');
+
+                      $today = $year . '-' . $month . '-' . $day;
                       ?>
                       <div class="col-sm-4">
                         <div class="form-group">
-                          <label for="supp">Endorse Date:</label>
-                          <input type="date" class="form-control " id="supp" name="endorsed_date" value="<?php echo $today;?>" readonly>
+                          <label for="endorsed_date">Endorse Date:</label>
+                          <input type="date" class="form-control " id="endorsed_date" name="endorsed_date" value="<?php echo $today; ?>" readonly>
                         </div>
                       </div>
                       <div class="col-sm-2">
                         <div class="form-group">
                           <label for="remarks">Remarks:</label>
-                          <input type="text" class="form-control " id="remarks" name="remarks">
+                          <input type="text" class="form-control " id="remarks" name="remarks" required>
                         </div>
                       </div>
                       <?php
-                        $current_user =  $_SESSION['login_user']['employee_name'];
-                      ?>  
+                      $current_user =  $_SESSION['login_user']['employee_name'];
+                      ?>
                       <div class="col-sm-2">
                         <div class="form-group">
-                          <input type="hidden" name="endorsed_by" value="<?php echo $current_user ?>">
+                          <input type="hidden" id="endorsed_by" name="endorsed_by" value="<?php echo $current_user ?>">
                           <label for="reloadBtn">Add Product</label>
-                          <button type="button" class="btn btn-info form-control" id="reloadBtn" name="addprodout">
+                          <button type="submit" class="btn btn-info form-control" id="reloadBtn">
                             <i class="fas fa-plus"></i>
                             ADD
                           </button>
@@ -524,7 +524,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                   <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-primary">Endorse Products</button>
-                  </div>    
+                  </div>
 
                 </form>
               </div>
@@ -913,7 +913,7 @@ if (!isset($_SESSION['login_user']['user'])) {
         }],
         "responsive": true,
         "lengthChange": true,
-        "paging":false,
+        "paging": false,
         // "scrollY": '500px',
         // "scrollCollapse": true,
         "autoWidth": false,
@@ -929,7 +929,7 @@ if (!isset($_SESSION['login_user']['user'])) {
         }],
         "responsive": true,
         "lengthChange": true,
-        "paging":true,
+        "paging": true,
         // "pageLength": 5,
         // "scrollY": 200,
         // "scrollX": true,
@@ -949,9 +949,9 @@ if (!isset($_SESSION['login_user']['user'])) {
       })
     })
   </script>
-  
+
   <!-- JavaScript code -->
-  <script>
+  <!-- <script>
     // When the button is clicked, reload the data
     document.getElementById('reloadBtn').addEventListener('click', function() {
       // Create an AJAX request
@@ -959,6 +959,67 @@ if (!isset($_SESSION['login_user']['user'])) {
       xhr.open('GET', 'get_prod-out.php');
       xhr.onload = function() {
         if (xhr.status === 200) {
+          // Parse the JSON response
+          var data = JSON.parse(xhr.responseText);
+          // Clear the table
+          var tableBody = document.querySelector('#myTable tbody');
+          tableBody.innerHTML = '';
+          // Populate the table with the new data
+          data.forEach(function(row) {
+            var tr = document.createElement('tr');
+            tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
+              row.description + '</td><td>' +
+              row.quantity + '</td><td>' +
+              row.lot + '</td><td>' +
+              row.exp_date + '</td><td>' +
+              row.remarks + '</td>'
+            tableBody.appendChild(tr);
+          });
+        } else {
+          alert('Error: ' + xhr.status);
+        }
+      };
+      xhr.send();
+    });
+  </script> -->
+
+  <!-- <script>
+    function saveData() {
+      // get data from form
+      var data = [document.getElementById("barcode").value, 
+        document.getElementById("prod").value, 
+        document.getElementById("quan").value, 
+        document.getElementById("lot").value, 
+        document.getElementById("branch").value, 
+        document.getElementById("mrf").value, 
+        document.getElementById("order_num").value, 
+        document.getElementById("exp").value, 
+        document.getElementById("remarks").value, 
+        document.getElementById("endorsed_by").value, 
+        ocument.getElementById("endorsed_date").value];
+
+      // create AJAX request
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          alert(this.responseText);
+        }
+      };
+      xmlhttp.open("POST", "post_prod-out.php", true);
+      xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xmlhttp.send("data=" + JSON.stringify(data));
+    }
+  </script> -->
+
+  <script>
+    $(document).ready(function() {
+    // Function to reload the table
+    function reloadTable() {
+      // Create an AJAX request
+      var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'get_prod-out.php');
+        xhr.onload = function() {
+          if (xhr.status === 200) {
             // Parse the JSON response
             var data = JSON.parse(xhr.responseText);
             // Clear the table
@@ -967,21 +1028,58 @@ if (!isset($_SESSION['login_user']['user'])) {
             // Populate the table with the new data
             data.forEach(function(row) {
               var tr = document.createElement('tr');
-              tr.innerHTML = '<td>' + row.barcode + '</td><td>'
-                  + row.description + '</td><td>' 
-                  + row.quantity + '</td><td>' 
-                  + row.lot + '</td><td>' 
-                  + row.exp_date + '</td><td>' 
-                  + row.remarks + '</td>' 
+              tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
+                row.description + '</td><td>' +
+                row.quantity + '</td><td>' +
+                row.lot + '</td><td>' +
+                row.exp_date + '</td><td>' +
+                row.remarks + '</td>'
               tableBody.appendChild(tr);
             });
-        }
-        else {
+          } else {
             alert('Error: ' + xhr.status);
-        }
-      };
-      xhr.send();
+          }
+        };
+        xhr.send();
+      }
+
+    // Initial load of the table
+    reloadTable();
+
+    // Add a click event listener to the reload button
+    $("#reloadBtn").click(function() {
+        reloadTable();
     });
+
+    // Add a submit event listener to the add form
+    $("#addprodout").submit(function(event) {
+        // Prevent the form from submitting normally
+        event.preventDefault();
+        
+        // Get the values from the form inputs
+        var formData = $(this).serialize();
+        
+        // Use AJAX to send the form data to your PHP script to insert it into the database
+        $.ajax({
+            url: "post_prod-out.php",
+            type: "POST",
+            data: formData,
+            success: function() {
+                
+                // Reload the table with the updated data
+                reloadTable();
+                // Reset the values of specific input fields
+                $('#barcode').val('');
+                $('#description').val('');
+                $('#quantity').val('');
+                $('#lot').val('');
+                $('#exp_date').val('');
+                $('#remarks').val('');
+            }
+        });
+    });
+  });
+
   </script>
 
 </body>
