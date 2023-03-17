@@ -314,18 +314,21 @@
                     <div class="col-sm-7">
                       <div class="form-group mb-3">
                         <label for="category">Select Category</label>
-                        <select class="custom-select" id="inputGroupSelect01" name="category" id="category" required>
-                          <option id="default-selected" selected disabled>--category--</option>
-                          <option value="PHARMA">PHARMA</option>
-                          <option value="NON-PHARMA">NON-PHARMA</option>
+                        <select class="custom-select" name="category" id="category" required>
                           <option value="GENERIC">GENERIC</option>
+                          <option value="BRANDED">BRANDED</option>
+                          <option value="MEDICAL DEVICE">MEDICAL DEVICE</option>
+                          <option value="NON-PHARMA">NON-PHARMA</option>
+                          <option value="SPECIAL ORDER">SPECIAL ORDER</option>
+                          <option value="HOUSE BRANDS">HOUSE BRANDS</option>
+                          <option value="HEALTHY FIX">HEALTHY FIX</option>
                         </select>
                       </div>
                     </div>
                     <div class="col-sm-12">
                       <label>Image</label>
                       <div class="custom-file form-group">
-                        <input type="file" class="custom-file-input" id="imageFile" accept=".png,.jpeg,.jpeg" name="imageFile" required> 
+                        <input type="file" class="custom-file-input" id="imageFile" accept=".png,.jpeg,.jpeg" name="imageFile"> 
                         <label class="custom-file-label" for="imageFile" id="file-label">Choose Image</label>
                       </div>
                     </div>
@@ -385,9 +388,13 @@
                       <div class="form-group">
                         <label for="cat-modal">Category:</label>
                         <select class="custom-select" name="cat-modal" id="cat-modal" disabled>
-                          <option value="PHARMA">PHARMA</option>
-                          <option value="NON-PHARMA">NON-PHARMA</option>
                           <option value="GENERIC">GENERIC</option>
+                          <option value="BRANDED">BRANDED</option>
+                          <option value="MEDICAL DEVICE">MEDICAL DEVICE</option>
+                          <option value="NON-PHARMA">NON-PHARMA</option>
+                          <option value="SPECIAL ORDER">SPECIAL ORDER</option>
+                          <option value="HOUSE BRANDS">HOUSE BRANDS</option>
+                          <option value="HEALTHY FIX">HEALTHY FIX</option>
                         </select>
                       </div>
                     </div>
@@ -412,11 +419,11 @@
                     <div class="modal-footer justify-content-between col-sm-12 mx-0 pb-0 px-0">
                       <button type="button" class="btn btn-outline-secondary" id="delete-product-btn" data-toggle="modal" data-target="#delete-modal">Delete</button>
                       <button type="button" class="btn btn-primary" id="update-btn" onclick="editDetails(this);">
-                        <i class="fas fa-pencil-alt"></i>Update Details
+                        <i class="fas fa-pencil-alt mr-2"></i>Update Details
                       </button>
                       <div class="justify-content-around d-none" id="save-cancel-btns">
                         <input type="hidden" name="employee_id" id="employee-id-modal" value="<?php echo $_SESSION['login_user']['user_id'];?>">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="cancelUpdate(this);">Cancel</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-success">Save changes</button>
                       </div>
                     </div>
