@@ -1,5 +1,5 @@
 <?php
-include('connection.php');
+include('templates/connection.php');
 
 // Get the values from the AJAX request
 $barcode = $_POST['barcode'];

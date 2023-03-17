@@ -27,60 +27,73 @@ echo json_encode($data);
 
 
 if(isset($_GET["action"]) && $_GET["action"] === "endorse_product") { 
+
+   $server = "localhost";
+   $user = "root";
+   $pass = "";
+   $db = "bfc_inventory";
+
+   $conn = mysqli_connect($server, $user, $pass, $db);
+
+   if (!$conn) {
+      die("<script>alert('Connection Failed.')</script>");
+   }
+
    header("Content-Type: text/json; charset=utf8");
-   include('connection.php');
    $endorsed_by = $_GET["endorsed_by"];
    $table = "endorse";
 
-   $sql = "SELECT * FROM `$table` WHERE endorsed_by='$endorsed_by';";
+   $sql = "SELECT * FROM $table WHERE endorsed_by='$endorsed_by';";
    $result = mysqli_query($conn, $sql);
    
-   if (!$result->num_rows < 0){
-      while ($row = mysqli_fetch_array($result)) {
-         $sql2 = "INSERT INTO endorse_final (
-            barcode, 
-            description, 
-            quantity, 
-            lot,
-            branch, 
-            mrf,
-            order_num, 
-            exp_date,
-            remarks, 
-            endorsed_by,
-            endorsed_date) 
-            VALUES (
-            '" . $row["barcode"] . "', 
-            '" . $row["description"] . "', 
-            '" . $row["quantity"] . "', 
-            '" . $row["lot"] . "',
-            '" . $row["branch"] . "', 
-            '" . $row["mrf"] . "',
-            '" . $row["order_num"] . "', 
-            '" . $row["exp_date"] . "',
-            '" . $row["remarks"] . "', 
-            '" . $row["endorsed_by"] . "',
-            '" . $row["endorsed_date"] . "')";
-   
-         if (mysqli_query($conn, $sql2)) {
-            $data = 'success';
-            echo json_encode($data);
-         } else {
-            echo "Error inserting data: " . mysqli_error($conn);
-         }
-   
-         $sql3 = "DELETE FROM endorse WHERE endorsed_by='$endorsed_by';";
-   
-         if (mysqli_query($conn, $sql3)) {
-            echo "Data deleted successfully";
-         } else {
-            echo "Error deleting data: " . mysqli_error($conn);
-         }
+   while ($row = mysqli_fetch_array($result)) {
+      $sql2 = "INSERT INTO endorse_final (
+         barcode, 
+         description, 
+         quantity, 
+         lot,
+         branch, 
+         mrf,
+         order_num, 
+         exp_date,
+         remarks, 
+         endorsed_by,
+         endorsed_date) 
+         VALUES (
+         '" . $row["barcode"] . "', 
+         '" . $row["description"] . "', 
+         '" . $row["quantity"] . "', 
+         '" . $row["lot"] . "',
+         '" . $row["branch"] . "', 
+         '" . $row["mrf"] . "',
+         '" . $row["order_num"] . "', 
+         '" . $row["exp_date"] . "',
+         '" . $row["remarks"] . "', 
+         '" . $row["endorsed_by"] . "',
+         '" . $row["endorsed_date"] . "')";
+
+      if (mysqli_query($conn, $sql2)) {
+         $data = 'success';
+         echo json_encode($data);
+      } else {
+         echo "Error inserting data: " . mysqli_error($conn);
       }
-   } else {
-      $data = 'nodata';
-      echo json_encode($data);
+
+      $sql3 = "DELETE FROM endorse WHERE endorsed_by='$endorsed_by';";
+
+      if (mysqli_query($conn, $sql3)) {
+         echo "Data deleted successfully";
+      } else {
+         echo "Error deleting data: " . mysqli_error($conn);
+      }
    }
+
+   // if (!$result->num_rows > 0){
+      
+   // } else {
+   //    $data = 'nodata';
+   //    echo json_encode($data);
+   // }
    
 }
 

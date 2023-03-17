@@ -273,66 +273,35 @@ include('templates/session.php');
                             </tr>
                           </thead>
                           <tbody>
+                            <?php
+                              $check_user =  $_SESSION['login_user']['user_id'];
+                              $query = "SELECT * FROM endorse_final ORDER BY endorsed_date";
+                              $result = mysqli_query($conn, $query);
+                              $check_row = mysqli_num_rows($result);
+                              while ($row = mysqli_fetch_array($result)) {
+                            ?>
                             <tr>
-                              <td>10231562432</td>
-                              <td>Robust 100Mg 12S</td>
-                              <td>50</td>
-                              <td>200</td>
-                              <td>23422/Sean</td>
-                              <td>3498</td>
-                              <td>10351</td>
-                              <td>AI</td>
+                              <td><?php echo $row['barcode']?></td>
+                              <td><?php echo $row['description']?></td>
+                              <td><?php echo $row['quantity']?></td>
+                              <td><?php echo $row['lot']?></td>
+                              <td><?php echo $row['branch']?></td>
+                              <td><?php echo $row['mrf']?></td>
+                              <td><?php echo $row['order_num']?></td>
+                              <td><?php echo $row['remarks']?></td>
                               <td>
                                 <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
                                   <i class="fas fa-pencil-alt"></i>
                                   Edit
                                 </button>
+
                                 <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
                                   <i class="fas fa-eye"></i>
                                   Details
                                 </button>
                               </td>
                             </tr>
-                            <tr>
-                              <td>10231562322</td>
-                              <td>Cetirizine 10Mg 10S</td>
-                              <td>34</td>
-                              <td>200</td>
-                              <td>23422/Sean</td>
-                              <td>3498</td>
-                              <td>10351</td>
-                              <td>AI</td>
-                              <td>
-                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                                  <i class="fas fa-pencil-alt"></i>
-                                  Edit
-                                </button>
-                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                                  <i class="fas fa-eye"></i>
-                                  Details
-                                </button>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>10231562322</td>
-                              <td>Salbutamol 2Mg Tab 100s (Ventomax)</td>
-                              <td>56</td>
-                              <td>200</td>
-                              <td>23422/Sean</td>
-                              <td>3498</td>
-                              <td>10351</td>
-                              <td></td>
-                              <td>
-                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                                  <i class="fas fa-pencil-alt"></i>
-                                  Edit
-                                </button>
-                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                                  <i class="fas fa-eye"></i>
-                                  Details
-                                </button>
-                              </td>
-                            </tr>
+                            <?php } ?>
                           </tbody>
                         </table>
                       </div>
@@ -535,6 +504,7 @@ include('templates/session.php');
           </div>
           <!-- /.modal -->
 
+          <!-- modal -->
           <div class="modal fade" id="update">
             <div class="modal-dialog modal-dialog-centered modal-lg">
               <div class="modal-content">
@@ -880,8 +850,8 @@ include('templates/session.php');
         }],
         "responsive": true,
         "lengthChange": true,
-        "scrollY": '500px',
-        "scrollCollapse": true,
+        // "scrollY": '500px',
+        // "scrollCollapse": true,
         "autoWidth": false,
         // "buttons": ["copy", "csv", "excel", "pdf", "print"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
@@ -994,11 +964,13 @@ include('templates/session.php');
         if (xhr.status === 200) {
           // Parse the JSON response
           var data = JSON.parse(xhr.responseText);
+          console.log(data)
           // Clear the table
           var tableBody = document.querySelector('#myTable tbody');
           tableBody.innerHTML = '';
           // Populate the table with the new data
           data.forEach(function(row) {
+            console.log(row)
             var tr = document.createElement('tr');
             tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
               row.description + '</td><td>' +
@@ -1058,50 +1030,57 @@ include('templates/session.php');
 
       // Get the values from the form
       var endorsed_by = $('#endorsed_by').val();
-      var myTable = $('#myTable tbody tr').val();
+      // var myTable = $('#myTable tbody tr').val();
       var mrf = $('#mrf').val();
       var order_num = $('#order_num').val();
 
-      if (mrf.length == 0 || order_num.length == 0){
-        $(document).ready(function() {
-          swal.fire({
-            title: "error!",
-            title: 'Something went wrong!',
-            text: "Make sure the table is not empty",
-            icon: "error",
-            confirmButtonText: "OK"
-          });
-        });
-      } else {
-        $.ajax({
+      $.ajax({
           url: "get_prod-out.php",
           type: "GET",
           data: {"endorsed_by": $("#endorsed_by").val(), action: "endorse_product"},
           dataType: "JSON",
           success: $(document).ready(function(data) {
             // // handle the response
+            // Reload the table with the updated data
+            // reloadTable();
+            // Reset the values of specific input fields
+            $('#branch').val('');
+            $('#mrf').val('');
+            $('#order_num').val('');
+            $('#barcode').val('');
+            $('#description').val('');
+            $('#quantity').val('');
+            $('#lot').val('');
+            $('#exp_date').val('');
+            $('#remarks').val('');
             console.log(data)
             swal.fire({
               title: "Success!",
               text: "Product successfully endorsed",
               icon: "success",
               confirmButtonText: "OK"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                  location.reload();
+                } else {
+                  location.reload();
+                }
             });
-              // Reload the table with the updated data
-              reloadTable();
-              // Reset the values of specific input fields
-              $('#branch').val('');
-              $('#mrf').val('');
-              $('#order_num').val('');
-              $('#barcode').val('');
-              $('#description').val('');
-              $('#quantity').val('');
-              $('#lot').val('');
-              $('#exp_date').val('');
-              $('#remarks').val('');
-            }
-        )});
-      }
+          })
+        });
+      // if (mrf.length == 0 || order_num.length == 0){
+      //   $(document).ready(function() {
+      //     swal.fire({
+      //       title: "error!",
+      //       title: 'Something went wrong!',
+      //       text: "Make sure the table is not empty",
+      //       icon: "error",
+      //       confirmButtonText: "OK"
+      //     });
+      //   });
+      // } else {
+        
+      // }
     });
   });
 
