@@ -14,6 +14,9 @@ if (!isset($_SESSION['login_user']['user'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AdminBFC | Dashboard</title>
 
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -42,6 +45,7 @@ if (!isset($_SESSION['login_user']['user'])) {
   <!-- Select2 -->
   <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -484,7 +488,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="exp_date">Expiration Date:</label>
-                          <input type="text" class="form-control " id="exp_date" name="exp_date" required>
+                          <input type="text" class="form-control " id="exp_date" name="exp_date">
                         </div>
                       </div>
                       <?php
@@ -503,7 +507,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                       <div class="col-sm-2">
                         <div class="form-group">
                           <label for="remarks">Remarks:</label>
-                          <input type="text" class="form-control " id="remarks" name="remarks" required>
+                          <input type="text" class="form-control " id="remarks" name="remarks">
                         </div>
                       </div>
                       <?php
@@ -523,7 +527,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                   </div>
                   <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Endorse Products</button>
+                    <button type="button" class="btn btn-primary" id="endorse" name="endorse">Endorse Products</button>
                   </div>
 
                 </form>
@@ -872,6 +876,7 @@ if (!isset($_SESSION['login_user']['user'])) {
   <script src="dist/js/demo.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="dist/js/pages/dashboard.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
   <!-- Select2 -->
   <script src="plugins/select2/js/select2.full.min.js"></script>
   <script>
@@ -983,65 +988,41 @@ if (!isset($_SESSION['login_user']['user'])) {
     });
   </script> -->
 
-  <!-- <script>
-    function saveData() {
-      // get data from form
-      var data = [document.getElementById("barcode").value, 
-        document.getElementById("prod").value, 
-        document.getElementById("quan").value, 
-        document.getElementById("lot").value, 
-        document.getElementById("branch").value, 
-        document.getElementById("mrf").value, 
-        document.getElementById("order_num").value, 
-        document.getElementById("exp").value, 
-        document.getElementById("remarks").value, 
-        document.getElementById("endorsed_by").value, 
-        ocument.getElementById("endorsed_date").value];
-
-      // create AJAX request
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          alert(this.responseText);
-        }
-      };
-      xmlhttp.open("POST", "post_prod-out.php", true);
-      xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xmlhttp.send("data=" + JSON.stringify(data));
-    }
-  </script> -->
 
   <script>
     $(document).ready(function() {
     // Function to reload the table
     function reloadTable() {
+      // Get the values from the form
+      var endorsed_by = document.getElementById('endorsed_by').value;
       // Create an AJAX request
       var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'get_prod-out.php');
-        xhr.onload = function() {
-          if (xhr.status === 200) {
-            // Parse the JSON response
-            var data = JSON.parse(xhr.responseText);
-            // Clear the table
-            var tableBody = document.querySelector('#myTable tbody');
-            tableBody.innerHTML = '';
-            // Populate the table with the new data
-            data.forEach(function(row) {
-              var tr = document.createElement('tr');
-              tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
-                row.description + '</td><td>' +
-                row.quantity + '</td><td>' +
-                row.lot + '</td><td>' +
-                row.exp_date + '</td><td>' +
-                row.remarks + '</td>'
-              tableBody.appendChild(tr);
-            });
-          } else {
-            alert('Error: ' + xhr.status);
-          }
-        };
-        xhr.send();
-      }
+      xhr.open('GET', 'get_prod-out.php?endorsed_by=' + endorsed_by);
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          // Parse the JSON response
+          var data = JSON.parse(xhr.responseText);
+          // Clear the table
+          var tableBody = document.querySelector('#myTable tbody');
+          tableBody.innerHTML = '';
+          // Populate the table with the new data
+          data.forEach(function(row) {
+            var tr = document.createElement('tr');
+            tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
+              row.description + '</td><td>' +
+              row.quantity + '</td><td>' +
+              row.lot + '</td><td>' +
+              row.exp_date + '</td><td>' +
+              row.remarks + '</td>'
+            tableBody.appendChild(tr);
+          });
+        } else {
+          alert('Error: ' + xhr.status);
+        }
+      };
+      xhr.send();
+    }
+      
 
     // Initial load of the table
     reloadTable();
@@ -1066,18 +1047,58 @@ if (!isset($_SESSION['login_user']['user'])) {
             data: formData,
             success: function() {
                 
-                // Reload the table with the updated data
-                reloadTable();
-                // Reset the values of specific input fields
-                $('#barcode').val('');
-                $('#description').val('');
-                $('#quantity').val('');
-                $('#lot').val('');
-                $('#exp_date').val('');
-                $('#remarks').val('');
+              // Reload the table with the updated data
+              reloadTable();
+              // Reset the values of specific input fields
+              $('#barcode').val('');
+              $('#description').val('');
+              $('#quantity').val('');
+              $('#lot').val('');
+              $('#exp_date').val('');
+              $('#remarks').val('');
             }
         });
     });
+
+    // Add a click event listener to the reload button
+    $("#endorse").click(function(event) {
+      // Prevent the form from submitting normally
+      event.preventDefault();
+
+      // Get the values from the form
+      var endorsed_by = $('#endorsed_by').val();
+
+      $.ajax({
+          url: "get_prod-out.php",
+          type: "GET",
+          data: {"endorsed_by": $("#endorsed_by").val(), action: "endorse_product"},
+          dataType: "JSON",
+          success: $(document).ready(function(data) {
+            // // handle the response
+            console.log(data)
+            swal.fire({
+              title: "Success!",
+              text: "Product successfully endorsed",
+              icon: "success",
+              confirmButtonText: "OK"
+            });
+            
+            // Reload the table with the updated data
+            reloadTable();
+            // Reset the values of specific input fields
+            $('#branch').val('');
+            $('#mrf').val('');
+            $('#order_num').val('');
+            $('#barcode').val('');
+            $('#description').val('');
+            $('#quantity').val('');
+            $('#lot').val('');
+            $('#exp_date').val('');
+            $('#remarks').val('');
+        }
+      )});
+    });
+
   });
 
   </script>
