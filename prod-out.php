@@ -406,7 +406,7 @@ if (!isset($_SESSION['login_user']['user'])) {
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label for="supp">Branch Code:</label>
-                          <select class="form-control select2bs4" style="width: 100%;" name="branch" id="branch">
+                          <select class="form-control select2bs4" style="width: 100%;" name="branch" id="branch" required>
                             <option selected="selected" disabled>Please Select Branch Code</option>
                             <?php
                             $check_user =  $_SESSION['login_user']['user_id'];
@@ -423,13 +423,13 @@ if (!isset($_SESSION['login_user']['user'])) {
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="mrf">MRF:</label>
-                          <input type="number" class="form-control " id="mrf" name="mrf">
+                          <input type="number" class="form-control " id="mrf" name="mrf" required>
                         </div>
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="order_num">Inv/Order No:</label>
-                          <input type="number" class="form-control " id="order_num" name="order_num">
+                          <input type="number" class="form-control " id="order_num" name="order_num" required>
                         </div>
                       </div>
                       <div class="col-sm-12">
@@ -1070,7 +1070,7 @@ if (!isset($_SESSION['login_user']['user'])) {
       var mrf = $('#mrf').val();
       var order_num = $('#order_num').val();
 
-      if (mrf.length == 0 || order_num.length == 0 || $('#my-table tbody tr').length === 0){
+      if (mrf.length == 0 || order_num.length == 0){
         $(document).ready(function() {
           swal.fire({
             title: "error!",
