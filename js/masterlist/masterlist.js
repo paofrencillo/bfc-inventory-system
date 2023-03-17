@@ -18,7 +18,7 @@ function viewModal(el) {
   $.ajax({
     type: "GET",
     url: "get_masterlist.php",
-    data: {"barcode": String(el.getAttribute("data-id"))},
+    data: {"barcode": String(el.getAttribute("data-id")), action: "get_product"},
     dataType: "JSON",
     success: function(data) {
       $("#barcode-modal").val(data.barcode);
@@ -45,15 +45,15 @@ function editDetails(el) {
 
     if (field.id != "barcode-modal") {
         field.removeAttribute("readonly");
-         
-    } else if (field.id == "imageFile2") {
-      $("#img-update-field").removeClass("d-none")
+      if (field.id == "imageFile2") {
+        $("#img-update-field").removeClass("d-none");
+      }
     }
   });
 }
 
 // ------ Cancel product update
-function cancelUpdate(el) {
+$('#details').on('hidden.bs.modal', function (e) {
   $("#save-cancel-btns").addClass("d-none");
   $("#update-btn").removeClass("d-none");
 
@@ -62,13 +62,14 @@ function cancelUpdate(el) {
   modal_fields.forEach(field => {
 
     if (field.id != "barcode-modal") {
-        field.setAttribute("readonly", "");
-         
-    } else if (field.id == "imageFile2") {
-      $("#img-update-field").addClass("d-none")
-    }
+      field.setAttribute("readonly", "");
+
+      if (field.id == "imageFile2") {
+        $("#img-update-field").addClass("d-none")
+      }    
+    } 
   });
-}
+})
 
 // ------ Delete product
 function deleteProduct() {
@@ -84,9 +85,7 @@ function deleteProduct() {
     error: function(error) {
       console.error(error);
     }
-  
-  })
-  ;
+  });
 }
 
 // ------ Close Delete Modal
@@ -110,6 +109,35 @@ $(".custom-file-input").on("change", function() {
   $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
 
+// ------ Check if product is already enrolled
+$("#barcode").on("change", ()=> {
+  console.log($("#barcode").val());
+  $.ajax({
+    type: "GET",
+    url: "get_masterlist.php",
+    data: {"barcode": $("#barcode").val(), action: "get_product"},
+    dataType: "JSON",
+    success: function(data) {
+      $("#barcode").attr("disabled", "");
+      $("#description").attr("disabled", "");
+      $("#generic_name").attr("disabled", "");
+      $("#category").attr("disabled", "");
+      $("#imageFile").attr("disabled", "");
+
+      $("#barcode").val(data.barcode);
+      $("#description").val(data.description);
+      $("#generic_name").val(data.generic_name);
+      $("#category").val(data.category);
+      let imgName = data.image;
+      let strip_imgName = imgName.replace("product-imgs/", '')
+      $("#file-label").substr(strip_imgName);
+    },
+    error: function(error) {
+      console.error(error);
+    }
+  })
+});
+
 // ------ Enrolling new product
 $("#enroll_form").on("submit", function(e) {
   e.preventDefault();
@@ -120,11 +148,12 @@ $("#enroll_form").on("submit", function(e) {
     contentType: false,
     processData:false,
     cache: false,
-    success: function() {
+    success: function(data) {
+      console.log(data)
       $('#enroll_success_text').removeClass('d-none');
-      setInterval(()=> {
-        location.reload();
-      }, 1000)
+      // setInterval(()=> {
+      //   location.reload();
+      // }, 1000)
     },
     error: function(error) {
       console.error(error);
@@ -141,7 +170,7 @@ $("#enroll_form").on("submit", function(e) {
   });
 });
 
-
+// ------------ Updating Product
 $("#update_masterlist_form").on("submit", function(e) {
   e.preventDefault();
   $.ajax({
@@ -155,7 +184,7 @@ $("#update_masterlist_form").on("submit", function(e) {
       $('#update_success_text').removeClass('d-none');
       setInterval(()=> {
         location.reload();
-      }, 1000)       
+      }, 750)       
     },
     error: function(error) {
       console.error(error);

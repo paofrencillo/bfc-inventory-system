@@ -14,6 +14,23 @@
         $last_edited_on = date("Y-m-d H:i:s");
         $table = "product_masterlist";
 
+        # Check if product is already existed
+        $query = "SELECT barcode FROM $table WHERE barcode='$barcode';";
+        $result = $conn->query($query);
+
+        if ($result) {
+            if (mysqli_num_rows($result) > 0) {
+                $data = "!!!!";
+                echo json_encode($data);
+            } else {
+                echo 'not found';
+            }
+        } else {
+            echo 'Error: ' . mysqli_error($conn);
+        }
+        // // close connection
+        // mysqli_close($conn);
+
         if($_FILES["imageFile"]["name"] != '') { //check if there is uploaded file
             $allowed_ext = array("png", "jpeg", "jpg"); //allowed image extensions
             $tmp = explode(".", $_FILES["imageFile"]["name"]); //get uploaded file ext
@@ -25,16 +42,18 @@
                 $path = "product-imgs/" . $name; // image upload path
                 move_uploaded_file($_FILES["imageFile"]["tmp_name"], $path);
             }
+        } else if($_FILES["imageFile"]["name"] == '') {
+            $path = "dist/img/valuemed-logo.png";
         }
 
         #Insert new products in the database 
         $conn->query("INSERT INTO `$table` (`barcode`, `description`,  `generic_name`, `category`, `image`, `last_edited_by`, `last_edited_on`)
                     VALUES ('$barcode', '$description', '$generic_name', '$category', '$path', $last_edited_by,  '$last_edited_on');") or die ('Error Could Not Query');
 
-        // if(!mysqli_error($conn)) {
-        //     // raise error
-        //     echo json_encode("success");
-        // }
+        if(!mysqli_error($conn)) {
+            // raise error
+            echo json_encode("error");
+        }
     }
 
     #PRODUCT UPDATE DETAILS
