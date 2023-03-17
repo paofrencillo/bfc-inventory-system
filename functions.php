@@ -27,7 +27,7 @@ if (isset($_POST['signin'])) {
                 $_SESSION['login_user'] = $getData;
                 header('location:dashboard.php');
             } else if ($row['is_superuser'] == '0') {
-                $_SESSION['login_user2'] = $row;
+                $_SESSION['login_user'] = $row;
                 header('location:z-dashboard.php');
             } else {
             ?>

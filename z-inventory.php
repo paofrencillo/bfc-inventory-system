@@ -1,8 +1,10 @@
 <?php
-include('connection.php');
-session_start();
-if (!isset($_SESSION['login_user2']['user'])) {
-  header("Location: index.php");
+include('templates/connection.php');
+include('templates/session.php');
+
+if ($_SESSION['login_user']['is_superuser'] == true) {
+  header('HTTP/1.0 403 Forbidden', TRUE, 403);
+  die(header('location: 403.html'));  
 }
 ?>
 

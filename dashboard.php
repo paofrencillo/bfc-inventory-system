@@ -2,6 +2,10 @@
   include('templates/connection.php');
   include('templates/session.php');
 
+  if ($_SESSION['login_user']['is_superuser'] == false) {
+    header('HTTP/1.0 403 Forbidden', TRUE, 403);
+    die(header('location: 403.html'));  
+  }
 ?>
 
 <!DOCTYPE html>
@@ -39,245 +43,20 @@
   <div class="wrapper">
 
     <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
+    <!-- <div class="preloader flex-column justify-content-center align-items-center">
       <img class="animation__shake" src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTELogo" height="500" width="500">
-    </div>
+    </div> -->
 
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-light navbar-light justify-content-between">
-      <!-- Left navbar links -->
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="starter.php" class="nav-link">Home</a>
-        </li>
-      </ul>
-      <h6 class="mb-0 mr-2">
-        <?php
-          date_default_timezone_set("Asia/Manila");  
-          $h = date('G');
-          $user = $_SESSION['login_user']['user'];
-
-          if ($h>=0 && $h<=11) {
-              echo "Good morning, $user";
-          } else if ($h>=12 && $h<=17) {
-              echo "Good afternoon, $user";
-          } else {
-              echo "Good evening, $user";
-          }
-        ?> 
-      </h6>
-    </nav>
-    <!-- /.navbar -->
-
-    <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-light-blue elevation-4">
-      <!-- Brand Logo -->
-      <a href="starter.php" class="brand-link">
-        <img src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminBFC</span>
-      </a>
-
-      <!-- Sidebar -->
-      <div class="sidebar">
-
-        <!-- Sidebar Menu -->
-        <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-            <li class="nav-item menu-open">
-              <a href="starter.php" class="nav-link active">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>
-                  Dashboard
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link ">
-                <i class="nav-icon fas fa-edit"></i>
-                <p>
-                  Manage Inventory
-                  <i class="fas fa-angle-left right "></i>
-                  <!-- <span class="badge badge-info right">6</span> -->
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="inventory.php" class="nav-link ">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Inventory</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="masterlist.php" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Masterlist</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-truck"></i>
-                <p>
-                  Product In/Out
-                  <i class="fas fa-angle-left right"></i>
-                  <!-- <span class="badge badge-info right">6</span> -->
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="prod-in.php" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Product In</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="prod-out.php" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Product Out</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-cog"></i>
-                <p>
-                  Settings
-                  <i class="fas fa-angle-left right"></i>
-                  <!-- <span class="badge badge-info right">6</span> -->
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="employee.php" class="nav-link ">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Employee Accounts</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="franchisee.php" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Franchisee List</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Supplier</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="admin.php" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Change Password </p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="functions.php?logout" class="nav-link">
-                <i class="nav-icon fas fa-sign-out-alt"></i>
-                <p>
-                  Logout
-                </p>
-              </a>
-            </li>
-
-          </ul>
-        </nav>
-        <!-- /.sidebar-menu -->
-      </div>
-      <!-- /.sidebar -->
-    </aside>
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <div class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1 class="m-0">Dashboard</h1>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-
-        <!-- Main content -->
-        <section class="content">
-          <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
-            <div class="row">
-              <div class="col-lg-4 col-6">
-                <!-- small box -->
-                <div class="small-box bg-info">
-                  <div class="inner">
-                    <h3>150<sup style="font-size: 20px"> Items</sup></h3>
-
-                    <p>Product In</p>
-                  </div>
-                  <div class="icon">
-                    <i class="ion ion-ios-download-outline"></i>
-                  </div>
-                  <a href="prod-in.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                </div>
-              </div>
-              <!-- ./col -->
-              <div class="col-lg-4 col-6">
-                <!-- small box -->
-                <div class="small-box bg-success">
-                  <div class="inner">
-                    <h3>53<sup style="font-size: 20px"> Items</sup></h3>
-
-                    <p>Product Out</p>
-                  </div>
-                  <div class="icon">
-                    <i class="ion ion-ios-upload-outline"></i>
-                  </div>
-                  <a href="prod-out.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                </div>
-              </div>
-
-              <div class="col-lg-4 col-6">
-                <!-- small box -->
-                <div class="small-box bg-danger">
-                  <div class="inner">
-                    <h3>700<sup style="font-size: 20px"> Items</sup></h3>
-
-                    <p>Total Product Registered</p>
-                  </div>
-                  <div class="icon">
-                    <i class="fas fa-barcode"></i>
-                  </div>
-                  <a href="inventory.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                </div>
-              </div>
-              <!-- ./col -->
-            </div>
-            <!-- /.row -->
-          </div>
-
-      </div>
-      <!-- /.content-header -->
-    </div>
-    <!-- /.content-wrapper -->
-
-    <footer class="main-footer">
-      <strong>Made by <a href="#">TUP-C Interns</a>.</strong>
-      <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 1.0.0
-      </div>
-    </footer>
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
+    <?php
+    // ------ Navbar
+    include("templates/navbar.php");
+    // ------ Main Sidebar Container
+    include("templates/sidebar.php");
+    // ------ Contents
+    include("templates/dashboard-contents.php");
+    // ------ Footer
+    include("templates/footer.php");
+    ?>
     <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
