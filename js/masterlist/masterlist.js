@@ -15,7 +15,7 @@ function viewModal(el) {
     },
     error: function(xhr, error, status, data) {
 
-      console.log(xhr, error, status, data.barcode);
+      console.log(xhr, error, status, JSON.parse(data.barcode));
     }
   })
 }
