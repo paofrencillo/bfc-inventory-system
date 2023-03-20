@@ -290,17 +290,206 @@ include('templates/session.php');
                               <td><?php echo $row['order_num']?></td>
                               <td><?php echo $row['remarks']?></td>
                               <td>
-                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#updatee<?php echo $row['id']?>">
                                   <i class="fas fa-pencil-alt"></i>
                                   Edit
                                 </button>
-
-                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['id']?>">
                                   <i class="fas fa-eye"></i>
                                   Details
                                 </button>
                               </td>
                             </tr>
+
+                            <div class="modal fade" id="updatee<?php echo $row['id']?>">
+                              <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <form id="updateprodout">
+                                      <div class="row">
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="barcode">Barcode:</label>
+                                            <input type="text" class="form-control " id="barcode" value="<?php echo $row['barcode']?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-8">
+                                          <div class="form-group">
+                                            <label for="description">Product Description:</label>
+                                            <input type="text" class="form-control " id="description" value="<?php echo $row['description']?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                          <div class="form-group">
+                                            <label for="quantity">Quantity:</label>
+                                            <input type="number" class="form-control " id="quantity" value="<?php echo $row['quantity']?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="lot">Lot Number:</label>
+                                            <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['lot']?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                            <label for="supp">Branch Code:</label>                                            
+                                            <select class="form-control select2bs4" style="width: 100%;" disabled>
+                                              <option selected="selected" value="<?php echo $row['branch']?>"><?php echo $row['branch']?></option>
+                                              <option value=""><?php echo $row2['supplier_name']?></option>
+                                            </select>                         
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                          <div class="form-group">
+                                            <label for="mrf">MRF:</label>
+                                            <input type="text" class="form-control " id="mrf" value="<?php echo $row['mrf']?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                          <div class="form-group">
+                                            <label for="order_num">Inv/Order No:</label>
+                                            <input type="text" class="form-control " id="order_num" value="<?php echo $row['order_num']?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-5">
+                                          <div class="form-group">
+                                            <label for="exp_date">Expiration Date:</label>
+                                            <input type="text" class="form-control " id="exp_date" value="<?php echo $row['exp_date']?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                          <div class="form-group">
+                                            <label for="remarks">Remarks:</label>
+                                            <input type="text" class="form-control " id="remarks" value="<?php echo $row['remarks']?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                            <label for="endorsed_by">Endorse By:</label>
+                                            <input type="text" class="form-control " id="endorsed_by" value="<?php echo $row['endorsed_by']?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                            <label for="endorsed_date">Endorsement Date:</label>
+                                            <input type="date" class="form-control " id="endorsed_date" value="<?php echo $row['endorsed_date']?>">
+                                          </div>
+                                        </div>                                           
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-danger">Delete</button>
+                                        <button type="button" class="btn btn-primary">Update</button>
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div>
+                                <!-- /.modal-content -->
+                              </div>
+                              <!-- /.modal-dialog -->
+                            </div>
+                            
+                            <div class="modal fade" id="view<?php echo $row['id']?>">
+                              <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">VIEW PRODUCT DETAILS</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <form>
+                                      <div class="row">
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="barcode">Barcode:</label>
+                                            <input type="text" class="form-control " id="barcode" readonly value="<?php echo $row['barcode']?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-8">
+                                          <div class="form-group">
+                                            <label for="prod">Product Description:</label>
+                                            <input type="text" class="form-control " id="prod" readonly value="<?php echo $row['description']?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                          <div class="form-group">
+                                            <label for="stock">Quantity:</label>
+                                            <input type="number" class="form-control " id="stock" readonly value="<?php echo $row['quantity']?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="lot">Lot Number:</label>
+                                            <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();" readonly value="<?php echo $row['lot']?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                            <label for="supp">Branch Code:</label>
+                                            <select class="form-control select2bs4" style="width: 100%;" disabled>
+                                              <option selected="selected" readonly value="<?php echo $row['branch']?>"><?php echo $row['branch']?></option>
+                                              <option>Supplier A</option>
+                                              <option>Supplier B</option>
+                                              <option>Supplier C</option>
+                                              <option>Supplier D</option>
+                                              <option>Supplier E</option>
+                                              <option>Supplier F</option>
+                                            </select>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                          <div class="form-group">
+                                            <label for="mrf">MRF:</label>
+                                            <input type="text" class="form-control " id="mrf" readonly value="<?php echo $row['mrf']?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                          <div class="form-group">
+                                            <label for="order_num">Inv/Order No:</label>
+                                            <input type="text" class="form-control " id="order_num" readonly value="<?php echo $row['order_num']?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-5">
+                                          <div class="form-group">
+                                            <label for="exp">Expiration Date:</label>
+                                            <input type="text" class="form-control " id="exp" readonly value="<?php echo $row['exp_date']?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                          <div class="form-group">
+                                            <label for="remarks">Remarks:</label>
+                                            <input type="text" class="form-control " id="remarks" readonly value="<?php echo $row['remarks']?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                            <label for="endorsed_by">Endorse By:</label>
+                                            <input type="text" class="form-control " id="endorsed_by" readonly value="<?php echo $row['endorsed_by']?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                            <label for="endorsed_date">Endorsement Date:</label>
+                                            <input type="date" class="form-control " id="endorsed_date" readonly value="<?php echo $row['endorsed_date']?>">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div>
+                                <!-- /.modal-content -->
+                              </div>
+                              <!-- /.modal-dialog -->
+                            </div>
+
                             <?php } ?>
                           </tbody>
                         </table>
@@ -504,200 +693,6 @@ include('templates/session.php');
           </div>
           <!-- /.modal -->
 
-          <!-- modal -->
-          <div class="modal fade" id="update">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label for="barcode">Barcode:</label>
-                          <input type="text" class="form-control " id="barcode" readonly>
-                        </div>
-                      </div>
-                      <div class="col-sm-8">
-                        <div class="form-group">
-                          <label for="prod">Product Description:</label>
-                          <input type="text" class="form-control " id="prod">
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="form-group">
-                          <label for="qty">Quantity:</label>
-                          <input type="number" class="form-control " id="qty">
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label for="lot">Lot Number:</label>
-                          <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();">
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <label for="supp">Branch Code:</label>
-                          <select class="form-control select2bs4" style="width: 100%;">
-                            <option selected="selected" disabled>Please Select Branch Code</option>
-                            <?php
-                            $check_user =  $_SESSION['login_user']['user_id'];
-                            $query = "SELECT * FROM branches";
-                            $result = mysqli_query($conn, $query);
-                            $check_row = mysqli_num_rows($result);
-                            while ($row = mysqli_fetch_array($result)) {
-                            ?>
-                              <option value="<?php echo $row['code'] ?>"><?php echo $row['code'] ?>/<?php echo $row['name'] ?></option>
-                            <?php } ?>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="form-group">
-                          <label for="barcode">MRF:</label>
-                          <input type="number" class="form-control " id="barcode">
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="form-group">
-                          <label for="barcode">Inv/Order No:</label>
-                          <input type="number" class="form-control " id="barcode">
-                        </div>
-                      </div>
-                      <div class="col-sm-5">
-                        <div class="form-group">
-                          <label for="exp">Expiration Date:</label>
-                          <input type="date" class="form-control " id="exp">
-                        </div>
-                      </div>
-                      <div class="col-sm-3">
-                        <div class="form-group">
-                          <label for="barcode">Remarks:</label>
-                          <input type="text" class="form-control " id="barcode">
-                        </div>
-                      </div>
-                      <!-- <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="supp">Entry Date:</label>
-                                    <input type="date" class="form-control " id="supp">
-                                </div>
-                            </div>         -->
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-danger">Delete</button>
-                  <button type="button" class="btn btn-primary">Update</button>
-                </div>
-              </div>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-          </div>
-          <!-- /.modal -->
-
-          <div class="modal fade" id="view">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">VIEW PRODUCT DETAILS</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label for="barcode">Barcode:</label>
-                          <input type="text" class="form-control " id="barcode" readonly>
-                        </div>
-                      </div>
-                      <div class="col-sm-8">
-                        <div class="form-group">
-                          <label for="prod">Product Description:</label>
-                          <input type="text" class="form-control " id="prod" readonly>
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="form-group">
-                          <label for="stock">Quantity:</label>
-                          <input type="number" class="form-control " id="stock" readonly>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label for="lot">Lot Number:</label>
-                          <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();" readonly>
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <label for="supp">Branch Code:</label>
-                          <select class="form-control select2bs4" style="width: 100%;" disabled>
-                            <option selected="selected" disabled>Please Select Branch</option>
-                            <option>Supplier A</option>
-                            <option>Supplier B</option>
-                            <option>Supplier C</option>
-                            <option>Supplier D</option>
-                            <option>Supplier E</option>
-                            <option>Supplier F</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="form-group">
-                          <label for="barcode">MRF:</label>
-                          <input type="text" class="form-control " id="barcode" readonly>
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="form-group">
-                          <label for="barcode">Inv/Order No:</label>
-                          <input type="text" class="form-control " id="barcode" readonly>
-                        </div>
-                      </div>
-                      <div class="col-sm-5">
-                        <div class="form-group">
-                          <label for="exp">Expiration Date:</label>
-                          <input type="date" class="form-control " id="exp" readonly>
-                        </div>
-                      </div>
-                      <div class="col-sm-3">
-                        <div class="form-group">
-                          <label for="barcode">Remarks:</label>
-                          <input type="text" class="form-control " id="barcode" readonly>
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <label for="barcode">Endorse By:</label>
-                          <input type="text" class="form-control " id="barcode" readonly>
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <label for="supp">Endorsement Date:</label>
-                          <input type="date" class="form-control " id="supp" readonly>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-          </div>
-          <!-- /.modal -->
-
           <div class="modal fade" id="dispatch">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
               <div class="modal-content">
@@ -710,7 +705,7 @@ include('templates/session.php');
                 <div class="modal-body">
                   <form>
                     <div class="row">
-                      <div class="col-sm-10">
+                      <div class="col-sm-7">
                         <div class="form-group">
                           <label for="supp">Branch Code:</label>
                           <select class="form-control select2bs4" style="width: 100%;">
@@ -725,6 +720,12 @@ include('templates/session.php');
                               <option value="<?php echo $row['code'] ?>"><?php echo $row['code'] ?>/<?php echo $row['name'] ?></option>
                             <?php } ?>
                           </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="mrf">MRF:</label>
+                          <input type="number" class="form-control " id="mrf" name="mrf" required>
                         </div>
                       </div>
                       <div class="col-sm-2">
@@ -841,6 +842,7 @@ include('templates/session.php');
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
   <!-- Select2 -->
   <script src="plugins/select2/js/select2.full.min.js"></script>
+
   <script>
     $(function() {
       $("#example1").DataTable({
@@ -853,6 +855,7 @@ include('templates/session.php');
         // "scrollY": '500px',
         // "scrollCollapse": true,
         "autoWidth": false,
+        "order": [[5, 'desc']],
         // "buttons": ["copy", "csv", "excel", "pdf", "print"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
@@ -952,7 +955,7 @@ include('templates/session.php');
 
 
   <script>
-    $(document).ready(function() {
+  $(document).ready(function() {
     // Function to reload the table
     function reloadTable() {
       // Get the values from the form
@@ -1019,6 +1022,26 @@ include('templates/session.php');
               $('#lot').val('');
               $('#exp_date').val('');
               $('#remarks').val('');
+            }
+        });
+    });
+
+    // Add a submit event listener to the add form
+    $("#updateprodout").submit(function(event) {
+        // Prevent the form from submitting normally
+        event.preventDefault();
+        
+        // Get the values from the form inputs
+        var formData = $(this).serialize();
+        
+        // Use AJAX to send the form data to your PHP script to insert it into the database
+        $.ajax({
+            url: "post_prod-out.php",
+            type: "POST",
+            data: formData,
+            success: function() {
+                
+
             }
         });
     });
