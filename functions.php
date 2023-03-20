@@ -927,6 +927,80 @@ if (isset($_POST['delete_supplier2'])) {
     }
 }
 
+#MODIFY ENDORSE
+if(isset($_POST['updateprodout'])) {
+
+    // Get the values from the AJAX request
+    $barcode = $_POST['barcode'];
+    $description = $_POST['description'];
+    $quantity = $_POST['quantity'];
+    $lot = $_POST['lot']; 
+    $mrf = $_POST['mrf'];
+    $order_num = $_POST['order_num'];
+    $exp_date = $_POST['exp_date'];
+    $remarks = $_POST['remarks'];
+    $id_update = $_POST['id_update'];
+
+    if ($id_update != null) {
+        // Insert the values into the database
+        $conn->query("UPDATE endorse_final 
+            SET barcode = '$barcode', 
+            description = '$description', 
+            quantity = '$quantity', 
+            lot = '$lot',
+            mrf = '$mrf',
+            order_num = '$order_num', 
+            exp_date = '$exp_date',
+            remarks = '$remarks' WHERE id = '$id_update'") or die($conn->error);
+        ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Product Successfully Updated',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "prod-out.php";
+                        } else {
+                            window.location.href = "prod-out.php";
+                        }
+                    })
+                })
+            </script>
+        <?php
+    } else {
+        ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'An Error Occured',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "prod-out.php";
+                        } else {
+                            window.location.href = "prod-out.php";
+                        }
+                    })
+                })
+            </script>
+        <?php
+    }
+
+    
+    
+   
+    
+}
+
 #CHANGE PASSWORD ADMIN
 if (isset($_POST['pass_admin'])) {
     $id_pass = $_POST['id_password'];

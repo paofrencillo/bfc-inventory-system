@@ -1,6 +1,8 @@
 <?php
 include('templates/connection.php');
 
+
+
 // Get the values from the AJAX request
 $barcode = $_POST['barcode'];
 $description = $_POST['description'];
@@ -13,10 +15,6 @@ $endorsed_by = $_POST['endorsed_by'];
 $mrf = $_POST['mrf'];
 $order_num = $_POST['order_num'];
 $branch = $_POST['branch'];
-
-if(isset($_POST['form1'])) {
-    
-}
 
 // Insert the values into the database
 $sql = "INSERT INTO endorse (
@@ -45,6 +43,10 @@ $sql = "INSERT INTO endorse (
     '$endorsed_date')";
 mysqli_query($conn, $sql);
 
+
+
+
+mysqli_close($conn);
 
  
 ?>
