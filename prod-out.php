@@ -45,7 +45,7 @@ include('templates/session.php');
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed" >
+<body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
     <!-- Preloader -->
@@ -274,221 +274,221 @@ include('templates/session.php');
                           </thead>
                           <tbody>
                             <?php
-                              $check_user =  $_SESSION['login_user']['user_id'];
-                              $query = "SELECT * FROM endorse_final ORDER BY endorsed_date";
-                              $result = mysqli_query($conn, $query);
-                              $check_row = mysqli_num_rows($result);
-                              while ($row = mysqli_fetch_array($result)) {
+                            $check_user =  $_SESSION['login_user']['user_id'];
+                            $query = "SELECT * FROM endorse_final ORDER BY endorsed_date";
+                            $result = mysqli_query($conn, $query);
+                            $check_row = mysqli_num_rows($result);
+                            while ($row = mysqli_fetch_array($result)) {
                             ?>
-                            <tr>
-                              <td><?php echo $row['barcode']?></td>
-                              <td><?php echo $row['description']?></td>
-                              <td><?php echo $row['quantity']?></td>
-                              <td><?php echo $row['lot']?></td>
-                              <td><?php echo $row['branch']?></td>
-                              <td><?php echo $row['mrf']?></td>
-                              <td><?php echo $row['order_num']?></td>
-                              <td><?php echo $row['remarks']?></td>
-                              <td>
-                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#updatee<?php echo $row['id']?>">
-                                  <i class="fas fa-pencil-alt"></i>
-                                  Edit
-                                </button>
-                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['id']?>">
-                                  <i class="fas fa-eye"></i>
-                                  Details
-                                </button>
-                              </td>
-                            </tr>
+                              <tr>
+                                <td><?php echo $row['barcode'] ?></td>
+                                <td><?php echo $row['description'] ?></td>
+                                <td><?php echo $row['quantity'] ?></td>
+                                <td><?php echo $row['lot'] ?></td>
+                                <td><?php echo $row['branch'] ?></td>
+                                <td><?php echo $row['mrf'] ?></td>
+                                <td><?php echo $row['order_num'] ?></td>
+                                <td><?php echo $row['remarks'] ?></td>
+                                <td>
+                                  <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#updatee<?php echo $row['id'] ?>">
+                                    <i class="fas fa-pencil-alt"></i>
+                                    Edit
+                                  </button>
+                                  <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['id'] ?>">
+                                    <i class="fas fa-eye"></i>
+                                    Details
+                                  </button>
+                                </td>
+                              </tr>
 
-                            <div class="modal fade" id="updatee<?php echo $row['id']?>">
-                              <div class="modal-dialog modal-dialog-centered modal-lg">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
+                              <div class="modal fade" id="updatee<?php echo $row['id'] ?>">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <form id="updateprodout">
+                                        <div class="row">
+                                          <div class="col-sm-4">
+                                            <div class="form-group">
+                                              <label for="barcode">Barcode:</label>
+                                              <input type="text" class="form-control " id="barcode" value="<?php echo $row['barcode'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-8">
+                                            <div class="form-group">
+                                              <label for="description">Product Description:</label>
+                                              <input type="text" class="form-control " id="description" value="<?php echo $row['description'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-2">
+                                            <div class="form-group">
+                                              <label for="quantity">Quantity:</label>
+                                              <input type="number" class="form-control " id="quantity" value="<?php echo $row['quantity'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-4">
+                                            <div class="form-group">
+                                              <label for="lot">Lot Number:</label>
+                                              <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['lot'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-6">
+                                            <div class="form-group">
+                                              <label for="supp">Branch Code:</label>
+                                              <select class="form-control select2bs4" style="width: 100%;" disabled>
+                                                <option selected="selected" value="<?php echo $row['branch'] ?>"><?php echo $row['branch'] ?></option>
+                                                <option value=""><?php echo $row['branch'] ?></option>
+                                              </select>
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-2">
+                                            <div class="form-group">
+                                              <label for="mrf">MRF:</label>
+                                              <input type="text" class="form-control " id="mrf" value="<?php echo $row['mrf'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-2">
+                                            <div class="form-group">
+                                              <label for="order_num">Inv/Order No:</label>
+                                              <input type="text" class="form-control " id="order_num" value="<?php echo $row['order_num'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-5">
+                                            <div class="form-group">
+                                              <label for="exp_date">Expiration Date:</label>
+                                              <input type="text" class="form-control " id="exp_date" value="<?php echo $row['exp_date'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-3">
+                                            <div class="form-group">
+                                              <label for="remarks">Remarks:</label>
+                                              <input type="text" class="form-control " id="remarks" value="<?php echo $row['remarks'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-6">
+                                            <div class="form-group">
+                                              <label for="endorsed_by">Endorse By:</label>
+                                              <input type="text" class="form-control " id="endorsed_by" value="<?php echo $row['endorsed_by'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-6">
+                                            <div class="form-group">
+                                              <label for="endorsed_date">Endorsement Date:</label>
+                                              <input type="date" class="form-control " id="endorsed_date" value="<?php echo $row['endorsed_date'] ?>">
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-outline-danger">Delete</button>
+                                          <button type="button" class="btn btn-primary">Update</button>
+                                        </div>
+                                      </form>
+                                    </div>
                                   </div>
-                                  <div class="modal-body">
-                                    <form id="updateprodout">
-                                      <div class="row">
-                                        <div class="col-sm-4">
-                                          <div class="form-group">
-                                            <label for="barcode">Barcode:</label>
-                                            <input type="text" class="form-control " id="barcode" value="<?php echo $row['barcode']?>">
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-8">
-                                          <div class="form-group">
-                                            <label for="description">Product Description:</label>
-                                            <input type="text" class="form-control " id="description" value="<?php echo $row['description']?>">
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                          <div class="form-group">
-                                            <label for="quantity">Quantity:</label>
-                                            <input type="number" class="form-control " id="quantity" value="<?php echo $row['quantity']?>">
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                          <div class="form-group">
-                                            <label for="lot">Lot Number:</label>
-                                            <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['lot']?>">
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                          <div class="form-group">
-                                            <label for="supp">Branch Code:</label>                                            
-                                            <select class="form-control select2bs4" style="width: 100%;" disabled>
-                                              <option selected="selected" value="<?php echo $row['branch']?>"><?php echo $row['branch']?></option>
-                                              <option value=""><?php echo $row2['supplier_name']?></option>
-                                            </select>                         
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                          <div class="form-group">
-                                            <label for="mrf">MRF:</label>
-                                            <input type="text" class="form-control " id="mrf" value="<?php echo $row['mrf']?>">
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                          <div class="form-group">
-                                            <label for="order_num">Inv/Order No:</label>
-                                            <input type="text" class="form-control " id="order_num" value="<?php echo $row['order_num']?>">
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-5">
-                                          <div class="form-group">
-                                            <label for="exp_date">Expiration Date:</label>
-                                            <input type="text" class="form-control " id="exp_date" value="<?php echo $row['exp_date']?>">
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                          <div class="form-group">
-                                            <label for="remarks">Remarks:</label>
-                                            <input type="text" class="form-control " id="remarks" value="<?php echo $row['remarks']?>">
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                          <div class="form-group">
-                                            <label for="endorsed_by">Endorse By:</label>
-                                            <input type="text" class="form-control " id="endorsed_by" value="<?php echo $row['endorsed_by']?>">
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                          <div class="form-group">
-                                            <label for="endorsed_date">Endorsement Date:</label>
-                                            <input type="date" class="form-control " id="endorsed_date" value="<?php echo $row['endorsed_date']?>">
-                                          </div>
-                                        </div>                                           
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline-danger">Delete</button>
-                                        <button type="button" class="btn btn-primary">Update</button>
-                                      </div>
-                                    </form>
-                                  </div>
+                                  <!-- /.modal-content -->
                                 </div>
-                                <!-- /.modal-content -->
+                                <!-- /.modal-dialog -->
                               </div>
-                              <!-- /.modal-dialog -->
-                            </div>
-                            
-                            <div class="modal fade" id="view<?php echo $row['id']?>">
-                              <div class="modal-dialog modal-dialog-centered modal-lg">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h4 class="modal-title">VIEW PRODUCT DETAILS</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
+
+                              <div class="modal fade" id="view<?php echo $row['id'] ?>">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h4 class="modal-title">VIEW PRODUCT DETAILS</h4>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <form>
+                                        <div class="row">
+                                          <div class="col-sm-4">
+                                            <div class="form-group">
+                                              <label for="barcode">Barcode:</label>
+                                              <input type="text" class="form-control " id="barcode" readonly value="<?php echo $row['barcode'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-8">
+                                            <div class="form-group">
+                                              <label for="prod">Product Description:</label>
+                                              <input type="text" class="form-control " id="prod" readonly value="<?php echo $row['description'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-2">
+                                            <div class="form-group">
+                                              <label for="stock">Quantity:</label>
+                                              <input type="number" class="form-control " id="stock" readonly value="<?php echo $row['quantity'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-4">
+                                            <div class="form-group">
+                                              <label for="lot">Lot Number:</label>
+                                              <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();" readonly value="<?php echo $row['lot'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-6">
+                                            <div class="form-group">
+                                              <label for="supp">Branch Code:</label>
+                                              <select class="form-control select2bs4" style="width: 100%;" disabled>
+                                                <option selected="selected" readonly value="<?php echo $row['branch'] ?>"><?php echo $row['branch'] ?></option>
+                                                <option>Supplier A</option>
+                                                <option>Supplier B</option>
+                                                <option>Supplier C</option>
+                                                <option>Supplier D</option>
+                                                <option>Supplier E</option>
+                                                <option>Supplier F</option>
+                                              </select>
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-2">
+                                            <div class="form-group">
+                                              <label for="mrf">MRF:</label>
+                                              <input type="text" class="form-control " id="mrf" readonly value="<?php echo $row['mrf'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-2">
+                                            <div class="form-group">
+                                              <label for="order_num">Inv/Order No:</label>
+                                              <input type="text" class="form-control " id="order_num" readonly value="<?php echo $row['order_num'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-5">
+                                            <div class="form-group">
+                                              <label for="exp">Expiration Date:</label>
+                                              <input type="text" class="form-control " id="exp" readonly value="<?php echo $row['exp_date'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-3">
+                                            <div class="form-group">
+                                              <label for="remarks">Remarks:</label>
+                                              <input type="text" class="form-control " id="remarks" readonly value="<?php echo $row['remarks'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-6">
+                                            <div class="form-group">
+                                              <label for="endorsed_by">Endorse By:</label>
+                                              <input type="text" class="form-control " id="endorsed_by" readonly value="<?php echo $row['endorsed_by'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-6">
+                                            <div class="form-group">
+                                              <label for="endorsed_date">Endorsement Date:</label>
+                                              <input type="date" class="form-control " id="endorsed_date" readonly value="<?php echo $row['endorsed_date'] ?>">
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </form>
+                                    </div>
                                   </div>
-                                  <div class="modal-body">
-                                    <form>
-                                      <div class="row">
-                                        <div class="col-sm-4">
-                                          <div class="form-group">
-                                            <label for="barcode">Barcode:</label>
-                                            <input type="text" class="form-control " id="barcode" readonly value="<?php echo $row['barcode']?>">
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-8">
-                                          <div class="form-group">
-                                            <label for="prod">Product Description:</label>
-                                            <input type="text" class="form-control " id="prod" readonly value="<?php echo $row['description']?>">
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                          <div class="form-group">
-                                            <label for="stock">Quantity:</label>
-                                            <input type="number" class="form-control " id="stock" readonly value="<?php echo $row['quantity']?>">
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                          <div class="form-group">
-                                            <label for="lot">Lot Number:</label>
-                                            <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();" readonly value="<?php echo $row['lot']?>">
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                          <div class="form-group">
-                                            <label for="supp">Branch Code:</label>
-                                            <select class="form-control select2bs4" style="width: 100%;" disabled>
-                                              <option selected="selected" readonly value="<?php echo $row['branch']?>"><?php echo $row['branch']?></option>
-                                              <option>Supplier A</option>
-                                              <option>Supplier B</option>
-                                              <option>Supplier C</option>
-                                              <option>Supplier D</option>
-                                              <option>Supplier E</option>
-                                              <option>Supplier F</option>
-                                            </select>
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                          <div class="form-group">
-                                            <label for="mrf">MRF:</label>
-                                            <input type="text" class="form-control " id="mrf" readonly value="<?php echo $row['mrf']?>">
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                          <div class="form-group">
-                                            <label for="order_num">Inv/Order No:</label>
-                                            <input type="text" class="form-control " id="order_num" readonly value="<?php echo $row['order_num']?>">
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-5">
-                                          <div class="form-group">
-                                            <label for="exp">Expiration Date:</label>
-                                            <input type="text" class="form-control " id="exp" readonly value="<?php echo $row['exp_date']?>">
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                          <div class="form-group">
-                                            <label for="remarks">Remarks:</label>
-                                            <input type="text" class="form-control " id="remarks" readonly value="<?php echo $row['remarks']?>">
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                          <div class="form-group">
-                                            <label for="endorsed_by">Endorse By:</label>
-                                            <input type="text" class="form-control " id="endorsed_by" readonly value="<?php echo $row['endorsed_by']?>">
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                          <div class="form-group">
-                                            <label for="endorsed_date">Endorsement Date:</label>
-                                            <input type="date" class="form-control " id="endorsed_date" readonly value="<?php echo $row['endorsed_date']?>">
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </form>
-                                  </div>
+                                  <!-- /.modal-content -->
                                 </div>
-                                <!-- /.modal-content -->
+                                <!-- /.modal-dialog -->
                               </div>
-                              <!-- /.modal-dialog -->
-                            </div>
 
                             <?php } ?>
                           </tbody>
@@ -555,7 +555,7 @@ include('templates/session.php');
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <form id="addprodout">
+                <form method="">
                   <div class="modal-body">
                     <div class="row">
                       <div class="col-sm-6">
@@ -682,7 +682,7 @@ include('templates/session.php');
                   </div>
                   <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="endorse" name="endorse" >Endorse Products</button>
+                    <button type="button" class="btn btn-primary" id="endorse" name="endorse">Endorse Products</button>
                   </div>
 
                 </form>
@@ -855,7 +855,9 @@ include('templates/session.php');
         // "scrollY": '500px',
         // "scrollCollapse": true,
         "autoWidth": false,
-        "order": [[5, 'desc']],
+        "order": [
+          [5, 'desc']
+        ],
         // "buttons": ["copy", "csv", "excel", "pdf", "print"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
@@ -955,112 +957,95 @@ include('templates/session.php');
 
 
   <script>
-  $(document).ready(function() {
-    // Function to reload the table
-    function reloadTable() {
-      // Get the values from the form
-      var endorsed_by = document.getElementById('endorsed_by').value;
-      // Create an AJAX request
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', 'get_prod-out.php?endorsed_by=' + endorsed_by);
-      xhr.onload = function() {
-        if (xhr.status === 200) {
-          // Parse the JSON response
-          var data = JSON.parse(xhr.responseText);
-          console.log(data)
-          // Clear the table
-          var tableBody = document.querySelector('#myTable tbody');
-          tableBody.innerHTML = '';
-          // Populate the table with the new data
-          data.forEach(function(row) {
-            console.log(row)
-            var tr = document.createElement('tr');
-            tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
-              row.description + '</td><td>' +
-              row.quantity + '</td><td>' +
-              row.lot + '</td><td>' +
-              row.exp_date + '</td><td>' +
-              row.remarks + '</td>'
-            tableBody.appendChild(tr);
-          });
-        } else {
-          alert('Error: ' + xhr.status);
-        }
-      };
-      xhr.send();
-    }
-      
-    // Initial load of the table
-    reloadTable();
+    $(document).ready(function() {
+      // Function to reload the table
+      function reloadTable() {
+        // Get the values from the form
+        var endorsed_by = document.getElementById('endorsed_by').value;
+        // Create an AJAX request
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'get_prod-out.php?endorsed_by=' + endorsed_by);
+        xhr.onload = function() {
+          if (xhr.status === 200) {
+            // Parse the JSON response
+            var data = JSON.parse(xhr.responseText);
+            console.log(data)
+            // Clear the table
+            var tableBody = document.querySelector('#myTable tbody');
+            tableBody.innerHTML = '';
+            // Populate the table with the new data
+            data.forEach(function(row) {
+              console.log(row)
+              var tr = document.createElement('tr');
+              tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
+                row.description + '</td><td>' +
+                row.quantity + '</td><td>' +
+                row.lot + '</td><td>' +
+                row.exp_date + '</td><td>' +
+                row.remarks + '</td>'
+              tableBody.appendChild(tr);
+            });
+          } else {
+            alert('Error: ' + xhr.status);
+          }
+        };
+        xhr.send();
+      }
 
-    // Add a click event listener to the reload button
-    $("#reloadBtn").click(function() {
+      // Initial load of the table
+      reloadTable();
+
+      // Add a click event listener to the reload button
+      $("#reloadBtn").click(function() {
         reloadTable();
-    });
+      });
 
-    // Add a submit event listener to the add form
-    $("#addprodout").submit(function(event) {
+      // Add a submit event listener to the add form
+      $("#addprodout").submit(function(event) {
         // Prevent the form from submitting normally
         event.preventDefault();
-        
+
         // Get the values from the form inputs
         var formData = $(this).serialize();
-        
+
         // Use AJAX to send the form data to your PHP script to insert it into the database
         $.ajax({
-            url: "post_prod-out.php",
-            type: "POST",
-            data: formData,
-            success: function() {
-                
-              // Reload the table with the updated data
-              reloadTable();
-              // Reset the values of specific input fields
-              $('#barcode').val('');
-              $('#description').val('');
-              $('#quantity').val('');
-              $('#lot').val('');
-              $('#exp_date').val('');
-              $('#remarks').val('');
-            }
-        });
-    });
+          url: "post_prod-out.php",
+          type: "POST",
+          data: formData,
+          success: function() {
 
-    // Add a submit event listener to the add form
-    $("#updateprodout").submit(function(event) {
+            // Reload the table with the updated data
+            reloadTable();
+            // Reset the values of specific input fields
+            $('#barcode').val('');
+            $('#description').val('');
+            $('#quantity').val('');
+            $('#lot').val('');
+            $('#exp_date').val('');
+            $('#remarks').val('');
+          }
+        });
+      });
+
+      // Add a click event listener to the reload button
+      $("#endorse").click(function(event) {
         // Prevent the form from submitting normally
         event.preventDefault();
-        
-        // Get the values from the form inputs
-        var formData = $(this).serialize();
-        
-        // Use AJAX to send the form data to your PHP script to insert it into the database
+
+        // Get the values from the form
+        var endorsed_by = $('#endorsed_by').val();
+        // var myTable = $('#myTable tbody tr').val();
+        var mrf = $('#mrf').val();
+        var order_num = $('#order_num').val();
+
         $.ajax({
-            url: "post_prod-out.php",
-            type: "POST",
-            data: formData,
-            success: function() {
-                
-
-            }
-        });
-    });
-
-    // Add a click event listener to the reload button
-    $("#endorse").click(function(event) {
-      // Prevent the form from submitting normally
-      event.preventDefault();
-
-      // Get the values from the form
-      var endorsed_by = $('#endorsed_by').val();
-      // var myTable = $('#myTable tbody tr').val();
-      var mrf = $('#mrf').val();
-      var order_num = $('#order_num').val();
-
-      $.ajax({
           url: "get_prod-out.php",
           type: "GET",
-          data: {"endorsed_by": $("#endorsed_by").val(), action: "endorse_product"},
+          data: {
+            "endorsed_by": $("#endorsed_by").val(),
+            action: "endorse_product"
+          },
           dataType: "JSON",
           success: $(document).ready(function(data) {
             // // handle the response
@@ -1083,30 +1068,29 @@ include('templates/session.php');
               icon: "success",
               confirmButtonText: "OK"
             }).then((result) => {
-                if (result.isConfirmed) {
-                  location.reload();
-                } else {
-                  location.reload();
-                }
+              if (result.isConfirmed) {
+                location.reload();
+              } else {
+                location.reload();
+              }
             });
           })
         });
-      // if (mrf.length == 0 || order_num.length == 0){
-      //   $(document).ready(function() {
-      //     swal.fire({
-      //       title: "error!",
-      //       title: 'Something went wrong!',
-      //       text: "Make sure the table is not empty",
-      //       icon: "error",
-      //       confirmButtonText: "OK"
-      //     });
-      //   });
-      // } else {
-        
-      // }
-    });
-  });
+        // if (mrf.length == 0 || order_num.length == 0){
+        //   $(document).ready(function() {
+        //     swal.fire({
+        //       title: "error!",
+        //       title: 'Something went wrong!',
+        //       text: "Make sure the table is not empty",
+        //       icon: "error",
+        //       confirmButtonText: "OK"
+        //     });
+        //   });
+        // } else {
 
+        // }
+      });
+    });
   </script>
 
 </body>
