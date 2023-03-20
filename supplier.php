@@ -179,7 +179,6 @@ if ($_SESSION['login_user']['is_superuser'] == false) {
       <!-- /.sidebar -->
     </aside>
 
-
   <?php
   include("templates/supplier-contents.php");
   include("templates/footer.php");
