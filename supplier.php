@@ -1,8 +1,10 @@
 <?php
-include('connection.php');
-session_start();
-if (!isset($_SESSION['login_user']['user'])) {
-  header("Location: index.php");
+include('templates/connection.php');
+include('templates/session.php');
+
+if ($_SESSION['login_user']['is_superuser'] == false) {
+  header('HTTP/1.0 403 Forbidden', TRUE, 403);
+  die(header('location: 403.html'));  
 }
 ?>
 
@@ -45,38 +47,13 @@ if (!isset($_SESSION['login_user']['user'])) {
   <div class="wrapper">
 
     <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
+    <!-- <div class="preloader flex-column justify-content-center align-items-center">
       <img class="animation__shake" src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTELogo" height="500" width="500">
-    </div>
+    </div> -->
 
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light justify-content-between">
-      <!-- Left navbar links -->
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="starter.php" class="nav-link">Home</a>
-        </li>
-      </ul>
-      <h6 class="mb-0 mr-2">
-        <?php
-          date_default_timezone_set("Asia/Manila");  
-          $h = date('G');
-          $user = $_SESSION['login_user']['user'];
-
-          if ($h>=0 && $h<=11) {
-              echo "Good morning, $user";
-          } else if ($h>=12 && $h<=17) {
-              echo "Good afternoon, $user";
-          } else {
-              echo "Good evening, $user";
-          }
-        ?> 
-      </h6>
-    </nav>
-    <!-- /.navbar -->
+    <?php
+    include("templates/navbar.php");
+    ?>
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-light-blue elevation-4">
@@ -202,162 +179,12 @@ if (!isset($_SESSION['login_user']['user'])) {
       <!-- /.sidebar -->
     </aside>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <div class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1 class="m-0">Supplier List</h1>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-        <div class="col-12">
-          <div class="card card-outline card-primary">
-            <div class="card-header text-center">
-              <a href="#" class="h1"><b>Add</b> Supplier</a>
-              <div class="card-tools">
-                <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse" title="Collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-              </div>
-            </div>
-            <div class="card-body text-right">
-              <p class="login-box-msg">Enroll New Supplier</p>
-              <?php
-              $check_name =  $_SESSION['login_user']['user'];
-              $query = "SELECT * FROM users WHERE user='$check_name'";
-              $result = mysqli_query($conn, $query);
-              while ($row = mysqli_fetch_array($result)) {
-              ?>
-              <form action="functions.php" method="post">
-                <div class="input-group mb-3">
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-truck"></span>
-                    </div>
-                  </div>
-                  <input type="text" class="form-control" name="supplier_name" placeholder="Enter name of Supplier" autocomplete="off" required>
-                </div>
-                <!-- /.col -->
-                <div class="col-12">
-                  <input type="hidden" name="id_lastuser" value="<?php echo $row['user_id'] ?>">
-                  <button type="submit" class="btn btn-primary" name="supplier">Add Supplier</button>
-                </div>
-              </form>
-              <?php } ?>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.row -->
-        </div>
 
-        <section class="content">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-12">
-                <div class="card">
-                  <!-- /.card-header -->
-                  <div class="card-body">
-                    <table id="example1" class="table table-bordered table-hover dt-center">
-                      <thead>
-                        <tr>
-                          <th>ID #</th>
-                          <th>Supplier Name</th>
-                          <th>Last Edited By</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-                        $check_user =  $_SESSION['login_user']['user_id'];
-                        $query = "SELECT * FROM suppliers";
-                        $result = mysqli_query($conn, $query);
-                        $check_row = mysqli_num_rows($result);
-                        while ($row = mysqli_fetch_array($result)) {
-                          $last_user = $row['last_edited_by'];
-                        ?>
-                          <tr>
-                            <td><?php echo $row['supplier_id'] ?></td>
-                            <td><?php echo $row['supplier_name'] ?></td>
-                            <?php
-                            $query2 = "SELECT * FROM users WHERE user_id ='$last_user'";
-                            $result2 = mysqli_query($conn, $query2);
-                            while ($row2 = mysqli_fetch_array($result2)) {
-                            ?>
+  <?php
+  include("templates/supplier-contents.php");
+  include("templates/footer.php");
+  ?>
 
-                              <td><?php echo $row2['employee_name'] ?></td>
-                              <td>
-                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['supplier_id'] ?>">
-                                  <i class="fas fa-pencil-alt"></i>
-                                  Edit
-                                </button>
-                                <!-- /.modal -->
-                                <div class="modal fade" id="update<?php echo $row['supplier_id'] ?>">
-                                  <div class="modal-dialog modal-dialog-centered modal-lg">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                      </div>
-                                      <div class="modal-body">
-                                        <form action="functions.php" method="POST">
-                                          <div class="row">
-                                            <div class="col-md-12">
-                                              <div class="form-group">
-                                                <label for="name">Name</label>
-                                                <input type="text" class="form-control " id="name" name="supplier_name" value="<?php echo $row['supplier_name'] ?>" required>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="modal-footer">
-                                            <input type="hidden" name="supplier_modify" value="<?php echo $row['supplier_id'] ?>">
-                                            <input type="hidden" name="last_user" value="<?php echo $check_user ?>">
-                                            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->
-                                            <button type="submit" class="btn btn-outline-danger" name="delete_supplier">Delete</button>
-                                            <button type="submit" class="btn btn-primary" name="modify_supplier">Save Changes</button>
-                                          </div>
-                                        </form>
-                                      </div>
-                                    </div>
-                                    <!-- /.modal-content -->
-                                  </div>
-                                  <!-- /.modal-dialog -->
-                                </div>
-                                <!-- /.modal -->
-                              </td>
-                          </tr>
-                        <?php } ?>
-                      <?php } ?>
-                      </tbody>
-                    </table>
-                  </div>
-                  <!-- /.card-body -->
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-      <!-- /.content-header -->
-    </div>
-    <!-- /.content-wrapper -->
-
-    <footer class="main-footer">
-      <strong>Made by <a href="#">TUP-C Interns</a>.</strong>
-      <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 1.0.0
-      </div>
-    </footer>
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
 

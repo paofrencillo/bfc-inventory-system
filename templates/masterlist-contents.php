@@ -135,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                             <div class="form-group mb-3">
                                                 <label for="category">Select Category</label>
                                                 <select class="custom-select" name="category" id="category" required>
-                                                    <option value="GENERIC">GENERIC</option>
+                                                    <option value="GENERIC" selected>GENERIC</option>
                                                     <option value="BRANDED">BRANDED</option>
                                                     <option value="MEDICAL DEVICE">MEDICAL DEVICE</option>
                                                     <option value="NON-PHARMA">NON-PHARMA</option>

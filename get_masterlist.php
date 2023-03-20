@@ -1,5 +1,5 @@
 <?php
-header("Content-Type: text/json; charset=utf8");
+header("Content-Type: application/json; charset=utf8");
 date_default_timezone_set('Asia/Manila');
 
 // Restrict user fron accessing the php file directly
@@ -11,13 +11,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
     header('HTTP/1.0 500 Internal Server Error', TRUE, 500);
 
     /* choose the appropriate page to redirect users */
-    die(header('location: ../500.html'));
+    die(header('location: 500.html'));
 }
 if (isset($_GET["action"]) && $_GET["action"] === "get_product") {
     include('templates/connection.php');
     $barcode = $_GET["barcode"];
     $table = "product_masterlist";
-    $query_get = "SELECT * FROM `$table` WHERE barcode='$barcode';";
+    $query_get = "SELECT * FROM $table WHERE barcode='$barcode';";
     $result = mysqli_query($conn, $query_get);
 
     if ($result->num_rows == 0) {

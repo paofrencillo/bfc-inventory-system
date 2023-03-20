@@ -1,35 +1,21 @@
-// //-------------- AUTOMATIC RELOAD TABLE (TRY LANGZZZ)
-// document.addEventListener('DOMContentLoaded', function () {
-//   $.ajax({
-//     type: "GET",
-//     url: "get_masterlist.php",
-//     data: {get_products: "get_products"},
-//     dataType: "html",
-//     success: function(data) {
-   
-//     },
-//     error: function(error) {
-//       console.error(error);
-//     }
-//   })
-// }, false);
-
 function viewModal(el) {
+  console.log(el.getAttribute("data-id"))
   $.ajax({
     type: "GET",
     url: "get_masterlist.php",
-    data: {"barcode": String(el.getAttribute("data-id")), action: "get_product"},
+    data: {"barcode": el.getAttribute("data-id"), action: "get_product"},
     dataType: "JSON",
     success: function(data) {
-      $("#barcode-modal").val(data.barcode);
+      $("#barcode-modal").val(JSON.parse(data.barcode));
       $("#desc-modal").val(data.description);
       $("#gen-modal").val(data.generic_name);
       $("#cat-modal").val(data.category);
       $("#img-modal").attr("src", data.image);
       $("#delete-product-btn").attr("data-product-barcode", data.barcode);   
     },
-    error: function(error) {
-      console.error(error);
+    error: function(xhr, error, status, data) {
+
+      console.log(xhr, error, status, data.barcode);
     }
   })
 }
