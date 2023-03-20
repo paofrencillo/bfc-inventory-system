@@ -94,13 +94,13 @@ if ($_SESSION['login_user']['is_superuser'] == false) {
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="inventory.php" class="nav-link">
-                <i class="far fa-dot-circle nav-icon"></i>
+                <i class="far fa-circle nav-icon"></i>
                 <p>Inventory</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="masterlist.php" class="nav-link active">
-                <i class="far fa-circle nav-icon"></i>
+                <i class="far fa-dot-circle nav-icon"></i>
                 <p>Masterlist</p>
               </a>
             </li>

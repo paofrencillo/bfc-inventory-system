@@ -1,11 +1,12 @@
 <?php
-include('connection.php');
-session_start();
-if (!isset($_SESSION['login_user']['user'])) {
-  header("Location: index.php");
+include('templates/connection.php');
+include('templates/session.php');
+
+if ($_SESSION['login_user']['is_superuser'] == false) {
+  header('HTTP/1.0 403 Forbidden', TRUE, 403);
+  die(header('location: 403.html'));  
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,38 +43,13 @@ if (!isset($_SESSION['login_user']['user'])) {
   <div class="wrapper">
 
     <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
+    <!-- <div class="preloader flex-column justify-content-center align-items-center">
       <img class="animation__shake" src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTELogo" height="500" width="500">
-    </div>
+    </div> -->
 
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light justify-content-between">
-      <!-- Left navbar links -->
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="starter.php" class="nav-link">Home</a>
-        </li>
-      </ul>
-      <h6 class="mb-0 mr-2">
-        <?php
-          date_default_timezone_set("Asia/Manila");  
-          $h = date('G');
-          $user = $_SESSION['login_user']['user'];
-
-          if ($h>=0 && $h<=11) {
-              echo "Good morning, $user";
-          } else if ($h>=12 && $h<=17) {
-              echo "Good afternoon, $user";
-          } else {
-              echo "Good evening, $user";
-          }
-        ?> 
-      </h6>
-    </nav>
-    <!-- /.navbar -->
+    <?php
+    include("templates/navbar.php");
+    ?>
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-light-blue elevation-4">
@@ -253,18 +229,9 @@ if (!isset($_SESSION['login_user']['user'])) {
     </div>
     <!-- /.content-wrapper -->
 
-    <footer class="main-footer">
-      <strong>Made by <a href="#">TUP-C Interns</a>.</strong>
-      <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 1.0.0
-      </div>
-    </footer>
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
+    <?php
+    include("templates/footer.php");
+    ?>
   </div>
   <!-- ./wrapper -->
 
