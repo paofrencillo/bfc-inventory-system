@@ -14,6 +14,10 @@ $mrf = $_POST['mrf'];
 $order_num = $_POST['order_num'];
 $branch = $_POST['branch'];
 
+if(isset($_POST['form1'])) {
+    
+}
+
 // Insert the values into the database
 $sql = "INSERT INTO endorse (
     barcode, 

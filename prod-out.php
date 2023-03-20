@@ -441,10 +441,7 @@ include('templates/session.php');
                                               <option>Supplier C</option>
                                               <option>Supplier D</option>
                                               <option>Supplier E</option>
-<<<<<<< HEAD
-=======
                                               <option>Supplier F</option>
->>>>>>> 1193f639005d26e05c5324ca67c373206b695c7b
                                             </select>
                                           </div>
                                         </div>
