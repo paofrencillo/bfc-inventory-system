@@ -1,12 +1,8 @@
 <?php
 include('templates/connection.php');
 include('templates/session.php');
-
-if ($_SESSION['login_user']['is_superuser'] == false) {
-  header('HTTP/1.0 403 Forbidden', TRUE, 403);
-  die(header('location: 403.html'));  
-}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,9 +54,32 @@ if ($_SESSION['login_user']['is_superuser'] == false) {
     </div> -->
 
     <!-- Navbar -->
-    <?php
-    include("templates/navbar.php");
-    ?>
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light justify-content-between">
+      <!-- Left navbar links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="starter.php" class="nav-link">Home</a>
+        </li>
+      </ul>
+      <h6 class="mb-0 mr-2">
+        <?php
+        date_default_timezone_set("Asia/Manila");
+        $h = date('G');
+        $user = $_SESSION['login_user']['user'];
+
+        if ($h >= 0 && $h <= 11) {
+          echo "Good morning, $user";
+        } else if ($h >= 12 && $h <= 17) {
+          echo "Good afternoon, $user";
+        } else {
+          echo "Good evening, $user";
+        }
+        ?>
+      </h6>
+    </nav>
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
@@ -128,7 +147,7 @@ if ($_SESSION['login_user']['is_superuser'] == false) {
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link active">
+                  <a href="#" class="nav-link  active">
                     <i class="far fa-dot-circle nav-icon"></i>
                     <p>Product Out</p>
                   </a>
@@ -422,6 +441,10 @@ if ($_SESSION['login_user']['is_superuser'] == false) {
                                               <option>Supplier C</option>
                                               <option>Supplier D</option>
                                               <option>Supplier E</option>
+<<<<<<< HEAD
+=======
+                                              <option>Supplier F</option>
+>>>>>>> 1193f639005d26e05c5324ca67c373206b695c7b
                                             </select>
                                           </div>
                                         </div>
