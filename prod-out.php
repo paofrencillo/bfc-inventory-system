@@ -275,7 +275,8 @@ include('templates/session.php');
                           <tbody>
                             <?php
                             $check_user =  $_SESSION['login_user']['user_id'];
-                            $query = "SELECT * FROM endorse_final ORDER BY endorsed_date";
+                            $user =  $_SESSION['login_user']['employee_name'];
+                            $query = "SELECT * FROM endorse_final WHERE endorsed_by = '$user' ORDER BY endorsed_date";
                             $result = mysqli_query($conn, $query);
                             $check_row = mysqli_num_rows($result);
                             while ($row = mysqli_fetch_array($result)) {
