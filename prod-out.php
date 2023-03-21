@@ -371,10 +371,10 @@ include('templates/session.php');
                                             </div>
                                           </div>
                                         </div>
-                                        <div class="modal-footer">
+                                        <div class="modal-footer justify-content-between">
                                           <input type="hidden" name="id_update" value="<?php echo $row['id'] ?>">
                                           <button type="submit" class="btn btn-outline-danger" name="delete_updateprodout">Delete</button>
-                                          <button type="submit" class="btn btn-primary" name="updateprodout">Update</button>
+                                          <button type="submit" class="btn btn-primary" name="updateprodout">Update Details</button>
                                         </div>
                                       </form>
                                     </div>
@@ -491,39 +491,35 @@ include('templates/session.php');
                               <th>Product Description</th>
                               <th>Quantity</th>
                               <th>Lot No.</th>
-                              <th>Branch Code/Name</th>
+                              <th>Branch Code</th>
                               <th>MRF</th>
                               <th>Inv/Order No.</th>
+                              <th>Remarks</th>
                               <th>Endorsed Date</th>
-                              <th>Date Released</th>
                               <th>Endorsed By</th>
                             </tr>
                           </thead>
                           <tbody>
+                          <?php
+                            $check_user =  $_SESSION['login_user']['user_id'];
+                            $query = "SELECT * FROM endorse_history ORDER BY endorsed_date";
+                            $result = mysqli_query($conn, $query);
+                            $check_row = mysqli_num_rows($result);
+                            while ($row = mysqli_fetch_array($result)) {
+                            ?>
                             <tr>
-                              <td>10231562322</td>
-                              <td>Cetirizine 10Mg 10S</td>
-                              <td>34</td>
-                              <td>200</td>
-                              <td>23422/Sean</td>
-                              <td>3498</td>
-                              <td>10351</td>
-                              <td>03-12-2023</td>
-                              <td>03-16-2023</td>
-                              <td>Ako si bnm</td>
+                              <td><?php echo $row['barcode'] ?></td>
+                              <td><?php echo $row['description'] ?></td>
+                              <td><?php echo $row['quantity'] ?></td>
+                              <td><?php echo $row['lot'] ?></td>
+                              <td><?php echo $row['branch'] ?></td>
+                              <td><?php echo $row['mrf'] ?></td>
+                              <td><?php echo $row['order_num'] ?></td>
+                              <td><?php echo $row['remarks'] ?></td>
+                              <td><?php echo $row['endorsed_date'] ?></td>
+                              <td><?php echo $row['endorsed_by'] ?></td>
                             </tr>
-                            <tr>
-                              <td>10231562322</td>
-                              <td>Salbutamol 2Mg Tab 100s (Ventomax)</td>
-                              <td>56</td>
-                              <td>200</td>
-                              <td>23422/Sean</td>
-                              <td>3499</td>
-                              <td>10351</td>
-                              <td>03-12-2023</td>
-                              <td>03-15-2023</td>
-                              <td>Ako si bnm</td>
-                            </tr>
+                            <?php } ?>
                           </tbody>
                         </table>
                       </div>
@@ -670,7 +666,7 @@ include('templates/session.php');
                     </div>
                   </div>
                   <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-outline-danger" id="cancelendorse" name="cancelendorse">Delete All</button>
                     <button type="button" class="btn btn-primary" id="endorse" name="endorse">Endorse Products</button>
                   </div>
 
@@ -714,48 +710,50 @@ include('templates/session.php');
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="mrf_search">MRF:</label>
-                          <input type="number" class="form-control " id="mrf_search" name="mrf_search" required>
+                          <input type="text" class="form-control " id="mrf_search" name="mrf_search" autocomplete="off" required>
                         </div>
                       </div>
                       <div class="col-sm-2">
                         <div class="form-group">
-                          <label for="barcode">Search MRF</label>
-                          <button type="submit" class="btn btn-info form-control">
+                          <label for="button_mrfsearch">Search MRF</label>
+                          <button type="submit" class="btn btn-info form-control" id="button_mrfsearch">
                             <i class="fas fa-search"></i>
                           </button>
                         </div>
                       </div>
                       <div class="col-sm-12">
-                        <div class="form-group ">
-                          <table id="example3" class="table table-bordered table-hover dt-center" id="searchtable">
-                            <thead>
-                              <tr>
-                                <th>Barcode</th>
-                                <th>Product Description</th>
-                                <th>Quantity</th>
+                        <div class="form-group">
+                          <div class="card-body table-responsive p-0" style="height: 300px;">
+                            <table id="example3" class="table table-head-fixed text-center">
+                              <thead>
+                                <tr>
+                                  <th>Barcode</th>
+                                  <th>Product Description</th>
+                                  <th>Quantity</th>
 
-                                <th>Branch Code</th>
-                                <th>MRF</th>
+                                  <th>Branch Code</th>
+                                  <th>MRF</th>
 
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <!-- <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr> -->
-                            </tbody>
-                          </table>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <!-- <tr>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                </tr> -->
+                              </tbody>
+                            </table>
+                          </div>
                         </div>
                       </div>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                  <button type="submit" class="btn btn-primary">Dispatch</button>
+                  <button type="button" class="btn btn-primary" id="dispatchall">Dispatch</button>
                 </div>
                 </form>
               </div>
@@ -843,10 +841,8 @@ include('templates/session.php');
         // "scrollY": '500px',
         // "scrollCollapse": true,
         "autoWidth": false,
-        "order": [
-          [5, 'desc']
-        ],
-        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+        "order": [[5, 'desc']],
+        "buttons": ["copy", "excel", "print"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
 
@@ -856,11 +852,12 @@ include('templates/session.php');
           "className": "dt-center",
           "targets": "_all"
         }],
-        "responsive": true,
+        "responsive": true, 
         "lengthChange": true,
         // "scrollY": '500px',
         // "scrollCollapse": false,
         "autoWidth": false,
+        "order": [[5, 'desc']],
         // "buttons": ["copy", "csv", "excel", "pdf", "print"]
       }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
     });
@@ -869,34 +866,20 @@ include('templates/session.php');
       $("#example3").DataTable({
         "columnDefs": [{
           "className": "dt-center",
-          "targets": "_all"
+          "targets": "_all",
+          "orderable": false
         }],
+        "searching": false,
+        "info": false,
         "responsive": true,
         "lengthChange": true,
         "paging": false,
         // "scrollY": '500px',
         // "scrollCollapse": true,
         "autoWidth": false,
+        "order": [],
         // "buttons": ["copy", "csv", "excel", "pdf", "print"]
       }).buttons().container().appendTo('#example3_wrapper .col-md-6:eq(0)');
-    });
-
-    $(function() {
-      $("#example4").DataTable({
-        "columnDefs": [{
-          "className": "dt-center",
-          "targets": "_all"
-        }],
-        "responsive": true,
-        "lengthChange": true,
-        "paging": true,
-        // "pageLength": 5,
-        // "scrollY": 200,
-        // "scrollX": true,
-        "scrollCollapse": false,
-        "autoWidth": false,
-        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
-      }).buttons().container().appendTo('#example4_wrapper .col-md-6:eq(0)');
     });
 
     $(function() {
@@ -966,11 +949,11 @@ include('templates/session.php');
               console.log(row)
               var tr = document.createElement('tr');
               tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
-                row.description + '</td><td>' +
-                row.quantity + '</td><td>' +
-                row.lot + '</td><td>' +
-                row.exp_date + '</td><td>' +
-                row.remarks + '</td>'
+              row.description + '</td><td>' +
+              row.quantity + '</td><td>' +
+              row.lot + '</td><td>' +
+              row.exp_date + '</td><td>' +
+              row.remarks + '</td>'
               tableBody.appendChild(tr);
             });
           } else {
@@ -1014,7 +997,7 @@ include('templates/session.php');
         });
       });
 
-      // Add a click event listener to the reload button
+      // Add a click event
       $("#endorse").click(function(event) {
         // Prevent the form from submitting normally
         event.preventDefault();
@@ -1077,23 +1060,138 @@ include('templates/session.php');
         // }
       });
 
+       // Add a click event
+       $("#cancelendorse").click(function(event) {
+        // Prevent the form from submitting normally
+        event.preventDefault();
+
+        // Get the values from the form
+        var endorsed_by = $('#endorsed_by').val();
+
+        $.ajax({
+          url: "get_prod-out.php",
+          type: "GET",
+          data: {
+            "endorsed_by": $("#endorsed_by").val(),
+            action: "cancelendorse"
+          },
+          dataType: "JSON",
+          success: $(document).ready(function(data) {
+            // // handle the response
+            // Reload the table with the updated data
+            // reloadTable();
+            // Reset the values of specific input fields
+            $('#branch').val('');
+            $('#mrf').val('');
+            $('#order_num').val('');
+            $('#barcode').val('');
+            $('#description').val('');
+            $('#quantity').val('');
+            $('#lot').val('');
+            $('#exp_date').val('');
+            $('#remarks').val('');
+            console.log(data)
+            swal.fire({
+              title: "Success!",
+              text: "Product successfully deleted",
+              icon: "success",
+              confirmButtonText: "OK"
+            }).then((result) => {
+              if (result.isConfirmed) {
+                reloadTable();
+              } else {
+                reloadTable();
+              }
+            });
+          })
+        });
+        // if (mrf.length == 0 || order_num.length == 0){
+        //   $(document).ready(function() {
+        //     swal.fire({
+        //       title: "error!",
+        //       title: 'Something went wrong!',
+        //       text: "Make sure the table is not empty",
+        //       icon: "error",
+        //       confirmButtonText: "OK"
+        //     });
+        //   });
+        // } else {
+
+        // }
+      });
 
     });
   </script>
 
   <script>
     $(document).ready(function() {
-
-      $('#search-form').submit(function(event) {
-        event.preventDefault();
-        var formData = $(this).serialize();
+      // Submit form using AJAX
+      $('#search_form').submit(function(event) {
+        event.preventDefault(); // Prevent page from reloading
         $.ajax({
-          type: 'POST',
           url: 'search_prod-out.php',
-          data: formData,
+          type: 'post',
+          dataType: 'json',
+          data: $('#search_form').serialize(),
           success: function(data) {
-            var data = JSON.parse(responseText);
+            console.log(data)
+            // Clear old data from the table
+            // $('#example3 tbody').empty();
+    
+            var tableBody = document.querySelector('#example3 tbody');
+            tableBody.innerHTML = '';
+            // Append new data to the table
+            data.forEach(function(row) {
+              // var tr = $('<tr>');
+              // tr.append('<td>' + row.barcode + '</td>');
+              // tr.append('<td>' + row.description + '</td>');
+              // tr.append('<td>' + row.quantity + '</td>');
+              // tr.append('<td>' + row.branch + '</td>');
+              // tr.append('<td>' + row.mrf + '</td>');
+              // $('#example3 tbody').append(tr);
+
+              var tr = document.createElement('tr');
+              tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
+                row.description + '</td><td>' +
+                row.quantity + '</td><td>' +
+                row.branch + '</td><td>' +
+                row.mrf + '</td>'
+                tableBody.appendChild(tr);
+            });
           }
+        });
+      });
+      
+      $("#dispatchall").click(function(event) {
+        // Prevent the form from submitting normally
+        event.preventDefault();
+
+        // Get the values from the form
+        var mrf_search = $('#mrf_search').val();
+        console.log(mrf_search)
+        $.ajax({
+          url: "get_prod-out.php",
+          type: "GET",
+          data: {
+            "mrf_search": $("#mrf_search").val(),
+            action: "mrfsearch"
+          },
+          dataType: "JSON",
+          success: $(document).ready(function(data) {
+            console.log(data)
+            swal.fire({
+              title: "Success!",
+              text: "Product successfully dispatch",
+              icon: "success",
+              confirmButtonText: "OK"
+            }).then((result) => {
+              if (result.isConfirmed) {
+                location.reload();
+              } else {
+                location.reload();
+              }
+            });
+          })
         });
       });
     });

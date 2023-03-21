@@ -25,7 +25,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 header('Content-Type: application/json');
 echo json_encode($data);
 
-
+// For endorse product
 if(isset($_GET["action"]) && $_GET["action"] === "endorse_product") { 
 
    $server = "localhost";
@@ -95,6 +95,92 @@ if(isset($_GET["action"]) && $_GET["action"] === "endorse_product") {
    //    echo json_encode($data);
    // }
    
+}
+
+// For cancel endorse product
+if(isset($_GET["action"]) && $_GET["action"] === "cancelendorse") { 
+
+   $server = "localhost";
+   $user = "root";
+   $pass = "";
+   $db = "bfc_inventory";
+
+   $conn = mysqli_connect($server, $user, $pass, $db);
+
+   if (!$conn) {
+      die("<script>alert('Connection Failed.')</script>");
+   }
+
+   header("Content-Type: text/json; charset=utf8");
+   $endorsed_by = $_GET["endorsed_by"];
+   $table = "endorse";
+
+   $del = "DELETE FROM endorse WHERE endorsed_by='$endorsed_by';";
+   $resultdel = mysqli_query($conn, $del);
+   
+}
+
+
+if(isset($_GET["action"]) && $_GET["action"] === "mrfsearch") { 
+
+   $server = "localhost";
+   $user = "root";
+   $pass = "";
+   $db = "bfc_inventory";
+
+   $conn = mysqli_connect($server, $user, $pass, $db);
+
+   if (!$conn) {
+      die("<script>alert('Connection Failed.')</script>");
+   }
+
+   header("Content-Type: text/json; charset=utf8");
+   $mrf_search = $_GET["mrf_search"];
+
+   $sql2 = "SELECT * FROM endorse_final WHERE mrf ='$mrf_search';";
+   $result2 = mysqli_query($conn, $sql2);
+   
+   while ($row2 = mysqli_fetch_array($result2)) {
+      $sql3 = "INSERT INTO endorse_history (
+         barcode, 
+         description, 
+         quantity, 
+         lot,
+         branch, 
+         mrf,
+         order_num, 
+         exp_date,
+         remarks, 
+         endorsed_by,
+         endorsed_date) 
+         VALUES (
+         '" . $row2["barcode"] . "', 
+         '" . $row2["description"] . "', 
+         '" . $row2["quantity"] . "', 
+         '" . $row2["lot"] . "',
+         '" . $row2["branch"] . "', 
+         '" . $row2["mrf"] . "',
+         '" . $row2["order_num"] . "', 
+         '" . $row2["exp_date"] . "',
+         '" . $row2["remarks"] . "', 
+         '" . $row2["endorsed_by"] . "',
+         '" . $row2["endorsed_date"] . "')";
+
+      if (mysqli_query($conn, $sql3)) {
+         $data = 'success';
+         echo json_encode($data);
+      } else {
+         echo "Error inserting data: " . mysqli_error($conn);
+      }
+
+      $sql4 = "DELETE FROM endorse_final WHERE mrf ='$mrf_search';";
+
+      if (mysqli_query($conn, $sql4)) {
+         echo "Data deleted successfully";
+      } else {
+         echo "Error deleting data: " . mysqli_error($conn);
+      }
+   }
 }
 
 ?>
