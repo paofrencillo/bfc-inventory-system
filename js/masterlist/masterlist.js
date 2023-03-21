@@ -31,7 +31,7 @@ function editDetails(el) {
 
   modal_fields = document.getElementById("details").querySelectorAll("input");
   $("#cat-modal").removeAttr("disabled");
-  $("#supp-modal").removeAttr("disabled");
+  $(".selectpicker").removeAttr("disabled");
   modal_fields.forEach(field => {
 
     if (field.id != "barcode-modal") {
