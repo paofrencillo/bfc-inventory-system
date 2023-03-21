@@ -611,7 +611,7 @@ include('templates/session.php');
                       <div class="col-sm-5">
                         <div class="form-group">
                           <label for="description2">Product Description:</label>
-                          <input type="text" class="form-control " id="description2" name="description" autocomplete="off" required readonly>
+                          <input type="text" class="form-control " id="description2" name="description" autocomplete="off" required>
                         </div>
                       </div>
                       <div class="col-sm-1">
@@ -1119,7 +1119,7 @@ include('templates/session.php');
           success: function(data) {
             console.log(data)
             if (data != "Not found") {
-              $("#description2").attr("disabled", "");
+              // $("#description2").attr("readonly", "");
               $("#description2").val(data.description);
             } else {
               // $("#description2").val("Product Not Found");
