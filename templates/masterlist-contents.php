@@ -148,8 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-5">
                                             <div class="form-group">
                                                 <label for="supp">Supplier:</label>
-                                                <select class="form-control selectpicker" style="width: 100%;" id="supp">
-                                                    <option selected="selected" disabled required>Select Supplier</option>
+                                                <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" id="supp">
                                                     <?php
                                                     $query2 = "SELECT * FROM suppliers";
                                                     $result = mysqli_query($conn, $query2);
@@ -241,9 +240,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                 <label for="supp">Supplier:</label>
                                                 <input class="form-control" type="text" name="" id="supp-text" readonly>
                                             </div> -->
-                                            <div class="form-group" id="supp-modal-group">
+                                            <div class="form-group">
                                                 <label for="supp-modal">Supplier:</label>
-                                                <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" name="supp-modal" id="supp-modal" disabled>
+                                                <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" name="supp-modal" id="supp-modal">
                                                     <?php
                                                     $query2 = "SELECT * FROM suppliers";
                                                     $result = mysqli_query($conn, $query2);

@@ -1,6 +1,8 @@
 $(document).ready(function() {
   $('.selectpicker').selectpicker();
+  document.getElementsByClassName("dropdown-toggle")[1].setAttribute("disabled", true);
 });
+
 // View product details
 function viewModal(el) {
   $.ajax({
@@ -13,7 +15,7 @@ function viewModal(el) {
       $("#desc-modal").val(data.description);
       $("#gen-modal").val(data.generic_name);
       $("#cat-modal").val(data.category);
-      $('#supp-modal').selectpicker('val', data.supplier)
+      $('#supp-modal').selectpicker('val', data.supplier);
       $("#img-modal").attr("src", data.image);
       $("#delete-product-btn").attr("data-product-barcode", data.barcode);   
     },
@@ -31,7 +33,8 @@ function editDetails(el) {
 
   modal_fields = document.getElementById("details").querySelectorAll("input");
   $("#cat-modal").removeAttr("disabled");
-  $(".selectpicker").removeAttr("disabled");
+  document.getElementsByClassName("dropdown-toggle")[1].removeAttribute("disabled");
+
   modal_fields.forEach(field => {
 
     if (field.id != "barcode-modal") {
@@ -48,7 +51,7 @@ function removeAttrInputs() {
   $("#description").removeAttr("disabled");
   $("#generic_name").removeAttr("disabled");
   $("#category").removeAttr("disabled");
-  $("#supp").removeAttr("disabled");
+  document.getElementsByClassName("dropdown-toggle")[0].removeAttribute("disabled");
   $("#imageFile").removeAttr("disabled");
 
   $("#description").val('');
@@ -82,10 +85,8 @@ $('#details').on('hidden.bs.modal', function (e) {
   $("#update-btn").removeClass("d-none");
 
   $("#cat-modal").attr("disabled", "")
-  $("#supp-modal").attr("disabled", "")
+  document.getElementsByClassName("dropdown-toggle")[1].setAttribute("disabled", true);
 
-  $("#supp-modal-group").addClass("d-none");
-  $("#supp-text-group").removeClass("d-none");
   modal_fields = document.getElementById("details").querySelectorAll("input");
   modal_fields.forEach(field => {
     if (field.id != "barcode-modal") {
@@ -142,14 +143,14 @@ $("#barcode").on("change", ()=> {
         $("#description").attr("disabled", "");
         $("#generic_name").attr("disabled", "");
         $("#category").attr("disabled", "");
-        $("#supp").attr("disabled", "");
+        document.getElementsByClassName("dropdown-toggle")[0].setAttribute("disabled", true);
         $("#imageFile").attr("disabled", "");
   
         $("#barcode").val(data.barcode);
         $("#description").val(data.description);
         $("#generic_name").val(data.generic_name);
         $("#category").val(data.category);
-        $("#supp").val(data.supplier);
+        $('#supp').selectpicker('val', data.supplier);
         let imgName = data.image;
         let strip_imgName = imgName.replace("product-imgs/", '')
         $("#file-label").html(strip_imgName);

@@ -90,13 +90,13 @@ if (!empty($_POST) && $_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST['ac
             move_uploaded_file($_FILES["imageFile2"]["tmp_name"], $path);
 
             $conn->query("UPDATE $table SET description='$description', generic_name='$generic_name',
-                            category='$category', image='$path', last_edited_by=$last_edited_by, last_edited_on='$last_edited_on'
-                            WHERE barcode='$barcode';");
+                            category='$category', supplier='$supplier', image='$path', last_edited_by=$last_edited_by,
+                            last_edited_on='$last_edited_on' WHERE barcode='$barcode';");
         }
     } else if ($_FILES["imageFile2"]["name"] == '') { // if image was not updated
         $conn->query("UPDATE $table SET description='$description', generic_name='$generic_name',
-                        category='$category', last_edited_by=$last_edited_by, last_edited_on='$last_edited_on'
-                        WHERE barcode='$barcode';");
+                        category='$category', supplier='$supplier', last_edited_by=$last_edited_by,
+                        last_edited_on='$last_edited_on'WHERE barcode='$barcode';");
     }
     // Check if barcode is changed
     // If not then proceed to code below
