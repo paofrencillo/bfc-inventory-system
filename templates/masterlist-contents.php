@@ -243,7 +243,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                             </div> -->
                                             <div class="form-group" id="supp-modal-group">
                                                 <label for="supp-modal">Supplier:</label>
-                                                <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" name="supp-modal" id="supp-modal">
+                                                <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" name="supp-modal" id="supp-modal" disabled>
                                                     <?php
                                                     $query2 = "SELECT * FROM suppliers";
                                                     $result = mysqli_query($conn, $query2);

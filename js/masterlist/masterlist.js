@@ -13,8 +13,7 @@ function viewModal(el) {
       $("#desc-modal").val(data.description);
       $("#gen-modal").val(data.generic_name);
       $("#cat-modal").val(data.category);
-      // $("#supp-text").val(data.supplier);
-      $('.selectpicker').selectpicker('val', data.supplier)
+      $('#supp-modal').selectpicker('val', data.supplier)
       $("#img-modal").attr("src", data.image);
       $("#delete-product-btn").attr("data-product-barcode", data.barcode);   
     },
@@ -33,8 +32,6 @@ function editDetails(el) {
   modal_fields = document.getElementById("details").querySelectorAll("input");
   $("#cat-modal").removeAttr("disabled");
   $("#supp-modal").removeAttr("disabled");
-  $("#supp-text-group").addClass("d-none");
-  $("#supp-modal-group").removeClass("d-none");
   modal_fields.forEach(field => {
 
     if (field.id != "barcode-modal") {
