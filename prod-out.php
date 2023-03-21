@@ -373,7 +373,7 @@ include('templates/session.php');
                                         </div>
                                         <div class="modal-footer">
                                           <input type="hidden" name="id_update" value="<?php echo $row['id'] ?>">
-                                          <button type="button" class="btn btn-outline-danger">Delete</button>
+                                          <button type="submit" class="btn btn-outline-danger" name="delete_updateprodout">Delete</button>
                                           <button type="submit" class="btn btn-primary" name="updateprodout">Update</button>
                                         </div>
                                       </form>
@@ -607,32 +607,32 @@ include('templates/session.php');
 
                       <div class="col-sm-3">
                         <div class="form-group">
-                          <label for="barcode">Barcode:</label>
-                          <input type="text" class="form-control " id="barcode" onmouseover="this.focus();" name="barcode" required>
+                          <label for="barcode2">Barcode:</label>
+                          <input type="text" class="form-control " id="barcode2" onmouseover="this.focus();" name="barcode" required>
                         </div>
                       </div>
                       <div class="col-sm-5">
                         <div class="form-group">
-                          <label for="description">Product Description:</label>
-                          <input type="text" class="form-control " id="description" name="description" required>
+                          <label for="description2">Product Description:</label>
+                          <input type="text" class="form-control " id="description2" name="description" required>
                         </div>
                       </div>
                       <div class="col-sm-1">
                         <div class="form-group">
-                          <label for="quantity">Quantity:</label>
-                          <input type="number" class="form-control " id="quantity" name="quantity" required>
+                          <label for="quantity2">Quantity:</label>
+                          <input type="number" class="form-control " id="quantity2" name="quantity" required>
                         </div>
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
-                          <label for="lot">Lot Number:</label>
-                          <input type="text" class="form-control" id="lot" name="lot" onkeyup="this.value = this.value.toUpperCase();" required>
+                          <label for="lot2">Lot Number:</label>
+                          <input type="text" class="form-control" id="lot2" name="lot" onkeyup="this.value = this.value.toUpperCase();" required>
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
-                          <label for="exp_date">Expiration Date:</label>
-                          <input type="text" class="form-control " id="exp_date" name="exp_date">
+                          <label for="exp_date2">Expiration Date:</label>
+                          <input type="text" class="form-control " id="exp_date2" name="exp_date">
                         </div>
                       </div>
                       <?php
@@ -650,8 +650,8 @@ include('templates/session.php');
                       </div>
                       <div class="col-sm-2">
                         <div class="form-group">
-                          <label for="remarks">Remarks:</label>
-                          <input type="text" class="form-control " id="remarks" name="remarks">
+                          <label for="remarks2">Remarks:</label>
+                          <input type="text" class="form-control " id="remarks2" name="remarks">
                         </div>
                       </div>
                       <?php
@@ -692,9 +692,9 @@ include('templates/session.php');
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <form id="search_form">
                     <div class="row">
-                      <div class="col-sm-7">
+                      <!-- <div class="col-sm-7">
                         <div class="form-group">
                           <label for="supp">Branch Code:</label>
                           <select class="form-control select2bs4" style="width: 100%;">
@@ -710,24 +710,24 @@ include('templates/session.php');
                             <?php } ?>
                           </select>
                         </div>
-                      </div>
-                      <div class="col-sm-3">
+                      </div> -->
+                      <div class="col-sm-4">
                         <div class="form-group">
-                          <label for="mrf">MRF:</label>
-                          <input type="number" class="form-control " id="mrf" name="mrf" required>
+                          <label for="mrf_search">MRF:</label>
+                          <input type="number" class="form-control " id="mrf_search" name="mrf_search" required>
                         </div>
                       </div>
                       <div class="col-sm-2">
                         <div class="form-group">
                           <label for="barcode">Search MRF</label>
-                          <a type="submit" class="btn btn-info form-control">
+                          <button type="submit" class="btn btn-info form-control">
                             <i class="fas fa-search"></i>
-                          </a>
+                          </button>
                         </div>
                       </div>
                       <div class="col-sm-12">
                         <div class="form-group ">
-                          <table id="example3" class="table table-bordered table-hover dt-center">
+                          <table id="example3" class="table table-bordered table-hover dt-center" id="searchtable">
                             <thead>
                               <tr>
                                 <th>Barcode</th>
@@ -752,12 +752,12 @@ include('templates/session.php');
                         </div>
                       </div>
                     </div>
-                  </form>
                 </div>
                 <div class="modal-footer justify-content-between">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-primary">Dispatch</button>
+                  <button type="submit" class="btn btn-primary">Dispatch</button>
                 </div>
+                </form>
               </div>
               <!-- /.modal-content -->
             </div>
@@ -771,12 +771,11 @@ include('templates/session.php');
     </div>
     <!-- /.content-wrapper -->
 
-    <footer class="main-footer">
-      <strong>Made by <a href="#">TUP-C Interns</a>.</strong>
-      <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 1.0.0
-      </div>
-    </footer>
+
+    <?php
+    // ------ Footer
+    include("templates/footer.php");
+    ?>
 
   </div>
   <!-- ./wrapper -->
@@ -994,21 +993,19 @@ include('templates/session.php');
         // Prevent the form from submitting normally
         event.preventDefault();
 
-        // Get the values from the form inputs
-        var formData = $(this).serialize();
 
         // Use AJAX to send the form data to your PHP script to insert it into the database
         $.ajax({
           url: "post_prod-out.php",
           type: "POST",
-          data: formData,
+          data: $(this).serialize(),
           success: function() {
-            $('#barcode').empty();
-            $('#description').empty();
-            $('#quantity').empty();
-            $('#lot').empty();
-            $('#exp_date').empty();
-            $('#remarks').empty();
+            $('#barcode2').val('');
+            $('#description2').val('');
+            $('#quantity2').val('');
+            $('#lot2').val('');
+            $('#exp_date2').val('');
+            $('#remarks2').val('');
             // Reload the table with the updated data
             reloadTable();
             // Reset the values of specific input fields
@@ -1079,9 +1076,28 @@ include('templates/session.php');
 
         // }
       });
+
+
     });
   </script>
 
+  <script>
+    $(document).ready(function() {
+
+      $('#search-form').submit(function(event) {
+        event.preventDefault();
+        var formData = $(this).serialize();
+        $.ajax({
+          type: 'POST',
+          url: 'search_prod-out.php',
+          data: formData,
+          success: function(data) {
+            var data = JSON.parse(responseText);
+          }
+        });
+      });
+    });
+  </script>
 
 </body>
 
