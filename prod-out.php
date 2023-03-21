@@ -1122,7 +1122,7 @@ include('templates/session.php');
               // $("#description2").attr("readonly", "");
               $("#description2").val(data.description);
             } else {
-              // $("#description2").val("Product Not Found");
+              $("#description2").val("Product Not Found");
               swal.fire({
               title: "Ooops!",
               text: "Scanned product not found",

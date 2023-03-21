@@ -327,7 +327,7 @@ if ($_SESSION['login_user']['is_superuser'] == false) {
     <!-- /.content-wrapper -->
 
     <?php
-    include("footer.php");
+    include("templates/footer.php");
     ?>
   </div>
   <!-- ./wrapper -->
