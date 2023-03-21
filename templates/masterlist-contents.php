@@ -145,7 +145,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-sm-12">
+                                        <div class="col-sm-5">
+                                            <div class="form-group">
+                                                <label for="supp">Supplier:</label>
+                                                <select class="form-control selectpicker" style="width: 100%;" id="supp">
+                                                    <option selected="selected" disabled required>Select Supplier</option>
+                                                    <?php
+                                                    $query2 = "SELECT * FROM suppliers";
+                                                    $result = mysqli_query($conn, $query2);
+                                                    $check_row = mysqli_num_rows($result);
+                                                    while ($row2 = mysqli_fetch_array($result)) {
+                                                    ?>
+                                                    <option value="<?php echo $row2['supplier_name']?>"><?php echo $row2['supplier_name']?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-7">
                                             <label>Image</label>
                                             <div class="custom-file form-group">
                                                 <input type="file" class="custom-file-input" id="imageFile" accept=".png,.jpeg,.jpeg" name="imageFile">
@@ -219,6 +235,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                     <option value="SPECIAL ORDER">SPECIAL ORDER</option>
                                                     <option value="HOUSE BRANDS">HOUSE BRANDS</option>
                                                     <option value="HEALTHY FIX">HEALTHY FIX</option>
+                                                </select>
+                                            </div>
+                                            <!-- <div class="form-group" id="supp-text-group">
+                                                <label for="supp">Supplier:</label>
+                                                <input class="form-control" type="text" name="" id="supp-text" readonly>
+                                            </div> -->
+                                            <div class="form-group" id="supp-modal-group">
+                                                <label for="supp-modal">Supplier:</label>
+                                                <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" name="supp-modal" id="supp-modal">
+                                                    <?php
+                                                    $query2 = "SELECT * FROM suppliers";
+                                                    $result = mysqli_query($conn, $query2);
+                                                    $check_row = mysqli_num_rows($result);
+                                                    while ($row2 = mysqli_fetch_array($result)) {
+                                                    ?>
+                                                    <option value="<?php echo $row2['supplier_name']?>"><?php echo $row2['supplier_name']?></option>
+                                                    <?php } ?>
                                                 </select>
                                             </div>
                                         </div>

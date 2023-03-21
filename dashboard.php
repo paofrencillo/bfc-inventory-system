@@ -77,7 +77,7 @@
               </a>
             </li>
 
-            <li class="nav-item menu-open ">
+            <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-edit"></i>
                 <p>
@@ -89,7 +89,7 @@
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="inventory.php" class="nav-link">
-                    <i class="far fa-dot-circle nav-icon"></i>
+                    <i class="far fa-circle nav-icon"></i>
                     <p>Inventory</p>
                   </a>
                 </li>
@@ -180,7 +180,7 @@
     
       <?php
       // ------ Contents
-      include("templates/prod-in-contents.php");
+      include("templates/dashboard-contents.php");
       // ------ Footer
       include("templates/footer.php");
       ?>

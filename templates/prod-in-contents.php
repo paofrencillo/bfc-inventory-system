@@ -47,33 +47,38 @@
                         <tr>
                           <th>Barcode</th>
                           <th>Product Description</th>
-                          <th>Stock</th>
-                          <th>Allocation</th>
-                          <th>S/A %</th>
+                          <th>Quantity</th>
+                          <th>Lot No.</th>
+                          <th>Exp. Date</th>
+                          <th>Last Edited</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1023156MHJHMHM</td>
-                          <td>Robust 100Mg 12S</td>
-                          <td>50</td>
-                          <td>200</td>
-                          <td>25%</td>
+                        <?php
+                          $query = "SELECT * FROM product_in ORDER BY last_edited_on DESC;";
+                          
+                          $result = mysqli_query($conn, $query);
+                          while ($row = mysqli_fetch_array($result)) {
+                            $last_user = $row['last_edited_by'];
+                            $date = date_create($row["last_edited_on"]);
+                            $date = date_format($date, "d/m/Y h:i"); 
+                        ?>
                           <td>
-                            <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                              <i class="fas fa-pencil-alt"></i>
-                              Edit
-                            </button>
-                            <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                              <i class="fas fa-eye"></i>
-                              Details
-                            </button>
+                            <?php echo $row["barcode"]; ?>
                           </td>
-                        </tr>
+                          <td>
+                            <?php echo $row["description"]; ?>
+                          </td>
+                          <td>
+                            <?php echo $row["in_quantity"];?>
+                          </td>
+                          <td>
+                            
+                          </td>
+                        <?php }?>
                         <tr>
-                          <td>421544256</td>
-                          <td>Cetirizine 10Mg 10S</td>
+
                           <td>80</td>
                           <td>200</td>
                           <td>40%</td>
@@ -88,25 +93,7 @@
                             </button>
                           </td>
                         </tr>
-                        <tr>
-                          <td>421544256</td>
-                          <td>Mefenamic Acid 500mg (Generic)</td>
-                          <td>70</td>
-                          <td>200</td>
-                          <td>35%</td>
-                          <td>
-                            <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                              <i class="fas fa-pencil-alt"></i>
-                              Edit
-                            </button>
-                            <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
-                              <i class="fas fa-eye"></i>
-                              Details
-                            </button>
-                          </td>
-                        </tr>
                       </tbody>
-
                     </table>
                   </div>
                   <!-- /.card-body -->
@@ -114,7 +101,6 @@
               </div>
             </div>
           </div>
-
 
           <div class="modal fade" id="addnew">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl ">
@@ -134,13 +120,12 @@
                           <select class="form-control select2bs4" style="width: 100%;">
                             <option selected="selected" disabled>Please Select Supplier</option>
                             <?php
-                              $check_user =  $_SESSION['login_user']['user_id'];
                               $query2 = "SELECT * FROM suppliers";
                               $result = mysqli_query($conn, $query2);
                               $check_row = mysqli_num_rows($result);
                               while ($row2 = mysqli_fetch_array($result)) {
                             ?>
-                            <option value="<?php echo $row2['supplier_name']?>"><?php echo $row2['supplier_name']?></option>
+                            <option value="<?php echo $row2['supplier']?>"><?php echo $row2['supplier']?></option>
                             <?php } ?>
                           </select>
                         </div>
@@ -264,7 +249,6 @@
             <!-- /.modal-dialog -->
           </div>
           <!-- /.modal -->
-           
 
           <div class="modal fade" id="update">
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -314,13 +298,12 @@
                           <select class="form-control select2bs4" style="width: 100%;">
                             <option selected="selected" disabled>Please Select Supplier</option>
                             <?php
-                              $check_user =  $_SESSION['login_user']['user_id'];
                               $query = "SELECT * FROM suppliers";
                               $result = mysqli_query($conn, $query);
                               $check_row = mysqli_num_rows($result);
                               while ($row = mysqli_fetch_array($result)) {
                             ?>
-                            <option value="<?php echo $row['supplier_name']?>"><?php echo $row['supplier_name']?></option>
+                            <option value="<?php echo $row['supplier']?>"><?php echo $row['supplier']?></option>
                             <?php } ?>
                           </select>
                         </div>

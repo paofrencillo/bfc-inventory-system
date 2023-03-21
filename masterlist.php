@@ -41,6 +41,9 @@ if ($_SESSION['login_user']['is_superuser'] == false) {
   <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -242,6 +245,11 @@ if ($_SESSION['login_user']['is_superuser'] == false) {
   <script src="dist/js/pages/dashboard.js"></script>
   <!-- bs-custom-file-input -->
   <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+  <script src="plugins/select-box-search-option/dist/js/jquery-searchbox.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
+  <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/i18n/defaults-*.min.js"></script>
   <script type="text/javascript" src="js/masterlist/masterlist.js"></script>
 </body>
 

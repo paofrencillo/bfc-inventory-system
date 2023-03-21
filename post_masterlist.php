@@ -72,6 +72,7 @@ if (!empty($_POST) && $_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST['ac
     $description = $_POST["desc-modal"];
     $generic_name = $_POST["gen-modal"];
     $category = $_POST["cat-modal"];
+    $supplier = $_POST["supp-modal"];
     $image = $_FILES["imageFile2"];
     $last_edited_by = $_POST["employee_id"];
     $last_edited_on = date("Y-m-d H:i:s");

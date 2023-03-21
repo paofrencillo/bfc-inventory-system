@@ -1,32 +1,40 @@
+$(document).ready(function() {
+  $('.selectpicker').selectpicker();
+});
+// View product details
 function viewModal(el) {
-  console.log(el.getAttribute("data-id"))
   $.ajax({
     type: "GET",
     url: "get_masterlist.php",
     data: {"barcode": el.getAttribute("data-id"), action: "get_product"},
     dataType: "JSON",
     success: function(data) {
-      $("#barcode-modal").val(JSON.parse(data.barcode));
+      $("#barcode-modal").val(data.barcode);
       $("#desc-modal").val(data.description);
       $("#gen-modal").val(data.generic_name);
       $("#cat-modal").val(data.category);
+      // $("#supp-text").val(data.supplier);
+      $('.selectpicker').selectpicker('val', data.supplier)
       $("#img-modal").attr("src", data.image);
       $("#delete-product-btn").attr("data-product-barcode", data.barcode);   
     },
-    error: function(xhr, error, status, data) {
-
-      console.log(xhr, error, status, JSON.parse(data.barcode));
+    error: function(error) {
+      console.log(error);
     }
   })
 }
 
+// Edit product details
 function editDetails(el) {
   // enable save and cancel button
   $("#save-cancel-btns").removeClass("d-none");
   $(el).addClass("d-none");
 
   modal_fields = document.getElementById("details").querySelectorAll("input");
-  $("#cat-modal").removeAttr("disabled")
+  $("#cat-modal").removeAttr("disabled");
+  $("#supp-modal").removeAttr("disabled");
+  $("#supp-text-group").addClass("d-none");
+  $("#supp-modal-group").removeClass("d-none");
   modal_fields.forEach(field => {
 
     if (field.id != "barcode-modal") {
@@ -38,15 +46,18 @@ function editDetails(el) {
   });
 }
 
+// Remove input attributes
 function removeAttrInputs() {
   $("#description").removeAttr("disabled");
   $("#generic_name").removeAttr("disabled");
   $("#category").removeAttr("disabled");
+  $("#supp").removeAttr("disabled");
   $("#imageFile").removeAttr("disabled");
 
   $("#description").val('');
   $("#generic_name").val('');
   $("#category").val('');
+  $("#supp").val('');
   $("#file-label").html("Choose Image");
   $("#imageFile").val("");
 }
@@ -74,6 +85,10 @@ $('#details').on('hidden.bs.modal', function (e) {
   $("#update-btn").removeClass("d-none");
 
   $("#cat-modal").attr("disabled", "")
+  $("#supp-modal").attr("disabled", "")
+
+  $("#supp-modal-group").addClass("d-none");
+  $("#supp-text-group").removeClass("d-none");
   modal_fields = document.getElementById("details").querySelectorAll("input");
   modal_fields.forEach(field => {
     if (field.id != "barcode-modal") {
@@ -117,6 +132,9 @@ $(".custom-file-input").on("change", function() {
 
 // ------ Check if product is already enrolled
 $("#barcode").on("change", ()=> {
+  $("enroll_form").on("submit", (e)=> {
+    e.preventDefault();
+  });
   $.ajax({
     type: "GET",
     url: "get_masterlist.php",
@@ -127,12 +145,14 @@ $("#barcode").on("change", ()=> {
         $("#description").attr("disabled", "");
         $("#generic_name").attr("disabled", "");
         $("#category").attr("disabled", "");
+        $("#supp").attr("disabled", "");
         $("#imageFile").attr("disabled", "");
   
         $("#barcode").val(data.barcode);
         $("#description").val(data.description);
         $("#generic_name").val(data.generic_name);
         $("#category").val(data.category);
+        $("#supp").val(data.supplier);
         let imgName = data.image;
         let strip_imgName = imgName.replace("product-imgs/", '')
         $("#file-label").html(strip_imgName);
@@ -176,7 +196,8 @@ $("#enroll_form").on("submit", function(e) {
       }, 5000)
       $('#barcode').val('');
       $('#description').val('');
-      // clear category
+      $("#category").val(data.category);
+      $("#supp").val(data.supplier);
       $('#imageFile').val('');
       $('#file-label').html("Choose Image");
     }
