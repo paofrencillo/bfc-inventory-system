@@ -564,13 +564,13 @@ include('templates/session.php');
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="mrf">MRF:</label>
-                          <input type="number" class="form-control " id="mrf" name="mrf" required>
+                          <input type="number" class="form-control " id="mrf" name="mrf" autocomplete="off" required>
                         </div>
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="order_num">Inv/Order No:</label>
-                          <input type="number" class="form-control " id="order_num" name="order_num" required>
+                          <input type="number" class="form-control " id="order_num" name="order_num" autocomplete="off" required>
                         </div>
                       </div>
                       <div class="col-sm-12">
@@ -611,25 +611,25 @@ include('templates/session.php');
                       <div class="col-sm-5">
                         <div class="form-group">
                           <label for="description2">Product Description:</label>
-                          <input type="text" class="form-control " id="description2" name="description" autocomplete="off" required readonly>
+                          <input type="text" class="form-control " id="description2" name="description" autocomplete="off" required>
                         </div>
                       </div>
                       <div class="col-sm-1">
                         <div class="form-group">
                           <label for="quantity2">Quantity:</label>
-                          <input type="number" class="form-control " id="quantity2" name="quantity" required>
+                          <input type="number" class="form-control " id="quantity2" name="quantity" autocomplete="off" required>
                         </div>
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="lot2">Lot Number:</label>
-                          <input type="text" class="form-control" id="lot2" name="lot" onkeyup="this.value = this.value.toUpperCase();" required>
+                          <input type="text" class="form-control" id="lot2" name="lot" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" required>
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="exp_date2">Expiration Date:</label>
-                          <input type="text" class="form-control " id="exp_date2" name="exp_date">
+                          <input type="text" class="form-control " id="exp_date2" autocomplete="off" name="exp_date">
                         </div>
                       </div>
                       <?php
@@ -1119,10 +1119,10 @@ include('templates/session.php');
           success: function(data) {
             console.log(data)
             if (data != "Not found") {
-              $("#description2").attr("disabled", "");
+              // $("#description2").attr("readonly", "");
               $("#description2").val(data.description);
             } else {
-              // $("#description2").val("Product Not Found");
+              $("#description2").val("Product Not Found");
               swal.fire({
               title: "Ooops!",
               text: "Scanned product not found",
