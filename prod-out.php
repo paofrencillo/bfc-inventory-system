@@ -604,13 +604,13 @@ include('templates/session.php');
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="barcode2">Barcode:</label>
-                          <input type="text" class="form-control " id="barcode2" onmouseover="this.focus();" name="barcode" required>
+                          <input type="text" class="form-control " id="barcode2" onmouseover="this.focus();" name="barcode" autocomplete="off" required>
                         </div>
                       </div>
                       <div class="col-sm-5">
                         <div class="form-group">
                           <label for="description2">Product Description:</label>
-                          <input type="text" class="form-control " id="description2" name="description" required>
+                          <input type="text" class="form-control " id="description2" name="description" autocomplete="off" required readonly>
                         </div>
                       </div>
                       <div class="col-sm-1">
@@ -1045,23 +1045,10 @@ include('templates/session.php');
             });
           })
         });
-        // if (mrf.length == 0 || order_num.length == 0){
-        //   $(document).ready(function() {
-        //     swal.fire({
-        //       title: "error!",
-        //       title: 'Something went wrong!',
-        //       text: "Make sure the table is not empty",
-        //       icon: "error",
-        //       confirmButtonText: "OK"
-        //     });
-        //   });
-        // } else {
-
-        // }
       });
 
        // Add a click event
-       $("#cancelendorse").click(function(event) {
+      $("#cancelendorse").click(function(event) {
         // Prevent the form from submitting normally
         event.preventDefault();
 
@@ -1118,6 +1105,38 @@ include('templates/session.php');
         // } else {
 
         // }
+      });
+
+      $("#barcode2").on("change", function() {
+        var barcode2 = $(this).val();
+        console.log(barcode2)
+        $.ajax({
+          type: "GET",
+          url: "find_masterlist.php",
+          data: {"barcode2": barcode2, action: "get_barcode"},
+          dataType: "JSON",
+          success: function(data) {
+            console.log(data)
+            if (data != "Not found") {
+              $("#description2").attr("disabled", "");
+              $("#description2").val(data.description);
+            } else {
+              // $("#description2").val("Product Not Found");
+              swal.fire({
+              title: "Ooops!",
+              text: "Scanned product not found",
+              icon: "error",
+              confirmButtonText: "OK"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  reloadTable();
+                } else {
+                  reloadTable();
+                }
+              });
+            }  
+          }
+        })
       });
 
     });

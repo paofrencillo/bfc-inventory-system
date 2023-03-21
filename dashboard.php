@@ -180,7 +180,7 @@
     
       <?php
       // ------ Contents
-      include("templates/prod-in-contents.php");
+      include("templates/dashboard-contents.php");
       // ------ Footer
       include("templates/footer.php");
       ?>
