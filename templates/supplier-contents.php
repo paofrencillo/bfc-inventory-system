@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                     <table id="example1" class="table table-bordered table-hover dt-center">
                       <thead>
                         <tr>
-                          <th>ID #</th>
+                          <th>ID</th>
                           <th>Supplier Name</th>
                           <th>Last Edited By</th>
                           <th>Action</th>
