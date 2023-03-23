@@ -12,8 +12,8 @@ $exp_date = $_POST['exp_date'];
 $endorsed_date = $_POST['endorsed_date'];
 $remarks = $_POST['remarks'];
 $endorsed_by = $_POST['endorsed_by'];
-$mrf = $_POST['mrf'];
-$order_num = $_POST['order_num'];
+$mrf = $_POST['mrff'];
+$order_num = $_POST['order_numm'];
 $branch = $_POST['branch'];
 
 // Insert the values into the database

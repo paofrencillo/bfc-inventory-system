@@ -317,7 +317,7 @@ include('templates/session.php');
                                           <div class="col-sm-4">
                                             <div class="form-group">
                                               <label for="barcode">Barcode:</label>
-                                              <input type="text" class="form-control " id="barcode" name="barcode" value="<?php echo $row['barcode'] ?>">
+                                              <input type="text" class="form-control " id="barcode" name="barcode" value="<?php echo $row['barcode'] ?>" readonly>
                                             </div>
                                           </div>
                                           <div class="col-sm-8">
@@ -564,13 +564,13 @@ include('templates/session.php');
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="mrf">MRF:</label>
-                          <input type="number" class="form-control " id="mrf" name="mrff" autocomplete="off" required disabled>
+                          <input type="text" class="form-control " id="mrf" name="mrff" autocomplete="off" required readonly>
                         </div>
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="order_num">Inv/Order No:</label>
-                          <input type="number" class="form-control " id="order_num" name="order_numm" autocomplete="off" required disabled>
+                          <input type="text" class="form-control " id="order_num" name="order_numm" autocomplete="off" required readonly>
                         </div>
                       </div>
                       <div class="col-sm-12">
@@ -602,7 +602,7 @@ include('templates/session.php');
                         </div>
                       </div>
 
-                      
+
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="barcode2">Barcode:</label>
@@ -1187,15 +1187,15 @@ include('templates/session.php');
             } else {
               // Append new data to the table
               data.forEach(function(row) {
-              var tr = document.createElement('tr');
-              tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
-                row.description + '</td><td>' +
-                row.quantity + '</td><td>' +
-                row.branch + '</td><td>' +
-                row.mrf + '</td>'
-              tableBody.appendChild(tr);
-            });
-          }            
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
+                  row.description + '</td><td>' +
+                  row.quantity + '</td><td>' +
+                  row.branch + '</td><td>' +
+                  row.mrf + '</td>'
+                tableBody.appendChild(tr);
+              });
+            }
           }
         });
       });
@@ -1235,39 +1235,39 @@ include('templates/session.php');
     });
   </script>
 
-  
+
   <script>
     // For Error Handling
     $(document).ready(function() {
       $("#branch").on("change", function() {
-        $("input[name='mrff']").prop("disabled", false);   
+        $("input[name='mrff']").prop("readonly", false);
       });
 
       $("input[name='mrff']").on("input", function() {
-        $("input[name='order_numm']").prop("disabled", false);     
+        $("input[name='order_numm']").prop("readonly", false);
       });
 
       $("input[name='order_numm']").on("input", function() {
-        $("button[name='reloadBtn']").prop("disabled", false); 
-        $("#barcode2").prop("disabled", false);   
-        $("#description2").prop("disabled", false);   
-        $("#quantity2").prop("disabled", false);   
-        $("#lot2").prop("disabled", false);   
-        $("#exp_date2").prop("disabled", false);   
-        $("#remarks2").prop("disabled", false);   
+        $("button[name='reloadBtn']").prop("disabled", false);
+        $("#barcode2").prop("disabled", false);
+        $("#description2").prop("disabled", false);
+        $("#quantity2").prop("disabled", false);
+        $("#lot2").prop("disabled", false);
+        $("#exp_date2").prop("disabled", false);
+        $("#remarks2").prop("disabled", false);
       });
 
       $("input[name='mrff']").on("blur", function() {
         var value = $(this).val();
         if (value === "") {
           $("input[name='order_numm']").val('');
-          $("input[name='order_numm']").prop("disabled", true);     
-          $("button[name='reloadBtn']").prop("disabled", true); 
-          $("#barcode2").prop("disabled", true);   
-          $("#description2").prop("disabled", true);   
-          $("#quantity2").prop("disabled", true);   
-          $("#lot2").prop("disabled", true);   
-          $("#exp_date2").prop("disabled", true);   
+          $("input[name='order_numm']").prop("readonly", true);
+          $("button[name='reloadBtn']").prop("disabled", true);
+          $("#barcode2").prop("disabled", true);
+          $("#description2").prop("disabled", true);
+          $("#quantity2").prop("disabled", true);
+          $("#lot2").prop("disabled", true);
+          $("#exp_date2").prop("disabled", true);
           $("#remarks2").prop("disabled", true);
         }
       });
@@ -1275,38 +1275,38 @@ include('templates/session.php');
       $("input[name='order_numm']").on("blur", function() {
         var value = $(this).val();
         if (value === "") {
-          $("button[name='reloadBtn']").prop("disabled", true); 
-          $("#barcode2").prop("disabled", true);   
-          $("#description2").prop("disabled", true);   
-          $("#quantity2").prop("disabled", true);   
-          $("#lot2").prop("disabled", true);   
-          $("#exp_date2").prop("disabled", true);   
-          $("#remarks2").prop("disabled", true);       
+          $("button[name='reloadBtn']").prop("disabled", true);
+          $("#barcode2").prop("disabled", true);
+          $("#description2").prop("disabled", true);
+          $("#quantity2").prop("disabled", true);
+          $("#lot2").prop("disabled", true);
+          $("#exp_date2").prop("disabled", true);
+          $("#remarks2").prop("disabled", true);
         }
       });
 
       $("button[name='cancelendorse']").on("click", function() {
         $("#branch").val('');
-        $("input[name='mrff']").prop("disabled", true);    
-        $("input[name='order_numm']").prop("disabled", true); 
+        $("input[name='mrff']").prop("readonly", true);
+        $("input[name='order_numm']").prop("readonly", true);
         $("input[name='mrff']").val('');
-        $("input[name='order_numm']").val('');   
-       
-        $("#barcode2").prop("disabled", true);   
-        $("#description2").prop("disabled", true);   
-        $("#quantity2").prop("disabled", true);   
-        $("#lot2").prop("disabled", true);   
-        $("#exp_date2").prop("disabled", true);   
-        $("#remarks2").prop("disabled", true);   
+        $("input[name='order_numm']").val('');
 
-        $("#barcode2").val('');  
-        $("#description2").val('');  
-        $("#quantity2").val('');  
-        $("#lot2").val('');  
-        $("#exp_date2").val('');  
-        $("#remarks2").val('');  
+        $("#barcode2").prop("disabled", true);
+        $("#description2").prop("disabled", true);
+        $("#quantity2").prop("disabled", true);
+        $("#lot2").prop("disabled", true);
+        $("#exp_date2").prop("disabled", true);
+        $("#remarks2").prop("disabled", true);
 
-        $("button[name='reloadBtn']").prop("disabled", true); 
+        $("#barcode2").val('');
+        $("#description2").val('');
+        $("#quantity2").val('');
+        $("#lot2").val('');
+        $("#exp_date2").val('');
+        $("#remarks2").val('');
+
+        $("button[name='reloadBtn']").prop("disabled", true);
       });
 
     });
