@@ -1,8 +1,8 @@
 // GET request to check barcode if exist in db
 $("#barcode").on("change", ()=>{
-    $("#receive-prod-form").on("submit", (e)=>{
-        e.preventDefault();
-    });
+    // $("#receive-prod-form").on("submit", (e)=>{
+    //     e.preventDefault();
+    // });
     $.ajax({
         type: "GET",
         url: "prod-in-functions.php",
@@ -21,9 +21,10 @@ $("#barcode").on("change", ()=>{
         },
         error: function(status, error) {
           console.log(status, error);
-        }
+        }   
     })
 });
+
 
 // Submit receive products
 $("#receive-prod-form").on("submit", function(e){
@@ -56,8 +57,8 @@ $("#receive-prod-form").on("submit", function(e){
             });
 
         },
-        error: function(error) {
-            console.error(error);
+        error: function(error, status, xhr) {
+            console.error(error, status, xhr);
         }
       });
 });

@@ -177,7 +177,6 @@ $("#enroll_form").on("submit", function(e) {
     type: "POST",
     url: "post_masterlist.php",
     data: new FormData(this),
-    dataType: "json",
     contentType: false,
     processData:false,
     cache: false,
@@ -195,8 +194,8 @@ $("#enroll_form").on("submit", function(e) {
       }, 5000)
       $('#barcode').val('');
       $('#description').val('');
-      $("#category").val(data.category);
-      $("#supp").val(data.supplier);
+      $("#category").val('');
+      $("#supp").val('');
       $('#imageFile').val('');
       $('#file-label').html("Choose Image");
     }

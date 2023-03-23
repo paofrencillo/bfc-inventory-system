@@ -8,10 +8,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
     if (isset($_GET["action"]) && $_GET['action'] === 'get_product') {
         $barcode = $_GET["barcode"];
         $table = "product_masterlist";
-        $query_get = "SELECT * FROM $table WHERE barcode='$barcode';";
+        $query_get = "SELECT description, supplier FROM product_masterlist WHERE barcode='1';";
         $result = mysqli_query($conn, $query_get);
     
-        if ($result->num_rows == 0) {
+        if ($result->num_rows == 0) {   
             $data = "Not found";
             echo json_encode($data);
         } else {

@@ -19,6 +19,7 @@ if (!empty($_POST) && $_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST['ac
     $description = $_POST["description"];
     $generic_name = $_POST["generic_name"];
     $category = $_POST["category"];
+    $supplier = $_POST["supplier"];
     $image = $_FILES["imageFile"];
     $last_edited_by = $_POST["employee_id"];
     $last_edited_on = date("Y-m-d H:i:s");
@@ -30,7 +31,7 @@ if (!empty($_POST) && $_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST['ac
 
     if ($result) {
         if (mysqli_num_rows($result) > 0) {
-            $data = "!!!!";
+            $data = "success";
             echo json_encode($data);
         } else {
             echo 'not found';
@@ -57,8 +58,8 @@ if (!empty($_POST) && $_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST['ac
     }
 
     #Insert new products in the database 
-    $conn->query("INSERT INTO `$table` (`barcode`, `description`,  `generic_name`, `category`, `image`, `last_edited_by`, `last_edited_on`)
-                    VALUES ('$barcode', '$description', '$generic_name', '$category', '$path', $last_edited_by,  '$last_edited_on');") or die('Error Could Not Query');
+    $conn->query("INSERT INTO $table (barcode, description,  generic_name, category, supplier, image, last_edited_by, last_edited_on)
+                    VALUES ('$barcode', '$description', '$generic_name', '$category', '$supplier', '$path', $last_edited_by, '$last_edited_on');") or die('Error Could Not Query');
 
     if (!mysqli_error($conn)) {
         // raise error
@@ -125,5 +126,4 @@ if (!empty($_POST) && $_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST['ac
     } else {
         echo "Error deleting record";
     }
-    print_r($barcode);
 }

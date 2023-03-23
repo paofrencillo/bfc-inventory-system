@@ -148,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-5">
                                             <div class="form-group">
                                                 <label for="supp">Supplier:</label>
-                                                <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" id="supp">
+                                                <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" name="supplier" id="supp">
                                                     <?php
                                                     $query2 = "SELECT * FROM suppliers";
                                                     $result = mysqli_query($conn, $query2);
