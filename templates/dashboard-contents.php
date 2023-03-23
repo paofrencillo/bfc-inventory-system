@@ -70,12 +70,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                       if ($result->num_rows > 0) {
                         $row = $result->fetch_assoc();
                         $sum = $row["sum"];
+                        // Split integer data with comma
+                        $formatted_data = number_format($sum);
                       } else {
                         $sum = 0;
                       }
                     
                     ?>
-                    <h3><?php echo $sum ?><sup style="font-size: 20px"> Items</sup></h3>
+                    <h3><?php echo $formatted_data ?><sup style="font-size: 20px"> Items</sup></h3>
                     <?php ?>
                     <p>Product Out</p>
                   </div>
