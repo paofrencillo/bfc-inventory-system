@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
     if (isset($_GET["action"]) && $_GET['action'] === 'get_product') {
         $barcode = $_GET["barcode"];
         $table = "product_masterlist";
-        $query_get = "SELECT description, supplier FROM product_masterlist WHERE barcode='1';";
+        $query_get = "SELECT description, supplier FROM product_masterlist WHERE barcode='$barcode';";
         $result = mysqli_query($conn, $query_get);
     
         if ($result->num_rows == 0) {   
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['action'] === 'receive_prod'){
         $last_edited_by = $_SESSION['login_user']['employee_name'];
         $last_edited_on = date("Y-m-d H:i:s");
-        $entry_date = $_POST["entry_date"]
+        $entry_date = $_POST["entry_date"];
         $barcode = $_POST["barcode"];
         $description = $_POST["description"];
         $quantity = $_POST["quantity"];

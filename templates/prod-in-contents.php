@@ -61,8 +61,8 @@
                           $result = mysqli_query($conn, $query);
                           while ($row = mysqli_fetch_array($result)) {
                             $last_user = $row['last_edited_by'];
-                            $date = date_create($row["last_edited_on"]);
-                            $date = date_format($date, "d/m/Y h:i"); 
+                            $date1 = date_create($row["last_edited_on"]);
+                            $date2 = date_format($date1, "d/m/Y h:i");
                         ?>
                         <tr>
                         <td>
@@ -76,7 +76,7 @@
                           </td>
                           <td><?php echo $row["in_quantity"];?></td>
                           <td><?php echo $row["exp_date"];?></td>
-                          <td class="text-italic"><small><?php echo $last_user . ' | ' . $date;?></small></td>
+                          <td class="text-italic"><small><?php echo $last_user . ' | ' . $date2;?></small></td>
                           <td>
                             <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
                               <i class="fas fa-pencil-alt"></i>
@@ -200,7 +200,7 @@
                     </div>
                     <div class="modal-footer justify-content-between">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                      <button type="button" class="btn btn-primary">Add Stocks</button>
+                      <button type="button" class="btn btn-primary" onclick="location.reload();">Add Stocks</button>
                     </div>    
                   </form>
               </div>

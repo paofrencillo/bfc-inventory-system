@@ -1,12 +1,13 @@
 // GET request to check barcode if exist in db
 $("#barcode").on("change", ()=>{
-    // $("#receive-prod-form").on("submit", (e)=>{
-    //     e.preventDefault();
-    // });
+    $("#receive-prod-form").on("submit", (e)=>{
+        e.preventDefault();
+    });
+    let data = {"barcode": $("#barcode").val(), action: "get_product"};
     $.ajax({
         type: "GET",
         url: "prod-in-functions.php",
-        data: {"barcode": $("#barcode").val(), action: "get_product"},
+        data: data,
         dataType: "JSON",
         success: function(data) {
             if ( data == "Not found" ) {
