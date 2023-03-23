@@ -548,7 +548,7 @@ include('templates/session.php');
                         <div class="form-group">
                           <label for="supp">Branch Code:</label>
                           <select class="form-control select2bs4" style="width: 100%;" name="branch" id="branch" required>
-                            <option selected="selected" disabled>Please Select Branch Code</option>
+                            <option selected="selected" value="default" disabled>Please Select Branch Code</option>
                             <?php
                             $check_user =  $_SESSION['login_user']['user_id'];
                             $query = "SELECT * FROM branches";
@@ -1167,19 +1167,26 @@ include('templates/session.php');
             console.log(data)
             // Clear old data from the table
             // $('#example3 tbody').empty();
-
+            var mrf = $('#mrf_search');
             var tableBody = document.querySelector('#example3 tbody');
             tableBody.innerHTML = '';
-            // Append new data to the table
-            data.forEach(function(row) {
-              // var tr = $('<tr>');
-              // tr.append('<td>' + row.barcode + '</td>');
-              // tr.append('<td>' + row.description + '</td>');
-              // tr.append('<td>' + row.quantity + '</td>');
-              // tr.append('<td>' + row.branch + '</td>');
-              // tr.append('<td>' + row.mrf + '</td>');
-              // $('#example3 tbody').append(tr);
 
+            if (data.length == "0") {
+              swal.fire({
+                title: "Ooops!",
+                text: "MRF not found",
+                icon: "error",
+                confirmButtonText: "OK"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  mrf.val('');
+                } else {
+                  mrf.val('');
+                }
+              });
+            } else {
+              // Append new data to the table
+              data.forEach(function(row) {
               var tr = document.createElement('tr');
               tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
                 row.description + '</td><td>' +
@@ -1188,6 +1195,7 @@ include('templates/session.php');
                 row.mrf + '</td>'
               tableBody.appendChild(tr);
             });
+          }            
           }
         });
       });
@@ -1227,7 +1235,9 @@ include('templates/session.php');
     });
   </script>
 
+  
   <script>
+    // For Error Handling
     $(document).ready(function() {
       $("#branch").on("change", function() {
         $("input[name='mrff']").prop("disabled", false);   
@@ -1274,6 +1284,31 @@ include('templates/session.php');
           $("#remarks2").prop("disabled", true);       
         }
       });
+
+      $("button[name='cancelendorse']").on("click", function() {
+        $("#branch").val('');
+        $("input[name='mrff']").prop("disabled", true);    
+        $("input[name='order_numm']").prop("disabled", true); 
+        $("input[name='mrff']").val('');
+        $("input[name='order_numm']").val('');   
+       
+        $("#barcode2").prop("disabled", true);   
+        $("#description2").prop("disabled", true);   
+        $("#quantity2").prop("disabled", true);   
+        $("#lot2").prop("disabled", true);   
+        $("#exp_date2").prop("disabled", true);   
+        $("#remarks2").prop("disabled", true);   
+
+        $("#barcode2").val('');  
+        $("#description2").val('');  
+        $("#quantity2").val('');  
+        $("#lot2").val('');  
+        $("#exp_date2").val('');  
+        $("#remarks2").val('');  
+
+        $("button[name='reloadBtn']").prop("disabled", true); 
+      });
+
     });
   </script>
 
