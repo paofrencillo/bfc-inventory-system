@@ -630,7 +630,7 @@ include('templates/session.php');
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="exp_date2">Expiration Date:</label>
-                          <input type="text" class="form-control " id="exp_date2" autocomplete="off" name="exp_date" required disabled>
+                          <input type="text" class="form-control " id="exp_date2" autocomplete="off" name="exp_date" placeholder="mm/dd/yyyy" required disabled>
                         </div>
                       </div>
                       <?php
