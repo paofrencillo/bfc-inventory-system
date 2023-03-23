@@ -32,6 +32,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 <!-- small box -->
                 <div class="small-box bg-info">
                   <div class="inner">
+                    <?php
+                      // $sql = "SELECT SUM(quantity) as sum FROM endorse_history";
+                      // Execute query and get result
+                      // $result = $conn->query($sql);
+
+                      // Fetch result and get count value
+                      // if ($result->num_rows > 0) {
+                      //   $row = $result->fetch_assoc();
+                      //   $sum = $row["sum"];
+                      // } else {
+                      //   $sum = 0;
+                      // }
+                    
+                    ?>
                     <h3>150<sup style="font-size: 20px"> Items</sup></h3>
 
                     <p>Product In</p>
@@ -47,8 +61,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 <!-- small box -->
                 <div class="small-box bg-success">
                   <div class="inner">
-                    <h3>53<sup style="font-size: 20px"> Items</sup></h3>
+                    <?php
+                      $sql = "SELECT SUM(quantity) as sum FROM endorse_history";
+                      // Execute query and get result
+                      $result = $conn->query($sql);
 
+                      // Fetch result and get count value
+                      if ($result->num_rows > 0) {
+                        $row = $result->fetch_assoc();
+                        $sum = $row["sum"];
+                      } else {
+                        $sum = 0;
+                      }
+                    
+                    ?>
+                    <h3><?php echo $sum ?><sup style="font-size: 20px"> Items</sup></h3>
+                    <?php ?>
                     <p>Product Out</p>
                   </div>
                   <div class="icon">
@@ -62,14 +90,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 <!-- small box -->
                 <div class="small-box bg-danger">
                   <div class="inner">
-                    <h3>700<sup style="font-size: 20px"> Items</sup></h3>
+                    <?php
+                      $sql = "SELECT COUNT(*) as count FROM product_masterlist";
+                      // Execute query and get result
+                      $result = $conn->query($sql);
 
+                      // Fetch result and get count value
+                      if ($result->num_rows > 0) {
+                        $row = $result->fetch_assoc();
+                        $count  = $row["count"];
+                      } else {
+                        $count  = 0;
+                      }
+                    
+                    ?>
+                    <h3><?php echo $count ?><sup style="font-size: 20px"> Items</sup></h3>
+                    <?php ?>
                     <p>Total Product Registered</p>
                   </div>
                   <div class="icon">
                     <i class="fas fa-barcode"></i>
                   </div>
-                  <a href="inventory.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="masterlist.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
               <!-- ./col -->
