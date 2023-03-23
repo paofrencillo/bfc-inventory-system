@@ -61,7 +61,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                             <span class="fas fa-building"></span>
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Company" name="company" autocomplete="off">
+                                    
+                                    <input type="text" class="form-control" placeholder="Company" name="company" id="company" onkeypress="return event.keyCode !== 39 && event.keyCode !== 34;" autocomplete="off">
+                                    <script>
+                                        document.getElementById("company").addEventListener("input", function(event) {
+                                            // Get the input value and replace any single or double quotes with a sanitized version
+                                            var inputValue = event.target.value;
+                                            var sanitizedValue = inputValue.replace(/['"]/g, "");
+                                            
+                                            // Set the sanitized value back to the input field
+                                            event.target.value = sanitizedValue;
+                                        });
+                                    </script>
                                     <div class="input-group-append" style="padding-left: 10px;">
                                         <div class="input-group-text">
                                             <span class="fas fa-map-marker-alt"></span>
@@ -164,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                                                 </div>
 
                                                                                 <div class="modal-footer">
-                                                                                    <input type="hidden" name="franchisee_modify" value="<?php echo $row['id'] ?>">
+                                                                                    <input type="hidden" name="franchisee_modify" value="<?php echo $row['code'] ?>">
                                                                                     <input type="hidden" name="last_user" value="<?php echo $check_user ?>">
                                                                                     <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->
                                                                                     <button type="submit" class="btn btn-outline-danger" name="delete_franchisee">Delete</button>
