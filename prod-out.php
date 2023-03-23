@@ -501,25 +501,25 @@ include('templates/session.php');
                             </tr>
                           </thead>
                           <tbody>
-                          <?php
+                            <?php
                             $check_user =  $_SESSION['login_user']['user_id'];
                             $query = "SELECT * FROM endorse_history ORDER BY endorsed_date";
                             $result = mysqli_query($conn, $query);
                             $check_row = mysqli_num_rows($result);
                             while ($row = mysqli_fetch_array($result)) {
                             ?>
-                            <tr>
-                              <td><?php echo $row['barcode'] ?></td>
-                              <td><?php echo $row['description'] ?></td>
-                              <td><?php echo $row['quantity'] ?></td>
-                              <td><?php echo $row['lot'] ?></td>
-                              <td><?php echo $row['branch'] ?></td>
-                              <td><?php echo $row['mrf'] ?></td>
-                              <td><?php echo $row['order_num'] ?></td>
-                              <td><?php echo $row['remarks'] ?></td>
-                              <td><?php echo $row['endorsed_date'] ?></td>
-                              <td><?php echo $row['endorsed_by'] ?></td>
-                            </tr>
+                              <tr>
+                                <td><?php echo $row['barcode'] ?></td>
+                                <td><?php echo $row['description'] ?></td>
+                                <td><?php echo $row['quantity'] ?></td>
+                                <td><?php echo $row['lot'] ?></td>
+                                <td><?php echo $row['branch'] ?></td>
+                                <td><?php echo $row['mrf'] ?></td>
+                                <td><?php echo $row['order_num'] ?></td>
+                                <td><?php echo $row['remarks'] ?></td>
+                                <td><?php echo $row['endorsed_date'] ?></td>
+                                <td><?php echo $row['endorsed_by'] ?></td>
+                              </tr>
                             <?php } ?>
                           </tbody>
                         </table>
@@ -564,13 +564,13 @@ include('templates/session.php');
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="mrf">MRF:</label>
-                          <input type="number" class="form-control " id="mrf" name="mrf" autocomplete="off" required>
+                          <input type="number" class="form-control " id="mrf" name="mrff" autocomplete="off" required disabled>
                         </div>
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="order_num">Inv/Order No:</label>
-                          <input type="number" class="form-control " id="order_num" name="order_num" autocomplete="off" required>
+                          <input type="number" class="form-control " id="order_num" name="order_numm" autocomplete="off" required disabled>
                         </div>
                       </div>
                       <div class="col-sm-12">
@@ -602,53 +602,56 @@ include('templates/session.php');
                         </div>
                       </div>
 
+                      
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="barcode2">Barcode:</label>
-                          <input type="text" class="form-control " id="barcode2" onmouseover="this.focus();" name="barcode" autocomplete="off" required>
+                          <input type="text" class="form-control " id="barcode2" onmouseover="this.focus();" name="barcode" autocomplete="off" required disabled>
                         </div>
                       </div>
                       <div class="col-sm-5">
                         <div class="form-group">
                           <label for="description2">Product Description:</label>
-                          <input type="text" class="form-control " id="description2" name="description" autocomplete="off" required>
+                          <input type="text" class="form-control " id="description2" name="description" autocomplete="off" required disabled>
                         </div>
                       </div>
                       <div class="col-sm-1">
                         <div class="form-group">
                           <label for="quantity2">Quantity:</label>
-                          <input type="number" class="form-control " id="quantity2" name="quantity" autocomplete="off" required>
+                          <input type="number" class="form-control " id="quantity2" name="quantity" autocomplete="off" required disabled>
                         </div>
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="lot2">Lot Number:</label>
-                          <input type="text" class="form-control" id="lot2" name="lot" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" required>
+                          <input type="text" class="form-control" id="lot2" name="lot" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" required disabled>
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="exp_date2">Expiration Date:</label>
-                          <input type="text" class="form-control " id="exp_date2" autocomplete="off" name="exp_date">
+                          <input type="text" class="form-control " id="exp_date2" autocomplete="off" name="exp_date" required disabled>
                         </div>
                       </div>
                       <?php
-                      $month = date('m');
-                      $day = date('d');
-                      $year = date('Y');
+                      // $month = date('m');
+                      // $day = date('d');
+                      // $year = date('Y');
 
-                      $today = $year . '-' . $month . '-' . $day;
+                      // $today = $month . '-' . $day . '-' . $year;
+                      date_default_timezone_set('Asia/Manila');
+                      $current_date = date('m-d-Y');
                       ?>
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="endorsed_date">Endorse Date:</label>
-                          <input type="date" class="form-control " id="endorsed_date" name="endorsed_date" value="<?php echo $today; ?>" readonly>
+                          <input type="text" class="form-control " id="endorsed_date" name="endorsed_date" value="<?php echo $current_date; ?>" readonly>
                         </div>
                       </div>
                       <div class="col-sm-2">
                         <div class="form-group">
                           <label for="remarks2">Remarks:</label>
-                          <input type="text" class="form-control " id="remarks2" name="remarks">
+                          <input type="text" class="form-control " id="remarks2" name="remarks" disabled>
                         </div>
                       </div>
                       <?php
@@ -658,7 +661,7 @@ include('templates/session.php');
                         <div class="form-group">
                           <input type="hidden" id="endorsed_by" name="endorsed_by" value="<?php echo $current_user ?>">
                           <label for="reloadBtn">Add Product</label>
-                          <button type="submit" class="btn btn-info form-control" id="reloadBtn">
+                          <button type="submit" class="btn btn-info form-control" name="reloadBtn" id="reloadBtn" disabled>
                             <i class="fas fa-plus"></i>
                             ADD
                           </button>
@@ -842,7 +845,9 @@ include('templates/session.php');
         // "scrollY": '500px',
         // "scrollCollapse": true,
         "autoWidth": false,
-        "order": [[5, 'desc']],
+        "order": [
+          [5, 'desc']
+        ],
         "buttons": ["copy", "excel", "print"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
@@ -853,12 +858,14 @@ include('templates/session.php');
           "className": "dt-center",
           "targets": "_all"
         }],
-        "responsive": true, 
+        "responsive": true,
         "lengthChange": true,
         // "scrollY": '500px',
         // "scrollCollapse": false,
         "autoWidth": false,
-        "order": [[5, 'desc']],
+        "order": [
+          [5, 'desc']
+        ],
         // "buttons": ["copy", "csv", "excel", "pdf", "print"]
       }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
     });
@@ -950,11 +957,11 @@ include('templates/session.php');
               console.log(row)
               var tr = document.createElement('tr');
               tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
-              row.description + '</td><td>' +
-              row.quantity + '</td><td>' +
-              row.lot + '</td><td>' +
-              row.exp_date + '</td><td>' +
-              row.remarks + '</td>'
+                row.description + '</td><td>' +
+                row.quantity + '</td><td>' +
+                row.lot + '</td><td>' +
+                row.exp_date + '</td><td>' +
+                row.remarks + '</td>'
               tableBody.appendChild(tr);
             });
           } else {
@@ -1048,7 +1055,7 @@ include('templates/session.php');
         });
       });
 
-       // Add a click event
+      // Add a click event
       $("#cancelendorse").click(function(event) {
         // Prevent the form from submitting normally
         event.preventDefault();
@@ -1114,7 +1121,10 @@ include('templates/session.php');
         $.ajax({
           type: "GET",
           url: "find_masterlist.php",
-          data: {"barcode2": barcode2, action: "get_barcode"},
+          data: {
+            "barcode2": barcode2,
+            action: "get_barcode"
+          },
           dataType: "JSON",
           success: function(data) {
             console.log(data)
@@ -1124,10 +1134,10 @@ include('templates/session.php');
             } else {
               $("#description2").val("Product Not Found");
               swal.fire({
-              title: "Ooops!",
-              text: "Scanned product not found",
-              icon: "error",
-              confirmButtonText: "OK"
+                title: "Ooops!",
+                text: "Scanned product not found",
+                icon: "error",
+                confirmButtonText: "OK"
               }).then((result) => {
                 if (result.isConfirmed) {
                   reloadTable();
@@ -1135,7 +1145,7 @@ include('templates/session.php');
                   reloadTable();
                 }
               });
-            }  
+            }
           }
         })
       });
@@ -1157,7 +1167,7 @@ include('templates/session.php');
             console.log(data)
             // Clear old data from the table
             // $('#example3 tbody').empty();
-    
+
             var tableBody = document.querySelector('#example3 tbody');
             tableBody.innerHTML = '';
             // Append new data to the table
@@ -1176,12 +1186,12 @@ include('templates/session.php');
                 row.quantity + '</td><td>' +
                 row.branch + '</td><td>' +
                 row.mrf + '</td>'
-                tableBody.appendChild(tr);
+              tableBody.appendChild(tr);
             });
           }
         });
       });
-      
+
       $("#dispatchall").click(function(event) {
         // Prevent the form from submitting normally
         event.preventDefault();
@@ -1213,6 +1223,56 @@ include('templates/session.php');
             });
           })
         });
+      });
+    });
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      $("#branch").on("change", function() {
+        $("input[name='mrff']").prop("disabled", false);   
+      });
+
+      $("input[name='mrff']").on("input", function() {
+        $("input[name='order_numm']").prop("disabled", false);     
+      });
+
+      $("input[name='order_numm']").on("input", function() {
+        $("button[name='reloadBtn']").prop("disabled", false); 
+        $("#barcode2").prop("disabled", false);   
+        $("#description2").prop("disabled", false);   
+        $("#quantity2").prop("disabled", false);   
+        $("#lot2").prop("disabled", false);   
+        $("#exp_date2").prop("disabled", false);   
+        $("#remarks2").prop("disabled", false);   
+      });
+
+      $("input[name='mrff']").on("blur", function() {
+        var value = $(this).val();
+        if (value === "") {
+          $("input[name='order_numm']").val('');
+          $("input[name='order_numm']").prop("disabled", true);     
+          $("button[name='reloadBtn']").prop("disabled", true); 
+          $("#barcode2").prop("disabled", true);   
+          $("#description2").prop("disabled", true);   
+          $("#quantity2").prop("disabled", true);   
+          $("#lot2").prop("disabled", true);   
+          $("#exp_date2").prop("disabled", true);   
+          $("#remarks2").prop("disabled", true);
+        }
+      });
+
+      $("input[name='order_numm']").on("blur", function() {
+        var value = $(this).val();
+        if (value === "") {
+          $("button[name='reloadBtn']").prop("disabled", true); 
+          $("#barcode2").prop("disabled", true);   
+          $("#description2").prop("disabled", true);   
+          $("#quantity2").prop("disabled", true);   
+          $("#lot2").prop("disabled", true);   
+          $("#exp_date2").prop("disabled", true);   
+          $("#remarks2").prop("disabled", true);       
+        }
       });
     });
   </script>
