@@ -329,7 +329,7 @@ include('templates/session.php');
                                           <div class="col-sm-2">
                                             <div class="form-group">
                                               <label for="quantity">Quantity:</label>
-                                              <input type="number" class="form-control " id="quantity" name="quantity" value="<?php echo $row['quantity'] ?>">
+                                              <input type="number" class="form-control " id="quantity" name="quantity" min="0" value="<?php echo $row['quantity'] ?>">
                                             </div>
                                           </div>
                                           <div class="col-sm-4">
@@ -564,13 +564,13 @@ include('templates/session.php');
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="mrf">MRF:</label>
-                          <input type="text" class="form-control " id="mrf" name="mrff" autocomplete="off" required readonly>
+                          <input type="text" class="form-control " id="mrf" name="mrff" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" required readonly>
                         </div>
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="order_num">Inv/Order No:</label>
-                          <input type="text" class="form-control " id="order_num" name="order_numm" autocomplete="off" required readonly>
+                          <input type="text" class="form-control " id="order_num" name="order_numm" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" required readonly>
                         </div>
                       </div>
                       <div class="col-sm-12">
@@ -618,7 +618,7 @@ include('templates/session.php');
                       <div class="col-sm-1">
                         <div class="form-group">
                           <label for="quantity2">Quantity:</label>
-                          <input type="number" class="form-control " id="quantity2" name="quantity" autocomplete="off" required disabled>
+                          <input type="number" class="form-control " id="quantity2" name="quantity" autocomplete="off" min="0" required disabled>
                         </div>
                       </div>
                       <div class="col-sm-3">
@@ -714,7 +714,7 @@ include('templates/session.php');
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="mrf_search">MRF:</label>
-                          <input type="text" class="form-control " id="mrf_search" name="mrf_search" autocomplete="off" required>
+                          <input type="text" class="form-control " id="mrf_search" name="mrf_search" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" required>
                         </div>
                       </div>
                       <div class="col-sm-2">
