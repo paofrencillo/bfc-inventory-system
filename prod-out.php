@@ -265,7 +265,7 @@ include('templates/session.php');
                               <th>Product Description</th>
                               <th>Quantity</th>
                               <th>Lot No.</th>
-                              <th>Branch Code/Name</th>
+                              <th>Branch Code</th>
                               <th>MRF</th>
                               <th>Inv/Order No.</th>
                               <th>Remarks</th>
@@ -556,7 +556,7 @@ include('templates/session.php');
                             $check_row = mysqli_num_rows($result);
                             while ($row = mysqli_fetch_array($result)) {
                             ?>
-                              <option value="<?php echo $row['code'] ?>"><?php echo $row['code'] ?>/<?php echo $row['name'] ?></option>
+                              <option value="<?php echo $row['code'] ?>/<?php echo $row['name'] ?>"><?php echo $row['code'] ?>/<?php echo $row['name'] ?></option>
                             <?php } ?>
                           </select>
                         </div>
@@ -1085,6 +1085,7 @@ include('templates/session.php');
       $("#barcode2").on("change", function() {
         var barcode2 = $(this).val();
         console.log(barcode2)
+
         $.ajax({
           type: "GET",
           url: "find_masterlist.php",
@@ -1100,18 +1101,22 @@ include('templates/session.php');
               $("#description2").val(data.description);
             } else {
               $("#description2").val("Product Not Found");
+              $("#barcode2").val("");
               swal.fire({
                 title: "Ooops!",
                 text: "Scanned product not found",
                 icon: "error",
+                // showConfirmButton: false,
+                timer: 900,
                 confirmButtonText: "OK"
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  reloadTable();
-                } else {
-                  reloadTable();
-                }
-              });
+              })
+              // .then((result) => {
+              //   if (result.isConfirmed) {
+              //     reloadTable();
+              //   } else {
+              //     reloadTable();
+              //   }
+              // });
             }
           }
         })
