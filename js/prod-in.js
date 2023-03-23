@@ -1,8 +1,5 @@
 // GET request to check barcode if exist in db
 $("#barcode").on("change", ()=>{
-
-    console.log($("#barcode").val()); 
-
     $("#receive-prod-form").on("submit", (e)=>{
         e.preventDefault();
     });
@@ -19,14 +16,50 @@ $("#barcode").on("change", ()=>{
                 }, 2000); 
             } else {
                 $("#description").val(data.description);
-            }
-          
-        console.log(data); 
+                $("#supp").val(data.supplier);
+            }    
+        },
+        error: function(status, error) {
+          console.log(status, error);
+        }
+    })
+});
+
+// Submit receive products
+$("#receive-prod-form").on("submit", function(e){
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "prod-in-functions.php",
+        data: new FormData(this),
+        contentType: false,
+        processData:false,
+        cache: false,
+        success: function(data) {
+            let tbody = document.getElementById("modal-tbody");
+            let tr = document.createElement("tr");
+            tr.innerHTML = `<tr>
+                                <td>${data.barcode}</td>
+                                <td>${data.description}</td>
+                                <td>${data.quantity}</td>
+                                <td>${data.lot}</td>
+                                <td>${data.expiration}</td>
+                            </tr>`
+            tbody.appendChild(tr);
+
+            let fields = this.querySelectorAll("input");
+
+            fields.forEach(field => {
+                if (field.name != "entry_date" || field.name != "receive_prod") {
+                    field.value = '';
+                }
+            });
+
         },
         error: function(error) {
-          console.log(error);
+            console.error(error);
         }
-      })
+      });
 });
 
 $(function() {

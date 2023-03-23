@@ -177,6 +177,7 @@ $("#enroll_form").on("submit", function(e) {
     type: "POST",
     url: "post_masterlist.php",
     data: new FormData(this),
+    dataType: "json",
     contentType: false,
     processData:false,
     cache: false,

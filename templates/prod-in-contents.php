@@ -64,7 +64,8 @@
                             $date = date_create($row["last_edited_on"]);
                             $date = date_format($date, "d/m/Y h:i"); 
                         ?>
-                          <td>
+                        <tr>
+                        <td>
                             <?php echo $row["barcode"]; ?>
                           </td>
                           <td>
@@ -73,15 +74,9 @@
                           <td>
                             <?php echo $row["in_quantity"];?>
                           </td>
-                          <td>
-                            
-                          </td>
-                        <?php }?>
-                        <tr>
-
-                          <td>80</td>
-                          <td>200</td>
-                          <td>40%</td>
+                          <td><?php echo $row["in_quantity"];?></td>
+                          <td><?php echo $row["exp_date"];?></td>
+                          <td class="text-italic"><small><?php echo $last_user . ' | ' . $date;?></small></td>
                           <td>
                             <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
                               <i class="fas fa-pencil-alt"></i>
@@ -92,7 +87,9 @@
                               Details
                             </button>
                           </td>
+                        <?php }?>
                         </tr>
+      
                       </tbody>
                     </table>
                   </div>
@@ -127,52 +124,53 @@
                                 <th>Exp. Date</th>
                               </tr>
                             </thead>
-                            <tbody>
-                              <!-- <tr>
-                                <td>42428</td>
-                                <td>Mefenamic</td>
-                                <td>42</td>
-                                <td>2828</td>
-                                <td>03-25-2023</td>
-                              </tr> -->
+                            <tbody id="modal-tbody">
+                              <!-- HERE GOES THE TABLE BODY -->
                             </tbody>
                           </table>
                         </div>
                       </div>
                     </div>
                   <form name="receive-prod-form" id="receive-prod-form">
+                    <input type="hidden" name="action" value="receive_prod">
                     <div class="row">
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="barcode">Barcode:</label>
-                          <input type="text" class="form-control" id="barcode" onmouseover="this.focus();">
+                          <input type="text" class="form-control" id="barcode" name="barcode" onmouseover="this.focus();" required>
                         </div>
                       </div>
                       <div class="col-sm-5">
                         <div class="form-group">
                           <label for="prod">Product Description:</label>
-                          <input type="text" class="form-control" id="description" readonly>
+                          <input type="text" class="form-control" id="description" name="description" readonly required>
                         </div>
                       </div>
                       <div class="col-sm-1">
                         <div class="form-group">
                           <label for="quan">Quantity:</label>
-                          <input type="number" class="form-control" id="quantity" onmouseover="this.focus();">
+                          <input type="number" class="form-control" id="quantity" name="quantity" onmouseover="this.focus();" min="0" required>
                         </div>
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="lot">Lot Number:</label>
-                          <input type="text" class="form-control" id="lot" onkeyup="this.value=this.value.toUpperCase();" onmouseover="this.focus();">
+                          <input type="text" class="form-control" id="lot" name="lot" onkeyup="this.value=this.value.toUpperCase();" onmouseover="this.focus();" required>
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
-                          <label for="exp">Expiration Date:</label>
-                          <input type="text" class="form-control" id="expiration" placeholder="mm-dd-yyyy" onmouseover="this.focus();">
+                          <label for="supp">Supplier</label>
+                          <input type="text" class="form-control" id="supp" name="supp" onmouseover="this.focus();" readonly required>
                         </div>
                       </div>
-                      <div class="col-sm-4">
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="exp">Expiration Date:</label>
+                          <input type="text" class="form-control" id="expiration" name="expiration" placeholder="mm-dd-yyyy" onmouseover="this.focus();" required>
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
                         <?php
                           $month = date('m');
                           $day = date('d');
@@ -181,17 +179,17 @@
                           $today = $month . '-' . $day . '-' . $year;
                           ?>
                         <div class="form-group">
-                          <label for="supp">Date Added:</label>
-                          <input type="text" class="form-control" id="supplier" value="<?php echo $today;?>" readonly>
+                          <label for="entry_date">Date Added:</label>
+                          <input type="text" class="form-control" id="entry_date" name="entry_date" value="<?php echo $today;?>" readonly required>
                         </div>
                       </div>
                       <div class="col-sm-2">
                         <div class="form-group">
-                          <label for="barcode">Add Product</label>
-                          <a type="submit" class="btn btn-info form-control">
+                          <label for="label">Add Product</label>
+                          <button type="submit" class="btn btn-info form-control" name="label">
                             <i class="fas fa-plus"></i>
-                            ADD
-                          </a>
+                            Add
+                          </button>
                         </div>
                       </div>
                       <div class="d-none ml-2" id="not-enrolled-text">
@@ -200,12 +198,11 @@
                           </h6>
                       </div>
                     </div>
-                  </div> 
-                  <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Add Stocks</button>
-                  </div>    
-                </form>
+                    <div class="modal-footer justify-content-between">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-primary">Add Stocks</button>
+                    </div>    
+                  </form>
               </div>
               <!-- /.modal-content -->
             </div>
