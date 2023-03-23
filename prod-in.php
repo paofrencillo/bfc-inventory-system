@@ -238,32 +238,7 @@ if ($_SESSION['login_user']['is_superuser'] == false) {
   <script src="dist/js/pages/dashboard.js"></script>
   <!-- Select2 -->
   <script src="plugins/select2/js/select2.full.min.js"></script>
-  <script>
-    $(function() {
-      $("#example1").DataTable({
-        "columnDefs": [{
-          "className": "dt-center",
-          "targets": "_all"
-        }],
-        "responsive": true,
-        "lengthChange": true,
-        "scrollY": '500px',
-        "scrollCollapse": true,
-        "autoWidth": false,
-        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    });
-
-    $(function() {
-      //Initialize Select2 Elements
-      $('.select2').select2()
-
-      //Initialize Select2 Elements
-      $('.select2bs4').select2({
-        theme: 'bootstrap4'
-      })
-    })
-  </script>
+  <script src="js/prod-in.js"></script>
 </body>
 
 </html>

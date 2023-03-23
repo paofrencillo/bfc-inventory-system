@@ -111,53 +111,12 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <form>
-                  <div class="modal-body">
-                    <div class="row">
-                      <div class="col-sm-12">
-                        <div class="form-group">
-                          <label for="supp">Supplier:</label>
-                          <select class="form-control select2bs4" style="width: 100%;">
-                            <option selected="selected" disabled>Please Select Supplier</option>
-                            <?php
-                              $query2 = "SELECT * FROM suppliers";
-                              $result = mysqli_query($conn, $query2);
-                              $check_row = mysqli_num_rows($result);
-                              while ($row2 = mysqli_fetch_array($result)) {
-                            ?>
-                            <option value="<?php echo $row2['supplier']?>"><?php echo $row2['supplier']?></option>
-                            <?php } ?>
-                          </select>
-                        </div>
-                      </div>
-                      
-                      <div class="col-sm-12">
-                        <div class="form-group">
-                          <!-- <table id="example4" class="table table-bordered table-hover dt-center">
-                            <thead>
-                              <tr>
-                                <th>Barcode</th>
-                                <th>Product Description</th>
-                                <th>Quantity</th>
-                                <th>Lot No.</th>
-                                <th>Exp. Date</th>
-                                <th>MRF</th>
-
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>asd</td>
-                                <td>asd</td>
-                                <td>asd</td>
-                                <td>asd</td>
-                                <td>asd</td>
-                              </tr>
-                              
-                              
-                            </tbody>
-                          </table> -->
-                          <div class="card-body table-responsive p-0" style="height: 200px;">
+                
+                <div class="modal-body">
+                  <div class="row">        
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <div class="card-body table-responsive p-0" style="height: 300px;">
                           <table class="table table-head-fixed text-center">
                             <thead>
                               <tr>
@@ -179,37 +138,38 @@
                             </tbody>
                           </table>
                         </div>
-                        </div>
                       </div>
-                      
+                    </div>
+                  <form name="receive-prod-form" id="receive-prod-form">
+                    <div class="row">
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="barcode">Barcode:</label>
-                          <input type="text" class="form-control " id="barcode" onmouseover="this.focus();">
+                          <input type="text" class="form-control" id="barcode" onmouseover="this.focus();">
                         </div>
                       </div>
                       <div class="col-sm-5">
                         <div class="form-group">
                           <label for="prod">Product Description:</label>
-                          <input type="text" class="form-control " id="prod" readonly>
+                          <input type="text" class="form-control" id="description" readonly>
                         </div>
                       </div>
                       <div class="col-sm-1">
                         <div class="form-group">
                           <label for="quan">Quantity:</label>
-                          <input type="number" class="form-control " id="quan" value="0">
+                          <input type="number" class="form-control" id="quantity" onmouseover="this.focus();">
                         </div>
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="lot">Lot Number:</label>
-                          <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();">
+                          <input type="text" class="form-control" id="lot" onkeyup="this.value=this.value.toUpperCase();" onmouseover="this.focus();">
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="exp">Expiration Date:</label>
-                          <input type="date" class="form-control " id="exp">
+                          <input type="text" class="form-control" id="expiration" placeholder="mm-dd-yyyy" onmouseover="this.focus();">
                         </div>
                       </div>
                       <div class="col-sm-4">
@@ -218,11 +178,11 @@
                           $day = date('d');
                           $year = date('Y');
                           
-                          $today = $year . '-' . $month . '-' . $day;
+                          $today = $month . '-' . $day . '-' . $year;
                           ?>
                         <div class="form-group">
                           <label for="supp">Date Added:</label>
-                          <input type="date" class="form-control" id="supp" value="<?php echo $today;?>" readonly>
+                          <input type="text" class="form-control" id="supplier" value="<?php echo $today;?>" readonly>
                         </div>
                       </div>
                       <div class="col-sm-2">
@@ -234,14 +194,17 @@
                           </a>
                         </div>
                       </div>
+                      <div class="d-none ml-2" id="not-enrolled-text">
+                          <h6 class="font-weight-bold text-danger">
+                            This product was not enrolled.
+                          </h6>
+                      </div>
                     </div>
-                  </div>
-                  
+                  </div> 
                   <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-primary">Add Stocks</button>
                   </div>    
-
                 </form>
               </div>
               <!-- /.modal-content -->
