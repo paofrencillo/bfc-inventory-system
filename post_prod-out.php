@@ -44,6 +44,5 @@ $sql = "INSERT INTO endorse (
 mysqli_query($conn, $sql);
 
 
-
-
 mysqli_close($conn);
+?>
