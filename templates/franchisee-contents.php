@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                             <span class="fas fa-building"></span>
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Company" name="company" autocomplete="off" required>
+                                    <input type="text" class="form-control" placeholder="Company" name="company" autocomplete="off">
                                     <div class="input-group-append" style="padding-left: 10px;">
                                         <div class="input-group-text">
                                             <span class="fas fa-map-marker-alt"></span>
