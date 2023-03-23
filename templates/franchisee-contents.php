@@ -61,7 +61,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                             <span class="fas fa-building"></span>
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Company" name="company" onkeypress="return event.keyCode !== 39 && event.keyCode !== 34;" autocomplete="off">
+                                    
+                                    <input type="text" class="form-control" placeholder="Company" name="company" id="company" onkeypress="return event.keyCode !== 39 && event.keyCode !== 34;" autocomplete="off">
+                                    <script>
+                                        document.getElementById("company").addEventListener("input", function(event) {
+                                            // Get the input value and replace any single or double quotes with a sanitized version
+                                            var inputValue = event.target.value;
+                                            var sanitizedValue = inputValue.replace(/['"]/g, "");
+                                            
+                                            // Set the sanitized value back to the input field
+                                            event.target.value = sanitizedValue;
+                                        });
+                                    </script>
                                     <div class="input-group-append" style="padding-left: 10px;">
                                         <div class="input-group-text">
                                             <span class="fas fa-map-marker-alt"></span>
