@@ -1,11 +1,11 @@
 <?php
-  include('templates/connection.php');
-  include('templates/session.php');
+include('templates/connection.php');
+include('templates/session.php');
 
-  if ($_SESSION['login_user']['is_superuser'] == false) {
-    header('HTTP/1.0 403 Forbidden', TRUE, 403);
-    die(header('location: 403.html'));  
-  }
+if ($_SESSION['login_user']['is_superuser'] == false) {
+  header('HTTP/1.0 403 Forbidden', TRUE, 403);
+  die(header('location: 403.html'));
+}
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +46,7 @@
     <!-- <div class="preloader flex-column justify-content-center align-items-center">
       <img class="animation__shake" src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTELogo" height="500" width="500">
     </div> -->
- 
+
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-light-blue elevation-4">
       <!-- Brand Logo -->
@@ -73,76 +73,133 @@
         </nav>
       </div>
       <!-- /.sidebar -->
-    </aside> 
-    
+    </aside>
+
     <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Technological University of the Philippines - Cavite Interns</h1>
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Technological University of the Philippines - Cavite Interns</h1>
+            </div>
+
           </div>
- 
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
+        </div><!-- /.container-fluid -->
+      </section>
 
-    <!-- Main content -->
-    <section class="content">
+      <!-- Main content -->
+      <section class="content">
 
-    <!-- Default box -->
-    <div class="card card-solid">
-        <div class="card-body pb-0">
+        <!-- Default box -->
+        <div class="card card-solid">
+          <div class="card-body pb-0">
             <div class="row">
-            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
-                <div class="card bg-light d-flex flex-fill">
-                <div class="card-header text-muted border-bottom-0">
-                    Digital Strategist
-                </div>
-                <div class="card-body pt-0">
+
+              <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column" >
+                <div class="card bg-light d-flex flex-fill" >
+                  <div class="card-header text-muted border-bottom-0" >
+                    Sheeshable Programist
+                  </div>
+                  <div class="card-body pt-0">
                     <div class="row">
-                    <div class="col-7">
+                      <div class="col-7">
+                        <h2 class="lead"><b>Nefetina Ira Tomas - Areglado</b></h2>
+                        <p class="text-muted text-sm"><b>About: </b> Laging Galit / No Eyes / Groggy</p>
+                        <ul class="ml-4 mb-0 fa-ul text-muted">
+                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Sa lugar na ako lang ang galit</li>
+                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: 09123456789</li>
+                        </ul>
+                      </div>
+                      <div class="col-5 text-center">
+                        <img src="intern_images/nef.png" alt="user-avatar" class="img-fluid img-circle" style="width:150px; height:150px;">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="text-right">
+                      <a href="https://web.facebook.com/nefetina" target="__blank" class="btn btn-sm btn-primary">
+                        <i class="fab fa-facebook-square"></i> View Profile
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+                <div class="card bg-light d-flex flex-fill">
+                  <div class="card-header text-muted border-bottom-0">
+                    Data Analyst
+                  </div>
+                  <div class="card-body pt-0">
+                    <div class="row">
+                      <div class="col-7">
                         <h2 class="lead"><b>Julius Areglado</b></h2>
                         <p class="text-muted text-sm"><b>About: </b> Chix Magnet / Lover Boy / Handsome / Sweet / Sour</p>
                         <ul class="ml-4 mb-0 fa-ul text-muted">
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: </li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: + 800 - 12 12 23 52</li>
+                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Sa lugar na ako lang ang gwapo</li>
+                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: 09123456789</li>
                         </ul>
+                      </div>
+                      <div class="col-5 text-center">
+                        <img src="intern_images/juls.jpeg" alt="user-avatar" class="img-fluid img-circle" style="width:150px; height:150px;">
+                      </div>
                     </div>
-                    <div class="col-5 text-center">
-                        <img src="" alt="user-avatar" class="img-circle img-fluid">
-                    </div>
-                    </div>
-                </div>
-                <div class="card-footer">
+                  </div>
+                  <div class="card-footer">
                     <div class="text-right">
-                    <a href="#" class="btn btn-sm bg-teal">
-                        <i class="fas fa-comments"></i>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-primary">
-                        <i class="fas fa-facebook"></i> View Profile
-                    </a>
+                      <a href="https://web.facebook.com/crisj.areglado" target="__blank" class="btn btn-sm btn-primary">
+                        <i class="fab fa-facebook-square"></i> View Profile
+                      </a>
                     </div>
+                  </div>
                 </div>
+              </div>
+
+              <!-- <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+                <div class="card bg-light d-flex flex-fill">
+                  <div class="card-header text-muted border-bottom-0">
+                    Data Analyst
+                  </div>
+                  <div class="card-body pt-0">
+                    <div class="row">
+                      <div class="col-7">
+                        <h2 class="lead"><b>Julius Areglado</b></h2>
+                        <p class="text-muted text-sm"><b>About: </b> Chix Magnet / Lover Boy / Handsome / Sweet / Sour</p>
+                        <ul class="ml-4 mb-0 fa-ul text-muted">
+                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Sa lugar na ako lang ang gwapo</li>
+                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: 09123456789</li>
+                        </ul>
+                      </div>
+                      <div class="col-5 text-center">
+                        <img src="intern_images/juls.jpeg" alt="user-avatar" class="img-fluid img-circle" style="width:150px; height:150px;">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="text-right">
+                      <a href="https://web.facebook.com/crisj.areglado" target="__blank" class="btn btn-sm btn-primary">
+                        <i class="fab fa-facebook-square"></i> View Profile
+                      </a>
+                    </div>
+                  </div>
                 </div>
+              </div> -->
             </div>
-           
-        </div>  
-    </div>
-  
-    <!-- /.card-footer -->
-    </div>
-    <!-- /.card -->
+          </div>
 
-    </section>
-    <!-- /.content -->
-  </div>
+          <!-- /.card-footer -->
+        </div>
+        <!-- /.card -->
 
-      <?php
-      // ------ Footer
-      include("templates/footer.php");
-      ?>
+      </section>
+      <!-- /.content -->
+    </div>
+
+    <?php
+    // ------ Footer
+    include("templates/footer.php");
+    ?>
 
   </div>
   <!-- ./wrapper -->
@@ -183,9 +240,9 @@
   <script src="dist/js/pages/dashboard.js"></script>
   <script>
     function closeTab() {
-        window.close();
+      window.close();
     }
-    </script>
+  </script>
 </body>
 
 </html>
