@@ -403,7 +403,7 @@ if (isset($_POST['modify_franchisee'])) {
     $last_user = $_POST['last_user'];
 
     if ($franchisee_modify != null) {
-        $conn->query("UPDATE branches SET code='$branch', name='$name', company='$company', address='$add', last_edited_by='$last_user' WHERE id='$franchisee_modify';") or die($conn->error);
+        $conn->query("UPDATE branches SET code='$branch', name='$name', company='$company', address='$add', last_edited_by='$last_user' WHERE code='$franchisee_modify';") or die($conn->error);
     ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -458,7 +458,7 @@ if (isset($_POST['modify_franchisee2'])) {
     $last_user = $_POST['last_user'];
 
     if ($franchisee_modify != null) {
-        $conn->query("UPDATE branches SET code='$branch', name='$name', company='$company', address='$add', last_edited_by='$last_user' WHERE id='$franchisee_modify';") or die($conn->error);
+        $conn->query("UPDATE branches SET code='$branch', name='$name', company='$company', address='$add', last_edited_by='$last_user' WHERE code='$franchisee_modify';") or die($conn->error);
     ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -508,7 +508,7 @@ if (isset($_POST['delete_franchisee'])) {
     $franchisee_modify = $_POST['franchisee_modify'];
 
     if ($franchisee_modify != null) {
-        $conn->query("DELETE FROM branches WHERE id='$franchisee_modify';") or die($conn->error);
+        $conn->query("DELETE FROM branches WHERE code='$franchisee_modify';") or die($conn->error);
     ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -558,7 +558,7 @@ if (isset($_POST['delete_franchisee2'])) {
     $franchisee_modify = $_POST['franchisee_modify'];
 
     if ($franchisee_modify != null) {
-        $conn->query("DELETE FROM branches WHERE id='$franchisee_modify';") or die($conn->error);
+        $conn->query("DELETE FROM branches WHERE code='$franchisee_modify';") or die($conn->error);
     ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
