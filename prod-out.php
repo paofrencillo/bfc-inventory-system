@@ -61,7 +61,7 @@ include('templates/session.php');
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="starter.php" class="nav-link">Home</a>
+          <a href="dashboard.php" class="nav-link">Home</a>
         </li>
       </ul>
       <h6 class="mb-0 mr-2">
@@ -99,7 +99,7 @@ include('templates/session.php');
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item">
-              <a href="starter.php" class="nav-link">
+              <a href="dashboard.php" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Dashboard
@@ -651,7 +651,7 @@ include('templates/session.php');
                       <div class="col-sm-2">
                         <div class="form-group">
                           <label for="remarks2">Remarks:</label>
-                          <input type="text" class="form-control " id="remarks2" name="remarks" disabled>
+                          <input type="text" class="form-control " id="remarks2" name="remarks" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" disabled>
                         </div>
                       </div>
                       <?php
@@ -900,39 +900,6 @@ include('templates/session.php');
       })
     })
   </script>
-
-  <!-- JavaScript code -->
-  <!-- <script>
-    // When the button is clicked, reload the data
-    document.getElementById('reloadBtn').addEventListener('click', function() {
-      // Create an AJAX request
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', 'get_prod-out.php');
-      xhr.onload = function() {
-        if (xhr.status === 200) {
-          // Parse the JSON response
-          var data = JSON.parse(xhr.responseText);
-          // Clear the table
-          var tableBody = document.querySelector('#myTable tbody');
-          tableBody.innerHTML = '';
-          // Populate the table with the new data
-          data.forEach(function(row) {
-            var tr = document.createElement('tr');
-            tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
-              row.description + '</td><td>' +
-              row.quantity + '</td><td>' +
-              row.lot + '</td><td>' +
-              row.exp_date + '</td><td>' +
-              row.remarks + '</td>'
-            tableBody.appendChild(tr);
-          });
-        } else {
-          alert('Error: ' + xhr.status);
-        }
-      };
-      xhr.send();
-    });
-  </script> -->
 
 
   <script>
