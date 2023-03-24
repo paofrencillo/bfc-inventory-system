@@ -159,11 +159,16 @@ $(".close-modal-delete2").on("click", ()=> {
 // Delete product
 function deleteProduct() {
     let id = $("#id-details").val();
+    let formData = new FormData();
+    formData.append('action', 'delete');
+    formData.append('id', id);
+
     $.ajax({
       type: "POST",
       url: "prod-in-functions.php",
-      data: {action: 'delete', id: id},
-      dataType: 'JSON',
+      data: formData,
+      contentType: false,
+      processData:false,
       cache: false,
       success: function() {
         location.reload();     
@@ -174,18 +179,14 @@ function deleteProduct() {
     });
   }
 
-$(function() {
+$(function () {
     $("#example1").DataTable({
-    "columnDefs": [{
-        "className": "dt-center",
-        "targets": "_all"
-    }],
-    "responsive": true,
-    "lengthChange": true,
-    "scrollY": '500px',
-    "scrollCollapse": true,
-    "autoWidth": false,
-    // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+      "order": [],
+      "columnDefs": [{"className": "dt-center", "targets": "no_sort", "orderable": false}],
+      "responsive": true, 
+      "lengthChange": true, 
+      "autoWidth": false,
+      // "buttons": ["copy", "csv", "excel", "pdf", "print"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 });
 

@@ -101,9 +101,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     else if (isset($_POST['action']) && $_POST['action'] === 'delete') {
         $id = $_POST["id"];
         $table = "product_in";
-        $sql = "DELETE FROM $table WHERE id='$id';";
 
         #Delete product_in in the database 
-        $conn->query($sql) or die('Error Could Not Query');
+        $conn->query("DELETE FROM $table WHERE id='$id';") or die('Error Could Not Query');
+
+        if(!mysqli_error($conn)) {
+            echo json_encode("success");
+        }
     }
 }

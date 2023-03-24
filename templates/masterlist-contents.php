@@ -181,7 +181,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         </div>
                                     </div>
                                     <div class="modal-footer justify-content-between px-0 mx-0">
-                                        <input type="hidden" name="employee_id" id="employee_id" value="<?php echo $_SESSION['login_user']['user_id']; ?>">
                                         <button type="button" class="btn btn-default mx-0" data-dismiss="modal">Cancel</button>
                                         <button type="submit" class="btn btn-primary mx-0">Add Product</button>
                                     </div>
@@ -274,7 +273,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                 <i class="fas fa-pencil-alt mr-2"></i>Update Details
                                             </button>
                                             <div class="justify-content-around d-none" id="save-cancel-btns">
-                                                <input type="hidden" name="employee_id" id="employee-id-modal" value="<?php echo $_SESSION['login_user']['user_id']; ?>">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                                 <button type="submit" class="btn btn-success">Save changes</button>
                                             </div>
