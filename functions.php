@@ -1122,7 +1122,7 @@ if(isset($_POST['modify_invent'])) {
     $sa_percentage = $_POST['sa_percentage'];
 
     if ($allocation != 0){
-        if ($stock < $allocation){
+        if ($stock <= $allocation){
             $divide_sa = $stock / $allocation;
             $multiply_sa = $divide_sa * 100;
             $answer_sa = number_format($multiply_sa, 0);
