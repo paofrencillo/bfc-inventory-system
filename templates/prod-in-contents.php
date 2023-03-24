@@ -76,11 +76,11 @@
                           <td>
                             <?php echo $row["in_quantity"];?>
                           </td>
-                          <td><?php echo $row["in_quantity"];?></td>
+                          <td><?php echo $row["lot_no"];?></td>
                           <td><?php echo $row["exp_date"];?></td>
                           <td class="text-italic"><small><?php echo $last_user . ' | ' . $date;?></small></td>
                           <td>
-                            <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#details">
+                            <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#details" onclick="viewModal(this);" data-id=<?php echo $row["id"];?>>
                               <i class="fas fa-eye"></i>
                               Details
                             </button>
@@ -107,56 +107,92 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <form name="update-prod-in-form" id="update-prod-in-form">
+                    <input type="hidden" name="id-details" id="id-details">
+                    <input type="hidden" name="action" value="update_prod_in">
                     <div class="row">
                       <div class="col-sm-4">
                         <div class="form-group">
-                          <label for="barcode">Barcode:</label>
-                          <input type="text" class="form-control" id="barcode-details" readonly disabled>
+                          <label for="barcode-details">Barcode:</label>
+                          <input type="text" class="form-control" id="barcode-details" name="barcode-details" readonly disabled>
                         </div>
                       </div>
                       <div class="col-sm-8">
                         <div class="form-group">
-                          <label for="prod">Product Description:</label>
-                          <input type="text" class="form-control" id="desc-details" readonly disabled>
+                          <label for="desc-details">Product Description:</label>
+                          <input type="text" class="form-control" id="desc-details" name="desc-details" readonly>
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
-                          <label for="lot">Quantity</label>
-                          <input type="number" class="form-control" id="quantity-details" name="quantity-details" onkeyup="this.value = this.value.toUpperCase();">
+                          <label for="quantity-details">Quantity</label>
+                          <input type="number" class="form-control" id="quantity-details" name="quantity-details" onkeyup="this.value = this.value.toUpperCase();" min="0" readonly>
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
-                          <label for="lot">Lot Number:</label>
-                          <input type="text" class="form-control" id="lot-details" name="lot-details" onkeyup="this.value = this.value.toUpperCase();">
+                          <label for="lot-details">Lot Number:</label>
+                          <input type="text" class="form-control" id="lot-details" name="lot-details" onkeyup="this.value = this.value.toUpperCase();" readonly>
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
-                          <label for="supp">Supplier:</label>
-                          <input type="text" class="form-control" id="supp-details" readonly disabled>
+                          <label for="supp-details">Supplier:</label>
+                          <input type="text" class="form-control" id="supp-details" name="supp-details" readonly>
                         </div>
                       </div>
                       <div class="col-sm-6">
                         <div class="form-group">
-                          <label for="exp">Expiration Date:</label>
-                          <input type="date" class="form-control" id="exp-details" name="exp-details">
+                          <label for="exp-details">Expiration Date:</label>
+                          <input type="text" class="form-control" id="exp-details" name="exp-details" readonly>
                         </div>
                       </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                          <label for="supp">Entry Date:</label>
-                          <input type="text" class="form-control" id="entry-details" readonly disabled>
+                          <label for="entry-details">Entry Date:</label>
+                          <input type="text" class="form-control" id="entry-details" name="entry-details" readonly>
                         </div>
+                      </div>
+                    </div>
+                    <h6 class="text-success font-weight-bold mt-2 d-none" id="update_success_text">
+                        Product updated successfully!
+                    </h6>
+                    <h6 class="text-danger font-weight-bold mt-2 d-none" id="update_error_text">
+                        Product update failed. Try again.
+                    </h6>
+                    <div class="modal-footer justify-content-between col-sm-12 mx-0 px-0">
+                      <button type="button" class="btn btn-outline-danger" id="delete-product-btn" data-toggle="modal" data-target="#delete-modal">Delete</button>
+                      <button type="button" class="btn btn-primary" id="update-btn">
+                          <i class="fas fa-pencil-alt mr-2"></i>Update Details
+                      </button>
+                      <div class="justify-content-around d-none" id="save-cancel-btns">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-success">Save changes</button>
                       </div>
                     </div>
                   </form>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" tabindex="-1" id="delete-modal" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title font-weight-bold text-danger">Delete Product</h5>
+                  <button type="button" class="close close-modal-delete1" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p class="text-danger">Are you sure you want to delete this product in the
+                      inventory?</p>
+                </div>
+                <div class="modal-footer justify-content-end">
+                  <button type="button" class="btn btn-outline-secondary close-modal-delete2">Cancel</button>
+                  <button type="button" class="btn btn-danger" onclick="deleteProduct();">Yes,
+                      Delete it</button>
                 </div>
               </div>
             </div>
@@ -230,7 +266,7 @@
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="exp">Expiration Date:</label>
-                          <input type="text" class="form-control" id="expiration" name="expiration" placeholder="mm-dd-yyyy or mm-yyyy" onmouseover="this.focus();" required>
+                          <input type="text" class="form-control" id="exp" name="exp" placeholder="mm-dd-yyyy or mm-yyyy" onmouseover="this.focus();" required>
                         </div>
                       </div>
                       <div class="col-sm-3">
@@ -249,7 +285,7 @@
                       <div class="col-sm-2">
                         <div class="form-group">
                           <label for="label">Add Product</label>
-                          <button type="submit" class="btn btn-info form-control" name="label">
+                          <button type="submit" class="btn btn-info form-control">
                             <i class="fas fa-plus"></i>
                             Add
                           </button>
@@ -261,7 +297,7 @@
                           </h6>
                       </div>
                     </div>
-                    <div class="modal-footer justify-content-between">
+                    <div class="modal-footer justify-content-between mx-0 px-0">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                       <button type="button" class="btn btn-primary" onclick="location.reload();">Add Stocks</button>
                     </div>    

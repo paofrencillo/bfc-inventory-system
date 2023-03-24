@@ -97,17 +97,13 @@ if (!empty($_POST) && $_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST['ac
     } else if ($_FILES["imageFile2"]["name"] == '') { // if image was not updated
         $conn->query("UPDATE $table SET description='$description', generic_name='$generic_name',
                         category='$category', supplier='$supplier', last_edited_by=$last_edited_by,
-                        last_edited_on='$last_edited_on'WHERE barcode='$barcode';");
+                        last_edited_on='$last_edited_on' WHERE barcode='$barcode';");
     }
-    // Check if barcode is changed
-    // If not then proceed to code below
-    // Update product in the database 
 
-
-    // if(!mysqli_error($conn)) {
-    //     // raise error
-    //     echo json_encode("success");
-    // }
+    if(!mysqli_error($conn)) {
+        // raise error
+        echo json_encode("success");
+    }
 }
 
 # DELETE PRODUCT
