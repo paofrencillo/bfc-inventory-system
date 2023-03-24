@@ -76,7 +76,7 @@
                           <td>
                             <?php echo $row["in_quantity"];?>
                           </td>
-                          <td><?php echo $row["in_quantity"];?></td>
+                          <td><?php echo $row["lot_no"];?></td>
                           <td><?php echo $row["exp_date"];?></td>
                           <td class="text-italic"><small><?php echo $last_user . ' | ' . $date;?></small></td>
                           <td>

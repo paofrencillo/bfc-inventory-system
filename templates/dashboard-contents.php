@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
           <div class="row">
             <div class="col-lg-4 col-6">
               <!-- small box -->
-              <div class="small-box bg-info">
+              <div class="small-box bg-success">
                 <div class="inner">
                   <?php
                   // $sql = "SELECT SUM(quantity) as sum FROM endorse_history";
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                   <p>Total Product In</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-ios-download-outline"></i>
+                  <i class="ion ion-ios-download-outline" style="color: #ffffff;"></i>
                 </div>
                 <a href="prod-in.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
             <!-- ./col -->
             <div class="col-lg-4 col-6">
               <!-- small box -->
-              <div class="small-box bg-success">
+              <div class="small-box bg-danger">
                 <div class="inner">
                   <?php
                   $sql = "SELECT SUM(quantity) as sum FROM endorse_history";
@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                   <p>Total Product Out</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-ios-upload-outline"></i>
+                  <i class="ion ion-ios-upload-outline" style="color: #ffffff;"></i>
                 </div>
                 <a href="prod-out.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 
             <div class="col-lg-4 col-6">
               <!-- small box -->
-              <div class="small-box bg-danger">
+              <div class="small-box bg-info">
                 <div class="inner">
                   <?php
                   $sql = "SELECT COUNT(*) as count FROM product_masterlist";
@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                   <p>Total Product Registered</p>
                 </div>
                 <div class="icon">
-                  <i class="fas fa-barcode"></i>
+                  <i class="fas fa-barcode" style="color: #ffffff;"></i>
                 </div>
                 <a href="masterlist.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
@@ -121,76 +121,208 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
             <!-- ./col -->
           </div>
 
-          <div class="card">
-            <div class="card-header border-transparent">
-              <h3 class="card-title font-weight-bold">Running out of stock items</h3>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="card ">
+                <div class="card-header border-transparent bg-secondary">
+                  <h3 class="card-title font-weight-bold">Running out of stock items</h3>
 
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                  <i class="fas fa-times"></i>
-                </button>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus" style="color: #ffffff;"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body p-0">
+                  <div class="table-responsive table-hover table-sm table-borderless table-md text-center">
+                    <table  class="table m-0">
+                      <thead class="thead-light ">
+                        <tr>
+                          <th>Description</th>
+                          <th>Quantity</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                                            
+                          // Query to get maximum value of the column
+                          $sql_max = "SELECT MAX(lot_no) as max_value FROM product_in";
+
+                          // Execute query and get result
+                          $result_max = $conn->query($sql_max);
+
+
+                          // Define low quantity threshold
+                          $low_quantity_threshold = 10;
+
+                          // Check if there is any data
+                          if ($result_max->num_rows > 0) {
+                            // Get the maximum value
+                            $row_max = mysqli_fetch_assoc($result_max);
+                            $max_value = $row_max["max_value"];
+                            
+                            // Calculate 20% of the maximum value
+                            $low_quantity_threshold = $max_value * 0.2;
+                            
+                            // Query to get low quantity data
+                            $sql = "SELECT * FROM product_in WHERE in_quantity <= $low_quantity_threshold ORDER BY in_quantity ASC LIMIT 15";
+                            
+                            // Execute query and get result
+                            $result = $conn->query($sql);
+                            
+                            // Check if there is any data
+                            if ($result->num_rows > 0) {
+                                // Display low quantity data
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                  // echo "ID: " . $row["id"] . " - Quantity: " . $row["yourcolumn"] . "<br>";                       
+                        ?>
+                      <tr >
+                        <td><?php echo $row["description"]?></td>
+                        <td>
+                          <div class="sparkbar text-danger font-weight-bold" data-color="#00a65a" data-height="20"><?php echo $row["in_quantity"]?>  </div>
+                        </td>
+                      </tr>
+                      <?php                      
+                            }
+                          } else {
+                            echo "No data found.";
+                          }
+                        } else {
+                            echo "No data found.";
+                        }
+                      ?>  
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+                <div class="card-footer clearfix bg-secondary">
+                  <a href="inventory.php" class="btn btn-sm btn-info float-right">View All Product</a>
+                </div>
               </div>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body p-0">
-              <div class="table-responsive text-center">
-                <table class="table m-0">
-                  <thead>
-                  <tr>
-                    <th>Barcode</th>
-                    <th>Description</th>
-                    <th>Quantity</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <?php
-                    // Define low quantity threshold
-                    $low_quantity_threshold = 10;
 
-                    // Query to get low quantity data
-                    $sql = "SELECT * FROM product_in WHERE in_quantity <= $low_quantity_threshold";
+            <div class="col-md-4">
+              <!-- PRODUCT LIST -->
+              <div class="card">
+                <div class="card-header bg-success">
+                  <h3 class="card-title font-weight-bold">Top Sales</h3>
 
-                    // Execute query and get result
-                    $result = $conn->query($sql);
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool " data-card-widget="collapse">
+                      <i class="fas fa-minus" style="color: #ffffff;"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body p-0">
+                  <ul class="products-list product-list-in-card pl-2 pr-2">
+                    <?php
+                      // Query to get recent data
+                      $sql = "SELECT * FROM endorse_history ORDER BY quantity ASC LIMIT 3";
 
-                    // Check if there is any data
-                    if ($result->num_rows > 0) {
-                        // Display low quantity data
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            // echo "ID: " . $row["id"] . " - Quantity: " . $row["yourcolumn"] . "<br>";
-                  ?>
-                  <tr>
-                    <td><?php echo $row["barcode"]?></td>
-                    <td><?php echo $row["description"]?></td>
-                    <td>
-                      <div class="sparkbar" data-color="#00a65a" data-height="20"><?php echo $row["in_quantity"]?>  </div>
-                    </td>
-                  </tr>
-                  <?php                      
-                    }
+                      // Execute query and get result
+                      $result = $conn->query($sql);
+
+                      // Check if there is any data
+                      if ($result->num_rows > 0) {
+                          // Display data
+                          while ($row = mysqli_fetch_assoc($result)) {
+                            // echo "ID: " . $row["id"] . " - Name: " . $row["name"] . " - Date: " .
+                            $barcode =  $row["barcode"];
+                            $barcode2 =  $row["barcode"];
+                    ?>
+                    <li class="item">
+                      <div class="product-img">
+                          <?php
+                            $query2 = "SELECT image FROM product_masterlist WHERE barcode = '$barcode'";
+                            $result2 = mysqli_query($conn, $query2);
+                            $check_row = mysqli_num_rows($result2);
+                            while ($row2 = mysqli_fetch_array($result2)) {
+                          ?>
+                        <img src="<?php echo $row2["image"]?>" alt="Product Image" class="img-size-50">
+                          <?php } ?>
+                      </div>
+                      <div class="product-info">
+                        <a href="inventory.php" class="product-title"><?php echo $row["description"]?></a>
+                        <span class="badge badge-success float-right"><?php echo $row["barcode"]?></span>
+                          <?php
+                            $query3 = "SELECT generic_name FROM product_masterlist WHERE barcode = '$barcode2'";
+                            $result3 = mysqli_query($conn, $query3);
+                            $check_row = mysqli_num_rows($result3);
+                            while ($row3 = mysqli_fetch_array($result3)) {
+                          ?>
+                        <span class="product-description">
+                          <?php echo $row3["generic_name"]?>
+                        </span>
+                          <?php } ?>
+                      </div>
+                    </li>
+                    <?php  
+                          }
+                        } else {
+                          echo "No data found.";
+                        }
+                    ?>  
+                  </ul>
+                </div>
+                <div class="card-footer text-center bg-success">
+                  <a href="masterlist.php" class="uppercase text-light">View All Products</a>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header bg-info">
+                  <h3 class="card-title font-weight-bold">Recently Added Products</h3>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus" style="color: #ffffff;"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body p-0">
+                  <ul class="products-list product-list-in-card pl-2 pr-2">
+                    <?php
+                      // Query to get recent data
+                      $sql = "SELECT * FROM product_masterlist ORDER BY last_edited_on DESC LIMIT 3";
+
+                      // Execute query and get result
+                      $result = $conn->query($sql);
+
+                      // Check if there is any data
+                      if ($result->num_rows > 0) {
+                          // Display data
+                          while ($row = mysqli_fetch_assoc($result)) {
+                            // echo "ID: " . $row["id"] . " - Name: " . $row["name"] . " - Date: " . $row["date_column"] . "<br>";
+                    ?>
+                    <li class="item">
+                      <div class="product-img">
+                        <img src="<?php echo $row["image"]?>" alt="Product Image" class="img-size-50">
+                      </div>
+                      <div class="product-info">
+                        <a href="masterlist.php" class="product-title"><?php echo $row["description"]?></a>
+                        <span class="badge badge-info float-right"><?php echo $row["barcode"]?></span>
+                        <span class="product-description">
+                          <?php echo $row["category"]?>
+                        </span>
+                      </div>
+                    </li>
+                    <?php  }
                       } else {
                           echo "No data found.";
                       }
-                  ?>  
-                  </tbody>
-                </table>
+                    ?>  
+                  </ul>
+                </div>
+                <div class="card-footer text-center bg-info">
+                  <a href="masterlist.php" class="uppercase text-light">View All Products</a>
+                </div>
               </div>
-              <!-- /.table-responsive -->
             </div>
-            <!-- /.card-body -->
-            <div class="card-footer clearfix">
-              <a href="inventory.php" class="btn btn-sm btn-secondary float-right">View All</a>
-            </div>
-            <!-- /.card-footer -->
+            
           </div>
-          <!-- /.row -->
         </div>
-                  
+      </section>         
     </div>
-    <!-- /.content-header -->
   </div>
-  <!-- /.content-wrapper -->
 <?php } ?>

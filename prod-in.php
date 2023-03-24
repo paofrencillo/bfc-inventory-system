@@ -4,7 +4,7 @@ include('templates/session.php');
 
 if ($_SESSION['login_user']['is_superuser'] == false) {
   header('HTTP/1.0 403 Forbidden', TRUE, 403);
-  die(header('location: 403.html'));  
+  die(header('location: 403.html'));
 }
 ?>
 <!DOCTYPE html>
@@ -56,8 +56,8 @@ if ($_SESSION['login_user']['is_superuser'] == false) {
     // ------ Navbar
     include("templates/navbar.php");
     ?>
-        <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-light-blue elevation-4">
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-light-blue elevation-4">
       <!-- Brand Logo -->
       <a href="dashboard.php" class="brand-link">
         <img src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
