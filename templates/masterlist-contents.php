@@ -134,8 +134,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-7">
                                             <div class="form-group mb-3">
                                                 <label for="category">Select Category</label>
-                                                <select class="custom-select" name="category" id="category" required>
-                                                    <option value="GENERIC" selected>GENERIC</option>
+                                                <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" name="category" id="category" required>
+                                                    <option value="GENERIC">GENERIC</option>
                                                     <option value="BRANDED">BRANDED</option>
                                                     <option value="MEDICAL DEVICE">MEDICAL DEVICE</option>
                                                     <option value="NON-PHARMA">NON-PHARMA</option>
@@ -148,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-5">
                                             <div class="form-group">
                                                 <label for="supp">Supplier:</label>
-                                                <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" name="supplier" id="supp">
+                                                <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" name="supplier" id="supp" required>
                                                     <?php
                                                     $query2 = "SELECT * FROM suppliers";
                                                     $result = mysqli_query($conn, $query2);
@@ -226,7 +226,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                             </div>
                                             <div class="form-group">
                                                 <label for="cat-modal">Category:</label>
-                                                <select class="custom-select" name="cat-modal" id="cat-modal" disabled>
+                                                <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" name="cat-modal" id="cat-modal">
                                                     <option value="GENERIC">GENERIC</option>
                                                     <option value="BRANDED">BRANDED</option>
                                                     <option value="MEDICAL DEVICE">MEDICAL DEVICE</option>
@@ -236,10 +236,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                     <option value="HEALTHY FIX">HEALTHY FIX</option>
                                                 </select>
                                             </div>
-                                            <!-- <div class="form-group" id="supp-text-group">
-                                                <label for="supp">Supplier:</label>
-                                                <input class="form-control" type="text" name="" id="supp-text" readonly>
-                                            </div> -->
                                             <div class="form-group">
                                                 <label for="supp-modal">Supplier:</label>
                                                 <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" name="supp-modal" id="supp-modal">

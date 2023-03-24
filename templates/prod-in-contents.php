@@ -11,8 +11,8 @@
         die( header( 'location: ../500.html' ) );
     }
     else {?>
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <div class="content-header">
         <div class="container-fluid">
@@ -31,7 +31,9 @@
               </div>
               <div class="card-body">
                 <div class="col-md-2">
-                  <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addnew"><i class="fas fa-plus-circle"></i> ADD STOCKS</button>
+                  <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addnew">
+                    <i class="fas fa-plus-circle"></i> ADD STOCKS
+                  </button>
                 </div>
               </div>
               <!-- /.card-body -->
@@ -61,8 +63,8 @@
                           $result = mysqli_query($conn, $query);
                           while ($row = mysqli_fetch_array($result)) {
                             $last_user = $row['last_edited_by'];
-                            $date1 = date_create($row["last_edited_on"]);
-                            $date2 = date_format($date1, "d/m/Y h:i");
+                            $date = date_create($row["last_edited_on"]);
+                            $date = date_format($date, "d/m/Y h:i");
                         ?>
                         <tr>
                         <td>
@@ -76,24 +78,101 @@
                           </td>
                           <td><?php echo $row["in_quantity"];?></td>
                           <td><?php echo $row["exp_date"];?></td>
-                          <td class="text-italic"><small><?php echo $last_user . ' | ' . $date2;?></small></td>
+                          <td class="text-italic"><small><?php echo $last_user . ' | ' . $date;?></small></td>
                           <td>
-                            <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update">
-                              <i class="fas fa-pencil-alt"></i>
-                              Edit
-                            </button>
-                            <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view">
+                            <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#details">
                               <i class="fas fa-eye"></i>
                               Details
                             </button>
                           </td>
                         <?php }?>
                         </tr>
-      
                       </tbody>
                     </table>
                   </div>
                   <!-- /.card-body -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal -->
+          <div class="modal fade" id="details">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Product Details</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="barcode">Barcode:</label>
+                          <input type="text" class="form-control " id="barcode" readonly>
+                        </div>
+                      </div>
+                      <div class="col-sm-8">
+                        <div class="form-group">
+                          <label for="prod">Product Description:</label>
+                          <input type="text" class="form-control " id="prod">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label for="stock">Stock:</label>
+                          <input type="number" class="form-control " id="stock">
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label for="allo">Allocation:</label>
+                          <input type="number" class="form-control " id="allo">
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="lot">Lot Number:</label>
+                          <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();">
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="supp">Supplier:</label>
+                          <select class="form-control select2bs4" style="width: 100%;">
+                            <option selected="selected" disabled>Please Select Supplier</option>
+                            <?php
+                              $query = "SELECT * FROM suppliers";
+                              $result = mysqli_query($conn, $query);
+                              $check_row = mysqli_num_rows($result);
+                              while ($row = mysqli_fetch_array($result)) {
+                            ?>
+                            <option value="<?php echo $row['supplier']?>"><?php echo $row['supplier']?></option>
+                            <?php } ?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label for="exp">Expiration Date:</label>
+                          <input type="date" class="form-control " id="exp">
+                        </div>
+                      </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                          <label for="supp">Entry Date:</label>
+                          <input type="date" class="form-control " id="supp">
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
               </div>
             </div>
@@ -167,7 +246,7 @@
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="exp">Expiration Date:</label>
-                          <input type="text" class="form-control" id="expiration" name="expiration" placeholder="mm-dd-yyyy" onmouseover="this.focus();" required>
+                          <input type="text" class="form-control" id="expiration" name="expiration" placeholder="mm-dd-yyyy or mm-yyyy" onmouseover="this.focus();" required>
                         </div>
                       </div>
                       <div class="col-sm-3">
@@ -203,178 +282,12 @@
                       <button type="button" class="btn btn-primary" onclick="location.reload();">Add Stocks</button>
                     </div>    
                   </form>
-              </div>
+                </div>
               <!-- /.modal-content -->
             </div>
             <!-- /.modal-dialog -->
           </div>
           <!-- /.modal -->
-
-          <div class="modal fade" id="update">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label for="barcode">Barcode:</label>
-                          <input type="text" class="form-control " id="barcode" readonly>
-                        </div>
-                      </div>
-                      <div class="col-sm-8">
-                        <div class="form-group">
-                          <label for="prod">Product Description:</label>
-                          <input type="text" class="form-control " id="prod">
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="form-group">
-                          <label for="stock">Stock:</label>
-                          <input type="number" class="form-control " id="stock">
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="form-group">
-                          <label for="allo">Allocation:</label>
-                          <input type="number" class="form-control " id="allo">
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label for="lot">Lot Number:</label>
-                          <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();">
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label for="supp">Supplier:</label>
-                          <select class="form-control select2bs4" style="width: 100%;">
-                            <option selected="selected" disabled>Please Select Supplier</option>
-                            <?php
-                              $query = "SELECT * FROM suppliers";
-                              $result = mysqli_query($conn, $query);
-                              $check_row = mysqli_num_rows($result);
-                              while ($row = mysqli_fetch_array($result)) {
-                            ?>
-                            <option value="<?php echo $row['supplier']?>"><?php echo $row['supplier']?></option>
-                            <?php } ?>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <label for="exp">Expiration Date:</label>
-                          <input type="date" class="form-control " id="exp">
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <label for="supp">Entry Date:</label>
-                          <input type="date" class="form-control " id="supp">
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer justify-content-between">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-primary">Update</button>
-                </div>
-              </div>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-          </div>
-          <!-- /.modal -->
-
-          <div class="modal fade" id="view">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">VIEW PRODUCT DETAILS</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label for="barcode">Barcode:</label>
-                          <input type="text" class="form-control " id="barcode" readonly>
-                        </div>
-                      </div>
-                      <div class="col-sm-8">
-                        <div class="form-group">
-                          <label for="prod">Product Description:</label>
-                          <input type="text" class="form-control " id="prod" readonly>
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="form-group">
-                          <label for="stock">Stock:</label>
-                          <input type="number" class="form-control " id="stock" readonly>
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="form-group">
-                          <label for="allo">Allocation:</label>
-                          <input type="number" class="form-control " id="allo" readonly>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label for="lot">Lot Number:</label>
-                          <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();" readonly>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label for="supp">Supplier:</label>
-                          <select class="form-control select2bs4" style="width: 100%;" disabled>
-                            <option selected="selected" disabled>Please Select Supplier</option>
-                            <option>Supplier A</option>
-                            <option>Supplier B</option>
-                            <option>Supplier C</option>
-                            <option>Supplier D</option>
-                            <option>Supplier E</option>
-                            <option>Supplier F</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <label for="exp">Expiration Date:</label>
-                          <input type="date" class="form-control " id="exp" readonly>
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                          <label for="supp">Entry Date:</label>
-                          <input type="date" class="form-control " id="supp" readonly>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer justify-content-between">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-          </div>
-          <!-- /.modal -->
-
         </section>
       </div>
       <!-- /.content-header -->

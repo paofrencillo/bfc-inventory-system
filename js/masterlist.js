@@ -1,6 +1,10 @@
 $(document).ready(function() {
-  $('.selectpicker').selectpicker();
-  document.getElementsByClassName("dropdown-toggle")[1].setAttribute("disabled", true);
+  $('.selectpicker1').selectpicker();
+  $('.selectpicker2').selectpicker();
+  $('.selectpicker3').selectpicker();
+  $('.selectpicker4').selectpicker();
+  document.getElementsByClassName("dropdown-toggle")[2].setAttribute("disabled", true);
+  document.getElementsByClassName("dropdown-toggle")[3].setAttribute("disabled", true);
 });
 
 // View product details
@@ -14,7 +18,7 @@ function viewModal(el) {
       $("#barcode-modal").val(data.barcode);
       $("#desc-modal").val(data.description);
       $("#gen-modal").val(data.generic_name);
-      $("#cat-modal").val(data.category);
+      $("#cat-modal").selectpicker('val', data.category);
       $('#supp-modal').selectpicker('val', data.supplier);
       $("#img-modal").attr("src", data.image);
       $("#delete-product-btn").attr("data-product-barcode", data.barcode);   
@@ -32,8 +36,8 @@ function editDetails(el) {
   $(el).addClass("d-none");
 
   modal_fields = document.getElementById("details").querySelectorAll("input");
-  $("#cat-modal").removeAttr("disabled");
-  document.getElementsByClassName("dropdown-toggle")[1].removeAttribute("disabled");
+  document.getElementsByClassName("dropdown-toggle")[2].removeAttribute("disabled");
+  document.getElementsByClassName("dropdown-toggle")[3].removeAttribute("disabled");
 
   modal_fields.forEach(field => {
 
@@ -84,8 +88,8 @@ $('#details').on('hidden.bs.modal', function (e) {
   $("#save-cancel-btns").addClass("d-none");
   $("#update-btn").removeClass("d-none");
 
-  $("#cat-modal").attr("disabled", "")
-  document.getElementsByClassName("dropdown-toggle")[1].setAttribute("disabled", true);
+  document.getElementsByClassName("dropdown-toggle")[2].setAttribute("disabled", true);
+  document.getElementsByClassName("dropdown-toggle")[3].setAttribute("disabled", true);
 
   modal_fields = document.getElementById("details").querySelectorAll("input");
   modal_fields.forEach(field => {
@@ -142,14 +146,14 @@ $("#barcode").on("change", ()=> {
       if (data != "Not found") {
         $("#description").attr("disabled", "");
         $("#generic_name").attr("disabled", "");
-        $("#category").attr("disabled", "");
         document.getElementsByClassName("dropdown-toggle")[0].setAttribute("disabled", true);
+        document.getElementsByClassName("dropdown-toggle")[1].setAttribute("disabled", true);
         $("#imageFile").attr("disabled", "");
   
         $("#barcode").val(data.barcode);
         $("#description").val(data.description);
         $("#generic_name").val(data.generic_name);
-        $("#category").val(data.category);
+        $("#category").selectpicker('val', data.category);
         $('#supp').selectpicker('val', data.supplier);
         let imgName = data.image;
         let strip_imgName = imgName.replace("product-imgs/", '')

@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['action'] === 'receive_prod'){
         $last_edited_by = $_SESSION['login_user']['employee_name'];
         $last_edited_on = date("Y-m-d H:i:s");
-        $entry_date = $_POST["entry_date"];
+        $entry_date = date("Y-m-d H:i:s");
         $barcode = $_POST["barcode"];
         $description = $_POST["description"];
         $quantity = $_POST["quantity"];
