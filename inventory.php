@@ -246,7 +246,7 @@ if ($_SESSION['login_user']['is_superuser'] == false) {
   <script src="plugins/select2/js/select2.full.min.js"></script>
   <script>
     $(function() {
-      $("#example1").DataTable({
+      $("#Generic").DataTable({
         "columnDefs": [{
           "className": "dt-center",
           "targets": "_all"
@@ -256,12 +256,15 @@ if ($_SESSION['login_user']['is_superuser'] == false) {
         // "scrollY": '500px',
         // "scrollCollapse": true,
         "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        "order": [
+          [1, 'asc']
+        ],
+        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+      }).buttons().container().appendTo('#Generic_wrapper .col-md-6:eq(0)');
     });
 
     $(function() {
-      $("#example2").DataTable({
+      $("#branded").DataTable({
         "columnDefs": [{
           "className": "dt-center",
           "targets": "_all"
@@ -271,9 +274,103 @@ if ($_SESSION['login_user']['is_superuser'] == false) {
         // "scrollY": '500px',
         // "scrollCollapse": true,
         "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print"]
+        "order": [
+          [1, 'asc']
+        ],
+        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
       }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
     });
+
+    $(function() {
+      $("#medical").DataTable({
+        "columnDefs": [{
+          "className": "dt-center",
+          "targets": "_all"
+        }],
+        "responsive": true,
+        "lengthChange": true,
+        // "scrollY": '500px',
+        // "scrollCollapse": true,
+        "autoWidth": false,
+        "order": [
+          [1, 'asc']
+        ],
+        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+      }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+    });
+
+    $(function() {
+      $("#non-pharma").DataTable({
+        "columnDefs": [{
+          "className": "dt-center",
+          "targets": "_all"
+        }],
+        "responsive": true,
+        "lengthChange": true,
+        // "scrollY": '500px',
+        // "scrollCollapse": true,
+        "autoWidth": false,
+        "order": [
+          [1, 'asc']
+        ],
+        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+      }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+    });
+
+    $(function() {
+      $("#special").DataTable({
+        "columnDefs": [{
+          "className": "dt-center",
+          "targets": "_all"
+        }],
+        "responsive": true,
+        "lengthChange": true,
+        // "scrollY": '500px',
+        // "scrollCollapse": true,
+        "autoWidth": false,
+        "order": [
+          [1, 'asc']
+        ],
+        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+      }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+    });
+
+    $(function() {
+      $("#house").DataTable({
+        "columnDefs": [{
+          "className": "dt-center",
+          "targets": "_all"
+        }],
+        "responsive": true,
+        "lengthChange": true,
+        // "scrollY": '500px',
+        // "scrollCollapse": true,
+        "autoWidth": false,
+        "order": [
+          [1, 'asc']
+        ],
+        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+      }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+    });
+
+    $(function() {
+      $("#health").DataTable({
+        "columnDefs": [{
+          "className": "dt-center",
+          "targets": "_all"
+        }],
+        "responsive": true,
+        "lengthChange": true,
+        // "scrollY": '500px',
+        // "scrollCollapse": true,
+        "autoWidth": false,
+        "order": [
+          [1, 'asc']
+        ],
+        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+      }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+    });
+
 
     $(function() {
       //Initialize Select2 Elements

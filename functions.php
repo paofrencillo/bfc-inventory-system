@@ -1112,4 +1112,150 @@ if (isset($_POST['delete_updateprodout'])) {
     }
 }
 
+#MODIFY INVENTORY
+if(isset($_POST['modify_invent'])) {
+
+    $barcode = $_POST['barcode'];
+    $description = $_POST['description'];
+    $stock = $_POST['stock'];
+    $allocation = $_POST['allocation']; 
+    $sa_percentage = $_POST['sa_percentage'];
+
+    if ($allocation != 0){
+        if ($stock < $allocation){
+            $divide_sa = $stock / $allocation;
+            $multiply_sa = $divide_sa * 100;
+            $answer_sa = number_format($multiply_sa, 0);
+
+            if ($barcode != null) {
+                // Insert the values into the database
+                $conn->query("UPDATE inventory 
+                    SET barcode = '$barcode', 
+                    description = '$description', 
+                    stock = '$stock', 
+                    allocation = '$allocation',
+                    sa_percentage = '$answer_sa' WHERE barcode = '$barcode'") or die($conn->error);
+                ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Product Successfully Updated',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Okay'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "inventory.php";
+                                } else {
+                                    window.location.href = "inventory.php";
+                                }
+                            })
+                        })
+                    </script>
+                <?php
+            } else {
+            ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'An Error Occured',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "inventory.php";
+                            } else {
+                                window.location.href = "inventory.php";
+                            }
+                        })
+                    })
+                </script>
+            <?php
+            }   
+        } else {
+            ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'An Error Occured',
+                            text: 'Stock must be less than allocation',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "inventory.php";
+                            } else {
+                                window.location.href = "inventory.php";
+                            }
+                        })
+                    })
+                </script>
+            <?php
+        }
+
+    } else {
+        $sa_percentage = 0;
+        $answer_sa = $sa_percentage;
+
+        if ($barcode != null) {
+            // Insert the values into the database
+            $conn->query("UPDATE inventory 
+                SET barcode = '$barcode', 
+                description = '$description', 
+                stock = '$stock', 
+                allocation = '$allocation',
+                sa_percentage = '$answer_sa' WHERE barcode = '$barcode'") or die($conn->error);
+            ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Product Successfully Updated',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "inventory.php";
+                            } else {
+                                window.location.href = "inventory.php";
+                            }
+                        })
+                    })
+                </script>
+            <?php
+        } else {
+            ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'An Error Occured',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "inventory.php";
+                            } else {
+                                window.location.href = "inventory.php";
+                            }
+                        })
+                    })
+                </script>
+            <?php
+        }   
+    }
+}
+
 ?>
