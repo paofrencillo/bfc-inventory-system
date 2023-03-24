@@ -96,7 +96,7 @@
             </div>
           </div>
 
-          <!-- Modal -->
+          <!-- Product Details Modal -->
           <div class="modal fade" id="details">
             <div class="modal-dialog modal-dialog-centered modal-lg">
               <div class="modal-content">
@@ -112,31 +112,25 @@
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="barcode">Barcode:</label>
-                          <input type="text" class="form-control " id="barcode" readonly>
+                          <input type="text" class="form-control" id="barcode-details" readonly>
                         </div>
                       </div>
                       <div class="col-sm-8">
                         <div class="form-group">
                           <label for="prod">Product Description:</label>
-                          <input type="text" class="form-control " id="prod">
+                          <input type="text" class="form-control" id="desc-details">
                         </div>
                       </div>
-                      <div class="col-sm-2">
+                      <div class="col-sm-4">
                         <div class="form-group">
-                          <label for="stock">Stock:</label>
-                          <input type="number" class="form-control " id="stock">
-                        </div>
-                      </div>
-                      <div class="col-sm-2">
-                        <div class="form-group">
-                          <label for="allo">Allocation:</label>
-                          <input type="number" class="form-control " id="allo">
+                          <label for="lot">Quantity</label>
+                          <input type="number" class="form-control" id="quantity-details" onkeyup="this.value = this.value.toUpperCase();">
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="lot">Lot Number:</label>
-                          <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();">
+                          <input type="text" class="form-control" id="lot-details" onkeyup="this.value = this.value.toUpperCase();">
                         </div>
                       </div>
                       <div class="col-sm-4">
@@ -158,13 +152,13 @@
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label for="exp">Expiration Date:</label>
-                          <input type="date" class="form-control " id="exp">
+                          <input type="date" class="form-control " id="exp-details">
                         </div>
                       </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                           <label for="supp">Entry Date:</label>
-                          <input type="date" class="form-control " id="supp">
+                          <input type="date" class="form-control " id="supp-details">
                         </div>
                       </div>
                     </div>
