@@ -11,7 +11,7 @@ $(document).ready(function() {
 function viewModal(el) {
   $.ajax({
     type: "GET",
-    url: "get_masterlist.php",
+    url: "masterlist-functions.php",
     data: {"barcode": el.getAttribute("data-id"), action: "get_product"},
     dataType: "JSON",
     success: function(data) {
@@ -56,6 +56,7 @@ function removeAttrInputs() {
   $("#generic_name").removeAttr("disabled");
   $("#category").removeAttr("disabled");
   document.getElementsByClassName("dropdown-toggle")[0].removeAttribute("disabled");
+  document.getElementsByClassName("dropdown-toggle")[1].removeAttribute("disabled");
   $("#imageFile").removeAttr("disabled");
 
   $("#description").val('');
@@ -69,16 +70,22 @@ function removeAttrInputs() {
 // ------ Delete product
 function deleteProduct() {
   let barcode =  $("#delete-product-btn").attr("data-product-barcode");
+  let formData = new FormData();
+  formData.append('action', 'delete');
+  formData.append('barcode', barcode);
+  
   $.ajax({
     type: "POST",
-    url: "post_masterlist.php",
-    data: {action: 'delete', barcode: barcode},
+    url: "masterlist-functions.php",
+    data: formData,
+    contentType: false,
+    processData:false,
     cache: false,
     success: function() {
       location.reload();     
     },
-    error: function(error) {
-      console.error(error);
+    error: function(error, status) {
+      console.error(error, status);
     }
   });
 }
@@ -139,7 +146,7 @@ $("#barcode").on("change", ()=> {
   });
   $.ajax({
     type: "GET",
-    url: "get_masterlist.php",
+    url: "masterlist-functions.php",
     data: {"barcode": $("#barcode").val(), action: "get_product"},
     dataType: "JSON",
     success: function(data) {
@@ -179,7 +186,7 @@ $("#enroll_form").on("submit", function(e) {
   e.preventDefault();
   $.ajax({
     type: "POST",
-    url: "post_masterlist.php",
+    url: "masterlist-functions.php",
     data: new FormData(this),
     contentType: false,
     processData:false,
@@ -211,7 +218,7 @@ $("#update_masterlist_form").on("submit", function(e) {
   e.preventDefault();
   $.ajax({
     type: "POST",
-    url: "post_masterlist.php",
+    url: "masterlist-functions.php",
     data: new FormData(this),
     contentType: false,
     processData:false,
