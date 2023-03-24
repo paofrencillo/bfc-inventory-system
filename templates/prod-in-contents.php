@@ -112,53 +112,43 @@
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="barcode">Barcode:</label>
-                          <input type="text" class="form-control" id="barcode-details" readonly>
+                          <input type="text" class="form-control" id="barcode-details" readonly disabled>
                         </div>
                       </div>
                       <div class="col-sm-8">
                         <div class="form-group">
                           <label for="prod">Product Description:</label>
-                          <input type="text" class="form-control" id="desc-details">
+                          <input type="text" class="form-control" id="desc-details" readonly disabled>
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="lot">Quantity</label>
-                          <input type="number" class="form-control" id="quantity-details" onkeyup="this.value = this.value.toUpperCase();">
+                          <input type="number" class="form-control" id="quantity-details" name="quantity-details" onkeyup="this.value = this.value.toUpperCase();">
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="lot">Lot Number:</label>
-                          <input type="text" class="form-control" id="lot-details" onkeyup="this.value = this.value.toUpperCase();">
+                          <input type="text" class="form-control" id="lot-details" name="lot-details" onkeyup="this.value = this.value.toUpperCase();">
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="supp">Supplier:</label>
-                          <select class="form-control select2bs4" style="width: 100%;">
-                            <option selected="selected" disabled>Please Select Supplier</option>
-                            <?php
-                              $query = "SELECT * FROM suppliers";
-                              $result = mysqli_query($conn, $query);
-                              $check_row = mysqli_num_rows($result);
-                              while ($row = mysqli_fetch_array($result)) {
-                            ?>
-                            <option value="<?php echo $row['supplier']?>"><?php echo $row['supplier']?></option>
-                            <?php } ?>
-                          </select>
+                          <input type="text" class="form-control" id="supp-details" readonly disabled>
                         </div>
                       </div>
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label for="exp">Expiration Date:</label>
-                          <input type="date" class="form-control " id="exp-details">
+                          <input type="date" class="form-control" id="exp-details" name="exp-details">
                         </div>
                       </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                           <label for="supp">Entry Date:</label>
-                          <input type="date" class="form-control " id="supp-details">
+                          <input type="text" class="form-control" id="entry-details" readonly disabled>
                         </div>
                       </div>
                     </div>
