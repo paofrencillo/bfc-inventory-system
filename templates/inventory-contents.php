@@ -144,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                       <div class="col-sm-7">
                                         <div class="form-group">
                                           <label for="prod">Product Description</label>
-                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>">
+                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>" readonly>
                                         </div>
                                       </div>
                                       <div class="col-sm-4">
@@ -275,7 +275,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                       <div class="col-sm-7">
                                         <div class="form-group">
                                           <label for="prod">Product Description</label>
-                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>">
+                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>" readonly>
                                         </div>
                                       </div>
                                       <div class="col-sm-4">
@@ -406,7 +406,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                       <div class="col-sm-7">
                                         <div class="form-group">
                                           <label for="prod">Product Description</label>
-                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>">
+                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>" readonly>
                                         </div>
                                       </div>
                                       <div class="col-sm-4">
@@ -537,7 +537,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                       <div class="col-sm-7">
                                         <div class="form-group">
                                           <label for="prod">Product Description</label>
-                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>">
+                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>" readonly>
                                         </div>
                                       </div>
                                       <div class="col-sm-4">
@@ -668,7 +668,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                       <div class="col-sm-7">
                                         <div class="form-group">
                                           <label for="prod">Product Description</label>
-                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>">
+                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>" readonly>
                                         </div>
                                       </div>
                                       <div class="col-sm-4">
@@ -799,7 +799,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                       <div class="col-sm-7">
                                         <div class="form-group">
                                           <label for="prod">Product Description</label>
-                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>">
+                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>" readonly>
                                         </div>
                                       </div>
                                       <div class="col-sm-4">
@@ -930,7 +930,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                       <div class="col-sm-7">
                                         <div class="form-group">
                                           <label for="prod">Product Description</label>
-                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>">
+                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>" readonly>
                                         </div>
                                       </div>
                                       <div class="col-sm-4">
