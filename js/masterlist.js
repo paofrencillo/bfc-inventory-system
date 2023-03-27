@@ -8,7 +8,29 @@ $(document).ready(function() {
 });
 
 // View product details
-function viewModal(el) {
+function viewModal1(el) {
+  $.ajax({
+    type: "GET",
+    url: "masterlist-functions.php",
+    data: {"barcode": el.getAttribute("data-id"), action: "get_product"},
+    dataType: "JSON",
+    success: function(data) {
+      $("#barcode-modal-details").val(data.barcode);
+      $("#desc-modal-details").val(data.description);
+      $("#gen-modal-details").val(data.generic_name);
+      $("#cat-modal-details").val(data.category);
+      $("#supp-modal-details").val(data.supplier);
+      $("#edited-modal-details").val(data.last_edited);
+      $("#img-modal-details").attr("src", data.image);
+    },
+    error: function(error) {
+      console.log(error);
+    }
+  })
+}
+
+// View product details
+function viewModal2(el) {
   $.ajax({
     type: "GET",
     url: "masterlist-functions.php",
@@ -19,9 +41,8 @@ function viewModal(el) {
       $("#desc-modal").val(data.description);
       $("#gen-modal").val(data.generic_name);
       $("#cat-modal").selectpicker('val', data.category);
-      $('#supp-modal').selectpicker('val', data.supplier);
+      $("#supp-modal").selectpicker('val', data.supplier);
       $("#img-modal").attr("src", data.image);
-      $("#delete-product-btn").attr("data-product-barcode", data.barcode);   
     },
     error: function(error) {
       console.log(error);
@@ -35,7 +56,7 @@ function editDetails(el) {
   $("#save-cancel-btns").removeClass("d-none");
   $(el).addClass("d-none");
 
-  modal_fields = document.getElementById("details").querySelectorAll("input");
+  modal_fields = document.getElementById("edit").querySelectorAll("input");
   document.getElementsByClassName("dropdown-toggle")[2].removeAttribute("disabled");
   document.getElementsByClassName("dropdown-toggle")[3].removeAttribute("disabled");
 
@@ -91,14 +112,14 @@ function deleteProduct() {
 }
 
 // ------ Cancel product update
-$('#details').on('hidden.bs.modal', function (e) {
+$('#edit').on('hidden.bs.modal', function (e) {
   $("#save-cancel-btns").addClass("d-none");
   $("#update-btn").removeClass("d-none");
 
   document.getElementsByClassName("dropdown-toggle")[2].setAttribute("disabled", true);
   document.getElementsByClassName("dropdown-toggle")[3].setAttribute("disabled", true);
 
-  modal_fields = document.getElementById("details").querySelectorAll("input");
+  modal_fields = document.getElementById("edit").querySelectorAll("input");
   modal_fields.forEach(field => {
     if (field.id != "barcode-modal") {
       field.setAttribute("readonly", "");

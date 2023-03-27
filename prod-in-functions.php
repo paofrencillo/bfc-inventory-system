@@ -5,7 +5,24 @@ header("Content-Type: text/json; charset=utf8");
 date_default_timezone_set('Asia/Manila');
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
-    if (isset($_GET["action"]) && $_GET['action'] === 'get_product') {
+    if (isset($_GET["action"]) && $_GET['action'] === 'reloadTable') {
+        $table = "product_in";
+        $added_by = $_SESSION["login_user"]["employee_name"];
+        $query_get = "SELECT * FROM $table WHERE added_by='$added_by';";
+        $result = mysqli_query($conn, $query_get);
+    
+        if ($result->num_rows == 0) {   
+            $data = "Not found";
+            echo json_encode($data);
+        } else {
+            $data = array();
+            while ($row = mysqli_fetch_array($result)) {
+                array_unshift($data, $row);
+            }
+            echo json_encode($data);
+        }
+    }
+    else if (isset($_GET["action"]) && $_GET['action'] === 'get_product') {
         $barcode = $_GET["barcode"];
         $table = "product_masterlist";
         $query_get = "SELECT description, supplier FROM $table WHERE barcode='$barcode';";
@@ -23,9 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 echo json_encode($data);
             }
         }
-    } else if (isset($_GET["action"]) && $_GET['action'] === 'get_product_in') {
+    }
+   
+    else if (isset($_GET["action"]) && $_GET['action'] === 'get_product_in') {
         $id = $_GET["id"];
-        $table = "product_in";
+        $table = "product_in_final";
         $query_get = "SELECT * FROM $table WHERE id=$id;";
         $result = mysqli_query($conn, $query_get);
     
@@ -34,17 +53,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
             echo json_encode($data);
         } else {
             while ($row = mysqli_fetch_array($result)) {
-                $date = date_create($row["entry_date"]);
-                $date = date_format($date, "m-d-Y");
+                if ($row["last_edited_on"] != '0000-00-00 00:00:00') {
+                    $date = date_create($row["last_edited_on"]);
+                    $date = date_format($date, "m-d-Y h:I");
+                } else {
+                    $date = '';
+                }
                 $data = array(
                     "id" => $row["id"],
                     "barcode" => $row["barcode"],
                     "description" => $row["description"],
-                    "supplier" => $row["supplier"],
-                    "lot_no" => $row["lot_no"],
-                    "entry_date" => $date,
-                    "exp_date" => $row["exp_date"],
                     "in_quantity" => $row["in_quantity"],
+                    "lot_no" => $row["lot_no"],
+                    "exp_date" => $row["exp_date"],
+                    "supplier" => $row["supplier"],
+                    "entry_date" => $row["entry_date"],
+                    "added_by" => $row["added_by"],
+                    "last_edited" => $row["last_edited_by"] . ' | ' . $date,
                 );
                 echo json_encode($data);
             }
@@ -55,22 +80,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Receive Product In
     if (isset($_POST["action"]) && $_POST['action'] === 'receive_prod'){
-        $last_edited_by = $_SESSION['login_user']['employee_name'];
+        $added_by = $_SESSION['login_user']['employee_name'];
         $last_edited_on = date("Y-m-d H:i:s");
-        $entry_date = date("Y-m-d H:i:s");
+        $entry_date = date("m-d-Y");
         $barcode = $_POST["barcode"];
         $description = $_POST["description"];
+        $prf = $_POST["prf"];
         $supplier = $_POST["supp"];
         $quantity = $_POST["quantity"];
         $lot = $_POST["lot"];
         $exp = $_POST["exp"];
-        $table = "product_in";
+        $table1 = "product_in";
+        $table2 = "inventory";
         
-        #Insert new products in the database 
-        $conn->query("INSERT INTO $table (barcode, description, supplier, in_quantity, lot_no, entry_date, exp_date, last_edited_by, last_edited_on)
-        VALUES ('$barcode', '$description', '$supplier', '$quantity', '$lot', '$entry_date', '$exp', '$last_edited_by', '$last_edited_on');") or die('Error Could Not Query');
-        
-        $data = array(
+        // Insert new products in the database 
+        $conn->query("INSERT INTO $table1 (barcode, description, supplier, prf, in_quantity, lot_no, entry_date,
+                    exp_date, added_by) VALUES ('$barcode', '$description', '$supplier', '$prf', '$quantity', '$lot',
+                    '$entry_date', '$exp', '$added_by');") or die('Error Could Not Query');
+
+        // Update product quantity in the inventory table 
+        $conn->query("UPDATE $table2 SET stock=stock+$quantity WHERE barcode='$barcode';") or die('Error Could Not Query');
+
+        $data = array(  
             "barcode" => $barcode,
             "description" => $description,
             "quantity" => $quantity,
@@ -79,6 +110,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
         echo json_encode($data);
     }
+    // Finalize Product In
+    if (isset($_POST["action"]) && $_POST['action'] === 'add_stocks'){
+        $added_by = $_SESSION['login_user']['employee_name'];
+        $table1 = "product_in_final";
+        $table2 = "product_in";
+        
+        // Insert new products in the database 
+        $conn->query("INSERT INTO $table1 SELECT * FROM $table2 WHERE added_by='$added_by';") or die('Error Could Not Query');
+        
+        // Delete the temporary products from the temporary table
+        $conn->query("DELETE FROM $table2 WHERE added_by='$added_by';") or die('Error Could Not Query');
+
+        $data = "success";
+        echo json_encode($data);
+    }
+    
     // Update Product In
     else if (isset($_POST["action"]) && $_POST['action'] === 'update_prod_in'){
         $last_edited_by = $_SESSION['login_user']['employee_name'];
@@ -89,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $expiration = $_POST["exp-details"];
         $table = "product_in";  
         
-        #Update product in the database 
+        // Update product in the database 
         $conn->query("UPDATE $table SET in_quantity=$quantity, lot_no='$lot', exp_date='$expiration', last_edited_by='$last_edited_by',
                     last_edited_on='$last_edited_on' WHERE id='$id';") or die('Error Could Not Query');
 
@@ -102,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id = $_POST["id"];
         $table = "product_in";
 
-        #Delete product_in in the database 
+        // Delete product_in in the database 
         $conn->query("DELETE FROM $table WHERE id='$id';") or die('Error Could Not Query');
 
         if(!mysqli_error($conn)) {

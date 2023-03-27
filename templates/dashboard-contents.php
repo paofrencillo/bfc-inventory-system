@@ -151,7 +151,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                         // Execute query and get result
                         $result_max = $conn->query($sql_max);
 
-
                         // Define low quantity threshold
                         $low_quantity_threshold = 10;
 

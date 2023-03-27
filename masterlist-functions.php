@@ -19,13 +19,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
             echo json_encode($data);
         } else {
             while ($row = mysqli_fetch_array($result)) {
+                $date = date_create($row["last_edited_on"]);
+                $date = date_format($date, "d/m/Y h:i");
+
                 $data = array(
                     "barcode" => $row["barcode"],
                     "description" => $row["description"],
                     "generic_name" => $row["generic_name"],
                     "category" => $row["category"],
                     "supplier" => $row["supplier"],
-                    "image" => $row["image"]
+                    "image" => $row["image"],
+                    "last_edited" => $row["last_edited_by"] . ' | ' .  $date,
                 );
                 echo json_encode($data);
             }
@@ -51,12 +55,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $category = $_POST["category"];
         $supplier = $_POST["supplier"];
         $image = $_FILES["imageFile"];
-        $last_edited_by = $_SESSION["login_user"]["user_id"];
+        $last_edited_by = $_SESSION["login_user"]["employee_name"];
         $last_edited_on = date("Y-m-d H:i:s");
-        $table = "product_masterlist";
+        $table1 = "product_masterlist";
+        $table2 = "inventory";
 
         # Check if product is already existed
-        $query = "SELECT barcode FROM $table WHERE barcode='$barcode';";
+        $query = "SELECT barcode FROM $table1 WHERE barcode='$barcode';";
         $result = $conn->query($query);
 
         if ($result) {
@@ -85,10 +90,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $path = "dist/img/valuemed-logo.png";
         }
 
-        #Insert new products in the database 
-        $conn->query("INSERT INTO $table (barcode, description,  generic_name, category, supplier, image, last_edited_by, last_edited_on)
-                        VALUES ('$barcode', '$description', '$generic_name', '$category', '$supplier', '$path', $last_edited_by, '$last_edited_on');") or die('Error Could Not Query');
+        // Insert new products in the database 
+        $conn->query("INSERT INTO $table1 (barcode, description,  generic_name, category, supplier, image, last_edited_by, last_edited_on)
+                    VALUES ('$barcode', '$description', '$generic_name', '$category', '$supplier', '$path', '$last_edited_by', '$last_edited_on');")
+                    or die('Error Could Not Query');
 
+        $conn->query("INSERT INTO $table2 (barcode, description, category, last_edited_by, last_edited_on)
+                    VALUES ('$barcode', '$description', '$category', '$last_edited_by', '$last_edited_on');")
+                    or die('Error Could Not Query');
+        
         if (!mysqli_error($conn)) {
             // raise error
             echo json_encode("error");
@@ -102,9 +112,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $category = $_POST["cat-modal"];
         $supplier = $_POST["supp-modal"];
         $image = $_FILES["imageFile2"];
-        $last_edited_by = $_SESSION["login_user"]["user_id"];
+        $last_edited_by = $_SESSION["login_user"]["employee_name"];
         $last_edited_on = date("Y-m-d H:i:s");
-        $table = "product_masterlist";
+        $table1 = "product_masterlist";
+        $table2 = "inventory";
     
         if ($_FILES["imageFile2"]["name"] != '') { //check if there is uploaded file
             $allowed_ext = array("png", "jpeg", "jpg"); //allowed image extensions
@@ -117,15 +128,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $path = "product-imgs/" . $name; // image upload path
                 move_uploaded_file($_FILES["imageFile2"]["tmp_name"], $path);
     
-                $conn->query("UPDATE $table SET description='$description', generic_name='$generic_name',
-                                category='$category', supplier='$supplier', image='$path', last_edited_by=$last_edited_by,
-                                last_edited_on='$last_edited_on' WHERE barcode='$barcode';");
+                $conn->query("UPDATE $table1 SET description='$description', generic_name='$generic_name',
+                            category='$category', supplier='$supplier', image='$path', last_edited_by='$last_edited_by',
+                            last_edited_on='$last_edited_on' WHERE barcode='$barcode';");
             }
         } else if ($_FILES["imageFile2"]["name"] == '') { // if image was not updated
-            $conn->query("UPDATE $table SET description='$description', generic_name='$generic_name',
-                            category='$category', supplier='$supplier', last_edited_by=$last_edited_by,
-                            last_edited_on='$last_edited_on' WHERE barcode='$barcode';");
+            $conn->query("UPDATE $table1 SET description='$description', generic_name='$generic_name',
+                        category='$category', supplier='$supplier', last_edited_by='$last_edited_by',
+                        last_edited_on='$last_edited_on' WHERE barcode='$barcode';");
         }
+
+        $conn->query("UPDATE $table2 SET description='$description', category='$category', last_edited_by='$last_edited_by',
+                    last_edited_on='$last_edited_on' WHERE barcode='$barcode';") or die('Error Could Not Query');
     
         if(!mysqli_error($conn)) {
             // raise error

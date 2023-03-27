@@ -47,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                 <th>Product Description</th>
                                                 <th>Generic Name</th>
                                                 <th>Category</th>
-                                                <th>Last Edited</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -73,19 +72,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                     <td>
                                                         <?php echo $row["category"] ?>
                                                     </td>
-                                                    <td class="font-italic">
-                                                        <small>
-                                                            <?php
-                                                            $query2 = "SELECT * FROM users WHERE user_id ='$last_user'";
-                                                            $result2 = mysqli_query($conn, $query2);
-                                                            while ($row2 = mysqli_fetch_array($result2)) {
-                                                                echo $row2['employee_name'] . ' | ' . $date;
-                                                            }
-                                                            ?>
-                                                        </small>
-                                                    </td>
                                                     <td>
-                                                        <button class="btn btn-secondary btn-sm" data-id="<?php echo $row["barcode"]; ?>" data-toggle="modal" data-target="#details" onclick="viewModal(this);">
+                                                        <button class="btn btn-info btn-sm" data-id="<?php echo $row["barcode"]; ?>" data-toggle="modal" data-target="#edit" onclick="viewModal2(this);">
+                                                            <i class="fas fa-pencil-alt"></i>
+                                                            Edit
+                                                        </button>
+                                                        <button class="btn btn-secondary btn-sm" data-id="<?php echo $row["barcode"]; ?>" data-toggle="modal" data-target="#details" onclick="viewModal1(this);">
                                                             <i class="fas fa-eye"></i>
                                                             Details
                                                         </button>
@@ -192,12 +184,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                     <!-- /.modal-dialog -->
                 </div>
                 <!-- /.modal -->
-
-                <div class="modal fade" id="details">
+                
+                <div class="modal fade" id="edit">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">PRODUCT DETAILS</h4>
+                                <h4 class="modal-title">EDIT PRODUCT</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -268,7 +260,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                             Product update failed. Try again.
                                         </h6>
                                         <div class="modal-footer justify-content-between col-sm-12 mx-0 pb-0 px-0">
-                                            <button type="button" class="btn btn-outline-secondary" id="delete-product-btn" data-toggle="modal" data-target="#delete-modal">Delete</button>
+                                            <button type="button" class="btn btn-outline-danger" id="delete-product-btn" data-toggle="modal" data-target="#delete-modal">Delete</button>
                                             <button type="button" class="btn btn-primary" id="update-btn" onclick="editDetails(this);">
                                                 <i class="fas fa-pencil-alt mr-2"></i>Update Details
                                             </button>
@@ -279,6 +271,81 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         </div>
                                     </div>
                                 </form>
+                                <div class="modal fade" tabindex="-1" id="delete-modal" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title font-weight-bold text-danger">Delete Product</h5>
+                                                <button type="button" class="close close-modal-delete1" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="text-danger">Are you sure you want to delete this product in the
+                                                    inventory?</p>
+                                            </div>
+                                            <div class="modal-footer justify-content-end">
+                                                <button type="button" class="btn btn-outline-secondary close-modal-delete2">Cancel</button>
+                                                <button type="button" class="btn btn-danger" onclick="deleteProduct();">Yes,
+                                                    Delete it</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <div class="modal fade" id="details">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">PRODUCT DETAILS</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="barcode-modal-details">Barcode:</label>
+                                            <input type="text" class="form-control modal-field-details" id="barcode-modal-details" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cat-modal-details">Category:</label>
+                                            <input type="text" class="form-control modal-field-details" id="cat-modal-details" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="supp-modal-details">Supplier:</label>
+                                            <input type="text" class="form-control modal-field-details" id="supp-modal-details" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="edited-modal-details">Last Edited By:</label>
+                                            <input type="text" class="form-control modal-field-details" id="edited-modal-details" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="desc-modal-details">Product Description:</label>
+                                            <input type="text" class="form-control modal-field-details" id="desc-modal-details" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="gen-modal-details">Generic Name:</label>
+                                            <input type="text" class="form-control modal-field-details" id="gen-modal-details" readonly>
+                                        </div>
+                                        <div class="position-relative">
+                                            <div class="w-100">
+                                                <label for="img-modal-details">Image:</label>
+                                                <img alt="Product photo" class="img-fluid modal-field" id="img-modal-details" style="height: 100%; width: 100%;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="modal fade" tabindex="-1" id="delete-modal" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-sm modal-dialog-centered">
                                         <div class="modal-content">

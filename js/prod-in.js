@@ -1,3 +1,42 @@
+// GET request to check if the current user has a pending product to add
+$(document).ready(()=> {
+    $.ajax({
+        type: "GET",
+        url: "prod-in-functions.php",
+        data: {action: "reloadTable"},
+        dataType: "JSON",
+        success: function(data) {
+            if ( data != "Not found" ) {
+                let tbody = document.getElementById("modal-tbody");
+                data.forEach((item)=> {
+                    let tr = document.createElement("tr");
+                    tr.innerHTML = `<tr>
+                                        <td>${item.barcode}</td>
+                                        <td>${item.description}</td>
+                                        <td>${item.in_quantity}</td>
+                                        <td>${item.lot_no}</td>
+                                        <td>${item.exp_date}</td>
+                                    </tr>`;
+                    tbody.appendChild(tr);
+                    $("#prf").val(`${item.prf}`);
+                    $("#prf").attr("readonly", true);
+                    $("#added-by").val(`${item.added_by}`);
+                    $("#added-on").val(`${item.entry_date}`);
+                });
+                let fields = document.getElementById("receive-prod-form").querySelectorAll("input");
+                fields.forEach(field => {
+                    if (field.name != "entry_date" && field.name != "action" && field.name != "prf" && field.name != "added-by" && field.name != "added-on") {
+                        field.value = '';
+                    }
+                });
+            }
+        },
+        error: function(error, status, xhr) {
+            console.error(error, status, xhr);
+        }
+    });
+});
+
 // GET request to check barcode if exist in db
 $("#barcode").on("change", ()=>{
     $("#receive-prod-form").on("submit", (e)=>{
@@ -14,7 +53,7 @@ $("#barcode").on("change", ()=>{
                 let fields = document.getElementById("receive-prod-form").querySelectorAll("input");
             
                 fields.forEach(field => {
-                    if ( field.name != "action" && field.name != "entry_date" ) {
+                    if ( field.name != "entry_date" && field.name != "action" && field.name != "prf" && field.name != "added-by" && field.name != "added-on"  ) {
                         field.value = "";
                     }
                 });
@@ -57,9 +96,8 @@ $("#receive-prod-form").on("submit", function(e){
             tbody.appendChild(tr);
 
             let fields = document.getElementById("receive-prod-form").querySelectorAll("input");
-
             fields.forEach(field => {
-                if (field.name != "entry_date" && field.name != "action") {
+                if (field.name != "entry_date" && field.name != "action" && field.name != "prf" && field.name != "added-by" && field.name != "added-on") {
                     field.value = '';
                 }
             });
@@ -70,8 +108,30 @@ $("#receive-prod-form").on("submit", function(e){
     });
 });
 
+// Add stocks to product in table
+$("#add-stocks-btn").on("click", ()=> {
+    let data = new FormData();
+    data.append("action", "add_stocks");
+
+    $.ajax({
+        type: "POST",
+        url: "prod-in-functions.php",
+        data: data,
+        contentType: false,
+        processData:false,
+        cache: false,
+        success: function() {
+            alert("Products were added to stocks!");
+            location.reload();
+        },
+        error: function(error) {
+            console.error(error);
+        }
+    });
+});
+
 // View product details
-function viewModal(el) {
+function viewModal1(el) {
     $.ajax({
         type: "GET",
         url: "prod-in-functions.php",
@@ -86,6 +146,31 @@ function viewModal(el) {
             $("#exp-details").val(data.exp_date);
             $("#supp-details").val(data.supplier);
             $("#entry-details").val(data.entry_date);   
+        },
+        error: function(error) {
+            console.log(error);
+        }
+      })
+}
+
+function viewModal2(el) {
+    console.log(el.getAttribute("data-id"));
+    $.ajax({
+        type: "GET",
+        url: "prod-in-functions.php",
+        data: {"id": el.getAttribute("data-id"), action: "get_product_in"},
+        dataType: "JSON",
+        success: function(data) {      
+            $("#id-details").val(data.id);
+            $("#barcode-details").val(data.barcode);
+            $("#desc-details").val(data.description);
+            $("#quantity-details").val(data.in_quantity);
+            $("#lot-details").val(data.lot_no);
+            $("#exp-details").val(data.exp_date);
+            $("#supp-details").val(data.supplier);
+            $("#entry-details").val(data.entry_date);
+            $("#added-by-details").val(data.added_by);
+            $("#last-edit-details").val(data.last_edited); 
         },
         error: function(error) {
             console.log(error);

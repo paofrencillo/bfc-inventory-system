@@ -12,6 +12,10 @@
     }
     else {?>
     <!-- Content Wrapper. Contains page content -->
+              <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <div class="content-header">
@@ -44,27 +48,24 @@
                 <div class="card">
                   <!-- /.card-header -->
                   <div class="card-body">
-                    <table id="example1" class="table table-bordered table-hover dt-center">
+                    <table id="example1" class="table table-bordered table-hover text-center">
                       <thead>
                         <tr>
                           <th>Barcode</th>
                           <th>Product Description</th>
+                          <th>PRF</th>
                           <th>Quantity</th>
                           <th>Lot No.</th>
                           <th>Exp. Date</th>
-                          <th>Last Edited</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                          $query = "SELECT * FROM product_in ORDER BY last_edited_on DESC;";
+                          $query = "SELECT * FROM product_in_final ORDER BY last_edited_on DESC;";
                           
                           $result = mysqli_query($conn, $query);
                           while ($row = mysqli_fetch_array($result)) {
-                            $last_user = $row['last_edited_by'];
-                            $date = date_create($row["last_edited_on"]);
-                            $date = date_format($date, "d/m/Y h:i");
                         ?>
                         <tr>
                         <td>
@@ -74,13 +75,19 @@
                             <?php echo $row["description"]; ?>
                           </td>
                           <td>
+                            <?php echo $row["prf"]; ?>
+                          </td>
+                          <td>
                             <?php echo $row["in_quantity"];?>
                           </td>
                           <td><?php echo $row["lot_no"];?></td>
                           <td><?php echo $row["exp_date"];?></td>
-                          <td class="text-italic"><small><?php echo $last_user . ' | ' . $date;?></small></td>
                           <td>
-                            <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#details" onclick="viewModal(this);" data-id=<?php echo $row["id"];?>>
+                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#edit" onclick="viewModal1(this);" data-id="<?php echo $row["id"];?>">
+                              <i class="fas fa-pencil-alt"></i>
+                              Edit
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#details" onclick="viewModal2(this);" data-id="<?php echo $row["id"];?>">
                               <i class="fas fa-eye"></i>
                               Details
                             </button>
@@ -95,13 +102,13 @@
               </div>
             </div>
           </div>
-
-          <!-- Product Details Modal -->
+          
+          <!-- product in  -->
           <div class="modal fade" id="details">
             <div class="modal-dialog modal-dialog-centered modal-lg">
-              <div class="modal-content">
+              <div class="modal-content ">
                 <div class="modal-header">
-                  <h5 class="modal-title">Product Details</h5>
+                  <h4 class="modal-title">PRODUCT DETAILS</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -123,10 +130,16 @@
                           <input type="text" class="form-control" id="desc-details" name="desc-details" readonly>
                         </div>
                       </div>
-                      <div class="col-sm-4">
+                      <div class="col-sm-3">
                         <div class="form-group">
                           <label for="quantity-details">Quantity</label>
                           <input type="number" class="form-control" id="quantity-details" name="quantity-details" onkeyup="this.value = this.value.toUpperCase();" min="0" readonly>
+                        </div>
+                      </div>
+                      <div class="col-sm-5">
+                        <div class="form-group">
+                          <label for="supp-details">Supplier:</label>
+                          <input type="text" class="form-control" id="supp-details" name="supp-details" readonly>
                         </div>
                       </div>
                       <div class="col-sm-4">
@@ -135,22 +148,28 @@
                           <input type="text" class="form-control" id="lot-details" name="lot-details" onkeyup="this.value = this.value.toUpperCase();" readonly>
                         </div>
                       </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label for="supp-details">Supplier:</label>
-                          <input type="text" class="form-control" id="supp-details" name="supp-details" readonly>
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
+                      <div class="col-sm-3">
                         <div class="form-group">
                           <label for="exp-details">Expiration Date:</label>
                           <input type="text" class="form-control" id="exp-details" name="exp-details" readonly>
                         </div>
                       </div>
-                    <div class="col-sm-6">
+                      <div class="col-sm-5">
+                        <div class="form-group">
+                          <label for="added-by-details">Added By:</label>
+                          <input type="text" class="form-control" id="added-by-details" name="added-by-details" readonly>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
                         <div class="form-group">
                           <label for="entry-details">Entry Date:</label>
                           <input type="text" class="form-control" id="entry-details" name="entry-details" readonly>
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <label for="last_edit-details">Last Edit:</label>
+                          <input type="text" class="form-control" id="last-edit-details" name="last-edit-details" readonly>
                         </div>
                       </div>
                     </div>
@@ -173,31 +192,13 @@
                   </form>
                 </div>
               </div>
+              <!-- /.modal-content -->
             </div>
+            <!-- /.modal-dialog -->
           </div>
-
-          <div class="modal fade" tabindex="-1" id="delete-modal" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-sm modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title font-weight-bold text-danger">Delete Product</h5>
-                  <button type="button" class="close close-modal-delete1" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p class="text-danger">Are you sure you want to delete this product in the
-                      inventory?</p>
-                </div>
-                <div class="modal-footer justify-content-end">
-                  <button type="button" class="btn btn-outline-secondary close-modal-delete2">Cancel</button>
-                  <button type="button" class="btn btn-danger" onclick="deleteProduct();">Yes,
-                      Delete it</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
+          <!-- /.modal -->
+          
+          <!-- product in  -->
           <div class="modal fade" id="addnew">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl ">
               <div class="modal-content ">
@@ -207,9 +208,28 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                
                 <div class="modal-body">
-                  <div class="row">        
+                <form name="receive-prod-form" id="receive-prod-form">
+                  <div class="row">
+                    <div class="col-sm-5 mb-2">
+                      <label for="prf">PRF:</label>
+                      <input type="text" class="form-control" id="prf" name="prf" required>
+                    </div>
+                    <div class="col-sm-5 mb-2">
+                      <?php
+                        $month = date('m');
+                        $day = date('d');
+                        $year = date('Y');
+                        
+                        $today = $month . '-' . $day . '-' . $year;
+                      ?>
+                      <label for="added-by">Added By:</label>
+                      <input type="text" class="form-control" id="added-by" name="added-by" value="<?php echo $_SESSION["login_user"]["employee_name"];?>" required readonly>
+                    </div>
+                    <div class="col-sm-2 mb-2">
+                      <label for="added-on">Added On:</label>
+                      <input type="text" class="form-control" id="added-on" name="added-on" value="<?php echo $today;?>" required readonly>
+                    </div>
                     <div class="col-sm-12">
                       <div class="form-group">
                         <div class="card-body table-responsive p-0" style="height: 300px;">
@@ -230,22 +250,21 @@
                         </div>
                       </div>
                     </div>
-                  <form name="receive-prod-form" id="receive-prod-form">
                     <input type="hidden" name="action" value="receive_prod">
                     <div class="row">
-                      <div class="col-sm-3">
+                      <div class="col-sm-4">
                         <div class="form-group">
                           <label for="barcode">Barcode:</label>
                           <input type="text" class="form-control" id="barcode" name="barcode" onmouseover="this.focus();" required>
                         </div>
                       </div>
-                      <div class="col-sm-5">
+                      <div class="col-sm-6">
                         <div class="form-group">
                           <label for="prod">Product Description:</label>
                           <input type="text" class="form-control" id="description" name="description" readonly required>
                         </div>
                       </div>
-                      <div class="col-sm-1">
+                      <div class="col-sm-2">
                         <div class="form-group">
                           <label for="quan">Quantity:</label>
                           <input type="number" class="form-control" id="quantity" name="quantity" onmouseover="this.focus();" min="0" required>
@@ -269,19 +288,6 @@
                           <input type="text" class="form-control" id="exp" name="exp" placeholder="mm-dd-yyyy or mm-yyyy" onmouseover="this.focus();" required>
                         </div>
                       </div>
-                      <div class="col-sm-3">
-                        <?php
-                          $month = date('m');
-                          $day = date('d');
-                          $year = date('Y');
-                          
-                          $today = $month . '-' . $day . '-' . $year;
-                          ?>
-                        <div class="form-group">
-                          <label for="entry_date">Date Added:</label>
-                          <input type="text" class="form-control" id="entry_date" name="entry_date" value="<?php echo $today;?>" readonly required>
-                        </div>
-                      </div>
                       <div class="col-sm-2">
                         <div class="form-group">
                           <label for="label">Add Product</label>
@@ -299,15 +305,38 @@
                     </div>
                     <div class="modal-footer justify-content-between mx-0 px-0">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                      <button type="button" class="btn btn-primary" onclick="location.reload();">Add Stocks</button>
+                      <button type="button" class="btn btn-primary" id="add-stocks-btn">Add Stocks</button>
                     </div>    
                   </form>
                 </div>
+              </div>
               <!-- /.modal-content -->
             </div>
             <!-- /.modal-dialog -->
           </div>
           <!-- /.modal -->
+
+          <div class="modal fade" tabindex="-1" id="delete-modal" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title font-weight-bold text-danger">Delete Product</h5>
+                  <button type="button" class="close close-modal-delete1" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p class="text-danger">Are you sure you want to delete this product in the
+                      inventory?</p>
+                </div>
+                <div class="modal-footer justify-content-end">
+                  <button type="button" class="btn btn-outline-secondary close-modal-delete2">Cancel</button>
+                  <button type="button" class="btn btn-danger" onclick="deleteProduct();">Yes,
+                      Delete it</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
       </div>
       <!-- /.content-header -->
