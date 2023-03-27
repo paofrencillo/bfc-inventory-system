@@ -857,7 +857,7 @@ include('templates/session.php');
         "order": [
           [5, 'desc']
         ],
-        "buttons": ["copy", "excel", "print"]
+        // "buttons": ["copy", "excel", "print"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
 

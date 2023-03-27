@@ -26,7 +26,7 @@ header('Content-Type: application/json');
 echo json_encode($data);
 
 // For endorse product
-if(isset($_GET["action"]) && $_GET["action"] === "endorse_product") { 
+if (isset($_GET["action"]) && $_GET["action"] === "endorse_product") {
 
    $server = "localhost";
    $user = "root";
@@ -45,7 +45,7 @@ if(isset($_GET["action"]) && $_GET["action"] === "endorse_product") {
 
    $sql = "SELECT * FROM $table WHERE endorsed_by='$endorsed_by';";
    $result = mysqli_query($conn, $sql);
-   
+
    while ($row = mysqli_fetch_array($result)) {
       $product_barcode = $row["barcode"];
       $quantity_to_add = $row["quantity"];
@@ -102,16 +102,16 @@ if(isset($_GET["action"]) && $_GET["action"] === "endorse_product") {
    }
 
    // if (!$result->num_rows > 0){
-      
+
    // } else {
    //    $data = 'nodata';
    //    echo json_encode($data);
    // }
-   
+
 }
 
 // For cancel endorse product
-if(isset($_GET["action"]) && $_GET["action"] === "cancelendorse") { 
+if (isset($_GET["action"]) && $_GET["action"] === "cancelendorse") {
 
    $server = "localhost";
    $user = "root";
@@ -130,11 +130,10 @@ if(isset($_GET["action"]) && $_GET["action"] === "cancelendorse") {
 
    $del = "DELETE FROM endorse WHERE endorsed_by='$endorsed_by';";
    $resultdel = mysqli_query($conn, $del);
-   
 }
 
 // For search dispatch product
-if(isset($_GET["action"]) && $_GET["action"] === "mrfsearch") { 
+if (isset($_GET["action"]) && $_GET["action"] === "mrfsearch") {
 
    $server = "localhost";
    $user = "root";
@@ -152,7 +151,7 @@ if(isset($_GET["action"]) && $_GET["action"] === "mrfsearch") {
 
    $sql2 = "SELECT * FROM endorse_final WHERE mrf ='$mrf_search';";
    $result2 = mysqli_query($conn, $sql2);
-   
+
    while ($row2 = mysqli_fetch_array($result2)) {
       $sql3 = "INSERT INTO endorse_history (
          barcode, 
