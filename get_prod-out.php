@@ -47,6 +47,19 @@ if(isset($_GET["action"]) && $_GET["action"] === "endorse_product") {
    $result = mysqli_query($conn, $sql);
    
    while ($row = mysqli_fetch_array($result)) {
+      $product_barcode = $row["barcode"];
+      $quantity_to_add = $row["quantity"];
+
+      // Create an SQL query to update the quantity field for the specified product
+      $sql9 = "UPDATE inventory SET stock = stock - $quantity_to_add WHERE barcode = $product_barcode";
+
+      // Execute the query
+      if ($conn->query($sql9) === TRUE) {
+         echo "Quantity updated successfully";
+      } else {
+         echo "Error updating quantity" . $conn->error;
+      }
+
       $sql2 = "INSERT INTO endorse_final (
          barcode, 
          description, 
@@ -182,5 +195,3 @@ if(isset($_GET["action"]) && $_GET["action"] === "mrfsearch") {
       }
    }
 }
-
-?>

@@ -2,7 +2,7 @@
 include('templates/connection.php');
    header("Content-Type: text/json; charset=utf8");
    $barcode2 = $_GET["barcode2"];
-   $table9 = "product_masterlist";
+   $table9 = "inventory";
    $query_get = "SELECT * FROM $table9 WHERE barcode='$barcode2';";
    $result9 = mysqli_query($conn, $query_get);
 
@@ -12,9 +12,9 @@ include('templates/connection.php');
    } else {
        while ($row9 = mysqli_fetch_array($result9)) {
            $data = array(
-               "description" => $row9["description"]
+               "description" => $row9["description"],
+               "stock" => $row9["stock"]
            );
            echo json_encode($data);
        }
    }
-?>

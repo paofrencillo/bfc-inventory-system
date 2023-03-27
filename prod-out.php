@@ -374,6 +374,7 @@ include('templates/session.php');
                                         </div>
                                         <div class="modal-footer justify-content-between">
                                           <input type="hidden" name="id_update" value="<?php echo $row['id'] ?>">
+                                          <input type="hidden" name="current_quantity" value="<?php echo $row['quantity'] ?>">
                                           <button type="submit" class="btn btn-outline-danger" name="delete_updateprodout">Delete</button>
                                           <button type="submit" class="btn btn-primary" name="updateprodout">Update Details</button>
                                         </div>
@@ -615,13 +616,13 @@ include('templates/session.php');
                           <input type="text" class="form-control " id="description2" name="description" autocomplete="off" required disabled>
                         </div>
                       </div>
-                      <div class="col-sm-1">
+                      <div class="col-sm-2">
                         <div class="form-group">
                           <label for="quantity2">Quantity:</label>
                           <input type="number" class="form-control " id="quantity2" name="quantity" autocomplete="off" min="0" required disabled>
                         </div>
                       </div>
-                      <div class="col-sm-3">
+                      <div class="col-sm-2">
                         <div class="form-group">
                           <label for="lot2">Lot Number:</label>
                           <input type="text" class="form-control" id="lot2" name="lot" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" required disabled>
@@ -630,7 +631,7 @@ include('templates/session.php');
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="exp_date2">Expiration Date:</label>
-                          <input type="text" class="form-control " id="exp_date2" autocomplete="off" name="exp_date" placeholder="mm/dd/yyyy" required disabled>
+                          <input type="text" class="form-control " id="exp_date2" autocomplete="off" name="exp_date" placeholder="mm/dd/yyyy or mm/yyyy" required disabled>
                         </div>
                       </div>
                       <?php
@@ -951,7 +952,6 @@ include('templates/session.php');
         // Prevent the form from submitting normally
         event.preventDefault();
 
-
         // Use AJAX to send the form data to your PHP script to insert it into the database
         $.ajax({
           url: "post_prod-out.php",
@@ -1099,15 +1099,17 @@ include('templates/session.php');
             if (data != "Not found") {
               // $("#description2").attr("readonly", "");
               $("#description2").val(data.description);
+              $("#quantity2").attr('placeholder', 'Stock: ' + data.stock);
+              $("#quantity2").attr('max', data.stock);
             } else {
-              $("#description2").val("Product Not Found");
+              $("#description2").val("Product Not Found or Out of stock");
               $("#barcode2").val("");
               swal.fire({
                 title: "Ooops!",
-                text: "Scanned product not found",
+                text: "Scanned product not found or out of stock",
                 icon: "error",
                 // showConfirmButton: false,
-                timer: 900,
+                timer: 1000,
                 confirmButtonText: "OK"
               })
               // .then((result) => {
@@ -1279,6 +1281,24 @@ include('templates/session.php');
         $("#remarks2").val('');
 
         $("button[name='reloadBtn']").prop("disabled", true);
+      });
+
+      // Get the input field
+		  var quantityInput = $("#quantity2");
+
+      // Listen for the "keyup" event on the input field
+      quantityInput.keyup(function() {
+        // Get the maximum allowed value
+        var max = parseInt(quantityInput.attr("max"));
+
+        // Get the current value of the input field
+        var currentValue = parseInt(quantityInput.val());
+
+        // If the current value is greater than the maximum allowed value
+        if (currentValue > max) {
+          // Set the value of the input field to the maximum allowed value
+          quantityInput.val(max);
+        }
       });
 
     });

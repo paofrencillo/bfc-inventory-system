@@ -995,6 +995,7 @@ if(isset($_POST['updateprodout'])) {
     $barcode = $_POST['barcode'];
     $description = $_POST['description'];
     $quantity = $_POST['quantity'];
+    $current_quantity = $_POST['current_quantity'];
     $lot = $_POST['lot']; 
     $mrf = $_POST['mrf'];
     $order_num = $_POST['order_num'];
@@ -1002,63 +1003,185 @@ if(isset($_POST['updateprodout'])) {
     $remarks = $_POST['remarks'];
     $id_update = $_POST['id_update'];
 
-    if ($id_update != null) {
-        // Insert the values into the database
-        $conn->query("UPDATE endorse_final 
-            SET barcode = '$barcode', 
-            description = '$description', 
-            quantity = '$quantity', 
-            lot = '$lot',
-            mrf = '$mrf',
-            order_num = '$order_num', 
-            exp_date = '$exp_date',
-            remarks = '$remarks' WHERE id = '$id_update'") or die($conn->error);
-        ?>
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Product Successfully Updated',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Okay'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "prod-out.php";
-                        } else {
-                            window.location.href = "prod-out.php";
-                        }
-                    })
-                })
-            </script>
-        <?php
-    } else {
-        ?>
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'An Error Occured',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Okay'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "prod-out.php";
-                        } else {
-                            window.location.href = "prod-out.php";
-                        }
-                    })
-                })
-            </script>
-        <?php
-    }
+    // Check if the user input is to increase or decrease the quantity
+    if ($current_quantity < $quantity) {
+        $newvalue = $quantity - $current_quantity;
+        // If the quantity is negative, decrease the existing quantity in the database
+        $sql = "UPDATE inventory SET stock = stock - " . abs($newvalue) . " WHERE barcode = $barcode";        
+        // Execute the SQL query
+        $result = mysqli_query($conn, $sql);
 
-    
-    
-   
+        if ($id_update != null) {
+            // Insert the values into the database
+            $conn->query("UPDATE endorse_final 
+                SET barcode = '$barcode', 
+                description = '$description', 
+                quantity = '$quantity', 
+                lot = '$lot',
+                mrf = '$mrf',
+                order_num = '$order_num', 
+                exp_date = '$exp_date',
+                remarks = '$remarks' WHERE id = '$id_update'") or die($conn->error);
+            ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Product Successfully Updated',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "prod-out.php";
+                            } else {
+                                window.location.href = "prod-out.php";
+                            }
+                        })
+                    })
+                </script>
+            <?php
+        } else {
+            ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'An Error Occured',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "prod-out.php";
+                            } else {
+                                window.location.href = "prod-out.php";
+                            }
+                        })
+                    })
+                </script>
+            <?php
+        }
+
+    } else if ($current_quantity > $quantity) {
+        $newvalue2 = $current_quantity - $quantity;
+        // If the quantity is negative, decrease the existing quantity in the database
+        $sql2 = "UPDATE inventory SET stock = stock + '$newvalue2' WHERE barcode = $barcode";    
+        // Execute the SQL query
+        $result = mysqli_query($conn, $sql2);    
+
+        if ($id_update != null) {
+            // Insert the values into the database
+            $conn->query("UPDATE endorse_final 
+                SET barcode = '$barcode', 
+                description = '$description', 
+                quantity = '$quantity', 
+                lot = '$lot',
+                mrf = '$mrf',
+                order_num = '$order_num', 
+                exp_date = '$exp_date',
+                remarks = '$remarks' WHERE id = '$id_update'") or die($conn->error);
+            ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Product Successfully Updated',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "prod-out.php";
+                            } else {
+                                window.location.href = "prod-out.php";
+                            }
+                        })
+                    })
+                </script>
+            <?php
+        } else {
+            ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'An Error Occured',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "prod-out.php";
+                            } else {
+                                window.location.href = "prod-out.php";
+                            }
+                        })
+                    })
+                </script>
+            <?php
+        }
+
+    } else {
+        // If the quantity is zero, do nothing
+        if ($id_update != null) {
+            // Insert the values into the database
+            $conn->query("UPDATE endorse_final 
+                SET barcode = '$barcode', 
+                description = '$description', 
+                quantity = '$quantity', 
+                lot = '$lot',
+                mrf = '$mrf',
+                order_num = '$order_num', 
+                exp_date = '$exp_date',
+                remarks = '$remarks' WHERE id = '$id_update'") or die($conn->error);
+            ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Product Successfully Updated',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "prod-out.php";
+                            } else {
+                                window.location.href = "prod-out.php";
+                            }
+                        })
+                    })
+                </script>
+            <?php
+        } else {
+            ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'An Error Occured',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "prod-out.php";
+                            } else {
+                                window.location.href = "prod-out.php";
+                            }
+                        })
+                    })
+                </script>
+            <?php
+        }
+    }
     
 }
 
