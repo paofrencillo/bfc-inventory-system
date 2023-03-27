@@ -44,7 +44,7 @@
 
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTELogo" height="500" width="500">
+      <img class="animation__shake" src="dist/img/valuemed logo final logo.png" alt="AdminLTELogo" height="500" width="550">
     </div>
 
     <?php
