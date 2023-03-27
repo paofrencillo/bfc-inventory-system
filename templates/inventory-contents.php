@@ -85,6 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                   <?php
                                   if ($row['sa_percentage'] == 0) {
                                     echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] >= 100) {
+                                    echo '<div class="progress progress-sm progress-bar-primary bg-primary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] <= 20) {
                                     echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   } else if ($row['sa_percentage'] <= 30) {
@@ -100,6 +102,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                   <?php
                                   if ($row['sa_percentage'] == 0) {
                                     echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] >= 100) {
+                                    echo "<span class='badge bg-primary font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 20) {
                                     echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 30) {
@@ -213,10 +217,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               <td><?php echo $row['stock'] ?></td>
                               <td><?php echo $row['allocation'] ?></td>
                               <td>
-                                <div class="project_progress">
+                              <div class="project_progress">
                                   <?php
                                   if ($row['sa_percentage'] == 0) {
                                     echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] >= 100) {
+                                    echo '<div class="progress progress-sm progress-bar-primary bg-primary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] <= 20) {
                                     echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   } else if ($row['sa_percentage'] <= 30) {
@@ -232,6 +238,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                   <?php
                                   if ($row['sa_percentage'] == 0) {
                                     echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] >= 100) {
+                                    echo "<span class='badge bg-primary font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 20) {
                                     echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 30) {
@@ -344,10 +352,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               <td><?php echo $row['stock'] ?></td>
                               <td><?php echo $row['allocation'] ?></td>
                               <td>
-                                <div class="project_progress">
+                              <div class="project_progress">
                                   <?php
                                   if ($row['sa_percentage'] == 0) {
                                     echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] >= 100) {
+                                    echo '<div class="progress progress-sm progress-bar-primary bg-primary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] <= 20) {
                                     echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   } else if ($row['sa_percentage'] <= 30) {
@@ -363,6 +373,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                   <?php
                                   if ($row['sa_percentage'] == 0) {
                                     echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] >= 100) {
+                                    echo "<span class='badge bg-primary font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 20) {
                                     echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 30) {
@@ -475,10 +487,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               <td><?php echo $row['stock'] ?></td>
                               <td><?php echo $row['allocation'] ?></td>
                               <td>
-                                <div class="project_progress">
+                              <div class="project_progress">
                                   <?php
                                   if ($row['sa_percentage'] == 0) {
                                     echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] >= 100) {
+                                    echo '<div class="progress progress-sm progress-bar-primary bg-primary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] <= 20) {
                                     echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   } else if ($row['sa_percentage'] <= 30) {
@@ -494,6 +508,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                   <?php
                                   if ($row['sa_percentage'] == 0) {
                                     echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] >= 100) {
+                                    echo "<span class='badge bg-primary font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 20) {
                                     echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 30) {
@@ -606,10 +622,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               <td><?php echo $row['stock'] ?></td>
                               <td><?php echo $row['allocation'] ?></td>
                               <td>
-                                <div class="project_progress">
+                              <div class="project_progress">
                                   <?php
                                   if ($row['sa_percentage'] == 0) {
                                     echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] >= 100) {
+                                    echo '<div class="progress progress-sm progress-bar-primary bg-primary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] <= 20) {
                                     echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   } else if ($row['sa_percentage'] <= 30) {
@@ -625,6 +643,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                   <?php
                                   if ($row['sa_percentage'] == 0) {
                                     echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] >= 100) {
+                                    echo "<span class='badge bg-primary font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 20) {
                                     echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 30) {
@@ -737,10 +757,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               <td><?php echo $row['stock'] ?></td>
                               <td><?php echo $row['allocation'] ?></td>
                               <td>
-                                <div class="project_progress">
+                              <div class="project_progress">
                                   <?php
                                   if ($row['sa_percentage'] == 0) {
                                     echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] >= 100) {
+                                    echo '<div class="progress progress-sm progress-bar-primary bg-primary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] <= 20) {
                                     echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   } else if ($row['sa_percentage'] <= 30) {
@@ -756,6 +778,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                   <?php
                                   if ($row['sa_percentage'] == 0) {
                                     echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] >= 100) {
+                                    echo "<span class='badge bg-primary font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 20) {
                                     echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 30) {
@@ -868,10 +892,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               <td><?php echo $row['stock'] ?></td>
                               <td><?php echo $row['allocation'] ?></td>
                               <td>
-                                <div class="project_progress">
+                              <div class="project_progress">
                                   <?php
                                   if ($row['sa_percentage'] == 0) {
                                     echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] >= 100) {
+                                    echo '<div class="progress progress-sm progress-bar-primary bg-primary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] <= 20) {
                                     echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   } else if ($row['sa_percentage'] <= 30) {
@@ -887,6 +913,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                   <?php
                                   if ($row['sa_percentage'] == 0) {
                                     echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] >= 100) {
+                                    echo "<span class='badge bg-primary font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 20) {
                                     echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 30) {
