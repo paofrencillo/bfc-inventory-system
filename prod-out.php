@@ -280,6 +280,7 @@ include('templates/session.php');
                             $result = mysqli_query($conn, $query);
                             $check_row = mysqli_num_rows($result);
                             while ($row = mysqli_fetch_array($result)) {
+                              $bar = $row['barcode']
                             ?>
                               <tr>
                                 <td><?php echo $row['barcode'] ?></td>
@@ -330,6 +331,14 @@ include('templates/session.php');
                                             <div class="form-group">
                                               <label for="quantity">Quantity:</label>
                                               <input type="number" class="form-control " id="quantity" name="quantity" min="0" value="<?php echo $row['quantity'] ?>">
+                                              <?php
+                                                $query9 = "SELECT * FROM inventory WHERE barcode = '$bar' ";
+                                                $result9 = mysqli_query($conn, $query9);
+                                                $check_row = mysqli_num_rows($result9);
+                                                while ($row9 = mysqli_fetch_array($result9)) {
+                                              ?>
+                                              <small>On Stock: <?php echo $row9['stock'] ?></small>
+                                              <?php } ?>
                                             </div>
                                           </div>
                                           <div class="col-sm-4">
@@ -480,7 +489,6 @@ include('templates/session.php');
                                 </div>
                                 <!-- /.modal-dialog -->
                               </div>
-
                             <?php } ?>
                           </tbody>
                         </table>
