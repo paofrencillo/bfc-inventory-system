@@ -309,7 +309,7 @@ include('templates/session.php');
                                     <div class="modal-header bg-info">
                                       <h4 class="modal-title font-weight-bold">UPDATE PRODUCT DETAILS</h4>
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span class="text-white" aria-hidden="true" >&times;</span>
+                                        <span class="text-white" aria-hidden="true">&times;</span>
                                       </button>
                                     </div>
                                     <div class="modal-body">
@@ -494,6 +494,14 @@ include('templates/session.php');
                         </table>
                       </div>
                       <div class="tab-pane fade" id="example22" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                        <div class="card-tools">
+                          <ul class="pagination pagination-sm">
+                            <button class="btn btn-danger btn-md" data-toggle="modal" data-target="#delete_history">
+                              <i class="fas fa-trash"></i>
+                              Delete Items
+                            </button>
+                          </ul>
+                        </div>
                         <table id="example2" class="table table-bordered table-hover dt-center">
                           <thead>
                             <tr>
@@ -775,6 +783,74 @@ include('templates/session.php');
             <!-- /.modal-dialog -->
           </div>
           <!-- /.modal -->
+
+          <div class="modal fade" id="delete_history">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+              <div class="modal-content">
+                <div class="modal-header bg-secondary">
+                  <h4 class="modal-title font-weight-bold">DELETE ITEMS</h4>
+                  <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form id="search_form2">
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label for="mrf_search2">MRF:</label>
+                          <input type="text" class="form-control " id="mrf_search2" name="mrf_search2" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" required>
+                        </div>
+                      </div>
+                      <div class="col-sm-2">
+                        <div class="form-group">
+                          <label for="button_mrfsearch2">Search MRF</label>
+                          <button type="submit" class="btn btn-info form-control" id="button_mrfsearch2">
+                            <i class="fas fa-search"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <div class="card-body table-responsive p-0" style="height: 300px;">
+                            <table id="example8" class="table table-head-fixed text-center">
+                              <thead>
+                                <tr>
+                                  <th>Barcode</th>
+                                  <th>Product Description</th>
+                                  <th>Quantity</th>
+
+                                  <th>Branch Code</th>
+                                  <th>MRF</th>
+
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <!-- <tr>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                </tr> -->
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-danger" id="deleteall">Delete All</button>
+                </div>
+                </form>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+          <!-- /.modal -->          
 
         </section>
       </div>
@@ -1202,6 +1278,89 @@ include('templates/session.php');
             swal.fire({
               title: "Success!",
               text: "Product successfully dispatch",
+              icon: "success",
+              confirmButtonText: "OK"
+            }).then((result) => {
+              if (result.isConfirmed) {
+                location.reload();
+              } else {
+                location.reload();
+              }
+            });
+          })
+        });
+      });
+    });
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      // Submit form using AJAX
+
+      $('#search_form2').submit(function(event) {
+        event.preventDefault(); // Prevent page from reloading
+        $.ajax({
+          url: 'search_prod-out_2.php',
+          type: 'post',
+          dataType: 'json',
+          data: $('#search_form2').serialize(),
+          success: function(data) {
+            console.log(data)
+            // Clear old data from the table
+            // $('#example3 tbody').empty();
+            var mrf = $('#mrf_search2');
+            var tableBody = document.querySelector('#example8 tbody');
+            tableBody.innerHTML = '';
+
+            if (data.length == "0") {
+              swal.fire({
+                title: "Ooops!",
+                text: "MRF not found",
+                icon: "error",
+                confirmButtonText: "OK"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  mrf.val('');
+                } else {
+                  mrf.val('');
+                }
+              });
+            } else {
+              // Append new data to the table
+              data.forEach(function(row) {
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
+                  row.description + '</td><td>' +
+                  row.quantity + '</td><td>' +
+                  row.branch + '</td><td>' +
+                  row.mrf + '</td>'
+                tableBody.appendChild(tr);
+              });
+            }
+          }
+        });
+      });
+
+      $("#deleteall").click(function(event) {
+        // Prevent the form from submitting normally
+        event.preventDefault();
+
+        // Get the values from the form
+        var mrf_search2 = $('#mrf_search2').val();
+        console.log(mrf_search2)
+        $.ajax({
+          url: "get_prod-out.php",
+          type: "GET",
+          data: {
+            "mrf_search2": $("#mrf_search2").val(),
+            action: "mrfsearch2"
+          },
+          dataType: "JSON",
+          success: $(document).ready(function(data) {
+            console.log(data)
+            swal.fire({
+              title: "Success!",
+              text: "Product successfully deleted",
               icon: "success",
               confirmButtonText: "OK"
             }).then((result) => {

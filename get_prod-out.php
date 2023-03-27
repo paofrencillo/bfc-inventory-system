@@ -194,3 +194,33 @@ if (isset($_GET["action"]) && $_GET["action"] === "mrfsearch") {
       }
    }
 }
+
+// For delete history
+if (isset($_GET["action"]) && $_GET["action"] === "mrfsearch2") {
+
+   $server = "localhost";
+   $user = "root";
+   $pass = "";
+   $db = "bfc_inventory";
+
+   $conn = mysqli_connect($server, $user, $pass, $db);
+
+   if (!$conn) {
+      die("<script>alert('Connection Failed.')</script>");
+   }
+
+   header("Content-Type: text/json; charset=utf8");
+   $mrf_search2 = $_GET["mrf_search2"];
+
+   $sql8 = "DELETE FROM endorse_history WHERE mrf ='$mrf_search2';";
+   $result8 = mysqli_query($conn, $sql8);
+
+   if (mysqli_query($conn, $sql8)) {
+      echo "Data deleted successfully";
+   } else {
+      echo "Error deleting data: " . mysqli_error($conn);
+   }
+
+}
+
+?>
