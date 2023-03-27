@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2023 at 02:21 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Mar 27, 2023 at 08:38 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,22 +28,28 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `inventory` (
-  `id` int(255) NOT NULL,
   `barcode` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `stock` int(11) NOT NULL,
-  `allocation` int(11) NOT NULL,
-  `sa_percentage` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `category` varchar(255) NOT NULL,
+  `stock` int(11) NOT NULL DEFAULT 0,
+  `allocation` int(11) NOT NULL DEFAULT 0,
+  `sa_percentage` decimal(10,0) GENERATED ALWAYS AS (`stock` / `allocation` * 100) VIRTUAL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `inventory`
 --
 
-INSERT INTO `inventory` (`id`, `barcode`, `description`, `stock`, `allocation`, `sa_percentage`) VALUES
-(1, '4806035214230', 'BUTAMIRATE CITRATE TAB 50mg 20s (BUTAMIR)', 50, 100, 50),
-(2, '1', '1', 10, 50, 25),
-(3, '2', '2', 20, 80, 25);
+INSERT INTO `inventory` (`barcode`, `description`, `category`, `stock`, `allocation`) VALUES
+('11111', 'Mupirocin 20mg/g (2%w/w) 5g (Kaptroban)', 'GENERIC', 500, 1000),
+('1212', 'Thermometer', 'MEDICAL DEVICE', 500, 1000),
+('1544587', 'Efficascent ni nef', 'NON-PHARMA', 500, 0),
+('22222', 'Salbutamol 2Mg Tab 100S (Ventomax)', 'GENERIC', 500, 1000),
+('411254', 'Baygon', 'HOUSE BRANDS', 500, 0),
+('4236325', 'Cosmo Cee', 'HEALTHY FIX', 500, 0),
+('45454', 'Amlodipine 10Mg Tab 100s (Lodipex)', 'GENERIC', 500, 1000),
+('4684122', 'Pink Phallic ni nefe', 'SPECIAL ORDER', 500, 1000),
+('88888', 'Salicyclic Acid 50ml-12', 'BRANDED', 500, 800);
 
 --
 -- Indexes for dumped tables
@@ -53,28 +59,8 @@ INSERT INTO `inventory` (`id`, `barcode`, `description`, `stock`, `allocation`, 
 -- Indexes for table `inventory`
 --
 ALTER TABLE `inventory`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `barcode` (`barcode`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `inventory`
---
-ALTER TABLE `inventory`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `inventory`
---
-ALTER TABLE `inventory`
-  ADD CONSTRAINT `barcode` FOREIGN KEY (`barcode`) REFERENCES `product_masterlist` (`barcode`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD PRIMARY KEY (`barcode`),
+  ADD UNIQUE KEY `barcode` (`barcode`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

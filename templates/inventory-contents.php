@@ -68,119 +68,119 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                         </thead>
                         <tbody>
                           <?php
-                            $check_user =  $_SESSION['login_user']['user_id'];
-                            $user =  $_SESSION['login_user']['employee_name'];
-                            $query = "SELECT * FROM inventory WHERE category = 'GENERIC' ";
-                            $result = mysqli_query($conn, $query);
-                            $check_row = mysqli_num_rows($result);
-                              while ($row = mysqli_fetch_array($result)) {
+                          $check_user =  $_SESSION['login_user']['user_id'];
+                          $user =  $_SESSION['login_user']['employee_name'];
+                          $query = "SELECT * FROM inventory WHERE category = 'GENERIC' ";
+                          $result = mysqli_query($conn, $query);
+                          $check_row = mysqli_num_rows($result);
+                          while ($row = mysqli_fetch_array($result)) {
                           ?>
-                          <tr>
-                            <td><?php echo $row['barcode'] ?></td>
-                            <td><?php echo $row['description'] ?></td>
-                            <td><?php echo $row['stock'] ?></td>
-                            <td><?php echo $row['allocation'] ?></td>
-                            <td>
-                              <div class="project_progress">
-                                <?php 
-                                  if ($row['sa_percentage'] == 0){
-                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] <= 20) {
-                                    echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] <= 30) {
-                                    echo '<div class="progress progress-sm progress-bar-warning bg-warning" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] >= 70) {
-                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:'.$row['sa_percentage'].'%"></div>';
+                            <tr>
+                              <td><?php echo $row['barcode'] ?></td>
+                              <td><?php echo $row['description'] ?></td>
+                              <td><?php echo $row['stock'] ?></td>
+                              <td><?php echo $row['allocation'] ?></td>
+                              <td>
+                                <div class="project_progress">
+                                  <?php
+                                  if ($row['sa_percentage'] == 0) {
+                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] <= 20) {
+                                    echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] <= 30) {
+                                    echo '<div class="progress progress-sm progress-bar-warning bg-warning" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] >= 70) {
+                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   } else {
-                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:'.$row['sa_percentage'].'%"></div>';
+                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   }
-                                ?>
-                              </div>
-                              <div>
-                                <?php 
-                                  if ($row['sa_percentage'] == 0){
-                                    echo "<span class='badge bg-danger font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] <= 20) {
-                                    echo "<span class='badge bg-danger font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] <= 30) {
-                                    echo "<span class='badge bg-warning font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] >= 70) {
-                                    echo "<span class='badge bg-success font-weight-bold'>".$row["sa_percentage"].'%</span>';  
-                                  }else {
-                                    echo "<span class='badge bg-success font-weight-bold'>".$row["sa_percentage"].'%</span>';
+                                  ?>
+                                </div>
+                                <div>
+                                  <?php
+                                  if ($row['sa_percentage'] == 0) {
+                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] <= 20) {
+                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] <= 30) {
+                                    echo "<span class='badge bg-warning font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] >= 70) {
+                                    echo "<span class='badge bg-success font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else {
+                                    echo "<span class='badge bg-success font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   }
-                                ?>
-                              </div>
-                            </td>
-                            <td>
-                              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode']?>">
-                                <i class="fas fa-pencil-alt"></i>
-                                Edit
-                              </button>
-                              <!-- <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['barcode'] ?>">
+                                  ?>
+                                </div>
+                              </td>
+                              <td>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode'] ?>">
+                                  <i class="fas fa-pencil-alt"></i>
+                                  Edit
+                                </button>
+                                <!-- <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['barcode'] ?>">
                                 <i class="fas fa-eye"></i>
                                 Details
                               </button> -->
-                            </td>
-                          </tr>
-                          <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
-                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <form action="functions.php" method="POST">
-                                    <div class="row">
-                                      <div class="col-sm-5">
-                                        <div class="form-group">
-                                          <label for="barcode">Barcode</label>
-                                          <input type="text" class="form-control " id="barcode" name="barcode" value="<?php echo $row['barcode']?>" readonly>
+                              </td>
+                            </tr>
+                            <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
+                              <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <form action="functions.php" method="POST">
+                                      <div class="row">
+                                        <div class="col-sm-5">
+                                          <div class="form-group">
+                                            <label for="barcode">Barcode</label>
+                                            <input type="text" class="form-control " id="barcode" name="barcode" value="<?php echo $row['barcode'] ?>" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-7">
+                                          <div class="form-group">
+                                            <label for="prod">Product Description</label>
+                                            <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description'] ?>" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="stock">Stock</label>
+                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="allo">Allocation</label>
+                                            <input type="number" class="form-control " id="allo" name="allocation" value="<?php echo $row['allocation'] ?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="sa_percentage">S/A%</label>
+                                            <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage'] ?>%" readonly>
+                                          </div>
                                         </div>
                                       </div>
-                                      <div class="col-sm-7">
-                                        <div class="form-group">
-                                          <label for="prod">Product Description</label>
-                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>" readonly>
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="stock">Stock</label>
-                                          <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock']?>">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="allo">Allocation</label>
-                                          <input type="number" class="form-control " id="allo" name="allocation" value="<?php echo $row['allocation']?>">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="sa_percentage">S/A%</label>
-                                          <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage']?>%" readonly>
-                                        </div>
-                                      </div>
-                                    </div>
-                                                                   
-                                    <div class="modal-footer justify-content-between">
-                                      <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
-                                      <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
-                                    </div>
 
-                                  </form>
+                                      <div class="modal-footer justify-content-between">
+                                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
+                                        <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
+                                      </div>
+
+                                    </form>
+                                  </div>
                                 </div>
+                                <!-- /.modal-content -->
                               </div>
-                              <!-- /.modal-content -->
+                              <!-- /.modal-dialog -->
                             </div>
-                            <!-- /.modal-dialog -->
-                          </div>
 
-                        <?php } ?>
+                          <?php } ?>
                         </tbody>
                       </table>
                     </div>
@@ -199,119 +199,120 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                         </thead>
                         <tbody>
                           <?php
-                            $check_user =  $_SESSION['login_user']['user_id'];
-                            $user =  $_SESSION['login_user']['employee_name'];
-                            $query = "SELECT * FROM inventory WHERE category = 'BRANDED' ";
-                            $result = mysqli_query($conn, $query);
-                            $check_row = mysqli_num_rows($result);
-                              while ($row = mysqli_fetch_array($result)) {
+                          $check_user =  $_SESSION['login_user']['user_id'];
+                          $user =  $_SESSION['login_user']['employee_name'];
+                          $query = "SELECT * FROM inventory WHERE category = 'BRANDED' ";
+                          $result = mysqli_query($conn, $query);
+                          $check_row = mysqli_num_rows($result);
+                            while ($row = mysqli_fetch_array($result)) {
+                           
                           ?>
-                          <tr>
-                            <td><?php echo $row['barcode'] ?></td>
-                            <td><?php echo $row['description'] ?></td>
-                            <td><?php echo $row['stock'] ?></td>
-                            <td><?php echo $row['allocation'] ?></td>
-                            <td>
-                              <div class="project_progress">
-                                <?php 
-                                  if ($row['sa_percentage'] == 0){
-                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] <= 20) {
-                                    echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] <= 30) {
-                                    echo '<div class="progress progress-sm progress-bar-warning bg-warning" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] >= 70) {
-                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:'.$row['sa_percentage'].'%"></div>';
+                            <tr>
+                              <td><?php echo $row['barcode'] ?></td>
+                              <td><?php echo $row['description'] ?></td>
+                              <td><?php echo $row['stock'] ?></td>
+                              <td><?php echo $row['allocation'] ?></td>
+                              <td>
+                                <div class="project_progress">
+                                  <?php
+                                  if ($row['sa_percentage'] == 0) {
+                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] <= 20) {
+                                    echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] <= 30) {
+                                    echo '<div class="progress progress-sm progress-bar-warning bg-warning" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] >= 70) {
+                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   } else {
-                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:'.$row['sa_percentage'].'%"></div>';
+                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   }
-                                ?>
-                              </div>
-                              <div>
-                                <?php 
-                                  if ($row['sa_percentage'] == 0){
-                                    echo "<span class='badge bg-danger font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] <= 20) {
-                                    echo "<span class='badge bg-danger font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] <= 30) {
-                                    echo "<span class='badge bg-warning font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] >= 70) {
-                                    echo "<span class='badge bg-success font-weight-bold'>".$row["sa_percentage"].'%</span>';  
-                                  }else {
-                                    echo "<span class='badge bg-success font-weight-bold'>".$row["sa_percentage"].'%</span>';
+                                  ?>
+                                </div>
+                                <div>
+                                  <?php
+                                  if ($row['sa_percentage'] == 0) {
+                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] <= 20) {
+                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] <= 30) {
+                                    echo "<span class='badge bg-warning font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] >= 70) {
+                                    echo "<span class='badge bg-success font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else {
+                                    echo "<span class='badge bg-success font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   }
-                                ?>
-                              </div>
-                            </td>
-                            <td>
-                              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode']?>">
-                                <i class="fas fa-pencil-alt"></i>
-                                Edit
-                              </button>
-                              <!-- <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['barcode'] ?>">
+                                  ?>
+                                </div>
+                              </td>
+                              <td>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode'] ?>">
+                                  <i class="fas fa-pencil-alt"></i>
+                                  Edit
+                                </button>
+                                <!-- <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['barcode'] ?>">
                                 <i class="fas fa-eye"></i>
                                 Details
                               </button> -->
-                            </td>
-                          </tr>
-                          <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
-                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <form action="functions.php" method="POST">
-                                    <div class="row">
-                                      <div class="col-sm-5">
-                                        <div class="form-group">
-                                          <label for="barcode">Barcode</label>
-                                          <input type="text" class="form-control " id="barcode" name="barcode" value="<?php echo $row['barcode']?>" readonly>
+                              </td>
+                            </tr>
+                            <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
+                              <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <form action="functions.php" method="POST">
+                                      <div class="row">
+                                        <div class="col-sm-5">
+                                          <div class="form-group">
+                                            <label for="barcode">Barcode</label>
+                                            <input type="text" class="form-control " id="barcode" name="barcode" value="<?php echo $row['barcode'] ?>" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-7">
+                                          <div class="form-group">
+                                            <label for="prod">Product Description</label>
+                                            <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description'] ?>" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="stock">Stock</label>
+                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="allo">Allocation</label>
+                                            <input type="number" class="form-control " id="allo" name="allocation" value="<?php echo $row['allocation'] ?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="sa_percentage">S/A%</label>
+                                            <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage'] ?>%" readonly>
+                                          </div>
                                         </div>
                                       </div>
-                                      <div class="col-sm-7">
-                                        <div class="form-group">
-                                          <label for="prod">Product Description</label>
-                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>" readonly>
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="stock">Stock</label>
-                                          <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock']?>">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="allo">Allocation</label>
-                                          <input type="number" class="form-control " id="allo" name="allocation" value="<?php echo $row['allocation']?>">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="sa_percentage">S/A%</label>
-                                          <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage']?>%" readonly>
-                                        </div>
-                                      </div>
-                                    </div>
-                                                                   
-                                    <div class="modal-footer justify-content-between">
-                                      <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
-                                      <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
-                                    </div>
 
-                                  </form>
+                                      <div class="modal-footer justify-content-between">
+                                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
+                                        <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
+                                      </div>
+
+                                    </form>
+                                  </div>
                                 </div>
+                                <!-- /.modal-content -->
                               </div>
-                              <!-- /.modal-content -->
+                              <!-- /.modal-dialog -->
                             </div>
-                            <!-- /.modal-dialog -->
-                          </div>
 
-                        <?php } ?>
+                          <?php } ?>
                         </tbody>
                       </table>
                     </div>
@@ -330,119 +331,119 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                         </thead>
                         <tbody>
                           <?php
-                            $check_user =  $_SESSION['login_user']['user_id'];
-                            $user =  $_SESSION['login_user']['employee_name'];
-                            $query = "SELECT * FROM inventory WHERE category = 'MEDICAL DEVICE' ";
-                            $result = mysqli_query($conn, $query);
-                            $check_row = mysqli_num_rows($result);
-                              while ($row = mysqli_fetch_array($result)) {
+                          $check_user =  $_SESSION['login_user']['user_id'];
+                          $user =  $_SESSION['login_user']['employee_name'];
+                          $query = "SELECT * FROM inventory WHERE category = 'MEDICAL DEVICE' ";
+                          $result = mysqli_query($conn, $query);
+                          $check_row = mysqli_num_rows($result);
+                          while ($row = mysqli_fetch_array($result)) {
                           ?>
-                          <tr>
-                            <td><?php echo $row['barcode'] ?></td>
-                            <td><?php echo $row['description'] ?></td>
-                            <td><?php echo $row['stock'] ?></td>
-                            <td><?php echo $row['allocation'] ?></td>
-                            <td>
-                              <div class="project_progress">
-                                <?php 
-                                  if ($row['sa_percentage'] == 0){
-                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] <= 20) {
-                                    echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] <= 30) {
-                                    echo '<div class="progress progress-sm progress-bar-warning bg-warning" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] >= 70) {
-                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:'.$row['sa_percentage'].'%"></div>';
+                            <tr>
+                              <td><?php echo $row['barcode'] ?></td>
+                              <td><?php echo $row['description'] ?></td>
+                              <td><?php echo $row['stock'] ?></td>
+                              <td><?php echo $row['allocation'] ?></td>
+                              <td>
+                                <div class="project_progress">
+                                  <?php
+                                  if ($row['sa_percentage'] == 0) {
+                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] <= 20) {
+                                    echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] <= 30) {
+                                    echo '<div class="progress progress-sm progress-bar-warning bg-warning" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] >= 70) {
+                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   } else {
-                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:'.$row['sa_percentage'].'%"></div>';
+                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   }
-                                ?>
-                              </div>
-                              <div>
-                                <?php 
-                                  if ($row['sa_percentage'] == 0){
-                                    echo "<span class='badge bg-danger font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] <= 20) {
-                                    echo "<span class='badge bg-danger font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] <= 30) {
-                                    echo "<span class='badge bg-warning font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] >= 70) {
-                                    echo "<span class='badge bg-success font-weight-bold'>".$row["sa_percentage"].'%</span>';  
-                                  }else {
-                                    echo "<span class='badge bg-success font-weight-bold'>".$row["sa_percentage"].'%</span>';
+                                  ?>
+                                </div>
+                                <div>
+                                  <?php
+                                  if ($row['sa_percentage'] == 0) {
+                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] <= 20) {
+                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] <= 30) {
+                                    echo "<span class='badge bg-warning font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] >= 70) {
+                                    echo "<span class='badge bg-success font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else {
+                                    echo "<span class='badge bg-success font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   }
-                                ?>
-                              </div>
-                            </td>
-                            <td>
-                              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode']?>">
-                                <i class="fas fa-pencil-alt"></i>
-                                Edit
-                              </button>
-                              <!-- <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['barcode'] ?>">
+                                  ?>
+                                </div>
+                              </td>
+                              <td>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode'] ?>">
+                                  <i class="fas fa-pencil-alt"></i>
+                                  Edit
+                                </button>
+                                <!-- <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['barcode'] ?>">
                                 <i class="fas fa-eye"></i>
                                 Details
                               </button> -->
-                            </td>
-                          </tr>
-                          <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
-                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <form action="functions.php" method="POST">
-                                    <div class="row">
-                                      <div class="col-sm-5">
-                                        <div class="form-group">
-                                          <label for="barcode">Barcode</label>
-                                          <input type="text" class="form-control " id="barcode" name="barcode" value="<?php echo $row['barcode']?>" readonly>
+                              </td>
+                            </tr>
+                            <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
+                              <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <form action="functions.php" method="POST">
+                                      <div class="row">
+                                        <div class="col-sm-5">
+                                          <div class="form-group">
+                                            <label for="barcode">Barcode</label>
+                                            <input type="text" class="form-control " id="barcode" name="barcode" value="<?php echo $row['barcode'] ?>" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-7">
+                                          <div class="form-group">
+                                            <label for="prod">Product Description</label>
+                                            <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description'] ?>" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="stock">Stock</label>
+                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="allo">Allocation</label>
+                                            <input type="number" class="form-control " id="allo" name="allocation" value="<?php echo $row['allocation'] ?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="sa_percentage">S/A%</label>
+                                            <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage'] ?>%" readonly>
+                                          </div>
                                         </div>
                                       </div>
-                                      <div class="col-sm-7">
-                                        <div class="form-group">
-                                          <label for="prod">Product Description</label>
-                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>" readonly>
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="stock">Stock</label>
-                                          <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock']?>">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="allo">Allocation</label>
-                                          <input type="number" class="form-control " id="allo" name="allocation" value="<?php echo $row['allocation']?>">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="sa_percentage">S/A%</label>
-                                          <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage']?>%" readonly>
-                                        </div>
-                                      </div>
-                                    </div>
-                                                                   
-                                    <div class="modal-footer justify-content-between">
-                                      <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
-                                      <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
-                                    </div>
 
-                                  </form>
+                                      <div class="modal-footer justify-content-between">
+                                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
+                                        <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
+                                      </div>
+
+                                    </form>
+                                  </div>
                                 </div>
+                                <!-- /.modal-content -->
                               </div>
-                              <!-- /.modal-content -->
+                              <!-- /.modal-dialog -->
                             </div>
-                            <!-- /.modal-dialog -->
-                          </div>
 
-                        <?php } ?>
+                          <?php } ?>
                         </tbody>
                       </table>
                     </div>
@@ -461,119 +462,119 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                         </thead>
                         <tbody>
                           <?php
-                            $check_user =  $_SESSION['login_user']['user_id'];
-                            $user =  $_SESSION['login_user']['employee_name'];
-                            $query = "SELECT * FROM inventory WHERE category = 'NON-PHARMA' ";
-                            $result = mysqli_query($conn, $query);
-                            $check_row = mysqli_num_rows($result);
-                              while ($row = mysqli_fetch_array($result)) {
+                          $check_user =  $_SESSION['login_user']['user_id'];
+                          $user =  $_SESSION['login_user']['employee_name'];
+                          $query = "SELECT * FROM inventory WHERE category = 'NON-PHARMA' ";
+                          $result = mysqli_query($conn, $query);
+                          $check_row = mysqli_num_rows($result);
+                          while ($row = mysqli_fetch_array($result)) {
                           ?>
-                          <tr>
-                            <td><?php echo $row['barcode'] ?></td>
-                            <td><?php echo $row['description'] ?></td>
-                            <td><?php echo $row['stock'] ?></td>
-                            <td><?php echo $row['allocation'] ?></td>
-                            <td>
-                              <div class="project_progress">
-                                <?php 
-                                  if ($row['sa_percentage'] == 0){
-                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] <= 20) {
-                                    echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] <= 30) {
-                                    echo '<div class="progress progress-sm progress-bar-warning bg-warning" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] >= 70) {
-                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:'.$row['sa_percentage'].'%"></div>';
+                            <tr>
+                              <td><?php echo $row['barcode'] ?></td>
+                              <td><?php echo $row['description'] ?></td>
+                              <td><?php echo $row['stock'] ?></td>
+                              <td><?php echo $row['allocation'] ?></td>
+                              <td>
+                                <div class="project_progress">
+                                  <?php
+                                  if ($row['sa_percentage'] == 0) {
+                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] <= 20) {
+                                    echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] <= 30) {
+                                    echo '<div class="progress progress-sm progress-bar-warning bg-warning" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] >= 70) {
+                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   } else {
-                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:'.$row['sa_percentage'].'%"></div>';
+                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   }
-                                ?>
-                              </div>
-                              <div>
-                                <?php 
-                                  if ($row['sa_percentage'] == 0){
-                                    echo "<span class='badge bg-danger font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] <= 20) {
-                                    echo "<span class='badge bg-danger font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] <= 30) {
-                                    echo "<span class='badge bg-warning font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] >= 70) {
-                                    echo "<span class='badge bg-success font-weight-bold'>".$row["sa_percentage"].'%</span>';  
-                                  }else {
-                                    echo "<span class='badge bg-success font-weight-bold'>".$row["sa_percentage"].'%</span>';
+                                  ?>
+                                </div>
+                                <div>
+                                  <?php
+                                  if ($row['sa_percentage'] == 0) {
+                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] <= 20) {
+                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] <= 30) {
+                                    echo "<span class='badge bg-warning font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] >= 70) {
+                                    echo "<span class='badge bg-success font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else {
+                                    echo "<span class='badge bg-success font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   }
-                                ?>
-                              </div>
-                            </td>
-                            <td>
-                              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode']?>">
-                                <i class="fas fa-pencil-alt"></i>
-                                Edit
-                              </button>
-                              <!-- <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['barcode'] ?>">
+                                  ?>
+                                </div>
+                              </td>
+                              <td>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode'] ?>">
+                                  <i class="fas fa-pencil-alt"></i>
+                                  Edit
+                                </button>
+                                <!-- <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['barcode'] ?>">
                                 <i class="fas fa-eye"></i>
                                 Details
                               </button> -->
-                            </td>
-                          </tr>
-                          <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
-                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <form action="functions.php" method="POST">
-                                    <div class="row">
-                                      <div class="col-sm-5">
-                                        <div class="form-group">
-                                          <label for="barcode">Barcode</label>
-                                          <input type="text" class="form-control " id="barcode" name="barcode" value="<?php echo $row['barcode']?>" readonly>
+                              </td>
+                            </tr>
+                            <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
+                              <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <form action="functions.php" method="POST">
+                                      <div class="row">
+                                        <div class="col-sm-5">
+                                          <div class="form-group">
+                                            <label for="barcode">Barcode</label>
+                                            <input type="text" class="form-control " id="barcode" name="barcode" value="<?php echo $row['barcode'] ?>" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-7">
+                                          <div class="form-group">
+                                            <label for="prod">Product Description</label>
+                                            <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description'] ?>" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="stock">Stock</label>
+                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="allo">Allocation</label>
+                                            <input type="number" class="form-control " id="allo" name="allocation" value="<?php echo $row['allocation'] ?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="sa_percentage">S/A%</label>
+                                            <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage'] ?>%" readonly>
+                                          </div>
                                         </div>
                                       </div>
-                                      <div class="col-sm-7">
-                                        <div class="form-group">
-                                          <label for="prod">Product Description</label>
-                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>" readonly>
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="stock">Stock</label>
-                                          <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock']?>">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="allo">Allocation</label>
-                                          <input type="number" class="form-control " id="allo" name="allocation" value="<?php echo $row['allocation']?>">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="sa_percentage">S/A%</label>
-                                          <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage']?>%" readonly>
-                                        </div>
-                                      </div>
-                                    </div>
-                                                                   
-                                    <div class="modal-footer justify-content-between">
-                                      <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
-                                      <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
-                                    </div>
 
-                                  </form>
+                                      <div class="modal-footer justify-content-between">
+                                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
+                                        <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
+                                      </div>
+
+                                    </form>
+                                  </div>
                                 </div>
+                                <!-- /.modal-content -->
                               </div>
-                              <!-- /.modal-content -->
+                              <!-- /.modal-dialog -->
                             </div>
-                            <!-- /.modal-dialog -->
-                          </div>
 
-                        <?php } ?>
+                          <?php } ?>
                         </tbody>
                       </table>
                     </div>
@@ -592,119 +593,119 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                         </thead>
                         <tbody>
                           <?php
-                            $check_user =  $_SESSION['login_user']['user_id'];
-                            $user =  $_SESSION['login_user']['employee_name'];
-                            $query = "SELECT * FROM inventory WHERE category = 'SPECIAL ORDER' ";
-                            $result = mysqli_query($conn, $query);
-                            $check_row = mysqli_num_rows($result);
-                              while ($row = mysqli_fetch_array($result)) {
+                          $check_user =  $_SESSION['login_user']['user_id'];
+                          $user =  $_SESSION['login_user']['employee_name'];
+                          $query = "SELECT * FROM inventory WHERE category = 'SPECIAL ORDER' ";
+                          $result = mysqli_query($conn, $query);
+                          $check_row = mysqli_num_rows($result);
+                          while ($row = mysqli_fetch_array($result)) {
                           ?>
-                          <tr>
-                            <td><?php echo $row['barcode'] ?></td>
-                            <td><?php echo $row['description'] ?></td>
-                            <td><?php echo $row['stock'] ?></td>
-                            <td><?php echo $row['allocation'] ?></td>
-                            <td>
-                              <div class="project_progress">
-                                <?php 
-                                  if ($row['sa_percentage'] == 0){
-                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] <= 20) {
-                                    echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] <= 30) {
-                                    echo '<div class="progress progress-sm progress-bar-warning bg-warning" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] >= 70) {
-                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:'.$row['sa_percentage'].'%"></div>';
+                            <tr>
+                              <td><?php echo $row['barcode'] ?></td>
+                              <td><?php echo $row['description'] ?></td>
+                              <td><?php echo $row['stock'] ?></td>
+                              <td><?php echo $row['allocation'] ?></td>
+                              <td>
+                                <div class="project_progress">
+                                  <?php
+                                  if ($row['sa_percentage'] == 0) {
+                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] <= 20) {
+                                    echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] <= 30) {
+                                    echo '<div class="progress progress-sm progress-bar-warning bg-warning" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] >= 70) {
+                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   } else {
-                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:'.$row['sa_percentage'].'%"></div>';
+                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   }
-                                ?>
-                              </div>
-                              <div>
-                                <?php 
-                                  if ($row['sa_percentage'] == 0){
-                                    echo "<span class='badge bg-danger font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] <= 20) {
-                                    echo "<span class='badge bg-danger font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] <= 30) {
-                                    echo "<span class='badge bg-warning font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] >= 70) {
-                                    echo "<span class='badge bg-success font-weight-bold'>".$row["sa_percentage"].'%</span>';  
-                                  }else {
-                                    echo "<span class='badge bg-success font-weight-bold'>".$row["sa_percentage"].'%</span>';
+                                  ?>
+                                </div>
+                                <div>
+                                  <?php
+                                  if ($row['sa_percentage'] == 0) {
+                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] <= 20) {
+                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] <= 30) {
+                                    echo "<span class='badge bg-warning font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] >= 70) {
+                                    echo "<span class='badge bg-success font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else {
+                                    echo "<span class='badge bg-success font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   }
-                                ?>
-                              </div>
-                            </td>
-                            <td>
-                              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode']?>">
-                                <i class="fas fa-pencil-alt"></i>
-                                Edit
-                              </button>
-                              <!-- <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['barcode'] ?>">
+                                  ?>
+                                </div>
+                              </td>
+                              <td>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode'] ?>">
+                                  <i class="fas fa-pencil-alt"></i>
+                                  Edit
+                                </button>
+                                <!-- <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['barcode'] ?>">
                                 <i class="fas fa-eye"></i>
                                 Details
                               </button> -->
-                            </td>
-                          </tr>
-                          <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
-                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <form action="functions.php" method="POST">
-                                    <div class="row">
-                                      <div class="col-sm-5">
-                                        <div class="form-group">
-                                          <label for="barcode">Barcode</label>
-                                          <input type="text" class="form-control " id="barcode" name="barcode" value="<?php echo $row['barcode']?>" readonly>
+                              </td>
+                            </tr>
+                            <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
+                              <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <form action="functions.php" method="POST">
+                                      <div class="row">
+                                        <div class="col-sm-5">
+                                          <div class="form-group">
+                                            <label for="barcode">Barcode</label>
+                                            <input type="text" class="form-control " id="barcode" name="barcode" value="<?php echo $row['barcode'] ?>" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-7">
+                                          <div class="form-group">
+                                            <label for="prod">Product Description</label>
+                                            <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description'] ?>" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="stock">Stock</label>
+                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="allo">Allocation</label>
+                                            <input type="number" class="form-control " id="allo" name="allocation" value="<?php echo $row['allocation'] ?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="sa_percentage">S/A%</label>
+                                            <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage'] ?>%" readonly>
+                                          </div>
                                         </div>
                                       </div>
-                                      <div class="col-sm-7">
-                                        <div class="form-group">
-                                          <label for="prod">Product Description</label>
-                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>" readonly>
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="stock">Stock</label>
-                                          <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock']?>">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="allo">Allocation</label>
-                                          <input type="number" class="form-control " id="allo" name="allocation" value="<?php echo $row['allocation']?>">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="sa_percentage">S/A%</label>
-                                          <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage']?>%" readonly>
-                                        </div>
-                                      </div>
-                                    </div>
-                                                                   
-                                    <div class="modal-footer justify-content-between">
-                                      <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
-                                      <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
-                                    </div>
 
-                                  </form>
+                                      <div class="modal-footer justify-content-between">
+                                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
+                                        <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
+                                      </div>
+
+                                    </form>
+                                  </div>
                                 </div>
+                                <!-- /.modal-content -->
                               </div>
-                              <!-- /.modal-content -->
+                              <!-- /.modal-dialog -->
                             </div>
-                            <!-- /.modal-dialog -->
-                          </div>
 
-                        <?php } ?>
+                          <?php } ?>
                         </tbody>
                       </table>
                     </div>
@@ -723,119 +724,119 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                         </thead>
                         <tbody>
                           <?php
-                            $check_user =  $_SESSION['login_user']['user_id'];
-                            $user =  $_SESSION['login_user']['employee_name'];
-                            $query = "SELECT * FROM inventory WHERE category = 'HOUSE BRANDS' ";
-                            $result = mysqli_query($conn, $query);
-                            $check_row = mysqli_num_rows($result);
-                              while ($row = mysqli_fetch_array($result)) {
+                          $check_user =  $_SESSION['login_user']['user_id'];
+                          $user =  $_SESSION['login_user']['employee_name'];
+                          $query = "SELECT * FROM inventory WHERE category = 'HOUSE BRANDS' ";
+                          $result = mysqli_query($conn, $query);
+                          $check_row = mysqli_num_rows($result);
+                          while ($row = mysqli_fetch_array($result)) {
                           ?>
-                          <tr>
-                            <td><?php echo $row['barcode'] ?></td>
-                            <td><?php echo $row['description'] ?></td>
-                            <td><?php echo $row['stock'] ?></td>
-                            <td><?php echo $row['allocation'] ?></td>
-                            <td>
-                              <div class="project_progress">
-                                <?php 
-                                  if ($row['sa_percentage'] == 0){
-                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] <= 20) {
-                                    echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] <= 30) {
-                                    echo '<div class="progress progress-sm progress-bar-warning bg-warning" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] >= 70) {
-                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:'.$row['sa_percentage'].'%"></div>';
+                            <tr>
+                              <td><?php echo $row['barcode'] ?></td>
+                              <td><?php echo $row['description'] ?></td>
+                              <td><?php echo $row['stock'] ?></td>
+                              <td><?php echo $row['allocation'] ?></td>
+                              <td>
+                                <div class="project_progress">
+                                  <?php
+                                  if ($row['sa_percentage'] == 0) {
+                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] <= 20) {
+                                    echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] <= 30) {
+                                    echo '<div class="progress progress-sm progress-bar-warning bg-warning" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] >= 70) {
+                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   } else {
-                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:'.$row['sa_percentage'].'%"></div>';
+                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   }
-                                ?>
-                              </div>
-                              <div>
-                                <?php 
-                                  if ($row['sa_percentage'] == 0){
-                                    echo "<span class='badge bg-danger font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] <= 20) {
-                                    echo "<span class='badge bg-danger font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] <= 30) {
-                                    echo "<span class='badge bg-warning font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] >= 70) {
-                                    echo "<span class='badge bg-success font-weight-bold'>".$row["sa_percentage"].'%</span>';  
-                                  }else {
-                                    echo "<span class='badge bg-success font-weight-bold'>".$row["sa_percentage"].'%</span>';
+                                  ?>
+                                </div>
+                                <div>
+                                  <?php
+                                  if ($row['sa_percentage'] == 0) {
+                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] <= 20) {
+                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] <= 30) {
+                                    echo "<span class='badge bg-warning font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] >= 70) {
+                                    echo "<span class='badge bg-success font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else {
+                                    echo "<span class='badge bg-success font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   }
-                                ?>
-                              </div>
-                            </td>
-                            <td>
-                              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode']?>">
-                                <i class="fas fa-pencil-alt"></i>
-                                Edit
-                              </button>
-                              <!-- <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['barcode'] ?>">
+                                  ?>
+                                </div>
+                              </td>
+                              <td>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode'] ?>">
+                                  <i class="fas fa-pencil-alt"></i>
+                                  Edit
+                                </button>
+                                <!-- <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['barcode'] ?>">
                                 <i class="fas fa-eye"></i>
                                 Details
                               </button> -->
-                            </td>
-                          </tr>
-                          <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
-                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <form action="functions.php" method="POST">
-                                    <div class="row">
-                                      <div class="col-sm-5">
-                                        <div class="form-group">
-                                          <label for="barcode">Barcode</label>
-                                          <input type="text" class="form-control " id="barcode" name="barcode" value="<?php echo $row['barcode']?>" readonly>
+                              </td>
+                            </tr>
+                            <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
+                              <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <form action="functions.php" method="POST">
+                                      <div class="row">
+                                        <div class="col-sm-5">
+                                          <div class="form-group">
+                                            <label for="barcode">Barcode</label>
+                                            <input type="text" class="form-control " id="barcode" name="barcode" value="<?php echo $row['barcode'] ?>" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-7">
+                                          <div class="form-group">
+                                            <label for="prod">Product Description</label>
+                                            <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description'] ?>" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="stock">Stock</label>
+                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="allo">Allocation</label>
+                                            <input type="number" class="form-control " id="allo" name="allocation" value="<?php echo $row['allocation'] ?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="sa_percentage">S/A%</label>
+                                            <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage'] ?>%" readonly>
+                                          </div>
                                         </div>
                                       </div>
-                                      <div class="col-sm-7">
-                                        <div class="form-group">
-                                          <label for="prod">Product Description</label>
-                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>" readonly>
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="stock">Stock</label>
-                                          <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock']?>">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="allo">Allocation</label>
-                                          <input type="number" class="form-control " id="allo" name="allocation" value="<?php echo $row['allocation']?>">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="sa_percentage">S/A%</label>
-                                          <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage']?>%" readonly>
-                                        </div>
-                                      </div>
-                                    </div>
-                                                                   
-                                    <div class="modal-footer justify-content-between">
-                                      <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
-                                      <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
-                                    </div>
 
-                                  </form>
+                                      <div class="modal-footer justify-content-between">
+                                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
+                                        <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
+                                      </div>
+
+                                    </form>
+                                  </div>
                                 </div>
+                                <!-- /.modal-content -->
                               </div>
-                              <!-- /.modal-content -->
+                              <!-- /.modal-dialog -->
                             </div>
-                            <!-- /.modal-dialog -->
-                          </div>
 
-                        <?php } ?>
+                          <?php } ?>
                         </tbody>
                       </table>
                     </div>
@@ -854,119 +855,119 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                         </thead>
                         <tbody>
                           <?php
-                            $check_user =  $_SESSION['login_user']['user_id'];
-                            $user =  $_SESSION['login_user']['employee_name'];
-                            $query = "SELECT * FROM inventory WHERE category = 'HEALTHY FIX' ";
-                            $result = mysqli_query($conn, $query);
-                            $check_row = mysqli_num_rows($result);
-                              while ($row = mysqli_fetch_array($result)) {
+                          $check_user =  $_SESSION['login_user']['user_id'];
+                          $user =  $_SESSION['login_user']['employee_name'];
+                          $query = "SELECT * FROM inventory WHERE category = 'HEALTHY FIX' ";
+                          $result = mysqli_query($conn, $query);
+                          $check_row = mysqli_num_rows($result);
+                          while ($row = mysqli_fetch_array($result)) {
                           ?>
-                          <tr>
-                            <td><?php echo $row['barcode'] ?></td>
-                            <td><?php echo $row['description'] ?></td>
-                            <td><?php echo $row['stock'] ?></td>
-                            <td><?php echo $row['allocation'] ?></td>
-                            <td>
-                              <div class="project_progress">
-                                <?php 
-                                  if ($row['sa_percentage'] == 0){
-                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] <= 20) {
-                                    echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] <= 30) {
-                                    echo '<div class="progress progress-sm progress-bar-warning bg-warning" style = "width:'.$row['sa_percentage'].'%"></div>';
-                                  }else if ($row['sa_percentage'] >= 70) {
-                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:'.$row['sa_percentage'].'%"></div>';
+                            <tr>
+                              <td><?php echo $row['barcode'] ?></td>
+                              <td><?php echo $row['description'] ?></td>
+                              <td><?php echo $row['stock'] ?></td>
+                              <td><?php echo $row['allocation'] ?></td>
+                              <td>
+                                <div class="project_progress">
+                                  <?php
+                                  if ($row['sa_percentage'] == 0) {
+                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] <= 20) {
+                                    echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] <= 30) {
+                                    echo '<div class="progress progress-sm progress-bar-warning bg-warning" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($row['sa_percentage'] >= 70) {
+                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   } else {
-                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:'.$row['sa_percentage'].'%"></div>';
+                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:' . $row['sa_percentage'] . '%"></div>';
                                   }
-                                ?>
-                              </div>
-                              <div>
-                                <?php 
-                                  if ($row['sa_percentage'] == 0){
-                                    echo "<span class='badge bg-danger font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] <= 20) {
-                                    echo "<span class='badge bg-danger font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] <= 30) {
-                                    echo "<span class='badge bg-warning font-weight-bold'>".$row["sa_percentage"].'%</span>';
-                                  }else if ($row['sa_percentage'] >= 70) {
-                                    echo "<span class='badge bg-success font-weight-bold'>".$row["sa_percentage"].'%</span>';  
-                                  }else {
-                                    echo "<span class='badge bg-success font-weight-bold'>".$row["sa_percentage"].'%</span>';
+                                  ?>
+                                </div>
+                                <div>
+                                  <?php
+                                  if ($row['sa_percentage'] == 0) {
+                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] <= 20) {
+                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] <= 30) {
+                                    echo "<span class='badge bg-warning font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($row['sa_percentage'] >= 70) {
+                                    echo "<span class='badge bg-success font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else {
+                                    echo "<span class='badge bg-success font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   }
-                                ?>
-                              </div>
-                            </td>
-                            <td>
-                              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode']?>">
-                                <i class="fas fa-pencil-alt"></i>
-                                Edit
-                              </button>
-                              <!-- <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['barcode'] ?>">
+                                  ?>
+                                </div>
+                              </td>
+                              <td>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode'] ?>">
+                                  <i class="fas fa-pencil-alt"></i>
+                                  Edit
+                                </button>
+                                <!-- <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['barcode'] ?>">
                                 <i class="fas fa-eye"></i>
                                 Details
                               </button> -->
-                            </td>
-                          </tr>
-                          <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
-                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <form action="functions.php" method="POST">
-                                    <div class="row">
-                                      <div class="col-sm-5">
-                                        <div class="form-group">
-                                          <label for="barcode">Barcode</label>
-                                          <input type="text" class="form-control " id="barcode" name="barcode" value="<?php echo $row['barcode']?>" readonly>
+                              </td>
+                            </tr>
+                            <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
+                              <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <form action="functions.php" method="POST">
+                                      <div class="row">
+                                        <div class="col-sm-5">
+                                          <div class="form-group">
+                                            <label for="barcode">Barcode</label>
+                                            <input type="text" class="form-control " id="barcode" name="barcode" value="<?php echo $row['barcode'] ?>" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-7">
+                                          <div class="form-group">
+                                            <label for="prod">Product Description</label>
+                                            <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description'] ?>" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="stock">Stock</label>
+                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="allo">Allocation</label>
+                                            <input type="number" class="form-control " id="allo" name="allocation" value="<?php echo $row['allocation'] ?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                            <label for="sa_percentage">S/A%</label>
+                                            <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage'] ?>%" readonly>
+                                          </div>
                                         </div>
                                       </div>
-                                      <div class="col-sm-7">
-                                        <div class="form-group">
-                                          <label for="prod">Product Description</label>
-                                          <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description']?>" readonly>
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="stock">Stock</label>
-                                          <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock']?>">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="allo">Allocation</label>
-                                          <input type="number" class="form-control " id="allo" name="allocation" value="<?php echo $row['allocation']?>">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <div class="form-group">
-                                          <label for="sa_percentage">S/A%</label>
-                                          <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage']?>%" readonly>
-                                        </div>
-                                      </div>
-                                    </div>
-                                                                   
-                                    <div class="modal-footer justify-content-between">
-                                      <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
-                                      <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
-                                    </div>
 
-                                  </form>
+                                      <div class="modal-footer justify-content-between">
+                                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
+                                        <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
+                                      </div>
+
+                                    </form>
+                                  </div>
                                 </div>
+                                <!-- /.modal-content -->
                               </div>
-                              <!-- /.modal-content -->
+                              <!-- /.modal-dialog -->
                             </div>
-                            <!-- /.modal-dialog -->
-                          </div>
 
-                        <?php } ?>
+                          <?php } ?>
                         </tbody>
                       </table>
                     </div>

@@ -306,10 +306,10 @@ include('templates/session.php');
                               <div class="modal fade" id="updatee<?php echo $row['id'] ?>">
                                 <div class="modal-dialog modal-dialog-centered modal-lg">
                                   <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
+                                    <div class="modal-header bg-info">
+                                      <h4 class="modal-title font-weight-bold">UPDATE PRODUCT DETAILS</h4>
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
+                                        <span class="text-white" aria-hidden="true" >&times;</span>
                                       </button>
                                     </div>
                                     <div class="modal-body">
@@ -332,12 +332,12 @@ include('templates/session.php');
                                               <label for="quantity">Quantity:</label>
                                               <input type="number" class="form-control " id="quantity" name="quantity" min="0" value="<?php echo $row['quantity'] ?>">
                                               <?php
-                                                $query9 = "SELECT * FROM inventory WHERE barcode = '$bar' ";
-                                                $result9 = mysqli_query($conn, $query9);
-                                                $check_row = mysqli_num_rows($result9);
-                                                while ($row9 = mysqli_fetch_array($result9)) {
+                                              $query9 = "SELECT * FROM inventory WHERE barcode = '$bar' ";
+                                              $result9 = mysqli_query($conn, $query9);
+                                              $check_row = mysqli_num_rows($result9);
+                                              while ($row9 = mysqli_fetch_array($result9)) {
                                               ?>
-                                              <small>On Stock: <?php echo $row9['stock'] ?></small>
+                                                <small class="text-info">On Stock: <?php echo $row9['stock'] ?></small>
                                               <?php } ?>
                                             </div>
                                           </div>
@@ -359,13 +359,13 @@ include('templates/session.php');
                                           <div class="col-sm-2">
                                             <div class="form-group">
                                               <label for="mrf">MRF:</label>
-                                              <input type="text" class="form-control " id="mrf" name="mrf" value="<?php echo $row['mrf'] ?>">
+                                              <input type="text" class="form-control " id="mrf" name="mrf" value="<?php echo $row['mrf'] ?>" readonly>
                                             </div>
                                           </div>
                                           <div class="col-sm-2">
                                             <div class="form-group">
                                               <label for="order_num">Inv/Order No:</label>
-                                              <input type="text" class="form-control " id="order_num" name="order_num" value="<?php echo $row['order_num'] ?>">
+                                              <input type="text" class="form-control " id="order_num" name="order_num" value="<?php echo $row['order_num'] ?>" readonly>
                                             </div>
                                           </div>
                                           <div class="col-sm-5">
@@ -398,9 +398,9 @@ include('templates/session.php');
                               <div class="modal fade" id="view<?php echo $row['id'] ?>">
                                 <div class="modal-dialog modal-dialog-centered modal-lg">
                                   <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h4 class="modal-title">VIEW PRODUCT DETAILS</h4>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <div class="modal-header bg-secondary">
+                                      <h4 class="modal-title font-weight-bold">VIEW PRODUCT DETAILS</h4>
+                                      <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                       </button>
                                     </div>
@@ -544,9 +544,9 @@ include('templates/session.php');
           <div class="modal fade" id="addnew">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl ">
               <div class="modal-content ">
-                <div class="modal-header">
-                  <h4 class="modal-title">DISPATCH ITEMS</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <div class="modal-header bg-primary">
+                  <h4 class="modal-title font-weight-bold">DISPATCH ITEMS</h4>
+                  <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -694,9 +694,9 @@ include('templates/session.php');
           <div class="modal fade" id="dispatch">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
               <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">DISPATCH ITEMS</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <div class="modal-header bg-primary">
+                  <h4 class="modal-title font-weight-bold">DISPATCH ITEMS</h4>
+                  <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -1292,7 +1292,7 @@ include('templates/session.php');
       });
 
       // Get the input field
-		  var quantityInput = $("#quantity2");
+      var quantityInput = $("#quantity2");
 
       // Listen for the "keyup" event on the input field
       quantityInput.keyup(function() {
@@ -1308,6 +1308,7 @@ include('templates/session.php');
           quantityInput.val(max);
         }
       });
+
 
     });
   </script>

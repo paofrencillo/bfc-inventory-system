@@ -1042,7 +1042,7 @@ if(isset($_POST['updateprodout'])) {
                     })
                 </script>
             <?php
-        } else {
+            } else {
             ?>
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -1188,9 +1188,13 @@ if(isset($_POST['updateprodout'])) {
 #DELETE ENDORSE
 if (isset($_POST['delete_updateprodout'])) {
     $id_update = $_POST['id_update'];
+    $barcode = $_POST['barcode'];
+    $current_quantity = $_POST['current_quantity'];
 
     if ($id_update != null) {
+        $conn->query("UPDATE inventory SET stock = stock + '$current_quantity' WHERE barcode = $barcode") or die($conn->error);
         $conn->query("DELETE FROM endorse_final WHERE id='$id_update';") or die($conn->error);
+        
     ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
