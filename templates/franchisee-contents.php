@@ -139,9 +139,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                             <div class="modal fade" id="update<?php echo $row['code'] ?>">
                                                                 <div class="modal-dialog modal-dialog-centered modal-lg">
                                                                     <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h4 class="modal-title">UPDATE FRANCHISEE DETAILS</h4>
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <div class="modal-header bg-info">
+                                                                        <h4 class="modal-title font-weight-bold">UPDATE FRANCHISE DETAILS</h4>
+                                                                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
@@ -174,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="modal-footer">
+                                                                                <div class="modal-footer justify-content-between">
                                                                                     <input type="hidden" name="franchisee_modify" value="<?php echo $row['code'] ?>">
                                                                                     <input type="hidden" name="last_user" value="<?php echo $check_user ?>">
                                                                                     <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->

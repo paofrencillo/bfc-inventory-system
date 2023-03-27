@@ -100,15 +100,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               <td>
                                 <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['supplier_id'] ?>">
                                   <i class="fas fa-pencil-alt"></i>
-                                  Edit
+                                  Edit Details
                                 </button>
                                 <!-- /.modal -->
                                 <div class="modal fade" id="update<?php echo $row['supplier_id'] ?>">
                                   <div class="modal-dialog modal-dialog-centered modal-lg">
                                     <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <div class="modal-header bg-info">
+                                        <h4 class="modal-title font-weight-bold">UPDATE SUPPLIER DETAILS</h4>
+                                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                         </button>
                                       </div>
@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                               </div>
                                             </div>
                                           </div>
-                                          <div class="modal-footer">
+                                          <div class="modal-footer justify-content-between">
                                             <input type="hidden" name="supplier_modify" value="<?php echo $row['supplier_id'] ?>">
                                             <input type="hidden" name="last_user" value="<?php echo $check_user ?>">
                                             <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->

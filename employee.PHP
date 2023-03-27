@@ -273,9 +273,9 @@ if ($_SESSION['login_user']['is_superuser'] == false) {
                               <div class="modal fade" id="update<?php echo $row['user_id'] ?>">
                                 <div class="modal-dialog modal-dialog-centered modal-lg">
                                   <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h4 class="modal-title">EDIT ACCOUNT DETAILS</h4>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <div class="modal-header bg-info">
+                                      <h4 class="modal-title font-weight-bold">UPDATE ACCOUNT DETAILS</h4>
+                                      <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                       </button>
                                     </div>
@@ -295,7 +295,7 @@ if ($_SESSION['login_user']['is_superuser'] == false) {
                                             </div>
                                           </div>
                                         </div>
-                                        <div class="modal-footer">
+                                        <div class="modal-footer justify-content-between">
                                           <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->
                                           <input type="hidden" name="employee_modify" value="<?php echo $row['user_id'] ?>">
                                           <button type="submit" class="btn btn-outline-danger" name="delete_employee">Delete</button>
