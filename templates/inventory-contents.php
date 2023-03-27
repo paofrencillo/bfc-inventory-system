@@ -83,8 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               <td>
                                 <div class="project_progress">
                                   <?php
-                                  if ($row['sa_percentage'] == 0) {
-                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  if ($row['sa_percentage'] == NULL) {
+                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] >= 100) {
                                     echo '<div class="progress progress-sm progress-bar-primary bg-primary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] <= 20) {
@@ -100,8 +100,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                 </div>
                                 <div>
                                   <?php
-                                  if ($row['sa_percentage'] == 0) {
-                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  if ($row['sa_percentage'] == NULL) {
+                                    echo "<span class='badge bg-secondary font-weight-bold'>0%</span>";
                                   } else if ($row['sa_percentage'] >= 100) {
                                     echo "<span class='badge bg-primary font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 20) {
@@ -130,9 +130,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
                               <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <div class="modal-header bg-info">
+                                    <h4 class="modal-title font-weight-bold">UPDATE PRODUCT DETAILS</h4>
+                                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
                                   </div>
@@ -217,10 +217,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               <td><?php echo $row['stock'] ?></td>
                               <td><?php echo $row['allocation'] ?></td>
                               <td>
-                              <div class="project_progress">
+                                <div class="project_progress">
                                   <?php
-                                  if ($row['sa_percentage'] == 0) {
-                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  if ($row['sa_percentage'] == NULL) {
+                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] >= 100) {
                                     echo '<div class="progress progress-sm progress-bar-primary bg-primary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] <= 20) {
@@ -236,8 +236,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                 </div>
                                 <div>
                                   <?php
-                                  if ($row['sa_percentage'] == 0) {
-                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  if ($row['sa_percentage'] == NULL) {
+                                    echo "<span class='badge bg-secondary font-weight-bold'>0%</span>";
                                   } else if ($row['sa_percentage'] >= 100) {
                                     echo "<span class='badge bg-primary font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 20) {
@@ -266,9 +266,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
                               <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <div class="modal-header bg-info">
+                                    <h4 class="modal-title font-weight-bold">UPDATE PRODUCT DETAILS</h4>
+                                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
                                   </div>
@@ -352,10 +352,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               <td><?php echo $row['stock'] ?></td>
                               <td><?php echo $row['allocation'] ?></td>
                               <td>
-                              <div class="project_progress">
+                                <div class="project_progress">
                                   <?php
-                                  if ($row['sa_percentage'] == 0) {
-                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  if ($row['sa_percentage'] == NULL) {
+                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] >= 100) {
                                     echo '<div class="progress progress-sm progress-bar-primary bg-primary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] <= 20) {
@@ -371,8 +371,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                 </div>
                                 <div>
                                   <?php
-                                  if ($row['sa_percentage'] == 0) {
-                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  if ($row['sa_percentage'] == NULL) {
+                                    echo "<span class='badge bg-secondary font-weight-bold'>0%</span>";
                                   } else if ($row['sa_percentage'] >= 100) {
                                     echo "<span class='badge bg-primary font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 20) {
@@ -401,9 +401,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
                               <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <div class="modal-header bg-info">
+                                    <h4 class="modal-title font-weight-bold">UPDATE PRODUCT DETAILS</h4>
+                                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
                                   </div>
@@ -487,10 +487,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               <td><?php echo $row['stock'] ?></td>
                               <td><?php echo $row['allocation'] ?></td>
                               <td>
-                              <div class="project_progress">
+                                <div class="project_progress">
                                   <?php
-                                  if ($row['sa_percentage'] == 0) {
-                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  if ($row['sa_percentage'] == NULL) {
+                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] >= 100) {
                                     echo '<div class="progress progress-sm progress-bar-primary bg-primary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] <= 20) {
@@ -506,8 +506,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                 </div>
                                 <div>
                                   <?php
-                                  if ($row['sa_percentage'] == 0) {
-                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  if ($row['sa_percentage'] == NULL) {
+                                    echo "<span class='badge bg-secondary font-weight-bold'>0%</span>";
                                   } else if ($row['sa_percentage'] >= 100) {
                                     echo "<span class='badge bg-primary font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 20) {
@@ -536,9 +536,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
                               <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <div class="modal-header bg-info">
+                                    <h4 class="modal-title font-weight-bold">UPDATE PRODUCT DETAILS</h4>
+                                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
                                   </div>
@@ -622,10 +622,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               <td><?php echo $row['stock'] ?></td>
                               <td><?php echo $row['allocation'] ?></td>
                               <td>
-                              <div class="project_progress">
+                                <div class="project_progress">
                                   <?php
-                                  if ($row['sa_percentage'] == 0) {
-                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  if ($row['sa_percentage'] == NULL) {
+                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] >= 100) {
                                     echo '<div class="progress progress-sm progress-bar-primary bg-primary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] <= 20) {
@@ -641,8 +641,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                 </div>
                                 <div>
                                   <?php
-                                  if ($row['sa_percentage'] == 0) {
-                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  if ($row['sa_percentage'] == NULL) {
+                                    echo "<span class='badge bg-secondary font-weight-bold'>0%</span>";
                                   } else if ($row['sa_percentage'] >= 100) {
                                     echo "<span class='badge bg-primary font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 20) {
@@ -671,9 +671,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
                               <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <div class="modal-header bg-info">
+                                    <h4 class="modal-title font-weight-bold">UPDATE PRODUCT DETAILS</h4>
+                                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
                                   </div>
@@ -757,10 +757,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               <td><?php echo $row['stock'] ?></td>
                               <td><?php echo $row['allocation'] ?></td>
                               <td>
-                              <div class="project_progress">
+                                <div class="project_progress">
                                   <?php
-                                  if ($row['sa_percentage'] == 0) {
-                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  if ($row['sa_percentage'] == NULL) {
+                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] >= 100) {
                                     echo '<div class="progress progress-sm progress-bar-primary bg-primary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] <= 20) {
@@ -776,8 +776,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                 </div>
                                 <div>
                                   <?php
-                                  if ($row['sa_percentage'] == 0) {
-                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  if ($row['sa_percentage'] == NULL) {
+                                    echo "<span class='badge bg-secondary font-weight-bold'>0%</span>";
                                   } else if ($row['sa_percentage'] >= 100) {
                                     echo "<span class='badge bg-primary font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 20) {
@@ -806,9 +806,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
                               <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <div class="modal-header bg-info">
+                                    <h4 class="modal-title font-weight-bold">UPDATE PRODUCT DETAILS</h4>
+                                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
                                   </div>
@@ -892,10 +892,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               <td><?php echo $row['stock'] ?></td>
                               <td><?php echo $row['allocation'] ?></td>
                               <td>
-                              <div class="project_progress">
+                                <div class="project_progress">
                                   <?php
-                                  if ($row['sa_percentage'] == 0) {
-                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  if ($row['sa_percentage'] == NULL) {
+                                    echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] >= 100) {
                                     echo '<div class="progress progress-sm progress-bar-primary bg-primary" style = "width:100%"></div>';
                                   } else if ($row['sa_percentage'] <= 20) {
@@ -911,8 +911,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                 </div>
                                 <div>
                                   <?php
-                                  if ($row['sa_percentage'] == 0) {
-                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  if ($row['sa_percentage'] == NULL) {
+                                    echo "<span class='badge bg-secondary font-weight-bold'>0%</span>";
                                   } else if ($row['sa_percentage'] >= 100) {
                                     echo "<span class='badge bg-primary font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
                                   } else if ($row['sa_percentage'] <= 20) {
@@ -941,9 +941,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
                               <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <div class="modal-header bg-info">
+                                    <h4 class="modal-title font-weight-bold">UPDATE PRODUCT DETAILS</h4>
+                                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
                                   </div>
