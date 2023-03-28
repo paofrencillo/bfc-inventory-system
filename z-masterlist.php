@@ -171,8 +171,8 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
   </div>
   <!-- ./wrapper -->
 
-  <!-- jQuery -->
-  <script src="plugins/jquery/jquery.min.js"></script>
+ <!-- jQuery -->
+ <script src="plugins/jquery/jquery.min.js"></script>
   <!-- jQuery UI 1.11.4 -->
   <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -220,8 +220,12 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
   <script src="dist/js/pages/dashboard.js"></script>
   <!-- bs-custom-file-input -->
   <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-  <script type="text/javascript" src="js/masterlist/masterlist.js"></script>
-  <script src="js/masterlist.js"></script>
+  <script src="plugins/select-box-search-option/dist/js/jquery-searchbox.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
+  <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/i18n/defaults-*.min.js"></script>
+  <script type="text/javascript" src="js/masterlist.js"></script>
 </body>
 
 </html>

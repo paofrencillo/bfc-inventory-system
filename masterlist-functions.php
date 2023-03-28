@@ -95,8 +95,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     VALUES ('$barcode', '$description', '$generic_name', '$category', '$supplier', '$path', '$last_edited_by', '$last_edited_on');")
                     or die('Error Could Not Query');
 
-        $conn->query("INSERT INTO $table2 (barcode, description, category, last_edited_by, last_edited_on)
-                    VALUES ('$barcode', '$description', '$category', '$last_edited_by', '$last_edited_on');")
+        $conn->query("INSERT INTO $table2 (barcode, description, category)
+                    VALUES ('$barcode', '$description', '$category');")
                     or die('Error Could Not Query');
         
         if (!mysqli_error($conn)) {
