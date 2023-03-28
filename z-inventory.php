@@ -55,9 +55,9 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-light-blue elevation-4">
    <!-- Brand Logo -->
-  <a href="z-dashboard.php" class="brand-link text-center">
-    <img src="dist/img/valuemed-logo.png" alt="valuemedlogo" style="width: 70%">
-  </a>
+    <a href="z-dashboard.php" class="brand-link text-center">
+      <img src="dist/img/valuemed-logo.png" alt="valuemedlogo" style="width: 70%">
+    </a>
 
     <!-- Sidebar -->
     <div class="sidebar"> 
@@ -163,7 +163,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
     <!-- /.sidebar -->
   </aside>
 
-  '<!-- Content Wrapper. Contains page content -->
+  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -497,7 +497,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
     </div>
     <!-- /.content-header -->
   </div>
-  <!-- /.content-wrapper -->'
+  <!-- /.content-wrapper -->
 
   <footer class="main-footer">
     <strong>Made by <a href="#">TUP-C Interns</a>.</strong>
@@ -564,33 +564,140 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
 <!-- Select2 -->
 <script src="plugins/select2/js/select2.full.min.js"></script>
 <script>
-    $(function () {
-      $("#example1").DataTable({
-        "columnDefs": [{"className": "dt-center", "targets": "_all"}],
-        "responsive": true, 
-        "lengthChange": true, 
+    $(function() {
+      $("#Generic").DataTable({
+        "columnDefs": [{
+          "className": "dt-center",
+          "targets": "_all"
+        }],
+        "responsive": true,
+        "lengthChange": true,
+        // "scrollY": '500px',
+        // "scrollCollapse": true,
         "autoWidth": false,
+        "order": [
+          [1, 'asc']
+        ],
         // "buttons": ["copy", "csv", "excel", "pdf", "print"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      }).buttons().container().appendTo('#Generic_wrapper .col-md-6:eq(0)');
     });
 
-    $(function () {
-      $("#example2").DataTable({
-        "columnDefs": [{"className": "dt-center", "targets": "_all"}],
-        "responsive": true, 
-        "lengthChange": true, 
+    $(function() {
+      $("#branded").DataTable({
+        "columnDefs": [{
+          "className": "dt-center",
+          "targets": "_all"
+        }],
+        "responsive": true,
+        "lengthChange": true,
+        // "scrollY": '500px',
+        // "scrollCollapse": true,
         "autoWidth": false,
+        "order": [
+          [1, 'asc']
+        ],
         // "buttons": ["copy", "csv", "excel", "pdf", "print"]
       }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
     });
 
-    $(function () {
-    //Initialize Select2 Elements
-    $('.select2').select2()
+    $(function() {
+      $("#medical").DataTable({
+        "columnDefs": [{
+          "className": "dt-center",
+          "targets": "_all"
+        }],
+        "responsive": true,
+        "lengthChange": true,
+        // "scrollY": '500px',
+        // "scrollCollapse": true,
+        "autoWidth": false,
+        "order": [
+          [1, 'asc']
+        ],
+        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+      }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+    });
 
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-      theme: 'bootstrap4'
+    $(function() {
+      $("#non-pharma").DataTable({
+        "columnDefs": [{
+          "className": "dt-center",
+          "targets": "_all"
+        }],
+        "responsive": true,
+        "lengthChange": true,
+        // "scrollY": '500px',
+        // "scrollCollapse": true,
+        "autoWidth": false,
+        "order": [
+          [1, 'asc']
+        ],
+        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+      }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+    });
+
+    $(function() {
+      $("#special").DataTable({
+        "columnDefs": [{
+          "className": "dt-center",
+          "targets": "_all"
+        }],
+        "responsive": true,
+        "lengthChange": true,
+        // "scrollY": '500px',
+        // "scrollCollapse": true,
+        "autoWidth": false,
+        "order": [
+          [1, 'asc']
+        ],
+        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+      }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+    });
+
+    $(function() {
+      $("#house").DataTable({
+        "columnDefs": [{
+          "className": "dt-center",
+          "targets": "_all"
+        }],
+        "responsive": true,
+        "lengthChange": true,
+        // "scrollY": '500px',
+        // "scrollCollapse": true,
+        "autoWidth": false,
+        "order": [
+          [1, 'asc']
+        ],
+        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+      }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+    });
+
+    $(function() {
+      $("#health").DataTable({
+        "columnDefs": [{
+          "className": "dt-center",
+          "targets": "_all"
+        }],
+        "responsive": true,
+        "lengthChange": true,
+        // "scrollY": '500px',
+        // "scrollCollapse": true,
+        "autoWidth": false,
+        "order": [
+          [1, 'asc']
+        ],
+        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+      }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+    });
+
+
+    $(function() {
+      //Initialize Select2 Elements
+      $('.select2').select2()
+
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
       })
     })
   </script>

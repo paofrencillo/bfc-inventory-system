@@ -1420,6 +1420,7 @@ if(isset($_POST['modify_invent'])) {
     $stock = $_POST['stock'];
     $allocation = $_POST['allocation']; 
     $sa_percentage = $_POST['sa_percentage'];
+    $is_superuser = $_POST['is_superuser'];
 
     if ($allocation != 0){
         if ($barcode != null) {
@@ -1429,80 +1430,53 @@ if(isset($_POST['modify_invent'])) {
                 description = '$description', 
                 stock = '$stock', 
                 allocation = '$allocation' WHERE barcode = '$barcode'") or die($conn->error);
-            ?>
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <script>
-                    $(document).ready(function() {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Product Successfully Updated',
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'Okay'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = "inventory.php";
-                            } else {
-                                window.location.href = "inventory.php";
-                            }
+            if ($is_superuser == '1'){
+                ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Product Successfully Updated',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Okay'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "inventory.php";
+                                } else {
+                                    window.location.href = "inventory.php";
+                                }
+                            })
                         })
-                    })
-                </script>
-            <?php
-        } else {
-            ?>
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'An Error Occured',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Okay'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "inventory.php";
-                        } else {
-                            window.location.href = "inventory.php";
-                        }
-                    })
-                })
-            </script>
-            <?php
-        }   
-
-    } else {
-
-        if ($barcode != null) {
-            // Insert the values into the database
-            $conn->query("UPDATE inventory 
-                SET barcode = '$barcode', 
-                description = '$description', 
-                stock = '$stock', 
-                allocation = '$allocation' WHERE barcode = '$barcode'") or die($conn->error);
-            ?>
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <script>
-                    $(document).ready(function() {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Product Successfully Updated',
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'Okay'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = "inventory.php";
-                            } else {
-                                window.location.href = "inventory.php";
-                            }
+                    </script>
+                <?php
+            } else if  ($is_superuser == '0') {
+                ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Product Successfully Updated',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Okay'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "z-inventory.php";
+                                } else {
+                                    window.location.href = "z-inventory.php";
+                                }
+                            })
                         })
-                    })
-                </script>
-            <?php
+                    </script>
+                <?php
+            }  
+            
         } else {
-            ?>
+            if ($is_superuser == '1'){
+                ?>
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
                 <script>
@@ -1521,9 +1495,132 @@ if(isset($_POST['modify_invent'])) {
                         })
                     })
                 </script>
-            <?php
+                <?php
+            } else if  ($is_superuser == '0') {
+                ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'An Error Occured',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "z-inventory.php";
+                            } else {
+                                window.location.href = "z-inventory.php";
+                            }
+                        })
+                    })
+                </script>
+                <?php
+            }     
+        }   
+
+    } else {
+
+        if ($barcode != null) {
+            // Insert the values into the database
+            $conn->query("UPDATE inventory 
+                SET barcode = '$barcode', 
+                description = '$description', 
+                stock = '$stock', 
+                allocation = '$allocation' WHERE barcode = '$barcode'") or die($conn->error);
+            if ($is_superuser == '1'){
+                ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Product Successfully Updated',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Okay'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "inventory.php";
+                                } else {
+                                    window.location.href = "inventory.php";
+                                }
+                            })
+                        })
+                    </script>
+                <?php
+            } else if  ($is_superuser == '0') {
+                ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Product Successfully Updated',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Okay'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "z-inventory.php";
+                                } else {
+                                    window.location.href = "z-inventory.php";
+                                }
+                            })
+                        })
+                    </script>
+                <?php
+            }  
+            
+        } else {
+            if ($is_superuser == '1'){
+                ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'An Error Occured',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Okay'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "inventory.php";
+                                } else {
+                                    window.location.href = "inventory.php";
+                                }
+                            })
+                        })
+                    </script>
+                <?php
+            } else if  ($is_superuser == '0') {
+                ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'An Error Occured',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Okay'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "z-inventory.php";
+                                } else {
+                                    window.location.href = "z-inventory.php";
+                                }
+                            })
+                        })
+                    </script>
+                <?php
+            }  
+            
         }   
     }
 }
+
 
 ?>
