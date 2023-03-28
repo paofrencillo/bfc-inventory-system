@@ -32,7 +32,7 @@
                 </div>
                 <div class="card-body">
                   <div class="col-md-2">
-                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addnew"><i class="fas fa-minus-circle"></i> ENDORSE PRODUCTS</button>
+                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addnew"><i class="fas fa-minus-circle"></i> ENDORSE</button>
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -672,5 +672,5 @@
         <!-- /.content-header -->
       </div>
       <!-- /.content-wrapper -->
-      
+
 <?php } ?>
