@@ -117,13 +117,13 @@
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="barcode-details">Barcode:</label>
-                          <input type="text" class="form-control" id="barcode-details" name="barcode-details" readonly>
+                          <input type="text" class="form-control" id="barcode-details" name="barcode-details" autocomplete="off" readonly>
                         </div>
                       </div>
                       <div class="col-sm-8">
                         <div class="form-group">
                           <label for="desc-details">Product Description:</label>
-                          <input type="text" class="form-control" id="desc-details" name="desc-details" readonly>
+                          <input type="text" class="form-control" id="desc-details" name="desc-details" autocomplete="off" readonly>
                         </div>
                       </div>
                       <div class="col-sm-3">
@@ -135,37 +135,37 @@
                       <div class="col-sm-5">
                         <div class="form-group">
                           <label for="supp-details">Supplier:</label>
-                          <input type="text" class="form-control" id="supp-details" name="supp-details" readonly>
+                          <input type="text" class="form-control" id="supp-details" name="supp-details" autocomplete="off" readonly>
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="lot-details">Lot Number:</label>
-                          <input type="text" class="form-control" id="lot-details" name="lot-details" onkeyup="this.value = this.value.toUpperCase();" readonly>
+                          <input type="text" class="form-control" id="lot-details" name="lot-details" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" readonly>
                         </div>
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="exp-details">Expiration Date:</label>
-                          <input type="text" class="form-control" id="exp-details" name="exp-details" readonly>
+                          <input type="text" class="form-control" id="exp-details" name="exp-details" autocomplete="off" readonly>
                         </div>
                       </div>
                       <div class="col-sm-5">
                         <div class="form-group">
                           <label for="added-by-details">Added By:</label>
-                          <input type="text" class="form-control" id="added-by-details" name="added-by-details" readonly>
+                          <input type="text" class="form-control" id="added-by-details" name="added-by-details" autocomplete="off" readonly>
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="entry-details">Entry Date:</label>
-                          <input type="text" class="form-control" id="entry-details" name="entry-details" readonly>
+                          <input type="text" class="form-control" id="entry-details" name="entry-details" autocomplete="off" readonly>
                         </div>
                       </div>
                       <div class="col-sm-12">
                         <div class="form-group">
                           <label for="last_edit-details">Last Edit:</label>
-                          <input type="text" class="form-control" id="last-edit-details" name="last-edit-details" readonly>
+                          <input type="text" class="form-control" id="last-edit-details" name="last-edit-details" autocomplete="off" readonly>
                         </div>
                       </div>
                     </div>
@@ -250,13 +250,13 @@
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="barcode">Barcode:</label>
-                          <input type="text" class="form-control" id="barcode" name="barcode" onmouseover="this.focus();" required>
+                          <input type="text" class="form-control" id="barcode" name="barcode" onmouseover="this.focus();" autocomplete="off" required>
                         </div>
                       </div>
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label for="prod">Product Description:</label>
-                          <input type="text" class="form-control" id="description" name="description" readonly required>
+                          <input type="text" class="form-control" id="description" name="description" autocomplete="off" readonly required>
                         </div>
                       </div>
                       <div class="col-sm-2">
@@ -268,19 +268,19 @@
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="lot">Lot Number:</label>
-                          <input type="text" class="form-control" id="lot" name="lot" onkeyup="this.value=this.value.toUpperCase();" onmouseover="this.focus();" required>
+                          <input type="text" class="form-control" id="lot" name="lot" onkeyup="this.value=this.value.toUpperCase();" onmouseover="this.focus();" autocomplete="off" required>
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="supp">Supplier</label>
-                          <input type="text" class="form-control" id="supp" name="supp" onmouseover="this.focus();" readonly required>
+                          <input type="text" class="form-control" id="supp" name="supp" onmouseover="this.focus();" autocomplete="off" readonly required>
                         </div>
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="exp">Expiration Date:</label>
-                          <input type="text" class="form-control" id="exp" name="exp" placeholder="mm-dd-yyyy or mm-yyyy" onmouseover="this.focus();" required>
+                          <input type="text" class="form-control" id="exp" name="exp" placeholder="mm-dd-yyyy or mm-yyyy" autocomplete="off" onmouseover="this.focus();" required>
                         </div>
                       </div>
                       <div class="col-sm-2">
