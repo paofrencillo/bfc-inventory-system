@@ -984,6 +984,7 @@ if(isset($_POST['updateprodout'])) {
     $exp_date = $_POST['exp_date'];
     $remarks = $_POST['remarks'];
     $id_update = $_POST['id_update'];
+    $is_superuser = $_POST['is_superuser'];
 
     // Check if the user input is to increase or decrease the quantity
     if ($current_quantity < $quantity) {
@@ -1004,47 +1005,94 @@ if(isset($_POST['updateprodout'])) {
                 order_num = '$order_num', 
                 exp_date = '$exp_date',
                 remarks = '$remarks' WHERE id = '$id_update'") or die($conn->error);
-            ?>
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <script>
-                    $(document).ready(function() {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Product Successfully Updated',
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'Okay'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = "prod-out.php";
-                            } else {
-                                window.location.href = "prod-out.php";
-                            }
+
+            if ($is_superuser == '1'){
+                ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Product Successfully Updated',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Okay'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "prod-out.php";
+                                } else {
+                                    window.location.href = "prod-out.php";
+                                }
+                            })
                         })
-                    })
-                </script>
-            <?php
-            } else {
-            ?>
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <script>
-                    $(document).ready(function() {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'An Error Occured',
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'Okay'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = "prod-out.php";
-                            } else {
-                                window.location.href = "prod-out.php";
-                            }
+                    </script>
+                <?php
+            } else if  ($is_superuser == '0') {
+                ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Product Successfully Updated',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Okay'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "z-prod-out.php";
+                                } else {
+                                    window.location.href = "z-prod-out.php";
+                                }
+                            })
                         })
-                    })
-                </script>
-            <?php
+                    </script>
+                <?php
+            }    
+        } else {
+            if ($is_superuser == '1'){
+                ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'An Error Occured',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Okay'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "prod-out.php";
+                                } else {
+                                    window.location.href = "prod-out.php";
+                                }
+                            })
+                        })
+                    </script>
+                <?php
+            } else if  ($is_superuser == '0') {
+                ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'An Error Occured',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Okay'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "z-prod-out.php";
+                                } else {
+                                    window.location.href = "z-prod-out.php";
+                                }
+                            })
+                        })
+                    </script>
+                <?php
+            }              
         }
 
     } else if ($current_quantity > $quantity) {
@@ -1065,47 +1113,94 @@ if(isset($_POST['updateprodout'])) {
                 order_num = '$order_num', 
                 exp_date = '$exp_date',
                 remarks = '$remarks' WHERE id = '$id_update'") or die($conn->error);
-            ?>
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <script>
-                    $(document).ready(function() {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Product Successfully Updated',
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'Okay'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = "prod-out.php";
-                            } else {
-                                window.location.href = "prod-out.php";
-                            }
+            
+            if ($is_superuser == '1'){
+                ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Product Successfully Updated',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Okay'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "prod-out.php";
+                                } else {
+                                    window.location.href = "prod-out.php";
+                                }
+                            })
                         })
-                    })
-                </script>
-            <?php
+                    </script>
+                <?php
+            } else if  ($is_superuser == '0') {
+                ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Product Successfully Updated',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Okay'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "z-prod-out.php";
+                                } else {
+                                    window.location.href = "z-prod-out.php";
+                                }
+                            })
+                        })
+                    </script>
+                <?php
+            }   
         } else {
-            ?>
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <script>
-                    $(document).ready(function() {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'An Error Occured',
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'Okay'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = "prod-out.php";
-                            } else {
-                                window.location.href = "prod-out.php";
-                            }
+            if ($is_superuser == '1'){
+                ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'An Error Occured',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Okay'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "prod-out.php";
+                                } else {
+                                    window.location.href = "prod-out.php";
+                                }
+                            })
                         })
-                    })
-                </script>
-            <?php
+                    </script>
+                <?php
+            } else if  ($is_superuser == '0') {
+                ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'An Error Occured',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Okay'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "z-prod-out.php";
+                                } else {
+                                    window.location.href = "z-prod-out.php";
+                                }
+                            })
+                        })
+                    </script>
+                <?php
+            }          
         }
 
     } else {
@@ -1121,6 +1216,112 @@ if(isset($_POST['updateprodout'])) {
                 order_num = '$order_num', 
                 exp_date = '$exp_date',
                 remarks = '$remarks' WHERE id = '$id_update'") or die($conn->error);
+
+            if ($is_superuser == '1'){
+                ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Product Successfully Updated',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Okay'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "prod-out.php";
+                                } else {
+                                    window.location.href = "prod-out.php";
+                                }
+                            })
+                        })
+                    </script>
+                <?php
+            } else if  ($is_superuser == '0') {
+                ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Product Successfully Updated',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Okay'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "z-prod-out.php";
+                                } else {
+                                    window.location.href = "z-prod-out.php";
+                                }
+                            })
+                        })
+                    </script>
+                <?php
+            }  
+            
+        } else {
+            if ($is_superuser == '1'){
+                ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'An Error Occured',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Okay'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "prod-out.php";
+                                } else {
+                                    window.location.href = "prod-out.php";
+                                }
+                            })
+                        })
+                    </script>
+                <?php
+            } else if  ($is_superuser == '0') {
+                ?>
+                    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'An Error Occured',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Okay'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "z-prod-out.php";
+                                } else {
+                                    window.location.href = "z-prod-out.php";
+                                }
+                            })
+                        })
+                    </script>
+                <?php
+            }            
+        }
+    }
+    
+}
+
+#DELETE ENDORSE
+if (isset($_POST['delete_updateprodout'])) {
+    $id_update = $_POST['id_update'];
+    $barcode = $_POST['barcode'];
+    $current_quantity = $_POST['current_quantity'];
+    $is_superuser = $_POST['is_superuser'];
+
+    if ($id_update != null) {
+        $conn->query("UPDATE inventory SET stock = stock + '$current_quantity' WHERE barcode = $barcode") or die($conn->error);
+        $conn->query("DELETE FROM endorse_final WHERE id='$id_update';") or die($conn->error);
+
+        if ($is_superuser == '1'){
             ?>
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -1128,7 +1329,7 @@ if(isset($_POST['updateprodout'])) {
                     $(document).ready(function() {
                         Swal.fire({
                             icon: 'success',
-                            title: 'Product Successfully Updated',
+                            title: 'Product Successfully Deleted',
                             confirmButtonColor: '#3085d6',
                             confirmButtonText: 'Okay'
                         }).then((result) => {
@@ -1141,7 +1342,31 @@ if(isset($_POST['updateprodout'])) {
                     })
                 </script>
             <?php
-        } else {
+        } else if  ($is_superuser == '0') {
+            ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Product Successfully Deleted',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "z-prod-out.php";
+                            } else {
+                                window.location.href = "z-prod-out.php";
+                            }
+                        })
+                    })
+                </script>
+            <?php
+        }  
+        
+    } else {
+        if ($is_superuser == '1'){
             ?>
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -1162,62 +1387,28 @@ if(isset($_POST['updateprodout'])) {
                     })
                 </script>
             <?php
-        }
-    }
-    
-}
-
-#DELETE ENDORSE
-if (isset($_POST['delete_updateprodout'])) {
-    $id_update = $_POST['id_update'];
-    $barcode = $_POST['barcode'];
-    $current_quantity = $_POST['current_quantity'];
-
-    if ($id_update != null) {
-        $conn->query("UPDATE inventory SET stock = stock + '$current_quantity' WHERE barcode = $barcode") or die($conn->error);
-        $conn->query("DELETE FROM endorse_final WHERE id='$id_update';") or die($conn->error);
-        
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Product Successfully Deleted',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "prod-out.php";
-                    } else {
-                        window.location.href = "prod-out.php";
-                    }
-                })
-            })
-        </script>
-    <?php
-    } else {
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'An Error Occured',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "prod-out.php";
-                    } else {
-                        window.location.href = "prod-out.php";
-                    }
-                })
-            })
-        </script>
-    <?php
+        } else if  ($is_superuser == '0') {
+            ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'An Error Occured',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "z-prod-out.php";
+                            } else {
+                                window.location.href = "z-prod-out.php";
+                            }
+                        })
+                    })
+                </script>
+            <?php
+        }  
     }
 }
 

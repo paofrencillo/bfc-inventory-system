@@ -137,6 +137,7 @@
                                                 <label for="quantity">Quantity:</label>
                                                 <input type="number" class="form-control " id="quantity" name="quantity" min="0" value="<?php echo $row['quantity'] ?>">
                                                 <?php
+                                                $is_superuser =  $_SESSION['login_user']['is_superuser'];
                                                 $query9 = "SELECT * FROM inventory WHERE barcode = '$bar' ";
                                                 $result9 = mysqli_query($conn, $query9);
                                                 $check_row = mysqli_num_rows($result9);
@@ -188,6 +189,7 @@
                                           </div>
                                           <div class="modal-footer justify-content-between flex-row-reverse">
                                             <input type="hidden" name="id_update" value="<?php echo $row['id'] ?>">
+                                            <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
                                             <input type="hidden" name="current_quantity" value="<?php echo $row['quantity'] ?>">
 
                                             <button type="submit" class="btn btn-primary" name="updateprodout">Update Details</button>
@@ -607,6 +609,10 @@
                         <div class="col-sm-4">
                           <div class="form-group">
                             <label for="mrf_search2">MRF:</label>
+                            <?php
+                            $is_superuser =  $_SESSION['login_user']['is_superuser'];
+                            ?>
+                            <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
                             <input type="text" class="form-control " id="mrf_search2" name="mrf_search2" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" required>
                           </div>
                         </div>
