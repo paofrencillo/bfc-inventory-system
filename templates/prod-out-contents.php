@@ -64,18 +64,20 @@
                               </button>
                             </ul>
                           </div>
-                          <table id="example1" class="table table-bordered table-hover dt-center">
+                          <table id="example1" class="table table-bordered table-hover text-center">
                             <thead>
                               <tr>
-                                <th>Barcode</th>
-                                <th>Product Description</th>
-                                <th>Quantity</th>
-                                <th>Lot No.</th>
-                                <th>Branch Code</th>
+                                <th>BARCODE</th>
+                                <th>DESCRIPTION</th>
+                                <th>LN</th>
+                                <th>EXPIRATION</th>
+                                <th>QTY</th>                                        
+                                <th>BRANCH</th>
                                 <th>MRF</th>
-                                <th>Inv/Order No.</th>
-                                <th>Remarks</th>
-                                <th>Action</th>
+                                <th>INV/ORDER</th>
+                                <th>REMARKS</th>
+                                <th>ENDORSED DATE</th>
+                                <th>ACTION</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -91,12 +93,14 @@
                                 <tr>
                                   <td><?php echo $row['barcode'] ?></td>
                                   <td><?php echo $row['description'] ?></td>
-                                  <td><?php echo $row['quantity'] ?></td>
                                   <td><?php echo $row['lot'] ?></td>
+                                  <td><?php echo $row['exp_date'] ?></td>
+                                  <td><?php echo $row['quantity'] ?></td>
                                   <td><?php echo $row['branch'] ?></td>
                                   <td><?php echo $row['mrf'] ?></td>
                                   <td><?php echo $row['order_num'] ?></td>
                                   <td><?php echo $row['remarks'] ?></td>
+                                  <td><?php echo $row['endorsed_date'] ?></td>
                                   <td>
                                     <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#updatee<?php echo $row['id'] ?>">
                                       <i class="fas fa-pencil-alt"></i>
@@ -287,7 +291,7 @@
                                             <div class="col-sm-6">
                                               <div class="form-group">
                                                 <label for="endorsed_date">Endorsement Date:</label>
-                                                <input type="date" class="form-control " id="endorsed_date" readonly value="<?php echo $row['endorsed_date'] ?>">
+                                                <input type="text" class="form-control " id="endorsed_date" value="<?php echo $row['endorsed_date'] ?>" readonly>
                                               </div>
                                             </div>
                                           </div>
@@ -314,16 +318,16 @@
                           <table id="example2" class="table table-bordered table-hover dt-center">
                             <thead>
                               <tr>
-                                <th>Barcode</th>
-                                <th>Product Description</th>
-                                <th>Quantity</th>
-                                <th>Lot No.</th>
-                                <th>Branch Code</th>
+                                <th>BARCODE</th>
+                                <th>DESCRIPTION</th>
+                                <th>QTY</th>
+                                <th>LOT</th>
+                                <th>BRANCH</th>
                                 <th>MRF</th>
-                                <th>Inv/Order No.</th>
-                                <th>Remarks</th>
-                                <th>Endorsed Date</th>
-                                <th>Endorsed By</th>
+                                <th>INV/ORDER</th>
+                                <th>REMARKS</th>
+                                <th>ENDORSED DATE</th>
+                                <th>ENDORSED BY</th>
                               </tr>
                             </thead>
                             <tbody>
