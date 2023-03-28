@@ -14,8 +14,8 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminBFC | Dashboard</title>
-
+  <title>Inventory | Product Out</title>
+  <link rel="icon" type="image/png" href="dist/img/valuemed-logo1.png">
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
@@ -38,7 +38,6 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
   <!-- Daterange picker -->
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
-  <link rel="icon" type="image/png" href="/dist/img/normal_BFC_logo_latest.png">
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -85,7 +84,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-light-blue elevation-4">
     <!-- Brand Logo -->
-    <a href="z-dashboard.php" class="brand-link text-center">
+    <a href="dashboard.php" class="brand-link text-center">
       <img src="dist/img/valuemed-logo.png" alt="valuemedlogo" style="width: 70%">
     </a>
 

@@ -20,7 +20,8 @@ if (isset($_SESSION['authenticated']) && $_SESSION['authenticated']) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> BFC Laboratories | Log in </title>
+  <title>Inventory | Login</title>
+  <link rel="icon" type="image/png" href="dist/img/valuemed-logo1.png">
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -73,7 +74,6 @@ if (isset($_SESSION['authenticated']) && $_SESSION['authenticated']) {
     </div>
 
   </div>
-  <img src="dist/img/bfc-logo-1.png" alt="" style="position: absolute; top: 0; left: 0; z-index: 100; width: 200px;">
   <div class="login-box" style="position: fixed;">
     <!-- /.login-logo -->
     <div id="login-card" class="card card-outline card-primary" style="background-color: rgba(216, 221, 236, 0.75) !important;">

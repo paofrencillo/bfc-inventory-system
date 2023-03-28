@@ -13,7 +13,8 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BFC | Product In</title>
+  <title>Inventory | Product In</title>
+  <link rel="icon" type="image/png" href="dist/img/valuemed-logo1.png">
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -34,7 +35,6 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
   <!-- Daterange picker -->
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
-  <link rel="icon" type="image/png" href="/dist/img/normal_BFC_logo_latest.png">
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -223,32 +223,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
   <script src="dist/js/pages/dashboard.js"></script>
   <!-- Select2 -->
   <script src="plugins/select2/js/select2.full.min.js"></script>
-  <script>
-    $(function() {
-      $("#example1").DataTable({
-        "columnDefs": [{
-          "className": "dt-center",
-          "targets": "_all"
-        }],
-        "responsive": true,
-        "lengthChange": true,
-        "scrollY": '500px',
-        "scrollCollapse": true,
-        "autoWidth": false,
-        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    });
-
-    $(function() {
-      //Initialize Select2 Elements
-      $('.select2').select2()
-
-      //Initialize Select2 Elements
-      $('.select2bs4').select2({
-        theme: 'bootstrap4'
-      })
-    })
-  </script>
+  <script src="js/prod-in.js"></script>
 </body>
 
 </html>

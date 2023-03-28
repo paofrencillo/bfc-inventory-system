@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 move_uploaded_file($_FILES["imageFile"]["tmp_name"], $path);
             }
         } else if ($_FILES["imageFile"]["name"] == '') {
-            $path = "dist/img/valuemed-logo.png";
+            $path = "product-imgs/valuemed-logo1.png";
         }
 
         // Insert new products in the database 
