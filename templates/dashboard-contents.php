@@ -33,20 +33,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
               <div class="small-box bg-success">
                 <div class="inner">
                   <?php
-                  // $sql = "SELECT SUM(quantity) as sum FROM endorse_history";
+                  $sql7 = "SELECT SUM(in_quantity) as sum FROM product_in_final";
                   // Execute query and get result
-                  // $result = $conn->query($sql);
+                  $result7 = $conn->query($sql7);
 
                   // Fetch result and get count value
-                  // if ($result->num_rows > 0) {
-                  //   $row = $result->fetch_assoc();
-                  //   $sum = $row["sum"];
-                  // } else {
-                  //   $sum = 0;
-                  // }
+                  if ($result7->num_rows > 0) {
+                    $row7 = $result->fetch_assoc();
+                    $sum = $row7["sum"];
+                    // Split integer data with comma
+                    $formatted_data = number_format($sum);
+                  } else {
+                    $sum = 0;
+                  }
 
                   ?>
-                  <h3>150<sup style="font-size: 20px"> Items</sup></h3>
+                  <h3><?php echo $formatted_data ?><sup style="font-size: 20px"> Items</sup></h3>
 
                   <p>Total Product In</p>
                 </div>
