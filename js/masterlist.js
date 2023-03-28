@@ -37,6 +37,7 @@ function viewModal2(el) {
     data: {"barcode": el.getAttribute("data-id"), action: "get_product"},
     dataType: "JSON",
     success: function(data) {
+      $("#barcode-hidden").val(data.barcode);
       $("#barcode-modal").val(data.barcode);
       $("#desc-modal").val(data.description);
       $("#gen-modal").val(data.generic_name);
@@ -90,7 +91,7 @@ function removeAttrInputs() {
 
 // ------ Delete product
 function deleteProduct() {
-  let barcode =  $("#delete-product-btn").attr("data-product-barcode");
+  let barcode =  $("#barcode-hidden").val();
   let formData = new FormData();
   formData.append('action', 'delete');
   formData.append('barcode', barcode);

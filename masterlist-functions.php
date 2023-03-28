@@ -138,8 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         last_edited_on='$last_edited_on' WHERE barcode='$barcode';");
         }
 
-        $conn->query("UPDATE $table2 SET description='$description', category='$category', last_edited_by='$last_edited_by',
-                    last_edited_on='$last_edited_on' WHERE barcode='$barcode';") or die('Error Could Not Query');
+        $conn->query("UPDATE $table2 SET description='$description', category='$category' WHERE barcode='$barcode';") or die('Error Could Not Query');
     
         if(!mysqli_error($conn)) {
             // raise error
@@ -149,9 +148,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // DELETE PRODUCT
     else if (isset($_POST['action']) && $_POST['action'] === 'delete') {
         $barcode = $_POST["barcode"];
-        $table = "product_masterlist";
+        $table1 = "product_masterlist";
+        $table2 = "inventory";
 
-        $conn->query("DELETE FROM $table WHERE barcode='$barcode';") or die('Error Could Not Query');
+        $conn->query("DELETE FROM $table1 WHERE barcode='$barcode';") or die('Error Could Not Query');
+        $conn->query("DELETE FROM $table2 WHERE barcode='$barcode';") or die('Error Could Not Query');
 
         if(!mysqli_error($conn)) {
             echo json_encode("success");

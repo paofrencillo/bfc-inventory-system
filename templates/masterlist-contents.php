@@ -108,19 +108,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-5">
                                             <div class="form-group">
                                                 <label for="barcode">Barcode</label>
-                                                <input type="text" class="form-control" name="barcode" id="barcode" required>
+                                                <input type="text" class="form-control" name="barcode" id="barcode" autocomplete="off" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-7">
                                             <div class="form-group">
                                                 <label for="description">Product Description</label>
-                                                <input type="text" class="form-control" name="description" id="description" required>
+                                                <input type="text" class="form-control" name="description" id="description" autocomplete="off" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-5">
                                             <div class="form-group">
                                                 <label for="generic_name">Generic Name</label>
-                                                <input type="text" class="form-control" name="generic_name" id="generic_name" required>
+                                                <input type="text" class="form-control" name="generic_name" id="generic_name" autocomplete="off" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-7">
@@ -196,24 +196,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             </div>
                             <div class="modal-body">
                                 <form name="update_masterlist_form" id="update_masterlist_form" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="barcode-hidden" id="barcode-hidden">
                                     <input type="hidden" name="action" value="update">
                                     <div class="row">
                                         <div class="col-sm-5">
                                             <div class="form-group">
                                                 <label for="barcode-modal">Barcode:</label>
-                                                <input type="text" class="form-control modal-field" name="barcode-modal" id="barcode-modal" readonly>
+                                                <input type="text" class="form-control modal-field" name="barcode-modal" id="barcode-modal" autocomplete="off" readonly>
                                             </div>
                                         </div>
                                         <div class="col-sm-7">
                                             <div class="form-group">
                                                 <label for="desc-modal">Product Description:</label>
-                                                <input type="text" class="form-control modal-field" name="desc-modal" id="desc-modal" readonly>
+                                                <input type="text" class="form-control modal-field" name="desc-modal" id="desc-modal" autocomplete="off" readonly>
                                             </div>
                                         </div>
                                         <div class="col-sm-5">
                                             <div class="form-group">
                                                 <label for="gen-modal">Generic Name:</label>
-                                                <input type="text" class="form-control modal-field" name="gen-modal" id="gen-modal" readonly>
+                                                <input type="text" class="form-control modal-field" name="gen-modal" id="gen-modal" autocomplete="off" readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label for="cat-modal">Category:</label>
@@ -313,29 +314,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="barcode-modal-details">Barcode:</label>
-                                            <input type="text" class="form-control modal-field-details" id="barcode-modal-details" readonly>
+                                            <input type="text" class="form-control modal-field-details" id="barcode-modal-details" autocomplete="off" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label for="cat-modal-details">Category:</label>
-                                            <input type="text" class="form-control modal-field-details" id="cat-modal-details" readonly>
+                                            <input type="text" class="form-control modal-field-details" id="cat-modal-details" autocomplete="off" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label for="supp-modal-details">Supplier:</label>
-                                            <input type="text" class="form-control modal-field-details" id="supp-modal-details" readonly>
+                                            <input type="text" class="form-control modal-field-details" id="supp-modal-details" autocomplete="off" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label for="edited-modal-details">Last Edited By:</label>
-                                            <input type="text" class="form-control modal-field-details" id="edited-modal-details" readonly>
+                                            <input type="text" class="form-control modal-field-details" id="edited-modal-details" autocomplete="off" readonly>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="desc-modal-details">Product Description:</label>
-                                            <input type="text" class="form-control modal-field-details" id="desc-modal-details" readonly>
+                                            <input type="text" class="form-control modal-field-details" id="desc-modal-details" autocomplete="off" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label for="gen-modal-details">Generic Name:</label>
-                                            <input type="text" class="form-control modal-field-details" id="gen-modal-details" readonly>
+                                            <input type="text" class="form-control modal-field-details" id="gen-modal-details" autocomplete="off" readonly>
                                         </div>
                                         <div class="position-relative">
                                             <div class="w-100">
