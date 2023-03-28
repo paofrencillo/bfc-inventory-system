@@ -6,8 +6,8 @@ $(document).ready(()=> {
         data: {action: "reloadTable"},
         dataType: "JSON",
         success: function(data) {
+            let tbody = document.getElementById("modal-tbody");
             if ( data != "Not found" ) {
-                let tbody = document.getElementById("modal-tbody");
                 data.forEach((item)=> {
                     let tr = document.createElement("tr");
                     tr.innerHTML = `<tr>
@@ -21,7 +21,6 @@ $(document).ready(()=> {
                     $("#prf").val(`${item.prf}`);
                     $("#prf").attr("readonly", true);
                     $("#added-by").val(`${item.added_by}`);
-                    $("#added-on").val(`${item.entry_date}`);
                 });
                 let fields = document.getElementById("receive-prod-form").querySelectorAll("input");
                 fields.forEach(field => {
@@ -29,6 +28,9 @@ $(document).ready(()=> {
                         field.value = '';
                     }
                 });
+                
+                $("#add-stocks-btn").removeAttr("disabled");
+                $("#delete-all-btn").removeAttr("disabled");
             }
         },
         error: function(error, status, xhr) {
@@ -101,6 +103,8 @@ $("#receive-prod-form").on("submit", function(e){
                     field.value = '';
                 }
             });
+            $("#add-stocks-btn").removeAttr("disabled");
+            $("#delete-all-btn").removeAttr("disabled");
         },
         error: function(error, status, xhr) {
             console.error(error, status, xhr);
@@ -131,36 +135,13 @@ $("#add-stocks-btn").on("click", ()=> {
 });
 
 // View product details
-function viewModal1(el) {
+function viewModal(el) {
     $.ajax({
         type: "GET",
         url: "prod-in-functions.php",
         data: {"id": el.getAttribute("data-id"), action: "get_product_in"},
         dataType: "JSON",
         success: function(data) {        
-            $("#id-details").val(data.id);
-            $("#barcode-details").val(data.barcode);
-            $("#desc-details").val(data.description);
-            $("#quantity-details").val(data.in_quantity);
-            $("#lot-details").val(data.lot_no);
-            $("#exp-details").val(data.exp_date);
-            $("#supp-details").val(data.supplier);
-            $("#entry-details").val(data.entry_date);   
-        },
-        error: function(error) {
-            console.log(error);
-        }
-      })
-}
-
-function viewModal2(el) {
-    console.log(el.getAttribute("data-id"));
-    $.ajax({
-        type: "GET",
-        url: "prod-in-functions.php",
-        data: {"id": el.getAttribute("data-id"), action: "get_product_in"},
-        dataType: "JSON",
-        success: function(data) {      
             $("#id-details").val(data.id);
             $("#barcode-details").val(data.barcode);
             $("#desc-details").val(data.description);
@@ -242,11 +223,9 @@ $(".close-modal-delete2").on("click", ()=> {
 });
 
 // Delete product
-function deleteProduct() {
-    let id = $("#id-details").val();
+function deleteProducts() {
     let formData = new FormData();
-    formData.append('action', 'delete');
-    formData.append('id', id);
+    formData.append('action', 'delete_all');
 
     $.ajax({
       type: "POST",

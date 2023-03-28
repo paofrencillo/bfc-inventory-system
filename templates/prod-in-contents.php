@@ -83,11 +83,7 @@
                           <td><?php echo $row["lot_no"];?></td>
                           <td><?php echo $row["exp_date"];?></td>
                           <td>
-                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#edit" onclick="viewModal1(this);" data-id="<?php echo $row["id"];?>">
-                              <i class="fas fa-pencil-alt"></i>
-                              Edit
-                            </button>
-                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#details" onclick="viewModal2(this);" data-id="<?php echo $row["id"];?>">
+                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#details" onclick="viewModal(this);" data-id="<?php echo $row["id"];?>">
                               <i class="fas fa-eye"></i>
                               Details
                             </button>
@@ -107,8 +103,8 @@
           <div class="modal fade" id="details">
             <div class="modal-dialog modal-dialog-centered modal-lg">
               <div class="modal-content ">
-                <div class="modal-header">
-                  <h4 class="modal-title">PRODUCT DETAILS</h4>
+                <div class="modal-header bg-secondary">
+                  <h4 class="modal-title font-weight-bold">PRODUCT DETAILS</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -121,7 +117,7 @@
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="barcode-details">Barcode:</label>
-                          <input type="text" class="form-control" id="barcode-details" name="barcode-details" readonly disabled>
+                          <input type="text" class="form-control" id="barcode-details" name="barcode-details" readonly>
                         </div>
                       </div>
                       <div class="col-sm-8">
@@ -179,8 +175,7 @@
                     <h6 class="text-danger font-weight-bold mt-2 d-none" id="update_error_text">
                         Product update failed. Try again.
                     </h6>
-                    <div class="modal-footer justify-content-between col-sm-12 mx-0 px-0">
-                      <button type="button" class="btn btn-outline-danger" id="delete-product-btn" data-toggle="modal" data-target="#delete-modal">Delete</button>
+                    <div class="modal-footer justify-content-end col-sm-12 mx-0 px-0">
                       <button type="button" class="btn btn-primary" id="update-btn">
                           <i class="fas fa-pencil-alt mr-2"></i>Update Details
                       </button>
@@ -201,9 +196,9 @@
           <!-- product in  -->
           <div class="modal fade" id="addnew">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl ">
-              <div class="modal-content ">
-                <div class="modal-header">
-                  <h4 class="modal-title">RECEIVING ITEMS</h4>
+              <div class="modal-content">
+                <div class="modal-header bg-primary">
+                  <h4 class="modal-title font-weight-bold">RECEIVING ITEMS</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -303,9 +298,9 @@
                           </h6>
                       </div>
                     </div>
-                    <div class="modal-footer justify-content-between mx-0 px-0">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                      <button type="button" class="btn btn-primary" id="add-stocks-btn">Add Stocks</button>
+                    <div class="modal-footer justify-content-between col-sm-12 mx-0 px-0">
+                      <button type="button" class="btn btn-outline-danger" id="delete-all-btn" data-toggle="modal" data-target="#delete-modal" disabled>Delete All</button>
+                      <button type="button" class="btn btn-primary" id="add-stocks-btn" disabled>Add Stocks</button>
                     </div>    
                   </form>
                 </div>
@@ -326,13 +321,11 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <p class="text-danger">Are you sure you want to delete this product in the
-                      inventory?</p>
+                  <p class="text-danger">This will delete all products you have entered here. Do you want to continue?</p>
                 </div>
                 <div class="modal-footer justify-content-end">
-                  <button type="button" class="btn btn-outline-secondary close-modal-delete2">Cancel</button>
-                  <button type="button" class="btn btn-danger" onclick="deleteProduct();">Yes,
-                      Delete it</button>
+                  <button type="button" class="btn btn-secondary close-modal-delete2">No, Go back</button>
+                  <button type="button" class="btn btn-outline-danger" onclick="deleteProducts();">Yes</button>
                 </div>
               </div>
             </div>
