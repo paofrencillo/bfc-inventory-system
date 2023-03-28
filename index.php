@@ -1,9 +1,14 @@
 <?php
 session_start();
-if (!isset($_SESSION['authenticated']) && $_SESSION['authenticated']) {
+if (isset($_SESSION['authenticated']) && $_SESSION['authenticated']) {
     // If the user is already authenticated, redirect them to another page
-    header('Location: dashboard.php');
-    exit();
+    if ($_SESSION['login_user']['is_superuser'] == '1') {
+      header('Location: dashboard.php');
+      exit();
+    } else if ($_SESSION['login_user']['is_superuser'] == '0') {
+      header('Location: z-dashboard.php');
+      exit();
+    }
 }
 
 // If the user is not authenticated, show the login page

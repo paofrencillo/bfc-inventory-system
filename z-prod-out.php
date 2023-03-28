@@ -2,7 +2,7 @@
 include('templates/connection.php');
 include('templates/session.php');
 
-if ($_SESSION['login_user']['is_superuser'] == true) {
+if ($_SESSION['login_user']['is_superuser'] == '1') {
   header('HTTP/1.0 403 Forbidden', TRUE, 403);
   die(header('location: 403.html'));
 }

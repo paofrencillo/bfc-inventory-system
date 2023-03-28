@@ -1,12 +1,3 @@
-<?php
-include('templates/connection.php');
-include('templates/session.php');
-
-if ($_SESSION['login_user']['is_superuser'] == false) {
-  header('HTTP/1.0 403 Forbidden', TRUE, 403);
-  die(header('location: 403.html'));
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
