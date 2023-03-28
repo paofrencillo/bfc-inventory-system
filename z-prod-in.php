@@ -43,6 +43,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
   <!-- Select2 -->
   <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -223,6 +224,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
   <script src="dist/js/pages/dashboard.js"></script>
   <!-- Select2 -->
   <script src="plugins/select2/js/select2.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
   <script>
     // GET request to check if the current user has a pending product to add
     $(document).ready(()=> {
