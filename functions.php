@@ -593,7 +593,9 @@ if (isset($_POST['delete_franchisee'])) {
 
 #ADD SUPPLIER
 if (isset($_POST['supplier'])) {
-    $id_lastuser = $_POST['id_lastuser'];
+    $last_edited_by = $_SESSION["login_user"]["employee_name"];
+    $last_edited_on = date("Y-m-d H:i:s");
+    $sku = $_POST['sku_code'];
     $supplier = $_POST['supplier_name'];
     $is_superuser = $_POST['is_superuser'];
 
@@ -601,8 +603,8 @@ if (isset($_POST['supplier'])) {
     $result = mysqli_query($conn, $sql);
 
     if (!$result->num_rows > 0) {
-        $conn->query("INSERT INTO suppliers (supplier_name, last_edited_by)
-        VALUES('$supplier', '$id_lastuser')") or die($conn->error);
+        $conn->query("INSERT INTO suppliers (sku_code, supplier_name, last_edited_by, last_edited_on)
+        VALUES('$sku', '$supplier', '$last_edited_by', '$last_edited_on')") or die($conn->error);
         if ($is_superuser == '1'){
             ?>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -705,14 +707,16 @@ if (isset($_POST['supplier'])) {
 
 #MODIFY SUPPLIER
 if (isset($_POST['modify_supplier'])) {
-    $supplier_modify = $_POST['supplier_modify'];
+    $supplier_modify = $_POST['sku_code'];
     $supplier_name = $_POST['supplier_name'];
     $last_user = $_POST['last_user'];
     $is_superuser = $_POST['is_superuser'];
+    $last_edited_on = date("Y-m-d H:i:s");
 
 
     if ($supplier_modify != null) {
-        $conn->query("UPDATE suppliers SET supplier_name='$supplier_name', last_edited_by='$last_user' WHERE supplier_id='$supplier_modify';") or die($conn->error);
+        $conn->query("UPDATE suppliers SET supplier_name='$supplier_name', last_edited_by='$last_user',
+                    last_edited_on='$last_edited_on' WHERE sku_code='$supplier_modify';") or die($conn->error);
         if ($is_superuser == '1'){
             ?>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -808,11 +812,11 @@ if (isset($_POST['modify_supplier'])) {
 
 #DELETE SUPPLIER
 if (isset($_POST['delete_supplier'])) {
-    $supplier_modify = $_POST['supplier_modify'];
+    $sku = $_POST['sku_code'];
     $is_superuser = $_POST['is_superuser'];
 
-    if ($supplier_modify != null) {
-        $conn->query("DELETE FROM suppliers WHERE supplier_id='$supplier_modify';") or die($conn->error);
+    if ($sku != null) {
+        $conn->query("DELETE FROM suppliers WHERE sku_code='$sku';") or die($conn->error);
         if ($is_superuser == '1'){
             ?>
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

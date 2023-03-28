@@ -45,6 +45,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 <div class="input-group mb-3">
                   <div class="input-group-append">
                     <div class="input-group-text">
+                      <span class="fas fa-hashtag"></span>
+                    </div>
+                  </div>
+                  <input type="text" class="form-control" name="sku_code" placeholder="Enter the SKU Code" autocomplete="off" required>
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
                       <span class="fas fa-truck"></span>
                     </div>
                   </div>
@@ -74,9 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                   <table id="example1" class="table table-bordered table-hover dt-center">
                     <thead>
                       <tr>
-                        <th>ID</th>
+                        <th>SKU Code</th>
                         <th>Supplier Name</th>
-                        <th>Last Edited By</th>
+                        <th>Last Edited</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -91,22 +99,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                         $last_user = $row['last_edited_by'];
                       ?>
                         <tr>
-                          <td><?php echo $row['supplier_id'] ?></td>
+                          <td><?php echo $row['sku_code'] ?></td>
                           <td><?php echo $row['supplier_name'] ?></td>
-                          <?php
-                          $query2 = "SELECT * FROM users WHERE user_id ='$last_user'";
-                          $result2 = mysqli_query($conn, $query2);
-                          while ($row2 = mysqli_fetch_array($result2)) {
-                          ?>
-
-                            <td><?php echo $row2['employee_name'] ?></td>
                             <td>
-                              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['supplier_id'] ?>">
+                              <?php
+                                $date = date_create($row["last_edited_on"]);
+                                $date = date_format($date, 'm-d-Y h:i');
+                                echo $row['last_edited_by'] . ' | ' . $date;
+                              ?>
+                            </td>
+                            <td>
+                              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['sku_code']; ?>">
                                 <i class="fas fa-pencil-alt"></i>
                                 Edit Details
                               </button>
                               <!-- /.modal -->
-                              <div class="modal fade" id="update<?php echo $row['supplier_id'] ?>">
+                              <div class="modal fade" id="update<?php echo $row['sku_code'] ?>">
                                 <div class="modal-dialog modal-dialog-centered modal-lg">
                                   <div class="modal-content">
                                     <div class="modal-header bg-info">
@@ -127,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         </div>
                                         <div class="modal-footer justify-content-between">
                                           <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
-                                          <input type="hidden" name="supplier_modify" value="<?php echo $row['supplier_id'] ?>">
+                                          <input type="hidden" name="sku_code" value="<?php echo $row['sku_code'] ?>">
                                           <input type="hidden" name="last_user" value="<?php echo $check_user ?>">
                                           <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->
                                           <button type="submit" class="btn btn-outline-danger" name="delete_supplier">Delete</button>
@@ -144,7 +152,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             </td>
                         </tr>
                       <?php } ?>
-                    <?php } ?>
                     </tbody>
                   </table>
                 </div>
