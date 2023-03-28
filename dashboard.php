@@ -1,11 +1,11 @@
 <?php
-  include('templates/connection.php');
-  include('templates/session.php');
+include('templates/connection.php');
+include('templates/session.php');
 
-  if ($_SESSION['login_user']['is_superuser'] == false) {
-    header('HTTP/1.0 403 Forbidden', TRUE, 403);
-    die(header('location: 403.html'));  
-  }
+if ($_SESSION['login_user']['is_superuser'] == false) {
+  header('HTTP/1.0 403 Forbidden', TRUE, 403);
+  die(header('location: 403.html'));
+}
 ?>
 
 <!DOCTYPE html>
@@ -48,10 +48,10 @@
     </div>
 
     <?php
-       // ------ Navbar
-       include("templates/navbar.php");
+    // ------ Navbar
+    include("templates/navbar.php");
     ?>
- 
+
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-light-blue elevation-4">
       <!-- Brand Logo -->
@@ -176,14 +176,14 @@
         <!-- /.sidebar-menu -->
       </div>
       <!-- /.sidebar -->
-    </aside> 
-    
-      <?php
-      // ------ Contents
-      include("templates/dashboard-contents.php");
-      // ------ Footer
-      include("templates/footer.php");
-      ?>
+    </aside>
+
+    <?php
+    // ------ Contents
+    include("templates/dashboard-contents.php");
+    // ------ Footer
+    include("templates/footer.php");
+    ?>
 
   </div>
   <!-- ./wrapper -->
@@ -223,7 +223,7 @@
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="dist/js/pages/dashboard.js"></script>
   <!-- ChartJS -->
-  <script src="../../plugins/chart.js/Chart.min.js"></script> 
+  <script src="../../plugins/chart.js/Chart.min.js"></script>
 
 </body>
 

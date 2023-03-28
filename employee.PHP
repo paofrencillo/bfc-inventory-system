@@ -207,18 +207,18 @@ if ($_SESSION['login_user']['is_superuser'] == false) {
                 <div class="input-group mb-3">
                   <div class="input-group-append">
                     <div class="input-group-text">
-                      <span class="fas fa-address-card"></span>
-                    </div>
-                  </div>
-                  <input type="text" class="form-control" placeholder="Username" name="username" autocomplete="off" required>
-                </div>
-                <div class="input-group mb-3">
-                  <div class="input-group-append">
-                    <div class="input-group-text">
                       <span class="fas fa-user"></span>
                     </div>
                   </div>
                   <input type="text" class="form-control" placeholder="Name" name="name" autocomplete="off" required>
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-address-card"></span>
+                    </div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Username" name="username" autocomplete="off" required>
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-append">

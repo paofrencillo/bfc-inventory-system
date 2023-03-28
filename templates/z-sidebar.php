@@ -9,10 +9,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 
     /* choose the appropriate page to redirect users */
     die(header('location: ../500.html'));
+
 } else { ?>
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-light-blue elevation-4">
         <!-- Brand Logo -->
+        <?php
+        $check_user2 = $_SESSION['login_user']['user'];
+        ?>
         <a href="z-dashboard.php" class="brand-link">
             <img src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                 style="opacity: .8">
@@ -28,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu"
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+                with font-awesome or any other icon font library -->
                     <li class="nav-item menu-open">
                         <a href="z-dashboard.php" class="nav-link active">
                             <i class="nav-icon fas fa-tachometer-alt"></i>

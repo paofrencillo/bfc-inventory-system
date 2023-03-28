@@ -36,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                         <!-- add new franchise -->
                         <?php
                         $check_name =  $_SESSION['login_user']['user'];
+                        $is_superuser =  $_SESSION['login_user']['is_superuser'];
                         $query = "SELECT * FROM users WHERE user='$check_name'";
                         $result = mysqli_query($conn, $query);
                         while ($row = mysqli_fetch_array($result)) {
@@ -81,6 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                     <input type="text" class="form-control" placeholder="Address" name="address" autocomplete="off" required>
                                 </div>
                                 <div class="col-12">
+                                    <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
                                     <input type="hidden" name="id_lastuser" value="<?php echo $row['user_id'] ?>">
                                     <button type="submit" class="btn btn-primary" name="franchise">Add Franchise</button>
                                 </div>
@@ -111,6 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         </thead>
                                         <tbody>
                                             <?php
+                                            $is_superuser =  $_SESSION['login_user']['is_superuser'];
                                             $check_user =  $_SESSION['login_user']['user_id'];
                                             $query = "SELECT * FROM branches";
                                             $result = mysqli_query($conn, $query);
@@ -175,6 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                                                 </div>
 
                                                                                 <div class="modal-footer justify-content-between">
+                                                                                    <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
                                                                                     <input type="hidden" name="franchisee_modify" value="<?php echo $row['code'] ?>">
                                                                                     <input type="hidden" name="last_user" value="<?php echo $check_user ?>">
                                                                                     <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->

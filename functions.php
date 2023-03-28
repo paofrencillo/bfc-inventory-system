@@ -217,7 +217,7 @@ if (isset($_POST['modify_employee'])) {
     }
 }
 
-#DELETE FRANCHISEE 
+#DELETE EMPLOYEE 
 if (isset($_POST['delete_employee'])) {
     $employee_modify = $_POST['employee_modify'];
 
@@ -274,6 +274,7 @@ if (isset($_POST['franchise'])) {
     $company = $_POST['company'];
     $address = $_POST['address'];
     $id_lastuser = $_POST['id_lastuser'];
+    $is_superuser = $_POST['is_superuser'];
 
     $sql = "SELECT * FROM branches WHERE (code='$branchcode');";
     $result = mysqli_query($conn, $sql);
@@ -282,116 +283,106 @@ if (isset($_POST['franchise'])) {
     if (!$result->num_rows > 0) {
         $conn->query("INSERT INTO branches (code, name, company, address, last_edited_by)
         VALUES('$branchcode', '$name', '$company', '$address', '$id_lastuser')") or die($conn->error);
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Successfully Registered',
-                    text: 'Franchisee successfully added',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "franchisee.php";
-                    } else {
-                        window.location.href = "franchisee.php";
-                    }
-                })
+        if ($is_superuser == '1'){
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully Registered',
+                        text: 'Franchisee successfully added',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "franchisee.php";
+                        } else {
+                            window.location.href = "franchisee.php";
+                        }
+                    })
 
-            })
-        </script>
-    <?php
+                })
+            </script>
+            <?php
+        } else if  ($is_superuser == '0') {
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully Registered',
+                        text: 'Franchisee successfully added',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "z-franchisee.php";
+                        } else {
+                            window.location.href = "z-franchisee.php";
+                        }
+                    })
+
+                })
+            </script>
+            <?php
+        }   
+        
     } else {
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Ooops...',
-                    text: 'Franchisee is already exist',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "franchisee.php";
-                    } else {
-                        window.location.href = "franchisee.php";
-                    }
-                })
+        if ($is_superuser == '1'){
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Ooops...',
+                        text: 'Franchisee is already exist',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "franchisee.php";
+                        } else {
+                            window.location.href = "franchisee.php";
+                        }
+                    })
 
-            })
-        </script>
-    <?php
+                })
+            </script>
+            <?php
+        } else if  ($is_superuser == '0') {
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Ooops...',
+                        text: 'Franchisee is already exist',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "z-franchisee.php";
+                        } else {
+                            window.location.href = "z-franchisee.php";
+                        }
+                    })
+
+                })
+            </script>
+            <?php
+        }   
+        
     }
 }
 
-#ADD Franchisee (Employee)
-if (isset($_POST['franchise2'])) {
-    $branchcode = $_POST['branchcode'];
-    $name = $_POST['name'];
-    $company = $_POST['company'];
-    $address = $_POST['address'];
-    $id_lastuser = $_POST['id_lastuser'];
-
-    $sql = "SELECT * FROM branches WHERE (code='$branchcode');";
-    $result = mysqli_query($conn, $sql);
-
-
-    if (!$result->num_rows > 0) {
-        $conn->query("INSERT INTO branches (code, name, company, address, last_edited_by)
-        VALUES('$branchcode', '$name', '$company', '$address', '$id_lastuser')") or die($conn->error);
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Successfully Registered',
-                    text: 'Franchisee successfully added',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "z-franchisee.php";
-                    } else {
-                        window.location.href = "z-franchisee.php";
-                    }
-                })
-
-            })
-        </script>
-    <?php
-    } else {
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Ooops...',
-                    text: 'Franchisee is already exist',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "z-franchisee.php";
-                    } else {
-                        window.location.href = "z-franchisee.php";
-                    }
-                })
-
-            })
-        </script>
-    <?php
-    }
-}
 
 #MODIFY FRANCHISEE 
 if (isset($_POST['modify_franchisee'])) {
@@ -401,212 +392,204 @@ if (isset($_POST['modify_franchisee'])) {
     $company = $_POST['company'];
     $add = $_POST['add'];
     $last_user = $_POST['last_user'];
+    $is_superuser = $_POST['is_superuser'];
 
     if ($franchisee_modify != null) {
         $conn->query("UPDATE branches SET code='$branch', name='$name', company='$company', address='$add', last_edited_by='$last_user' WHERE code='$franchisee_modify';") or die($conn->error);
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Successfully Updated',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "franchisee.php";
-                    } else {
-                        window.location.href = "franchisee.php";
-                    }
+        if ($is_superuser == '1'){
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully Updated',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "franchisee.php";
+                        } else {
+                            window.location.href = "franchisee.php";
+                        }
+                    })
                 })
-            })
-        </script>
-    <?php
+            </script>
+            <?php
+        } else if  ($is_superuser == '0') {
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully Updated',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "z-franchisee.php";
+                        } else {
+                            window.location.href = "z-franchisee.php";
+                        }
+                    })
+                })
+            </script>
+            <?php
+        }   
     } else {
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'An Error Occured',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "franchisee.php";
-                    } else {
-                        window.location.href = "franchisee.php";
-                    }
+        if ($is_superuser == '1'){
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully Updated',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "franchisee.php";
+                        } else {
+                            window.location.href = "franchisee.php";
+                        }
+                    })
                 })
-            })
-        </script>
-    <?php
+            </script>
+            <?php
+        } else if  ($is_superuser == '0') {
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully Updated',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "z-franchisee.php";
+                        } else {
+                            window.location.href = "z-franchisee.php";
+                        }
+                    })
+                })
+            </script>
+            <?php
+        }   
     }
 }
 
-#MODIFY FRANCHISEE (Employee)
-if (isset($_POST['modify_franchisee2'])) {
-    $franchisee_modify = $_POST['franchisee_modify'];
-    $branch = $_POST['branch'];
-    $name = $_POST['name'];
-    $company = $_POST['company'];
-    $add = $_POST['add'];
-    $last_user = $_POST['last_user'];
-
-    if ($franchisee_modify != null) {
-        $conn->query("UPDATE branches SET code='$branch', name='$name', company='$company', address='$add', last_edited_by='$last_user' WHERE code='$franchisee_modify';") or die($conn->error);
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Successfully Updated',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "z-franchisee.php";
-                    } else {
-                        window.location.href = "z-franchisee.php";
-                    }
-                })
-            })
-        </script>
-    <?php
-    } else {
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'An Error Occured',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "z-franchisee.php";
-                    } else {
-                        window.location.href = "z-franchisee.php";
-                    }
-                })
-            })
-        </script>
-    <?php
-    }
-}
 
 #DELETE FRANCHISEE 
 if (isset($_POST['delete_franchisee'])) {
     $franchisee_modify = $_POST['franchisee_modify'];
+    $is_superuser = $_POST['is_superuser'];
 
     if ($franchisee_modify != null) {
         $conn->query("DELETE FROM branches WHERE code='$franchisee_modify';") or die($conn->error);
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Successfully Deleted',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "franchisee.php";
-                    } else {
-                        window.location.href = "franchisee.php";
-                    }
+        if ($is_superuser == '1'){
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully Deleted',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "franchisee.php";
+                        } else {
+                            window.location.href = "franchisee.php";
+                        }
+                    })
                 })
-            })
-        </script>
-    <?php
+            </script>
+            <?php
+        } else if  ($is_superuser == '0') {
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully Deleted',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "z-franchisee.php";
+                        } else {
+                            window.location.href = "z-franchisee.php";
+                        }
+                    })
+                })
+            </script>
+            <?php
+        }         
     } else {
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'An Error Occured',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "franchisee.php";
-                    } else {
-                        window.location.href = "franchisee.php";
-                    }
+        if ($is_superuser == '1'){
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'An Error Occured',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "franchisee.php";
+                        } else {
+                            window.location.href = "franchisee.php";
+                        }
+                    })
                 })
-            })
-        </script>
-    <?php
+            </script>
+            <?php
+        } else if  ($is_superuser == '0') {
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'An Error Occured',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "z-franchisee.php";
+                        } else {
+                            window.location.href = "z-franchisee.php";
+                        }
+                    })
+                })
+            </script>
+            <?php
+        }         
     }
 }
 
-#DELETE FRANCHISEE (Employee)
-if (isset($_POST['delete_franchisee2'])) {
-    $franchisee_modify = $_POST['franchisee_modify'];
-
-    if ($franchisee_modify != null) {
-        $conn->query("DELETE FROM branches WHERE code='$franchisee_modify';") or die($conn->error);
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Successfully Deleted',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "z-franchisee.php";
-                    } else {
-                        window.location.href = "z-franchisee.php";
-                    }
-                })
-            })
-        </script>
-    <?php
-    } else {
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'An Error Occured',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "z-franchisee.php";
-                    } else {
-                        window.location.href = "z-franchisee.php";
-                    }
-                })
-            })
-        </script>
-    <?php
-    }
-}
 
 #ADD SUPPLIER
 if (isset($_POST['supplier'])) {
     $id_lastuser = $_POST['id_lastuser'];
     $supplier = $_POST['supplier_name'];
+    $is_superuser = $_POST['is_superuser'];
 
     $sql = "SELECT * FROM suppliers WHERE supplier_name='$supplier';";
     $result = mysqli_query($conn, $sql);
@@ -614,318 +597,308 @@ if (isset($_POST['supplier'])) {
     if (!$result->num_rows > 0) {
         $conn->query("INSERT INTO suppliers (supplier_name, last_edited_by)
         VALUES('$supplier', '$id_lastuser')") or die($conn->error);
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Successfully Registered',
-                    text: 'Supplier successfully added',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "supplier.php";
-                    } else {
-                        window.location.href = "supplier.php";
-                    }
-                })
+        if ($is_superuser == '1'){
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully Registered',
+                        text: 'Supplier successfully added',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "supplier.php";
+                        } else {
+                            window.location.href = "supplier.php";
+                        }
+                    })
 
-            })
-        </script>
-    <?php
+                })
+            </script>
+            <?php
+        } else if  ($is_superuser == '0') {
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully Registered',
+                        text: 'Supplier successfully added',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "z-supplier.php";
+                        } else {
+                            window.location.href = "z-supplier.php";
+                        }
+                    })
+
+                })
+            </script>
+            <?php
+        }        
     } else {
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Ooops...',
-                    text: 'Supplier is already exist',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "supplier.php";
-                    } else {
-                        window.location.href = "supplier.php";
-                    }
-                })
+        if ($is_superuser == '1'){
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Ooops...',
+                        text: 'Supplier is already exist',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "supplier.php";
+                        } else {
+                            window.location.href = "supplier.php";
+                        }
+                    })
 
-            })
-        </script>
-    <?php
+                })
+            </script>
+            <?php
+        } else if  ($is_superuser == '0') {
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Ooops...',
+                        text: 'Supplier is already exist',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "z-supplier.php";
+                        } else {
+                            window.location.href = "z-supplier.php";
+                        }
+                    })
+
+                })
+            </script>
+            <?php
+        }     
+        
     }
 }
 
-#ADD SUPPLIER (EMPLOYEE)
-if (isset($_POST['supplier2'])) {
-    $id_lastuser = $_POST['id_lastuser'];
-    $supplier = $_POST['supplier_name'];
-
-    $sql = "SELECT * FROM suppliers WHERE supplier_name='$supplier';";
-    $result = mysqli_query($conn, $sql);
-
-    if (!$result->num_rows > 0) {
-        $conn->query("INSERT INTO suppliers (supplier_name, last_edited_by)
-        VALUES('$supplier', '$id_lastuser')") or die($conn->error);
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Successfully Registered',
-                    text: 'Supplier successfully added',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "z-supplier.php";
-                    } else {
-                        window.location.href = "z-supplier.php";
-                    }
-                })
-
-            })
-        </script>
-    <?php
-    } else {
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Ooops...',
-                    text: 'Supplier is already exist',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "z-supplier.php";
-                    } else {
-                        window.location.href = "z-supplier.php";
-                    }
-                })
-
-            })
-        </script>
-    <?php
-    }
-}
 
 #MODIFY SUPPLIER
 if (isset($_POST['modify_supplier'])) {
     $supplier_modify = $_POST['supplier_modify'];
     $supplier_name = $_POST['supplier_name'];
     $last_user = $_POST['last_user'];
+    $is_superuser = $_POST['is_superuser'];
 
 
     if ($supplier_modify != null) {
         $conn->query("UPDATE suppliers SET supplier_name='$supplier_name', last_edited_by='$last_user' WHERE supplier_id='$supplier_modify';") or die($conn->error);
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Successfully Updated',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "supplier.php";
-                    } else {
-                        window.location.href = "supplier.php";
-                    }
+        if ($is_superuser == '1'){
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully Updated',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "supplier.php";
+                        } else {
+                            window.location.href = "supplier.php";
+                        }
+                    })
                 })
-            })
-        </script>
-    <?php
+            </script>
+            <?php
+        } else if  ($is_superuser == '0') {
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully Updated',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "z-supplier.php";
+                        } else {
+                            window.location.href = "z-supplier.php";
+                        }
+                    })
+                })
+            </script>
+            <?php
+        }       
+        
     } else {
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'An Error Occured',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "supplier.php";
-                    } else {
-                        window.location.href = "supplier.php";
-                    }
+        if ($is_superuser == '1'){
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'An Error Occured',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "supplier.php";
+                        } else {
+                            window.location.href = "supplier.php";
+                        }
+                    })
                 })
-            })
-        </script>
-    <?php
+            </script>
+            <?php
+        } else if  ($is_superuser == '0') {
+            ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'An Error Occured',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "z-supplier.php";
+                        } else {
+                            window.location.href = "z-supplier.php";
+                        }
+                    })
+                })
+            </script>
+            <?php
+        }    
+        
     }
 }
 
-#MODIFY SUPPLIER (Employee)
-if (isset($_POST['modify_supplier2'])) {
-    $supplier_modify = $_POST['supplier_modify'];
-    $supplier_name = $_POST['supplier_name'];
-    $last_user = $_POST['last_user'];
-
-
-    if ($supplier_modify != null) {
-        $conn->query("UPDATE suppliers SET supplier_name='$supplier_name', last_edited_by='$last_user' WHERE supplier_id='$supplier_modify';") or die($conn->error);
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Successfully Updated',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "z-supplier.php";
-                    } else {
-                        window.location.href = "z-supplier.php";
-                    }
-                })
-            })
-        </script>
-    <?php
-    } else {
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'An Error Occured',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "z-supplier.php";
-                    } else {
-                        window.location.href = "z-supplier.php";
-                    }
-                })
-            })
-        </script>
-    <?php
-    }
-}
 
 #DELETE SUPPLIER
 if (isset($_POST['delete_supplier'])) {
     $supplier_modify = $_POST['supplier_modify'];
+    $is_superuser = $_POST['is_superuser'];
 
     if ($supplier_modify != null) {
         $conn->query("DELETE FROM suppliers WHERE supplier_id='$supplier_modify';") or die($conn->error);
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Successfully Deleted',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "supplier.php";
-                    } else {
-                        window.location.href = "supplier.php";
-                    }
-                })
-            })
-        </script>
-    <?php
+        if ($is_superuser == '1'){
+            ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Successfully Deleted',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "supplier.php";
+                            } else {
+                                window.location.href = "supplier.php";
+                            }
+                        })
+                    })
+                </script>
+            <?php
+        } else if  ($is_superuser == '0') {
+            ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Successfully Deleted',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "z-supplier.php";
+                            } else {
+                                window.location.href = "z-supplier.php";
+                            }
+                        })
+                    })
+                </script>
+            <?php
+        }   
+    
     } else {
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'An Error Occured',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "supplier.php";
-                    } else {
-                        window.location.href = "supplier.php";
-                    }
-                })
-            })
-        </script>
-    <?php
+        if ($is_superuser == '1'){
+            ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'An Error Occured',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "supplier.php";
+                            } else {
+                                window.location.href = "supplier.php";
+                            }
+                        })
+                    })
+                </script>
+            <?php
+        } else if  ($is_superuser == '0') {
+            ?>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'An Error Occured',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Okay'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "z-supplier.php";
+                            } else {
+                                window.location.href = "z-supplier.php";
+                            }
+                        })
+                    })
+                </script>
+            <?php
+        }  
+    
     }
 }
 
-#DELETE SUPPLIER (Employee)
-if (isset($_POST['delete_supplier2'])) {
-    $supplier_modify = $_POST['supplier_modify'];
-
-    if ($supplier_modify != null) {
-        $conn->query("DELETE FROM suppliers WHERE supplier_id='$supplier_modify';") or die($conn->error);
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Successfully Deleted',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "z-supplier.php";
-                    } else {
-                        window.location.href = "z-supplier.php";
-                    }
-                })
-            })
-        </script>
-    <?php
-    } else {
-    ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'An Error Occured',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "z-supplier.php";
-                    } else {
-                        window.location.href = "z-supplier.php";
-                    }
-                })
-            })
-        </script>
-    <?php
-    }
-}
 
 #CHANGE PASSWORD ADMIN
 if (isset($_POST['pass_admin'])) {
