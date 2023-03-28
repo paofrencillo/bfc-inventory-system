@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 
                   // Fetch result and get count value
                   if ($result7->num_rows > 0) {
-                    $row7 = $result->fetch_assoc();
+                    $row7 = $result7->fetch_assoc();
                     $sum = $row7["sum"];
                     // Split integer data with comma
                     $formatted_data = number_format($sum);
