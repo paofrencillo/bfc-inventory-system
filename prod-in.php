@@ -234,7 +234,9 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
   <script src="dist/js/pages/dashboard.js"></script>
   <!-- Select2 -->
   <script src="plugins/select2/js/select2.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
   <script src="js/prod-in.js"></script>
+
 </body>
 
 </html>
