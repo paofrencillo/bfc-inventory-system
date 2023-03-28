@@ -244,7 +244,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <?php } ?>
                           </div>
                           <div class="product-info">
-                            <a href="inventory.php" class="product-title"><?php echo $row["description"] ?></a>
+                            <a href="prod-out.php" class="product-title"><?php echo $row["description"] ?></a>
                             <span class="badge badge-success float-right"><?php echo $row["barcode"] ?></span>
                             <?php
                             $query3 = "SELECT generic_name FROM product_masterlist WHERE barcode = '$barcode2'";
@@ -267,7 +267,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                   </ul>
                 </div>
                 <div class="card-footer text-center bg-success">
-                  <a href="masterlist.php" class="uppercase text-light">View All Products</a>
+                  <a href="prod-out.php" class="uppercase text-light">View All Products</a>
                 </div>
               </div>
 
@@ -315,7 +315,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <?php } ?>
                           </div>
                           <div class="product-info">
-                            <a href="masterlist.php" class="product-title"><?php echo $row["description"] ?></a>
+                            <a href="prod-in.php" class="product-title"><?php echo $row["description"] ?></a>
                             <span class="badge badge-info float-right"><?php echo $row["added_by"] ?></span>
                             <span class="product-description">Entry Date:
                               <?php echo $row["entry_date"] ?>
@@ -328,7 +328,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                   </ul>
                 </div>
                 <div class="card-footer text-center bg-info">
-                  <a href="masterlist.php" class="uppercase text-light">View All Products</a>
+                  <a href="prod-in.php" class="uppercase text-light">View All Products</a>
                 </div>
               </div>
             </div>

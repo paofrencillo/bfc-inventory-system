@@ -384,7 +384,7 @@ include('templates/session.php');
                                         <div class="modal-footer justify-content-between flex-row-reverse">
                                           <input type="hidden" name="id_update" value="<?php echo $row['id'] ?>">
                                           <input type="hidden" name="current_quantity" value="<?php echo $row['quantity'] ?>">
-                                  
+
                                           <button type="submit" class="btn btn-primary" name="updateprodout">Update Details</button>
                                           <button type="submit" class="btn btn-outline-danger" id="delete_updateprodout" name="delete_updateprodout">Delete</button>
                                         </div>
@@ -851,7 +851,7 @@ include('templates/session.php');
             </div>
             <!-- /.modal-dialog -->
           </div>
-          <!-- /.modal -->          
+          <!-- /.modal -->
 
         </section>
       </div>
