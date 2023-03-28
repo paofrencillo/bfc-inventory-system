@@ -105,7 +105,7 @@
               <div class="modal-content ">
                 <div class="modal-header bg-secondary">
                   <h4 class="modal-title font-weight-bold">PRODUCT DETAILS</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -199,7 +199,7 @@
               <div class="modal-content">
                 <div class="modal-header bg-primary">
                   <h4 class="modal-title font-weight-bold">RECEIVING ITEMS</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>

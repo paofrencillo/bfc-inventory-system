@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
     /* choose the appropriate page to redirect users */
     die(header('location: ../500.html'));
 } else { ?>
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light justify-content-between">
+    <nav class="main-header navbar navbar-expand navbar-light justify-content-between">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">

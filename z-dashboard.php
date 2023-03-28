@@ -55,17 +55,10 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-light-blue elevation-4">
-        <!-- Brand Logo -->
-        <?php
-        $check_user2 = $_SESSION['login_user']['user'];
-        ?>
-        <a href="z-dashboard.php" class="brand-link">
-            <img src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                style="opacity: .8">
-            <span class="brand-text font-weight-light">Hello!
-                <?php echo $check_user2 ?>
-            </span>
-        </a>
+    <!-- Brand Logo -->
+    <a href="z-dashboard.php" class="brand-link text-center">
+        <img src="dist/img/valuemed-logo.png" alt="valuemedlogo" style="width: 70%">
+    </a>
 
         <!-- Sidebar -->
         <div class="sidebar">
@@ -169,7 +162,6 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         </div>
         <!-- /.sidebar -->
     </aside>
-
 
     <?php
     // ------ Contents
