@@ -56,6 +56,7 @@ if ($_SESSION['login_user']['is_superuser'] == false) {
     // ------ Navbar
     include("templates/navbar.php");
     ?>
+    
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-light-blue elevation-4">
       <!-- Brand Logo -->

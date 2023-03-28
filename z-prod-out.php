@@ -4,7 +4,7 @@ include('templates/session.php');
 
 if ($_SESSION['login_user']['is_superuser'] == true) {
   header('HTTP/1.0 403 Forbidden', TRUE, 403);
-  die(header('location: 403.html'));  
+  die(header('location: 403.html'));
 }
 ?>
 
@@ -49,7 +49,7 @@ if ($_SESSION['login_user']['is_superuser'] == true) {
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed" >
+<body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
     <!-- Preloader -->
@@ -60,8 +60,126 @@ if ($_SESSION['login_user']['is_superuser'] == true) {
     <?php
     // ------ Navbar
     include("templates/navbar.php");
-    // ------ Main Sidebar Container
-    include("templates/sidebar.php");
+    ?>
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-light-blue elevation-4">
+        <!-- Brand Logo -->
+        <?php
+        $check_user2 = $_SESSION['login_user']['user'];
+        ?>
+        <a href="z-dashboard.php" class="brand-link">
+            <img src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                style="opacity: .8">
+            <span class="brand-text font-weight-light">Hello!
+                <?php echo $check_user2 ?>
+            </span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+                    <li class="nav-item">
+                        <a href="z-dashboard.php" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link ">
+                            <i class="nav-icon fas fa-edit"></i>
+                            <p>
+                                Manage Inventory
+                                <i class="fas fa-angle-left right "></i>
+                                <!-- <span class="badge badge-info right">6</span> -->
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="z-inventory.php" class="nav-link ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Inventory</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="z-masterlist.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Masterlist</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-truck"></i>
+                            <p>
+                                Product In/Out
+                                <i class="fas fa-angle-left right"></i>
+                                <!-- <span class="badge badge-info right">6</span> -->
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="z-prod-in.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Product In</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="z-prod-out.php" class="nav-link active">
+                                    <i class="far fa-dot-circle nav-icon"></i>
+                                    <p>Product Out</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="#" class="nav-link ">
+                            <i class="nav-icon fas fa-cog"></i>
+                            <p>
+                                Settings
+                                <i class="fas fa-angle-left right"></i>
+                                <!-- <span class="badge badge-info right">6</span> -->
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="z-franchisee.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon "></i>
+                                    <p>Franchisee List</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="z-supplier.php" class="nav-link ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Supplier</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="functions.php?logout" class="nav-link">
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            <p>
+                                Logout
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+
+    <?php
     // ------ Contents
     include("templates/prod-out-contents.php");
     // ------ Footer
@@ -121,6 +239,7 @@ if ($_SESSION['login_user']['is_superuser'] == true) {
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
   <!-- Select2 -->
   <script src="plugins/select2/js/select2.full.min.js"></script>
+
   <script>
     $(function() {
       $("#example1").DataTable({
@@ -130,10 +249,13 @@ if ($_SESSION['login_user']['is_superuser'] == true) {
         }],
         "responsive": true,
         "lengthChange": true,
-        "scrollY": '500px',
-        "scrollCollapse": true,
+        // "scrollY": '500px',
+        // "scrollCollapse": true,
         "autoWidth": false,
-        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+        "order": [
+          [5, 'desc']
+        ],
+        // "buttons": ["copy", "excel", "print"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
 
@@ -148,6 +270,9 @@ if ($_SESSION['login_user']['is_superuser'] == true) {
         // "scrollY": '500px',
         // "scrollCollapse": false,
         "autoWidth": false,
+        "order": [
+          [5, 'desc']
+        ],
         // "buttons": ["copy", "csv", "excel", "pdf", "print"]
       }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
     });
@@ -156,34 +281,20 @@ if ($_SESSION['login_user']['is_superuser'] == true) {
       $("#example3").DataTable({
         "columnDefs": [{
           "className": "dt-center",
-          "targets": "_all"
+          "targets": "_all",
+          "orderable": false
         }],
+        "searching": false,
+        "info": false,
         "responsive": true,
         "lengthChange": true,
         "paging": false,
         // "scrollY": '500px',
         // "scrollCollapse": true,
         "autoWidth": false,
+        "order": [],
         // "buttons": ["copy", "csv", "excel", "pdf", "print"]
       }).buttons().container().appendTo('#example3_wrapper .col-md-6:eq(0)');
-    });
-
-    $(function() {
-      $("#example4").DataTable({
-        "columnDefs": [{
-          "className": "dt-center",
-          "targets": "_all"
-        }],
-        "responsive": true,
-        "lengthChange": true,
-        "paging": true,
-        // "pageLength": 5,
-        // "scrollY": 200,
-        // "scrollX": true,
-        "scrollCollapse": false,
-        "autoWidth": false,
-        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
-      }).buttons().container().appendTo('#example4_wrapper .col-md-6:eq(0)');
     });
 
     $(function() {
@@ -197,164 +308,498 @@ if ($_SESSION['login_user']['is_superuser'] == true) {
     })
   </script>
 
-  <!-- JavaScript code -->
-  <!-- <script>
-    // When the button is clicked, reload the data
-    document.getElementById('reloadBtn').addEventListener('click', function() {
-      // Create an AJAX request
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', 'get_prod-out.php');
-      xhr.onload = function() {
-        if (xhr.status === 200) {
-          // Parse the JSON response
-          var data = JSON.parse(xhr.responseText);
-          // Clear the table
-          var tableBody = document.querySelector('#myTable tbody');
-          tableBody.innerHTML = '';
-          // Populate the table with the new data
-          data.forEach(function(row) {
-            var tr = document.createElement('tr');
-            tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
-              row.description + '</td><td>' +
-              row.quantity + '</td><td>' +
-              row.lot + '</td><td>' +
-              row.exp_date + '</td><td>' +
-              row.remarks + '</td>'
-            tableBody.appendChild(tr);
-          });
-        } else {
-          alert('Error: ' + xhr.status);
-        }
-      };
-      xhr.send();
-    });
-  </script> -->
-
 
   <script>
     $(document).ready(function() {
-    // Function to reload the table
-    function reloadTable() {
-      // Get the values from the form
-      var endorsed_by = document.getElementById('endorsed_by').value;
-      // Create an AJAX request
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', 'get_prod-out.php?endorsed_by=' + endorsed_by);
-      xhr.onload = function() {
-        if (xhr.status === 200) {
-          // Parse the JSON response
-          var data = JSON.parse(xhr.responseText);
-          // Clear the table
-          var tableBody = document.querySelector('#myTable tbody');
-          tableBody.innerHTML = '';
-          // Populate the table with the new data
-          data.forEach(function(row) {
-            var tr = document.createElement('tr');
-            tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
-              row.description + '</td><td>' +
-              row.quantity + '</td><td>' +
-              row.lot + '</td><td>' +
-              row.exp_date + '</td><td>' +
-              row.remarks + '</td>'
-            tableBody.appendChild(tr);
-          });
-        } else {
-          alert('Error: ' + xhr.status);
-        }
-      };
-      xhr.send();
-    }
-      
-    // Initial load of the table
-    reloadTable();
+      // Function to reload the table
+      function reloadTable() {
+        // Get the values from the form
+        var endorsed_by = document.getElementById('endorsed_by').value;
+        // Create an AJAX request
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'get_prod-out.php?endorsed_by=' + endorsed_by);
+        xhr.onload = function() {
+          if (xhr.status === 200) {
+            // Parse the JSON response
+            var data = JSON.parse(xhr.responseText);
+            console.log(data)
+            // Clear the table
+            var tableBody = document.querySelector('#myTable tbody');
+            tableBody.innerHTML = '';
+            // Populate the table with the new data
+            data.forEach(function(row) {
+              console.log(row)
+              var tr = document.createElement('tr');
+              tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
+                row.description + '</td><td>' +
+                row.quantity + '</td><td>' +
+                row.lot + '</td><td>' +
+                row.exp_date + '</td><td>' +
+                row.remarks + '</td>'
+              tableBody.appendChild(tr);
+            });
+          } else {
+            alert('Error: ' + xhr.status);
+          }
+        };
+        xhr.send();
+      }
 
-    // Add a click event listener to the reload button
-    $("#reloadBtn").click(function() {
+      // Initial load of the table
+      reloadTable();
+
+      // Add a click event listener to the reload button
+      $("#reloadBtn").click(function() {
         reloadTable();
-    });
+      });
 
-    // Add a submit event listener to the add form
-    $("#addprodout").submit(function(event) {
+      // Add a submit event listener to the add form
+      $("#addprodout").submit(function(event) {
         // Prevent the form from submitting normally
         event.preventDefault();
-        
-        // Get the values from the form inputs
-        var formData = $(this).serialize();
-        
+
         // Use AJAX to send the form data to your PHP script to insert it into the database
         $.ajax({
-            url: "post_prod-out.php",
-            type: "POST",
-            data: formData,
-            success: function() {
-                
-              // Reload the table with the updated data
-              reloadTable();
-              // Reset the values of specific input fields
-              $('#barcode').val('');
-              $('#description').val('');
-              $('#quantity').val('');
-              $('#lot').val('');
-              $('#exp_date').val('');
-              $('#remarks').val('');
-            }
+          url: "post_prod-out.php",
+          type: "POST",
+          data: $(this).serialize(),
+          success: function() {
+            $('#barcode2').val('');
+            $('#description2').val('');
+            $('#quantity2').val('');
+            $('#lot2').val('');
+            $('#exp_date2').val('');
+            $('#remarks2').val('');
+            // Reload the table with the updated data
+            reloadTable();
+            // Reset the values of specific input fields
+
+          }
         });
-    });
+      });
 
-    // Add a click event listener to the reload button
-    $("#endorse").click(function(event) {
-      // Prevent the form from submitting normally
-      event.preventDefault();
+      // Add a click event
+      $("#endorse").click(function(event) {
+        // Prevent the form from submitting normally
+        event.preventDefault();
 
-      // Get the values from the form
-      var endorsed_by = $('#endorsed_by').val();
-      var myTable = $('#myTable tbody tr').val();
-      var mrf = $('#mrf').val();
-      var order_num = $('#order_num').val();
+        // Get the values from the form
+        var endorsed_by = $('#endorsed_by').val();
+        // var myTable = $('#myTable tbody tr').val();
+        var mrf = $('#mrf').val();
+        var order_num = $('#order_num').val();
 
-      if (mrf.length == 0 || order_num.length == 0){
-        $(document).ready(function() {
-          swal.fire({
-            title: "error!",
-            title: 'Something went wrong!',
-            text: "Make sure the table is not empty",
-            icon: "error",
-            confirmButtonText: "OK"
-          });
-        });
-      } else {
         $.ajax({
           url: "get_prod-out.php",
           type: "GET",
-          data: {"endorsed_by": $("#endorsed_by").val(), action: "endorse_product"},
+          data: {
+            "endorsed_by": $("#endorsed_by").val(),
+            action: "endorse_product"
+          },
           dataType: "JSON",
           success: $(document).ready(function(data) {
             // // handle the response
+            // Reload the table with the updated data
+            // reloadTable();
+            // Reset the values of specific input fields
+            $('#branch').val('');
+            $('#mrf').val('');
+            $('#order_num').val('');
+            $('#barcode').val('');
+            $('#description').val('');
+            $('#quantity').val('');
+            $('#lot').val('');
+            $('#exp_date').val('');
+            $('#remarks').val('');
             console.log(data)
             swal.fire({
               title: "Success!",
               text: "Product successfully endorsed",
               icon: "success",
               confirmButtonText: "OK"
+            }).then((result) => {
+              if (result.isConfirmed) {
+                location.reload();
+              } else {
+                location.reload();
+              }
             });
-              // Reload the table with the updated data
-              reloadTable();
-              // Reset the values of specific input fields
-              $('#branch').val('');
-              $('#mrf').val('');
-              $('#order_num').val('');
-              $('#barcode').val('');
-              $('#description').val('');
-              $('#quantity').val('');
-              $('#lot').val('');
-              $('#exp_date').val('');
-              $('#remarks').val('');
-            }
-        )});
-      }
-    });
-  });
+          })
+        });
+      });
 
+      // Add a click event
+      $("#cancelendorse").click(function(event) {
+        // Prevent the form from submitting normally
+        event.preventDefault();
+
+        // Get the values from the form
+        var endorsed_by = $('#endorsed_by').val();
+
+        $.ajax({
+          url: "get_prod-out.php",
+          type: "GET",
+          data: {
+            "endorsed_by": $("#endorsed_by").val(),
+            action: "cancelendorse"
+          },
+          dataType: "JSON",
+          success: $(document).ready(function(data) {
+            // // handle the response
+            // Reload the table with the updated data
+            // reloadTable();
+            // Reset the values of specific input fields
+            $('#branch').val('');
+            $('#mrf').val('');
+            $('#order_num').val('');
+            $('#barcode').val('');
+            $('#description').val('');
+            $('#quantity').val('');
+            $('#lot').val('');
+            $('#exp_date').val('');
+            $('#remarks').val('');
+            console.log(data)
+            swal.fire({
+              title: "Success!",
+              text: "Product successfully deleted",
+              icon: "success",
+              confirmButtonText: "OK"
+            }).then((result) => {
+              if (result.isConfirmed) {
+                reloadTable();
+              } else {
+                reloadTable();
+              }
+            });
+          })
+        });
+        // if (mrf.length == 0 || order_num.length == 0){
+        //   $(document).ready(function() {
+        //     swal.fire({
+        //       title: "error!",
+        //       title: 'Something went wrong!',
+        //       text: "Make sure the table is not empty",
+        //       icon: "error",
+        //       confirmButtonText: "OK"
+        //     });
+        //   });
+        // } else {
+
+        // }
+      });
+
+      $("#barcode2").on("change", function() {
+        var barcode2 = $(this).val();
+        console.log(barcode2)
+
+        $.ajax({
+          type: "GET",
+          url: "find_masterlist.php",
+          data: {
+            "barcode2": barcode2,
+            action: "get_barcode"
+          },
+          dataType: "JSON",
+          success: function(data) {
+            console.log(data)
+            if (data != "Not found") {
+              // $("#description2").attr("readonly", "");
+              $("#description2").val(data.description);
+              $("#quantity2").attr('placeholder', 'Stock: ' + data.stock);
+              $("#quantity2").attr('max', data.stock);
+            } else {
+              $("#description2").val("Product Not Found or Out of stock");
+              $("#barcode2").val("");
+              swal.fire({
+                title: "Ooops!",
+                text: "Scanned product not found or out of stock",
+                icon: "error",
+                // showConfirmButton: false,
+                timer: 1000,
+                confirmButtonText: "OK"
+              })
+              // .then((result) => {
+              //   if (result.isConfirmed) {
+              //     reloadTable();
+              //   } else {
+              //     reloadTable();
+              //   }
+              // });
+            }
+          }
+        })
+      });
+
+    });
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      // Submit form using AJAX
+      $('#search_form').submit(function(event) {
+        event.preventDefault(); // Prevent page from reloading
+        $.ajax({
+          url: 'search_prod-out.php',
+          type: 'post',
+          dataType: 'json',
+          data: $('#search_form').serialize(),
+          success: function(data) {
+            console.log(data)
+            // Clear old data from the table
+            // $('#example3 tbody').empty();
+            var mrf = $('#mrf_search');
+            var tableBody = document.querySelector('#example3 tbody');
+            tableBody.innerHTML = '';
+
+            if (data.length == "0") {
+              swal.fire({
+                title: "Ooops!",
+                text: "MRF not found",
+                icon: "error",
+                confirmButtonText: "OK"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  mrf.val('');
+                } else {
+                  mrf.val('');
+                }
+              });
+            } else {
+              // Append new data to the table
+              data.forEach(function(row) {
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
+                  row.description + '</td><td>' +
+                  row.quantity + '</td><td>' +
+                  row.branch + '</td><td>' +
+                  row.mrf + '</td>'
+                tableBody.appendChild(tr);
+              });
+            }
+          }
+        });
+      });
+
+      $("#dispatchall").click(function(event) {
+        // Prevent the form from submitting normally
+        event.preventDefault();
+
+        // Get the values from the form
+        var mrf_search = $('#mrf_search').val();
+        console.log(mrf_search)
+        $.ajax({
+          url: "get_prod-out.php",
+          type: "GET",
+          data: {
+            "mrf_search": $("#mrf_search").val(),
+            action: "mrfsearch"
+          },
+          dataType: "JSON",
+          success: $(document).ready(function(data) {
+            console.log(data)
+            swal.fire({
+              title: "Success!",
+              text: "Product successfully dispatch",
+              icon: "success",
+              confirmButtonText: "OK"
+            }).then((result) => {
+              if (result.isConfirmed) {
+                location.reload();
+              } else {
+                location.reload();
+              }
+            });
+          })
+        });
+      });
+    });
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      // Submit form using AJAX
+
+      $('#search_form2').submit(function(event) {
+        event.preventDefault(); // Prevent page from reloading
+        $.ajax({
+          url: 'search_prod-out_2.php',
+          type: 'post',
+          dataType: 'json',
+          data: $('#search_form2').serialize(),
+          success: function(data) {
+            console.log(data)
+            // Clear old data from the table
+            // $('#example3 tbody').empty();
+            var mrf = $('#mrf_search2');
+            var tableBody = document.querySelector('#example8 tbody');
+            tableBody.innerHTML = '';
+
+            if (data.length == "0") {
+              swal.fire({
+                title: "Ooops!",
+                text: "MRF not found",
+                icon: "error",
+                confirmButtonText: "OK"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  mrf.val('');
+                } else {
+                  mrf.val('');
+                }
+              });
+            } else {
+              // Append new data to the table
+              data.forEach(function(row) {
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
+                  row.description + '</td><td>' +
+                  row.quantity + '</td><td>' +
+                  row.branch + '</td><td>' +
+                  row.mrf + '</td>'
+                tableBody.appendChild(tr);
+              });
+            }
+          }
+        });
+      });
+
+      $("#deleteall").click(function(event) {
+        // Prevent the form from submitting normally
+        event.preventDefault();
+
+        // Get the values from the form
+        var mrf_search2 = $('#mrf_search2').val();
+        console.log(mrf_search2)
+        $.ajax({
+          url: "get_prod-out.php",
+          type: "GET",
+          data: {
+            "mrf_search2": $("#mrf_search2").val(),
+            action: "mrfsearch2"
+          },
+          dataType: "JSON",
+          success: $(document).ready(function(data) {
+            console.log(data)
+            swal.fire({
+              title: "Success!",
+              text: "Product successfully deleted",
+              icon: "success",
+              confirmButtonText: "OK"
+            }).then((result) => {
+              if (result.isConfirmed) {
+                location.reload();
+              } else {
+                location.reload();
+              }
+            });
+          })
+        });
+      });
+    });
+  </script>
+
+
+  <script>
+    // For Error Handling
+    $(document).ready(function() {
+      $("#branch").on("change", function() {
+        $("input[name='mrff']").prop("readonly", false);
+      });
+
+      $("input[name='mrff']").on("input", function() {
+        $("input[name='order_numm']").prop("readonly", false);
+      });
+
+      $("input[name='order_numm']").on("input", function() {
+        $("button[name='reloadBtn']").prop("disabled", false);
+        $("#barcode2").prop("disabled", false);
+        $("#description2").prop("disabled", false);
+        $("#quantity2").prop("disabled", false);
+        $("#lot2").prop("disabled", false);
+        $("#exp_date2").prop("disabled", false);
+        $("#remarks2").prop("disabled", false);
+      });
+
+      $("input[name='mrff']").on("blur", function() {
+        var value = $(this).val();
+        if (value === "") {
+          $("input[name='order_numm']").val('');
+          $("input[name='order_numm']").prop("readonly", true);
+          $("button[name='reloadBtn']").prop("disabled", true);
+          $("#barcode2").prop("disabled", true);
+          $("#description2").prop("disabled", true);
+          $("#quantity2").prop("disabled", true);
+          $("#lot2").prop("disabled", true);
+          $("#exp_date2").prop("disabled", true);
+          $("#remarks2").prop("disabled", true);
+        }
+      });
+
+      $("input[name='order_numm']").on("blur", function() {
+        var value = $(this).val();
+        if (value === "") {
+          $("button[name='reloadBtn']").prop("disabled", true);
+          $("#barcode2").prop("disabled", true);
+          $("#description2").prop("disabled", true);
+          $("#quantity2").prop("disabled", true);
+          $("#lot2").prop("disabled", true);
+          $("#exp_date2").prop("disabled", true);
+          $("#remarks2").prop("disabled", true);
+        }
+      });
+
+      $("button[name='cancelendorse']").on("click", function() {
+        $("#branch").val('');
+        $("input[name='mrff']").prop("readonly", true);
+        $("input[name='order_numm']").prop("readonly", true);
+        $("input[name='mrff']").val('');
+        $("input[name='order_numm']").val('');
+        $("#quantity2").attr('placeholder', '');
+
+        $("#barcode2").prop("disabled", true);
+        $("#description2").prop("disabled", true);
+        $("#quantity2").prop("disabled", true);
+        $("#lot2").prop("disabled", true);
+        $("#exp_date2").prop("disabled", true);
+        $("#remarks2").prop("disabled", true);
+
+        $("#barcode2").val('');
+        $("#description2").val('');
+        $("#quantity2").val('');
+        $("#lot2").val('');
+        $("#exp_date2").val('');
+        $("#remarks2").val('');
+
+
+        $("button[name='reloadBtn']").prop("disabled", true);
+      });
+
+      $("button[name='reloadBtn']").on("click", function() {
+        // $("button[name='endorse']").prop("disabled", false);
+        // $("button[name='cancelendorse']").prop("disabled", false);
+        $("#quantity2").attr('placeholder', '');
+      });
+
+      // Get the input field
+      var quantityInput = $("#quantity2");
+
+      // Listen for the "keyup" event on the input field
+      quantityInput.keyup(function() {
+        // Get the maximum allowed value
+        var max = parseInt(quantityInput.attr("max"));
+
+        // Get the current value of the input field
+        var currentValue = parseInt(quantityInput.val());
+
+        // If the current value is greater than the maximum allowed value
+        if (currentValue > max) {
+          // Set the value of the input field to the maximum allowed value
+          quantityInput.val(max);
+        }
+      });
+
+
+    });
   </script>
 
 </body>
