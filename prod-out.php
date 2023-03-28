@@ -83,10 +83,10 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-light-blue elevation-4">
-    <!-- Brand Logo -->
-    <a href="dashboard.php" class="brand-link text-center">
-      <img src="dist/img/valuemed-logo.png" alt="valuemedlogo" style="width: 70%">
-    </a>
+      <!-- Brand Logo -->
+      <a href="dashboard.php" class="brand-link text-center">
+        <img src="dist/img/valuemed-logo.png" alt="valuemedlogo" style="width: 70%">
+      </a>
 
       <!-- Sidebar -->
       <div class="sidebar">

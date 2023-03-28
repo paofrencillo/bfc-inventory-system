@@ -125,8 +125,20 @@ $("#add-stocks-btn").on("click", ()=> {
         processData:false,
         cache: false,
         success: function() {
-            alert("Products were added to stocks!");
-            location.reload();
+            swal.fire({
+                title: "Success!",
+                text: "Products were added to stocks!",
+                icon: "success",
+                confirmButtonText: "OK"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    location.reload();
+                } else {
+                    location.reload();
+                }
+              });
+            // alert("Products were added to stocks!");
+          
         },
         error: function(error) {
             console.error(error);
