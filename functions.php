@@ -25,9 +25,15 @@ if (isset($_POST['signin'])) {
         if (password_verify($mypassword, $getData['pass'])) {
             if ($getData['is_superuser'] == '1') {
                 $_SESSION['login_user'] = $getData;
+                $_SESSION['authenticated'] = true;
+                $user_id = $_SESSION["login_user"]["user_id"];
+                $conn->query("UPDATE users SET is_logged_in=1 WHERE user_id='$user_id';") or die("Error Could Not Query");
                 header('location:dashboard.php');
             } else if ($row['is_superuser'] == '0') {
                 $_SESSION['login_user'] = $row;
+                $_SESSION['authenticated'] = true;
+                $user_id = $_SESSION["login_user"]["user_id"];
+                $conn->query("UPDATE users SET is_logged_in=1 WHERE user_id='$user_id';") or die("Error Could Not Query");
                 header('location:z-dashboard.php');
             } else {
             ?>
@@ -957,6 +963,9 @@ if (isset($_POST['pass_admin'])) {
 
 #LOGOUT
 if (isset($_GET['logout'])) {
+    $_SESSION["authenticated"] = false;
+    $user_id = $_SESSION["login_user"]["user_id"];
+    $conn->query("UPDATE users SET is_logged_in=0 WHERE user_id='$user_id';") or die("Error Could Not Query");
     session_destroy();
     header('location:index.php');
 }
