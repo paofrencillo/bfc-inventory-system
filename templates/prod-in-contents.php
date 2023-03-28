@@ -208,7 +208,7 @@
                   <div class="row">
                     <div class="col-sm-5 mb-2">
                       <label for="prf">PRF:</label>
-                      <input type="text" class="form-control" id="prf" name="prf" required>
+                      <input type="text" class="form-control" id="prf" name="prf" autocomplete="off" required>
                     </div>
                     <div class="col-sm-5 mb-2">
                       <?php
