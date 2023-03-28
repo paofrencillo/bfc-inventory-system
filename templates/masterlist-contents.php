@@ -95,9 +95,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 <div class="modal fade" id="addnew">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">ENROLL NEW PRODUCT</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <div class="modal-header bg-primary">
+                                <h4 class="modal-title font-weight-bold">ENROLL NEW PRODUCT</h4>
+                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
@@ -188,9 +188,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 <div class="modal fade" id="edit">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">EDIT PRODUCT</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <div class="modal-header bg-info">
+                                <h4 class="modal-title font-weight-bold">EDIT PRODUCT</h4>
+                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
@@ -302,9 +302,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 <div class="modal fade" id="details">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">PRODUCT DETAILS</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <div class="modal-header bg-secondary">
+                                <h4 class="modal-title font-weight-bold">PRODUCT DETAILS</h4>
+                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>

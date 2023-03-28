@@ -1433,6 +1433,7 @@ include('templates/session.php');
         $("input[name='order_numm']").prop("readonly", true);
         $("input[name='mrff']").val('');
         $("input[name='order_numm']").val('');
+        $("#quantity2").attr('placeholder', '');
 
         $("#barcode2").prop("disabled", true);
         $("#description2").prop("disabled", true);
@@ -1448,7 +1449,14 @@ include('templates/session.php');
         $("#exp_date2").val('');
         $("#remarks2").val('');
 
+
         $("button[name='reloadBtn']").prop("disabled", true);
+      });
+
+      $("button[name='reloadBtn']").on("click", function() {
+        // $("button[name='endorse']").prop("disabled", false);
+        // $("button[name='cancelendorse']").prop("disabled", false);
+        $("#quantity2").attr('placeholder', '');
       });
 
       // Get the input field

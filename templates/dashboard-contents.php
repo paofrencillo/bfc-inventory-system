@@ -139,6 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                       <thead class="thead-light ">
                         <tr>
                           <th>Description</th>
+                          <th>Category</th>
                           <th>Quantity</th>
                         </tr>
                       </thead>
@@ -146,39 +147,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                         <?php
 
                         // Query to get maximum value of the column
-                        $sql_max = "SELECT MAX(lot_no) as max_value FROM product_in";
+                        // $sql_max = "SELECT MAX(allocation) as max_value FROM inventory";
 
-                        // Execute query and get result
-                        $result_max = $conn->query($sql_max);
+                        // // Execute query and get result
+                        // $result_max = $conn->query($sql_max);
 
-                        // Define low quantity threshold
-                        $low_quantity_threshold = 10;
+                        // // Define low quantity threshold
+                        // $low_quantity_threshold = 100;
 
                         // Check if there is any data
-                        if ($result_max->num_rows > 0) {
-                          // Get the maximum value
-                          $row_max = mysqli_fetch_assoc($result_max);
-                          $max_value = $row_max["max_value"];
+                        // if ($result_max->num_rows > 0) {
+                        //   // Get the maximum value
+                        //   $row_max = mysqli_fetch_assoc($result_max);
+                        //   $max_value = $row_max["max_value"];
 
-                          // Calculate 20% of the maximum value
-                          $low_quantity_threshold = $max_value * 0.2;
+                        //   // Calculate 20% of the maximum value
+                        //   $low_quantity_threshold = $max_value * 0.3;
 
-                          // Query to get low quantity data
-                          $sql = "SELECT * FROM product_in WHERE in_quantity <= $low_quantity_threshold ORDER BY in_quantity ASC LIMIT 15";
+                        // Query to get low quantity data
+                        $sql = "SELECT * FROM inventory WHERE sa_percentage <= 40 ORDER BY stock ASC LIMIT 15";
 
-                          // Execute query and get result
-                          $result = $conn->query($sql);
+                        // Execute query and get result
+                        $result = $conn->query($sql);
 
-                          // Check if there is any data
-                          if ($result->num_rows > 0) {
-                            // Display low quantity data
-                            while ($row = mysqli_fetch_assoc($result)) {
-                              // echo "ID: " . $row["id"] . " - Quantity: " . $row["yourcolumn"] . "<br>";                       
+                        // Check if there is any data
+                        if ($result->num_rows > 0) {
+                          // Display low quantity data
+                          while ($row = mysqli_fetch_assoc($result)) {
+                            // echo "ID: " . $row["id"] . " - Quantity: " . $row["yourcolumn"] . "<br>";                       
                         ?>
                               <tr>
                                 <td><?php echo $row["description"] ?></td>
+                                <td><?php echo $row["category"] ?></td>
                                 <td>
-                                  <div class="sparkbar text-danger font-weight-bold" data-color="#00a65a" data-height="20"><?php echo $row["in_quantity"] ?> </div>
+                                  <div class="sparkbar text-danger font-weight-bold" data-color="#00a65a" data-height="20"><?php echo $row["stock"] ?> </div>
                                 </td>
                               </tr>
                         <?php
@@ -186,9 +188,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                           } else {
                             echo "No data found.";
                           }
-                        } else {
-                          echo "No data found.";
-                        }
+                        // } else {
+                        //   echo "No data found.";
+                        // }
                         ?>
                       </tbody>
                     </table>
