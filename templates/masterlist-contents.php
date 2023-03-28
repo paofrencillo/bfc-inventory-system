@@ -196,6 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             </div>
                             <div class="modal-body">
                                 <form name="update_masterlist_form" id="update_masterlist_form" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="barcode-hidden" id="barcode-hidden">
                                     <input type="hidden" name="action" value="update">
                                     <div class="row">
                                         <div class="col-sm-5">
