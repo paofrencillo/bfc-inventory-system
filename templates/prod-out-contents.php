@@ -11,6 +11,7 @@
         die( header( 'location: ../500.html' ) );
     }
     else {?>
+
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -671,4 +672,5 @@
         <!-- /.content-header -->
       </div>
       <!-- /.content-wrapper -->
+      
 <?php } ?>
