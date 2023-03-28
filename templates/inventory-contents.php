@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                           <?php
                           $check_user =  $_SESSION['login_user']['user_id'];
                           $user =  $_SESSION['login_user']['employee_name'];
-                          
+
                           $query = "SELECT * FROM inventory WHERE category = 'GENERIC' ";
                           $result = mysqli_query($conn, $query);
                           $check_row = mysqli_num_rows($result);
@@ -213,8 +213,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                           $query = "SELECT * FROM inventory WHERE category = 'BRANDED' ";
                           $result = mysqli_query($conn, $query);
                           $check_row = mysqli_num_rows($result);
-                            while ($row = mysqli_fetch_array($result)) {
-                           
+                          while ($row = mysqli_fetch_array($result)) {
+
                           ?>
                             <tr>
                               <td><?php echo $row['barcode'] ?></td>
@@ -313,6 +313,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                       </div>
 
                                       <div class="modal-footer justify-content-between">
+                                        <?php
+                                          $is_superuser =  $_SESSION['login_user']['is_superuser'];
+                                        ?>
+                                        <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
                                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
                                         <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
                                       </div>
@@ -448,6 +452,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                       </div>
 
                                       <div class="modal-footer justify-content-between">
+                                        <?php
+                                          $is_superuser =  $_SESSION['login_user']['is_superuser'];
+                                        ?>
+                                        <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
                                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
                                         <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
                                       </div>
@@ -583,6 +591,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                       </div>
 
                                       <div class="modal-footer justify-content-between">
+                                      <?php
+                                          $is_superuser =  $_SESSION['login_user']['is_superuser'];
+                                        ?>
+                                        <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
                                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
                                         <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
                                       </div>
@@ -718,6 +730,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                       </div>
 
                                       <div class="modal-footer justify-content-between">
+                                      <?php
+                                          $is_superuser =  $_SESSION['login_user']['is_superuser'];
+                                        ?>
+                                        <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
                                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
                                         <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
                                       </div>
@@ -853,6 +869,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                       </div>
 
                                       <div class="modal-footer justify-content-between">
+                                      <?php
+                                          $is_superuser =  $_SESSION['login_user']['is_superuser'];
+                                        ?>
+                                        <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
                                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
                                         <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
                                       </div>
@@ -988,6 +1008,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                       </div>
 
                                       <div class="modal-footer justify-content-between">
+                                      <?php
+                                          $is_superuser =  $_SESSION['login_user']['is_superuser'];
+                                        ?>
+                                        <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
                                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
                                         <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
                                       </div>
