@@ -70,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                           <?php
                           $check_user =  $_SESSION['login_user']['user_id'];
                           $user =  $_SESSION['login_user']['employee_name'];
+                          
                           $query = "SELECT * FROM inventory WHERE category = 'GENERIC' ";
                           $result = mysqli_query($conn, $query);
                           $check_row = mysqli_num_rows($result);
@@ -171,9 +172,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         </div>
                                       </div>
 
-                                      <div class="modal-footer justify-content-between">
-                                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
-                                        <button type="submit" class="btn btn-primary" name="modify_invent">Update</button>
+                                      <div class="modal-footer ">
+                                        <?php
+                                          $is_superuser =  $_SESSION['login_user']['is_superuser'];
+                                        ?>
+                                        <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
+                                        <!-- <button type="button" class="btn btn-outline-danger" data-dismiss="modal" name="delete_invent">Delete</button> -->
+                                        <button type="submit" class="btn btn-primary" name="modify_invent">Update Details</button>
                                       </div>
 
                                     </form>

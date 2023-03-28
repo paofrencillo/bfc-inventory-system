@@ -49,11 +49,6 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-<!-- Preloader -->
-<!-- <div class="preloader flex-column justify-content-center align-items-center">
-  <img class="animation__shake" src="dist/img/normal_BFC_logo_latest.png" alt="AdminLTELogo" height="500" width="500">
-</div> -->
-
 <?php
    // ------ Navbar
    include("templates/navbar.php");
