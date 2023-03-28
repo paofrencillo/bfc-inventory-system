@@ -176,18 +176,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                           while ($row = mysqli_fetch_assoc($result)) {
                             // echo "ID: " . $row["id"] . " - Quantity: " . $row["yourcolumn"] . "<br>";                       
                         ?>
-                              <tr>
-                                <td><?php echo $row["description"] ?></td>
-                                <td><?php echo $row["category"] ?></td>
-                                <td>
-                                  <div class="sparkbar text-danger font-weight-bold" data-color="#00a65a" data-height="20"><?php echo $row["stock"] ?> </div>
-                                </td>
-                              </tr>
+                            <tr>
+                              <td><?php echo $row["description"] ?></td>
+                              <td><?php echo $row["category"] ?></td>
+                              <td>
+                                <div class="sparkbar text-danger font-weight-bold" data-color="#00a65a" data-height="20"><?php echo $row["stock"] ?> </div>
+                              </td>
+                            </tr>
                         <?php
-                            }
-                          } else {
-                            echo "No data found.";
                           }
+                        } else {
+                          echo "No data found.";
+                        }
                         // } else {
                         //   echo "No data found.";
                         // }
@@ -273,7 +273,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 
               <div class="card">
                 <div class="card-header bg-info">
-                  <h3 class="card-title font-weight-bold">Recently Added Products</h3>
+                  <h3 class="card-title font-weight-bold">Recently Added Items</h3>
 
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -285,7 +285,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                   <ul class="products-list product-list-in-card pl-2 pr-2">
                     <?php
                     // Query to get recent data
-                    $sql = "SELECT * FROM product_masterlist ORDER BY last_edited_on DESC LIMIT 3";
+                    $sql = "SELECT * FROM product_in_final ORDER BY last_edited_on DESC LIMIT 3";
 
                     // Execute query and get result
                     $result = $conn->query($sql);
@@ -294,24 +294,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                     if ($result->num_rows > 0) {
                       // Display data
                       while ($row = mysqli_fetch_assoc($result)) {
+                        $barcode = $row["barcode"];
                         // echo "ID: " . $row["id"] . " - Name: " . $row["name"] . " - Date: " . $row["date_column"] . "<br>";
                     ?>
                         <li class="item">
                           <div class="product-img">
-                            <img src="<?php echo $row["image"] ?>" alt="Product Image" class="img-size-50">
+                            <?php
+                              // Query to get recent data
+                              $sql2 = "SELECT * FROM product_masterlist WHERE barcode = '$barcode' ";
+
+                              // Execute query and get result
+                              $result2 = $conn->query($sql2);
+
+                              // Check if there is any data
+                              if ($result2->num_rows > 0) {
+                                // Display data
+                                while ($row2 = mysqli_fetch_assoc($result2)) {
+                            ?>
+                            <img src="<?php echo $row2["image"] ?>" alt="Product Image" class="img-size-50">
+                            <?php } ?>
                           </div>
                           <div class="product-info">
                             <a href="masterlist.php" class="product-title"><?php echo $row["description"] ?></a>
-                            <span class="badge badge-info float-right"><?php echo $row["barcode"] ?></span>
-                            <span class="product-description">
-                              <?php echo $row["category"] ?>
+                            <span class="badge badge-info float-right"><?php echo $row["added_by"] ?></span>
+                            <span class="product-description">Entry Date:
+                              <?php echo $row["entry_date"] ?>
                             </span>
                           </div>
                         </li>
                     <?php  }
-                    } else {
-                      echo "No data found.";
-                    }
+                    } }
                     ?>
                   </ul>
                 </div>
