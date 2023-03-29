@@ -233,7 +233,13 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         "columnDefs": [{
           "className": "text-center",
           "visible": false,
-          "targets": [9],        
+          "targets": [9],
+        }],
+        "columnDefs": [{
+          "className": "text-center",
+          "visible": true,
+          "searchable": false,
+          "targets": [7],
         }],
         "responsive": true,
         "lengthChange": true,
@@ -243,44 +249,43 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         "order": [
           [6, 'desc']
         ],
-        "buttons": [
-            {
-              extend: 'copy',
-              title: function(){             
-                    var printTitle = 'ENDORSEMENT FORM ';
-                    return printTitle
-                },
-              exportOptions: {
-                columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
-              }
+        "buttons": [{
+            extend: 'copy',
+            title: function() {
+              var printTitle = 'ENDORSEMENT FORM ';
+              return printTitle
             },
-            {
-              extend: 'excel',
-              title: function(){             
-                    var printTitle = 'ENDORSEMENT FORM ';
-                    return printTitle
-                },
-              exportOptions: {
-                  columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
-              }
+            exportOptions: {
+              columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            }
+          },
+          {
+            extend: 'excel',
+            title: function() {
+              var printTitle = 'ENDORSEMENT FORM ';
+              return printTitle
             },
-            {
-              extend: 'print',
-              exportOptions: {
-                columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
-              },
-              title: function(){             
-                    var printTitle = 'ENDORSEMENT FORM ';
-                    return printTitle
-                },
-              customize: function (win) {
-                  $(win.document.body).find('table').addClass('display').css('font-size', '10px');
-                  $(win.document.body).find('tr:nth-child(odd) td').each(function(index){
-                      $(this).css('background-color','#D0D0D0');
-                  });
-                  $(win.document.body).find('h1').css('text-align','center');
-              }
+            exportOptions: {
+              columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            }
+          },
+          {
+            extend: 'print',
+            exportOptions: {
+              columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
             },
+            title: function() {
+              var printTitle = 'ENDORSEMENT FORM ';
+              return printTitle
+            },
+            customize: function(win) {
+              $(win.document.body).find('table').addClass('display').css('font-size', '10px');
+              $(win.document.body).find('tr:nth-child(odd) td').each(function(index) {
+                $(this).css('background-color', '#D0D0D0');
+              });
+              $(win.document.body).find('h1').css('text-align', 'center');
+            }
+          },
         ]
         // "buttons": ["copy", "excel", "print"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
@@ -335,7 +340,6 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
     })
   </script>
 
-
   <script>
     $(document).ready(function() {
       // Function to reload the table
@@ -349,7 +353,40 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
           if (xhr.status === 200) {
             // Parse the JSON response
             var data = JSON.parse(xhr.responseText);
-            console.log(data)
+            console.log(data.length)
+            if (data.length >= 1){
+              console.log('norems')
+              data.forEach(function(row){
+                $("#branch111").attr('hidden', true);
+                $("#branch222").attr('hidden', false);
+                $("#branch22").val(row.branch);
+                $("#branch").val(row.branch);
+                $("#branch22").prop('readonly', true);
+                
+                $("input[name='mrff']").val(row.mrf);
+                $("input[name='mrff']").prop('readonly', true);
+                $("input[name='order_numm']").val(row.order_num);
+                $("input[name='order_numm']").prop('readonly', true);
+
+                $("button[name='reloadBtn']").prop("disabled", false);
+                $("#barcode2").prop("disabled", false);
+                $("#description2").prop("disabled", false);
+                $("#quantity2").prop("disabled", false);
+                $("#lot2").prop("disabled", false);
+                $("#exp_date2").prop("disabled", false);
+                $("#remarks2").prop("disabled", false);
+              });
+            } else {
+              console.log('alaws')
+              data.forEach(function(row){
+                $("#branch111").attr('hidden', false)
+                $("#branch222").attr('hidden', true)
+                $("#branch22").val('')
+                $("input[name='mrff']").val('');
+                $("input[name='order_numm']").val('');
+              });
+            }
+
             // Clear the table
             var tableBody = document.querySelector('#myTable tbody');
             tableBody.innerHTML = '';
@@ -412,9 +449,11 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
 
         // Get the values from the form
         var endorsed_by = $('#endorsed_by').val();
-        // var myTable = $('#myTable tbody tr').val();
         var mrf = $('#mrf').val();
         var order_num = $('#order_num').val();
+
+        var tableBody = document.getElementById('myTable');
+        console.log(tableBody.rows.length)
 
         $.ajax({
           url: "get_prod-out.php",
@@ -425,32 +464,37 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
           },
           dataType: "JSON",
           success: $(document).ready(function(data) {
-            // // handle the response
-            // Reload the table with the updated data
-            // reloadTable();
-            // Reset the values of specific input fields
-            $('#branch').val('');
-            $('#mrf').val('');
-            $('#order_num').val('');
-            $('#barcode').val('');
-            $('#description').val('');
-            $('#quantity').val('');
-            $('#lot').val('');
-            $('#exp_date').val('');
-            $('#remarks').val('');
-            console.log(data)
-            swal.fire({
-              title: "Success!",
-              text: "Product successfully endorsed",
-              icon: "success",
-              confirmButtonText: "OK"
-            }).then((result) => {
-              if (result.isConfirmed) {
-                location.reload();
-              } else {
-                location.reload();
-              }
-            });
+            if (tableBody.rows.length <= 1) {
+              console.log("The DataTable is empty");
+              swal.fire({
+                title: "Ooops!",
+                text: "Table is empty. Please add items before endorse",
+                icon: "error",
+                confirmButtonText: "OK"
+              })
+            } else {
+              $('#branch').val('');
+              $('#mrf').val('');
+              $('#order_num').val('');
+              $('#barcode').val('');
+              $('#description').val('');
+              $('#quantity').val('');
+              $('#lot').val('');
+              $('#exp_date').val('');
+              $('#remarks').val('');
+              swal.fire({
+                title: "Success!",
+                text: "Product successfully endorsed",
+                icon: "success",
+                confirmButtonText: "OK"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  location.reload();
+                } else {
+                  location.reload();
+                }
+              });
+            }        
           })
         });
       });
@@ -530,13 +574,16 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
           success: function(data) {
             console.log(data)
             if (data != "Not found") {
-              // $("#description2").attr("readonly", "");
+              $("#description2").prop("readonly", false);
               $("#description2").val(data.description);
               $("#quantity2").attr('placeholder', 'Stock: ' + data.stock);
               $("#quantity2").attr('max', data.stock);
             } else {
+              $("#description2").prop("readonly", true);
               $("#description2").val("Product Not Found or Out of stock");
+              $("#quantity2").attr('placeholder', '');
               $("#barcode2").val("");
+              $("#barcode2").focus();
               swal.fire({
                 title: "Ooops!",
                 text: "Scanned product not found or out of stock",
@@ -547,9 +594,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
               })
               // .then((result) => {
               //   if (result.isConfirmed) {
-              //     reloadTable();
-              //   } else {
-              //     reloadTable();
+                  
               //   }
               // });
             }
@@ -575,7 +620,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
             // Clear old data from the table
             // $('#example3 tbody').empty();
             var mrf = $('#mrf_search');
-            var tableBody = document.querySelector('#example3 tbody');
+            var tableBody = document.querySelector('#example33 tbody');
             tableBody.innerHTML = '';
 
             if (data.length == "0") {
@@ -587,6 +632,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
               }).then((result) => {
                 if (result.isConfirmed) {
                   mrf.val('');
+                  console.log(tableBody)
                 } else {
                   mrf.val('');
                 }
@@ -602,6 +648,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
                   row.mrf + '</td>'
                 tableBody.appendChild(tr);
               });
+              console.log(tableBody)
             }
           }
         });
@@ -614,6 +661,11 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         // Get the values from the form
         var mrf_search = $('#mrf_search').val();
         console.log(mrf_search)
+
+        var tableBody = document.getElementById('example33');
+        console.log(tableBody.rows.length)
+
+
         $.ajax({
           url: "get_prod-out.php",
           type: "GET",
@@ -623,19 +675,31 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
           },
           dataType: "JSON",
           success: $(document).ready(function(data) {
+            console.log('data')
             console.log(data)
-            swal.fire({
-              title: "Success!",
-              text: "Product successfully dispatch",
-              icon: "success",
-              confirmButtonText: "OK"
-            }).then((result) => {
-              if (result.isConfirmed) {
-                location.reload();
-              } else {
-                location.reload();
-              }
-            });
+
+            if (tableBody.rows.length <= 1) {
+              console.log("The DataTable is empty");
+              swal.fire({
+                title: "Ooops!",
+                text: "Table is empty. Please search valid MRF",
+                icon: "error",
+                confirmButtonText: "OK"
+              })
+            } else {
+              swal.fire({
+                title: "Success!",
+                text: "Product successfully dispatch",
+                icon: "success",
+                confirmButtonText: "OK"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  location.reload();
+                } else {
+                  location.reload();
+                }
+              });
+            }
           })
         });
       });
@@ -694,6 +758,9 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         // Prevent the form from submitting normally
         event.preventDefault();
 
+        var tableBody = document.getElementById('example8');
+        console.log(tableBody.rows.length)
+
         // Get the values from the form
         var mrf_search2 = $('#mrf_search2').val();
         console.log(mrf_search2)
@@ -706,25 +773,33 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
           },
           dataType: "JSON",
           success: $(document).ready(function(data) {
-            console.log(data)
-            swal.fire({
-              title: "Success!",
-              text: "Product successfully deleted",
-              icon: "success",
-              confirmButtonText: "OK"
-            }).then((result) => {
-              if (result.isConfirmed) {
-                location.reload();
-              } else {
-                location.reload();
-              }
-            });
+            if (tableBody.rows.length <= 1) {
+              console.log("The DataTable is empty");
+              swal.fire({
+                title: "Ooops!",
+                text: "Table is empty. Please search valid MRF",
+                icon: "error",
+                confirmButtonText: "OK"
+              })
+            } else {
+              swal.fire({
+                title: "Success!",
+                text: "Product successfully deleted",
+                icon: "success",
+                confirmButtonText: "OK"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  location.reload();
+                } else {
+                  location.reload();
+                }
+              });
+            }        
           })
         });
       });
     });
   </script>
-
 
   <script>
     // For Error Handling
@@ -829,13 +904,13 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
     });
   </script>
 
-<script>
-  // ------ Close Delete Modal
-  $(".close-modal-delete1").on("click", ()=> {
+  <script>
+    // ------ Close Delete Modal
+    $(".close-modal-delete1").on("click", () => {
       $("div[name='delete_modal']").modal("hide");
     });
 
-    $(".close-modal-delete2").on("click", ()=> {
+    $(".close-modal-delete2").on("click", () => {
       $("div[name='delete_modal']").modal("hide");
     });
   </script>
