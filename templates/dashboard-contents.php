@@ -33,10 +33,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
               <div class="small-box bg-success">
                 <div class="inner">
                   <?php
-                  $sql7 = "SELECT SUM(in_quantity) as sum FROM product_in_final";
+                  $date = date_create();
+                  $date = date_format($date, 'm-d-Y');
+                  $sql7 = "SELECT SUM(in_quantity) as sum FROM product_in_final WHERE entry_date='$date'";
                   // Execute query and get result
                   $result7 = $conn->query($sql7);
-
+ 
                   // Fetch result and get count value
                   if ($result7->num_rows > 0) {
                     $row7 = $result7->fetch_assoc();
@@ -50,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                   ?>
                   <h3><?php echo $formatted_data ?><sup style="font-size: 20px"> Items</sup></h3>
 
-                  <p>Total Product In</p>
+                  <p>Total Product In Today</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-ios-download-outline" style="color: #ffffff;"></i>
@@ -64,7 +66,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
               <div class="small-box bg-danger">
                 <div class="inner">
                   <?php
-                  $sql = "SELECT SUM(quantity) as sum FROM endorse_history";
+                  $date = date_create();
+                  $date = date_format($date, 'm-d-Y');
+                  $sql = "SELECT SUM(quantity) as sum FROM endorse_final WHERE endorsed_date='$date';";
                   // Execute query and get result
                   $result = $conn->query($sql);
 
@@ -81,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                   ?>
                   <h3><?php echo $formatted_data ?><sup style="font-size: 20px"> Items</sup></h3>
                   <?php ?>
-                  <p>Total Product Out</p>
+                  <p>Total Product Out Today</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-ios-upload-outline" style="color: #ffffff;"></i>
