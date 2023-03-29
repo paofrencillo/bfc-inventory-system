@@ -147,28 +147,30 @@ if ($_SESSION["authenticated"] == false) {
             </div>
           </div>
 
-          <div class="col-xl-3 col-sm-6 g-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="d-flex align-items-center">
-                  <div><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
-                  <div class="flex-1 ms-3">
-                    <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Pao Frencillo</h5>
-                    <small class="font-size-10 text-white mb-1">Developer/Designer</small>
-                  </div>
+        <div class="col-xl-3 col-sm-6 g-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="100px"
+                    class="avatar-md rounded-circle img-thumbnail" /></div>
+                <div class="flex-1 ms-3">
+                  <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Pao Frencillo</h5>
+                  <small class="font-size-10 text-white mb-1">Developer/Designer</small>
                 </div>
-                <div class="mt-3 pt-1">
-                  <p class="text-white mb-0"><i class="mdi mdi-phone font-size-15 align-middle pe-2 text-white"></i>0998 902 9155</p>
-                  <p class="text-white mb-0 mt-2"><i class="mdi mdi-email font-size-15 align-middle pe-2 text-white"></i>paolofrencillo07@gmail.com</p>
-                </div>
-                <div class="d-flex">
-                  <button type="button" class="btn btn-sm btn-primary w-100 mt-2" onclick="window.location.href = 'https://www.facebook.com/paopaolopaoloo';">
-                    <i class="bx bxl-facebook-circle me-1"></i>Contact
-                  </button>
-                </div>
+              </div>
+              <div class="mt-3 pt-1">
+                <p class="text-white mb-0"><i class="mdi mdi-phone font-size-15 align-middle pe-2 text-white"></i>0998 902 9155</p>
+                <p class="text-white mb-0 mt-2"><i
+                    class="mdi mdi-email font-size-15 align-middle pe-2 text-white"></i>paolofrencillo07@gmail.com</p>
+              </div>
+              <div class="d-flex">
+                <button type="button" class="btn btn-sm btn-primary w-100 mt-2" onclick="window.location.href = 'https://www.facebook.com/paopaolopaoloo';">
+                  <i class="bx bxl-facebook-circle me-1"></i>Contact
+                </button>
               </div>
             </div>
           </div>
+        </div>
 
           <div class="col-xl-3 col-sm-6 g-4">
             <div class="card">
