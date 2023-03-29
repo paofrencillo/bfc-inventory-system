@@ -49,7 +49,7 @@
                   <!-- /.card-header -->
                   <div class="card-body">
                     <table id="example1" class="table table-bordered table-hover text-center">
-                      <thead>
+                      <thead class="thead-dark">
                         <tr>
                           <th>Barcode</th>
                           <th>Product Description</th>
@@ -229,7 +229,7 @@
                       <div class="form-group">
                         <div class="card-body table-responsive p-0" style="height: 300px;">
                           <table class="table table-head-fixed text-center">
-                            <thead>
+                            <thead class="thead-dark">
                               <tr>
                                 <th>Barcode</th>
                                 <th>Product Description</th>

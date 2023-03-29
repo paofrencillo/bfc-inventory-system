@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <table id="example1" class="table table-bordered table-hover projects">
-                                        <thead>
+                                        <thead class="">
                                             <tr class=text-center>
                                                 <th>Barcode</th>
                                                 <th>Product Description</th>
