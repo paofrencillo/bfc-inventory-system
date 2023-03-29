@@ -251,9 +251,9 @@ if ($_SESSION["authenticated"] == false) {
             <div class="card">
               <div class="card-body">
                 <div class="d-flex align-items-center">
-                  <div><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
+                  <div><img src="dist/img/miole.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                   <div class="flex-1 ms-3">
-                    <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Shell Miole</h5>
+                    <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Chrichelle Miole</h5>
                     <small class="font-size-10 text-white mb-1">Endorsement</small>
                   </div>
                 </div>
@@ -275,7 +275,7 @@ if ($_SESSION["authenticated"] == false) {
             <div class="card">
               <div class="card-body">
                 <div class="d-flex align-items-center">
-                  <div><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
+                  <div><img src="dist/img/corpuz.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                   <div class="flex-1 ms-3">
                     <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Celyna Corpuz</h5>
                     <small class="font-size-10 text-white mb-1">Endorsement</small>
@@ -299,7 +299,7 @@ if ($_SESSION["authenticated"] == false) {
             <div class="card">
               <div class="card-body">
                 <div class="d-flex align-items-center">
-                  <div><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
+                  <div><img src="dist/img/tomas.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                   <div class="flex-1 ms-3">
                     <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Nefetina Tomas</h5>
                     <small class="font-size-10 text-white mb-1">Endorsement</small>
