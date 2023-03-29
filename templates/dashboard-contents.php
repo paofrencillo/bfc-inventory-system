@@ -57,7 +57,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 <div class="icon">
                   <i class="ion ion-ios-download-outline" style="color: #ffffff;"></i>
                 </div>
-                <a href="prod-in.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href=<?php
+                              if ($_SESSION["login_user"]["is_superuser"] == '1') {
+                                echo 'prod-in.php';
+                              } else if ($_SESSION["login_user"]["is_superuser"] == '0') {
+                                echo 'z-prod-in.php';
+                              }
+                          ?> class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -90,7 +96,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 <div class="icon">
                   <i class="ion ion-ios-upload-outline" style="color: #ffffff;"></i>
                 </div>
-                <a href="prod-out.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href=<?php
+                              if ($_SESSION["login_user"]["is_superuser"] == '1') {
+                                echo 'prod-out.php';
+                              } else if ($_SESSION["login_user"]["is_superuser"] == '0') {
+                                echo 'z-prod-out.php';
+                              }
+                          ?> class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
 
@@ -121,7 +133,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 <div class="icon">
                   <i class="fas fa-barcode" style="color: #ffffff;"></i>
                 </div>
-                <a href="masterlist.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href=<?php
+                              if ($_SESSION["login_user"]["is_superuser"] == '1') {
+                                echo 'masterlist.php';
+                              } else if ($_SESSION["login_user"]["is_superuser"] == '0') {
+                                echo 'z-masterlist.php';
+                              }
+                          ?> class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -204,7 +222,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                   </div>
                 </div>
                 <div class="card-footer clearfix bg-secondary">
-                  <a href="inventory.php" class="btn btn-sm btn-info float-right">View All Product</a>
+                  <a href=<?php
+                              if ($_SESSION["login_user"]["is_superuser"] == '1') {
+                                echo 'inventory.php';
+                              } else if ($_SESSION["login_user"]["is_superuser"] == '0') {
+                                echo 'z-inventory.php';
+                              }
+                          ?> class="btn btn-sm btn-info float-right">View All Product</a>
                 </div>
               </div>
             </div>
@@ -252,7 +276,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <?php } ?>
                           </div>
                           <div class="product-info">
-                            <a href="prod-out.php" class="product-title"><?php echo $row["description"] ?></a>
+                            <a href=<?php
+                                        if ($_SESSION["login_user"]["is_superuser"] == '1') {
+                                          echo 'masterlist.php';
+                                        } else if ($_SESSION["login_user"]["is_superuser"] == '0') {
+                                          echo 'z-masterlist.php';
+                                        }
+                                    ?> class="product-title"><?php echo $row["description"] ?></a>
                             <span class="badge badge-success float-right"><?php echo $row["barcode"] ?></span>
                             <?php
                             $query3 = "SELECT generic_name FROM product_masterlist WHERE barcode = '$barcode2'";
@@ -275,7 +305,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                   </ul>
                 </div>
                 <div class="card-footer text-center bg-success">
-                  <a href="prod-out.php" class="uppercase text-light">View All Products</a>
+                  <a href=<?php
+                              if ($_SESSION["login_user"]["is_superuser"] == '1') {
+                                echo 'prod-out.php';
+                              } else if ($_SESSION["login_user"]["is_superuser"] == '0') {
+                                echo 'z-prod-out.php';
+                              }
+                          ?> class="uppercase text-light">View All Products</a>
                 </div>
               </div>
 
@@ -323,7 +359,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               <?php } ?>
                           </div>
                           <div class="product-info">
-                            <a href="prod-in.php" class="product-title"><?php echo $row["description"] ?></a>
+                            <a href=<?php
+                                        if ($_SESSION["login_user"]["is_superuser"] == '1') {
+                                          echo 'prod-in.php';
+                                        } else if ($_SESSION["login_user"]["is_superuser"] == '0') {
+                                          echo 'z-prod-in.php';
+                                        }
+                                    ?>  class="product-title"><?php echo $row["description"] ?></a>
                             <span class="badge badge-info float-right"><?php echo $row["added_by"] ?></span>
                             <span class="product-description">Entry Date:
                               <?php echo $row["entry_date"] ?>
@@ -337,7 +379,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                   </ul>
                 </div>
                 <div class="card-footer text-center bg-info">
-                  <a href="prod-in.php" class="uppercase text-light">View All Products</a>
+                  <a href=<?php
+                                    if ($_SESSION["login_user"]["is_superuser"] == '1') {
+                                      echo 'prod-in.php';
+                                    } else if ($_SESSION["login_user"]["is_superuser"] == '0') {
+                                      echo 'z-prod-in.php';
+                                    }
+                                ?> class="uppercase text-light">View All Products</a>
                 </div>
               </div>
             </div>
