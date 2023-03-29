@@ -55,7 +55,7 @@ if ($_SESSION["authenticated"] == false) {
     }
 
     .card {
-      background: rgba(109, 82, 82, 0.2);
+      background: rgba(109, 82, 82, 0.5);
       box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.5);
       backdrop-filter: blur(1px);
       -webkit-backdrop-filter: blur(1px);
