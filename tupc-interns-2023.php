@@ -164,7 +164,7 @@ if ($_SESSION["authenticated"] == false) {
           <div class="card">
             <div class="card-body">
               <div class="d-flex align-items-center">
-                <div><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="100px"
+                <div><img src="dist/img/pao-avatar.jpg" alt="" width="100px"
                     class="avatar-md rounded-circle img-thumbnail" /></div>
                 <div class="flex-1 ms-3">
                   <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Pao Frencillo</h5>
