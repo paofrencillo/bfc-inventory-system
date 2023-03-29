@@ -65,7 +65,7 @@
                             </ul>
                           </div>
                           <table id="example1" class="table table-bordered table-hover text-center">
-                            <thead>
+                            <thead class="bg-dark">
                               <tr>
                                 <th>BARCODE</th>
                                 <th>DESCRIPTION</th>
@@ -316,7 +316,7 @@
                             </ul>
                           </div>
                           <table id="example2" class="table table-bordered table-hover dt-center">
-                            <thead>
+                            <thead class="bg-dark">
                               <tr>
                                 <th>BARCODE</th>
                                 <th>DESCRIPTION</th>

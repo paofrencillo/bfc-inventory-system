@@ -285,12 +285,20 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         "buttons": [
             {
               extend: 'copy',
+              title: function(){             
+                    var printTitle = 'ENDORSEMENT FORM ';
+                    return printTitle
+                },
               exportOptions: {
                 columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
               }
             },
             {
               extend: 'excel',
+              title: function(){             
+                    var printTitle = 'ENDORSEMENT FORM ';
+                    return printTitle
+                },
               exportOptions: {
                   columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
               }
@@ -300,8 +308,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
               exportOptions: {
                 columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
               },
-              title: function(){
-              
+              title: function(){             
                     var printTitle = 'ENDORSEMENT FORM ';
                     return printTitle
                 },

@@ -59,112 +59,111 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-light-blue elevation-4">
-     <!-- Brand Logo -->
-     <a href="z-dashboard.php" class="brand-link text-center">
-      <img src="dist/img/valuemed-logo.png" alt="valuemedlogo" style="width: 70%">
-    </a>
+      <!-- Brand Logo -->
+      <a href="z-dashboard.php" class="brand-link text-center">
+        <img src="dist/img/valuemed-logo.png" alt="valuemedlogo" style="width: 70%">
+      </a>
 
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <!-- Sidebar Menu -->
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu"
-                    data-accordion="false">
-                    <!-- Add icons to the links using the .nav-icon class
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
-                    <li class="nav-item">
-                        <a href="z-dashboard.php" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>
-                                Dashboard
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link ">
-                            <i class="nav-icon fas fa-edit"></i>
-                            <p>
-                                Manage Inventory
-                                <i class="fas fa-angle-left right "></i>
-                                <!-- <span class="badge badge-info right">6</span> -->
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="z-inventory.php" class="nav-link ">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Inventory</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="z-masterlist.php" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Masterlist</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
-                            <i class="nav-icon fas fa-truck"></i>
-                            <p>
-                                Product In/Out
-                                <i class="fas fa-angle-left right"></i>
-                                <!-- <span class="badge badge-info right">6</span> -->
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="z-prod-in.php" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Product In</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="z-prod-out.php" class="nav-link active">
-                                    <i class="far fa-dot-circle nav-icon"></i>
-                                    <p>Product Out</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item ">
-                        <a href="#" class="nav-link ">
-                            <i class="nav-icon fas fa-cog"></i>
-                            <p>
-                                Settings
-                                <i class="fas fa-angle-left right"></i>
-                                <!-- <span class="badge badge-info right">6</span> -->
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="z-franchisee.php" class="nav-link">
-                                    <i class="far fa-circle nav-icon "></i>
-                                    <p>Franchisee List</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="z-supplier.php" class="nav-link ">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Supplier</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="functions.php?logout" class="nav-link">
-                            <i class="nav-icon fas fa-sign-out-alt"></i>
-                            <p>
-                                Logout
-                            </p>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <!-- /.sidebar-menu -->
-        </div>
-        <!-- /.sidebar -->
+            <li class="nav-item">
+              <a href="z-dashboard.php" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Dashboard
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-edit"></i>
+                <p>
+                  Manage Inventory
+                  <i class="fas fa-angle-left right "></i>
+                  <!-- <span class="badge badge-info right">6</span> -->
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="z-inventory.php" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Inventory</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="z-masterlist.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Masterlist</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item menu-open">
+              <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-truck"></i>
+                <p>
+                  Product In/Out
+                  <i class="fas fa-angle-left right"></i>
+                  <!-- <span class="badge badge-info right">6</span> -->
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="z-prod-in.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Product In</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="z-prod-out.php" class="nav-link active">
+                    <i class="far fa-dot-circle nav-icon"></i>
+                    <p>Product Out</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item ">
+              <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-cog"></i>
+                <p>
+                  Settings
+                  <i class="fas fa-angle-left right"></i>
+                  <!-- <span class="badge badge-info right">6</span> -->
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="z-franchisee.php" class="nav-link">
+                    <i class="far fa-circle nav-icon "></i>
+                    <p>Franchisee List</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="z-supplier.php" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Supplier</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="functions.php?logout" class="nav-link">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p>
+                  Logout
+                </p>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
     </aside>
 
     <?php
@@ -232,8 +231,9 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
     $(function() {
       $("#example1").DataTable({
         "columnDefs": [{
-          "className": "dt-center",
-          "targets": "_all"
+          "className": "text-center",
+          "visible": false,
+          "targets": [9],        
         }],
         "responsive": true,
         "lengthChange": true,
@@ -241,8 +241,47 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         // "scrollCollapse": true,
         "autoWidth": false,
         "order": [
-          [5, 'desc']
+          [6, 'desc']
         ],
+        "buttons": [
+            {
+              extend: 'copy',
+              title: function(){             
+                    var printTitle = 'ENDORSEMENT FORM ';
+                    return printTitle
+                },
+              exportOptions: {
+                columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+              }
+            },
+            {
+              extend: 'excel',
+              title: function(){             
+                    var printTitle = 'ENDORSEMENT FORM ';
+                    return printTitle
+                },
+              exportOptions: {
+                  columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+              }
+            },
+            {
+              extend: 'print',
+              exportOptions: {
+                columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+              },
+              title: function(){             
+                    var printTitle = 'ENDORSEMENT FORM ';
+                    return printTitle
+                },
+              customize: function (win) {
+                  $(win.document.body).find('table').addClass('display').css('font-size', '10px');
+                  $(win.document.body).find('tr:nth-child(odd) td').each(function(index){
+                      $(this).css('background-color','#D0D0D0');
+                  });
+                  $(win.document.body).find('h1').css('text-align','center');
+              }
+            },
+        ]
         // "buttons": ["copy", "excel", "print"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });

@@ -56,14 +56,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                   <div class="tab-content" id="custom-tabs-one-tabContent">
                     <div class="tab-pane fade show active" id="gen" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
                       <table id="Generic" class="table table-bordered table-hover dt-center">
-                        <thead>
+                        <thead class="bg-dark">
                           <tr>
-                            <th>Barcode</th>
-                            <th>Product Description</th>
-                            <th>Stock</th>
-                            <th>Allocation</th>
+                            <th>BARCODE</th>
+                            <th>DESCRIPTION</th>
+                            <th>STOCK</th>
+                            <th>ALLOCATION</th>
                             <th>S/A %</th>
-                            <th>Action</th>
+                            <th>ACTION</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -174,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 
                                       <div class="modal-footer ">
                                         <?php
-                                          $is_superuser =  $_SESSION['login_user']['is_superuser'];
+                                        $is_superuser =  $_SESSION['login_user']['is_superuser'];
                                         ?>
                                         <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
                                         <!-- <button type="button" class="btn btn-outline-danger" data-dismiss="modal" name="delete_invent">Delete</button> -->
@@ -196,14 +196,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 
                     <div class="tab-pane fade show" id="bran" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
                       <table id="branded" class="table table-bordered table-hover dt-center">
-                        <thead>
+                        <thead class="bg-dark">
                           <tr>
-                            <th>Barcode</th>
-                            <th>Product Description</th>
-                            <th>Stock</th>
-                            <th>Allocation</th>
+                            <th>BARCODE</th>
+                            <th>DESCRIPTION</th>
+                            <th>STOCK</th>
+                            <th>ALLOCATION</th>
                             <th>S/A %</th>
-                            <th>Action</th>
+                            <th>ACTION</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -314,7 +314,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 
                                       <div class="modal-footer justify-content-between">
                                         <?php
-                                          $is_superuser =  $_SESSION['login_user']['is_superuser'];
+                                        $is_superuser =  $_SESSION['login_user']['is_superuser'];
                                         ?>
                                         <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
                                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
@@ -336,14 +336,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 
                     <div class="tab-pane fade show" id="meddev" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
                       <table id="medical" class="table table-bordered table-hover dt-center">
-                        <thead>
+                        <thead class="bg-dark">
                           <tr>
-                            <th>Barcode</th>
-                            <th>Product Description</th>
-                            <th>Stock</th>
-                            <th>Allocation</th>
+                            <th>BARCODE</th>
+                            <th>DESCRIPTION</th>
+                            <th>STOCK</th>
+                            <th>ALLOCATION</th>
                             <th>S/A %</th>
-                            <th>Action</th>
+                            <th>ACTION</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -453,7 +453,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 
                                       <div class="modal-footer justify-content-between">
                                         <?php
-                                          $is_superuser =  $_SESSION['login_user']['is_superuser'];
+                                        $is_superuser =  $_SESSION['login_user']['is_superuser'];
                                         ?>
                                         <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
                                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
@@ -475,14 +475,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 
                     <div class="tab-pane fade show" id="non" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
                       <table id="non-pharma" class="table table-bordered table-hover dt-center">
-                        <thead>
+                        <thead class="bg-dark">
                           <tr>
-                            <th>Barcode</th>
-                            <th>Product Description</th>
-                            <th>Stock</th>
-                            <th>Allocation</th>
+                            <th>BARCODE</th>
+                            <th>DESCRIPTION</th>
+                            <th>STOCK</th>
+                            <th>ALLOCATION</th>
                             <th>S/A %</th>
-                            <th>Action</th>
+                            <th>ACTION</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -591,8 +591,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                       </div>
 
                                       <div class="modal-footer justify-content-between">
-                                      <?php
-                                          $is_superuser =  $_SESSION['login_user']['is_superuser'];
+                                        <?php
+                                        $is_superuser =  $_SESSION['login_user']['is_superuser'];
                                         ?>
                                         <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
                                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
@@ -614,14 +614,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 
                     <div class="tab-pane fade show" id="spec" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
                       <table id="special" class="table table-bordered table-hover dt-center">
-                        <thead>
+                        <thead class="bg-dark">
                           <tr>
-                            <th>Barcode</th>
-                            <th>Product Description</th>
-                            <th>Stock</th>
-                            <th>Allocation</th>
+                            <th>BARCODE</th>
+                            <th>DESCRIPTION</th>
+                            <th>STOCK</th>
+                            <th>ALLOCATION</th>
                             <th>S/A %</th>
-                            <th>Action</th>
+                            <th>ACTION</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -730,8 +730,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                       </div>
 
                                       <div class="modal-footer justify-content-between">
-                                      <?php
-                                          $is_superuser =  $_SESSION['login_user']['is_superuser'];
+                                        <?php
+                                        $is_superuser =  $_SESSION['login_user']['is_superuser'];
                                         ?>
                                         <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
                                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
@@ -753,14 +753,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 
                     <div class="tab-pane fade show" id="hou" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
                       <table id="house" class="table table-bordered table-hover dt-center">
-                        <thead>
+                        <thead class="bg-dark">
                           <tr>
-                            <th>Barcode</th>
-                            <th>Product Description</th>
-                            <th>Stock</th>
-                            <th>Allocation</th>
+                            <th>BARCODE</th>
+                            <th>DESCRIPTION</th>
+                            <th>STOCK</th>
+                            <th>ALLOCATION</th>
                             <th>S/A %</th>
-                            <th>Action</th>
+                            <th>ACTION</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -869,8 +869,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                       </div>
 
                                       <div class="modal-footer justify-content-between">
-                                      <?php
-                                          $is_superuser =  $_SESSION['login_user']['is_superuser'];
+                                        <?php
+                                        $is_superuser =  $_SESSION['login_user']['is_superuser'];
                                         ?>
                                         <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
                                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
@@ -892,14 +892,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 
                     <div class="tab-pane fade show" id="heal" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
                       <table id="health" class="table table-bordered table-hover dt-center">
-                        <thead>
+                        <thead class="bg-dark">
                           <tr>
-                            <th>Barcode</th>
-                            <th>Product Description</th>
-                            <th>Stock</th>
-                            <th>Allocation</th>
+                            <th>BARCODE</th>
+                            <th>DESCRIPTION</th>
+                            <th>STOCK</th>
+                            <th>ALLOCATION</th>
                             <th>S/A %</th>
-                            <th>Action</th>
+                            <th>ACTION</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -1008,8 +1008,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                       </div>
 
                                       <div class="modal-footer justify-content-between">
-                                      <?php
-                                          $is_superuser =  $_SESSION['login_user']['is_superuser'];
+                                        <?php
+                                        $is_superuser =  $_SESSION['login_user']['is_superuser'];
                                         ?>
                                         <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
                                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
@@ -1028,7 +1028,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                         </tbody>
                       </table>
                     </div>
-
                   </div>
                 </div>
               </div>
