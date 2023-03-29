@@ -326,7 +326,7 @@ if ($_SESSION["authenticated"] == false) {
                   <div><img src="dist/img/sean-avatar.jpg" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                   <div class="flex-1 ms-3">
                     <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Sean Monacillo</h5>
-                    <small class="font-size-10 text-white mb-1">Web Developer</small>
+                    <small class="font-size-10 text-white mb-1">Web Designer/Developer</small>
                   </div>
                 </div>
                 <div class="mt-3 pt-1">
@@ -353,10 +353,9 @@ if ($_SESSION["authenticated"] == false) {
                   </div>
                 </div>
                 <div class="mt-3 pt-1">
-                  <p class="text-white mb-0"><i class="mdi mdi-phone font-size-15 align-middle pe-2 text-white"></i> 070
-                    2860 5375</p>
+                  <p class="text-white mb-0"><i class="mdi mdi-phone font-size-15 align-middle pe-2 text-white"></i> 09666759170</p>
                   <p class="text-white mb-0 mt-2"><i class="mdi mdi-email font-size-15 align-middle pe-2 text-white"></i>
-                    PhyllisGatlin@spy.com</p>
+                    melsmanalili@gmail.com</p>
                 </div>
                 <div class="d-flex">
                   <button type="button" class="btn btn-sm btn-primary w-100 mt-2"><i class="bx bxl-facebook-circle me-1"></i>
