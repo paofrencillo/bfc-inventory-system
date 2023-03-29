@@ -227,7 +227,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                     $date = date_create();
                     $date = date_format($date, 'm-d-Y');
                     // Query to get recent data
-                    $sql = "SELECT * FROM endorse_history WHERE endorsed_date='$date' ORDER BY quantity ASC LIMIT 3";
+                    $sql = "SELECT * FROM endorse_history ORDER BY quantity AND endorsed_date ASC LIMIT 3";
 
                     // Execute query and get result
                     $result = $conn->query($sql);

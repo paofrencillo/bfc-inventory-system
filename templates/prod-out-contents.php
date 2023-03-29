@@ -384,7 +384,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 
 
         <div class="modal fade" id="addnew">
-          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl ">
+          <div class="modal-dialog modal-dialog-centered  modal-xl ">
             <div class="modal-content ">
               <div class="modal-header bg-primary">
                 <h4 class="modal-title font-weight-bold">DISPATCH ITEMS</h4>
@@ -393,7 +393,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 </button>
               </div>
               <form id="addprodout">
-                <div class="modal-body">
+                <div class="modal-body" style="overflow-y: scroll;">
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
