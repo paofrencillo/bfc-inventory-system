@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                   $sql7 = "SELECT SUM(in_quantity) as sum FROM product_in_final WHERE entry_date='$date'";
                   // Execute query and get result
                   $result7 = $conn->query($sql7);
- 
+
                   // Fetch result and get count value
                   if ($result7->num_rows > 0) {
                     $row7 = $result7->fetch_assoc();
@@ -224,8 +224,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 <div class="card-body p-0">
                   <ul class="products-list product-list-in-card pl-2 pr-2">
                     <?php
+                    $date = date_create();
+                    $date = date_format($date, 'm-d-Y');
                     // Query to get recent data
-                    $sql = "SELECT * FROM endorse_history ORDER BY quantity ASC LIMIT 3";
+                    $sql = "SELECT * FROM endorse_history WHERE endorsed_date='$date' ORDER BY quantity ASC LIMIT 3";
 
                     // Execute query and get result
                     $result = $conn->query($sql);
@@ -306,19 +308,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                         <li class="item">
                           <div class="product-img">
                             <?php
-                              // Query to get recent data
-                              $sql2 = "SELECT * FROM product_masterlist WHERE barcode = '$barcode' ";
+                            // Query to get recent data
+                            $sql2 = "SELECT * FROM product_masterlist WHERE barcode = '$barcode' ";
 
-                              // Execute query and get result
-                              $result2 = $conn->query($sql2);
+                            // Execute query and get result
+                            $result2 = $conn->query($sql2);
 
-                              // Check if there is any data
-                              if ($result2->num_rows > 0) {
-                                // Display data
-                                while ($row2 = mysqli_fetch_assoc($result2)) {
+                            // Check if there is any data
+                            if ($result2->num_rows > 0) {
+                              // Display data
+                              while ($row2 = mysqli_fetch_assoc($result2)) {
                             ?>
-                            <img src="<?php echo $row2["image"] ?>" alt="Product Image" class="img-size-50">
-                            <?php } ?>
+                                <img src="<?php echo $row2["image"] ?>" alt="Product Image" class="img-size-50">
+                              <?php } ?>
                           </div>
                           <div class="product-info">
                             <a href="prod-in.php" class="product-title"><?php echo $row["description"] ?></a>
@@ -328,9 +330,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             </span>
                           </div>
                         </li>
-                    <?php  }
-                    } }
-                    ?>
+                  <?php  }
+                          }
+                        }
+                  ?>
                   </ul>
                 </div>
                 <div class="card-footer text-center bg-info">
