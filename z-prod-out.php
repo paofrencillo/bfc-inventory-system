@@ -829,6 +829,17 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
     });
   </script>
 
+<script>
+  // ------ Close Delete Modal
+  $(".close-modal-delete1").on("click", ()=> {
+      $("div[name='delete_modal']").modal("hide");
+    });
+
+    $(".close-modal-delete2").on("click", ()=> {
+      $("div[name='delete_modal']").modal("hide");
+    });
+  </script>
+
 </body>
 
 </html>

@@ -277,7 +277,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title font-weight-bold text-danger">Delete Product</h5>
-                                                <button type="button" class="close close-modal-delete1" aria-label="Close">
+                                                <button type="button" class="close close-modal-delete1"  aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
