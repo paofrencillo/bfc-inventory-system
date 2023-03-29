@@ -113,7 +113,7 @@ if ($_SESSION["authenticated"] == false) {
             <div class="card">
               <div class="card-body">
                 <div class="d-flex align-items-center">
-                  <div><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
+                  <div><img src="dist/img/rey-avatar.jpg" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                   <div class="flex-1 ms-3">
                     <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Rey Asilo</h5>
                     <small class="font-size-10 text-white mb-1">--position--</small>
@@ -137,7 +137,7 @@ if ($_SESSION["authenticated"] == false) {
             <div class="card">
               <div class="card-body">
                 <div class="d-flex align-items-center">
-                  <div><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
+                  <div><img src="dist/img/nedz-avatar.jpg" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                   <div class="flex-1 ms-3">
                     <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Nedz Baybay</h5>
                     <small class="font-size-10 text-white mb-1">--position--</small>
@@ -184,7 +184,7 @@ if ($_SESSION["authenticated"] == false) {
             <div class="card">
               <div class="card-body">
                 <div class="d-flex align-items-center">
-                  <div><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
+                  <div><img src="dist/img/ryan-avatar.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                   <div class="flex-1 ms-3">
                     <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Ryan Dela Cruz</h5>
                     <small class="font-size-10 text-white mb-1">Endorsement</small>
@@ -208,7 +208,7 @@ if ($_SESSION["authenticated"] == false) {
             <div class="card">
               <div class="card-body">
                 <div class="d-flex align-items-center">
-                  <div><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
+                  <div><img src="dist/img/cef-avatar.jpg" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                   <div class="flex-1 ms-3">
                     <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Cefrin Paanod</h5>
                     <small class="font-size-10 text-white mb-1">Endorsement</small>
@@ -232,7 +232,7 @@ if ($_SESSION["authenticated"] == false) {
             <div class="card">
               <div class="card-body">
                 <div class="d-flex align-items-center">
-                  <div><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
+                  <div><img src="dist/img/ron-avatar.jpg" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                   <div class="flex-1 ms-3">
                     <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Roniel Kilario</h5>
                     <small class="font-size-10 text-white mb-1">Endorsement</small>
@@ -364,7 +364,7 @@ if ($_SESSION["authenticated"] == false) {
                 </div>
                 <div class="d-flex">
                   <button type="button" class="btn btn-sm btn-primary w-100 mt-2"><i class="bx bxl-facebook-circle me-1"></i>
-                    Contact</button>
+                    Melisa Manalili</button>
                 </div>
               </div>
             </div>
@@ -374,7 +374,7 @@ if ($_SESSION["authenticated"] == false) {
             <div class="card">
               <div class="card-body">
                 <div class="d-flex align-items-center">
-                  <div><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
+                  <div><img src="dist/img/mico-avatar.jpg" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                   <div class="flex-1 ms-3">
                     <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Mico San Pablo</h5>
                     <small class="font-size-10 text-white mb-1">Endorsement</small>
@@ -398,7 +398,7 @@ if ($_SESSION["authenticated"] == false) {
             <div class="card">
               <div class="card-body">
                 <div class="d-flex align-items-center">
-                  <div><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
+                  <div><img src="dist/img/lerry-avatar.jpg" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                   <div class="flex-1 ms-3">
                     <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Lerry Laungayan</h5>
                     <small class="font-size-10 text-white mb-1">Endorsement</small>
@@ -422,7 +422,7 @@ if ($_SESSION["authenticated"] == false) {
             <div class="card">
               <div class="card-body">
                 <div class="d-flex align-items-center">
-                  <div><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
+                  <div><img src="dist/img/dante-avatar.jpg" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                   <div class="flex-1 ms-3">
                     <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Dante Tiagan</h5>
                     <small class="font-size-10 text-white mb-1">Endorsement</small>
@@ -470,7 +470,7 @@ if ($_SESSION["authenticated"] == false) {
             <div class="card">
               <div class="card-body">
                 <div class="d-flex align-items-center">
-                  <div><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
+                  <div><img src="dist/img/mark-avatar.jpg" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                   <div class="flex-1 ms-3">
                     <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Mark Orcullo</h5>
                     <small class="font-size-10 text-white mb-1">Endorsement</small>
@@ -490,29 +490,6 @@ if ($_SESSION["authenticated"] == false) {
             </div>
           </div>
 
-          <div class="col-xl-3 col-sm-6 g-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="d-flex align-items-center">
-                  <div><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
-                  <div class="flex-1 ms-3">
-                    <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Nedz Baybay</h5>
-                    <small class="font-size-10 text-white mb-1">Endorsement</small>
-                  </div>
-                </div>
-                <div class="mt-3 pt-1">
-                  <p class="text-white mb-0"><i class="mdi mdi-phone font-size-15 align-middle pe-2 text-white"></i> 070
-                    2860 5375</p>
-                  <p class="text-white mb-0 mt-2"><i class="mdi mdi-email font-size-15 align-middle pe-2 text-white"></i>
-                    PhyllisGatlin@spy.com</p>
-                </div>
-                <div class="d-flex">
-                  <button type="button" class="btn btn-sm btn-primary w-100 mt-2"><i class="bx bxl-facebook-circle me-1"></i>
-                    Contact</button>
-                </div>
-              </div>
-            </div>
-          </div>
 
         </div>
       </div>
