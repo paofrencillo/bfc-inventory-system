@@ -61,6 +61,11 @@ if ($_SESSION["authenticated"] == false) {
       .card:hover {
         transform: scale(1.075);
       }
+
+      img {
+        height: 100px !important;
+        object-fit: cover;
+      }
     </style>
   </head>
 
