@@ -228,14 +228,14 @@
                     <div class="col-sm-12">
                       <div class="form-group">
                         <div class="card-body table-responsive p-0" style="height: 300px;">
-                          <table class="table table-head-fixed text-center">
+                          <table class="table table-bordered table-hover text-center">
                             <thead class="thead-dark">
                               <tr>
-                                <th>Barcode</th>
-                                <th>Product Description</th>
-                                <th>Quantity</th>
-                                <th>Lot No.</th>
-                                <th>Exp. Date</th>
+                                <th>BARCODE</th>
+                                <th>PRODUCT DESCRIPTION</th>
+                                <th>QUANTITY</th>
+                                <th>LOT NO.</th>
+                                <th>EXP. DATE </th>
                               </tr>
                             </thead>
                             <tbody id="modal-tbody">

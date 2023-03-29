@@ -40,14 +40,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <div class="card">
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <table id="example1" class="table table-bordered table-hover projects">
-                                        <thead class="">
+                                    <table id="example1" class="table table-bordered table-hover">
+                                        <thead class="thead-dark">
                                             <tr class=text-center>
-                                                <th>Barcode</th>
-                                                <th>Product Description</th>
-                                                <th>Generic Name</th>
-                                                <th>Category</th>
-                                                <th>Action</th>
+                                                <th>BARCODE</th>
+                                                <th>PRODUCT DESCRIPTION</th>
+                                                <th>GENERIC NAME</th>
+                                                <th>CATEGORY</th>
+                                                <th>ACTION</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -107,25 +107,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                     <div class="row">
                                         <div class="col-sm-5">
                                             <div class="form-group">
-                                                <label for="barcode">Barcode</label>
+                                                <label for="barcode">Barcode:</label>
                                                 <input type="text" class="form-control" name="barcode" id="barcode" autocomplete="off" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-7">
                                             <div class="form-group">
-                                                <label for="description">Product Description</label>
+                                                <label for="description">Product Description:</label>
                                                 <input type="text" class="form-control" name="description" id="description" autocomplete="off" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-5">
                                             <div class="form-group">
-                                                <label for="generic_name">Generic Name</label>
+                                                <label for="generic_name">Generic Name:</label>
                                                 <input type="text" class="form-control" name="generic_name" id="generic_name" autocomplete="off" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-7">
                                             <div class="form-group mb-3">
-                                                <label for="category">Select Category</label>
+                                                <label for="category">Category:</label>
                                                 <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" name="category" id="category" required>
                                                     <option value="GENERIC">GENERIC</option>
                                                     <option value="BRANDED">BRANDED</option>
@@ -140,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-5">
                                             <div class="form-group">
                                                 <label for="supp">Supplier:</label>
-                                                <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" name="supplier" id="supp" required>
+                                                <select class="form-control selectpicker" data-container="body" data-live-search="true" style="width: 100%;" name="supplier" id="supp" required>
                                                     <?php
                                                     $query2 = "SELECT * FROM suppliers";
                                                     $result = mysqli_query($conn, $query2);
@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                             </div>
                                         </div>
                                         <div class="col-sm-7">
-                                            <label>Image</label>
+                                            <label>Image:</label>
                                             <div class="custom-file form-group">
                                                 <input type="file" class="custom-file-input" id="imageFile" accept=".png,.jpeg,.jpeg" name="imageFile">
                                                 <label class="custom-file-label" for="imageFile" id="file-label">Choose
