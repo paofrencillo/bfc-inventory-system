@@ -56,12 +56,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                       <span class="fas fa-truck"></span>
                     </div>
                   </div>
-                  <input type="text" class="form-control" name="supplier_name" placeholder="Enter name of Supplier" autocomplete="off" required>
+                  <input type="text" class="form-control" name="supplier_name" placeholder="Enter name of Supplier" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" required>
                 </div>
                 <!-- /.col -->
                 <div class="col-12">
                   <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
-                  <input type="hidden" name="id_lastuser" value="<?php echo $row['user_id'] ?>">
+                  <input type="hidden" name="id_lastuser" value="<?php echo $row['employee_name'] ?>">
                   <button type="submit" class="btn btn-primary" name="supplier">Add Supplier</button>
                 </div>
               </form>
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                     </thead>
                     <tbody>
                       <?php
-                      $check_user =  $_SESSION['login_user']['user_id'];
+                      $check_user =  $_SESSION['login_user']['employee_name'];
                       $is_superuser =  $_SESSION['login_user']['is_superuser'];
                       $query = "SELECT * FROM suppliers";
                       $result = mysqli_query($conn, $query);
@@ -101,55 +101,55 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                         <tr>
                           <td><?php echo $row['sku_code'] ?></td>
                           <td><?php echo $row['supplier_name'] ?></td>
-                            <td>
-                              <?php
-                                $date = date_create($row["last_edited_on"]);
-                                $date = date_format($date, 'm-d-Y h:i');
-                                echo $row['last_edited_by'] . ' | ' . $date;
-                              ?>
-                            </td>
-                            <td>
-                              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['sku_code']; ?>">
-                                <i class="fas fa-pencil-alt"></i>
-                                Edit Details
-                              </button>
-                              <!-- /.modal -->
-                              <div class="modal fade" id="update<?php echo $row['sku_code'] ?>">
-                                <div class="modal-dialog modal-dialog-centered modal-lg">
-                                  <div class="modal-content">
-                                    <div class="modal-header bg-info">
-                                      <h4 class="modal-title font-weight-bold">UPDATE SUPPLIER DETAILS</h4>
-                                      <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                      </button>
-                                    </div>
-                                    <div class="modal-body">
-                                      <form action="functions.php" method="POST">
-                                        <div class="row">
-                                          <div class="col-md-12">
-                                            <div class="form-group">
-                                              <label for="name">Name</label>
-                                              <input type="text" class="form-control " id="name" name="supplier_name" value="<?php echo $row['supplier_name'] ?>" required>
-                                            </div>
+                          <td>
+                            <?php
+                            $date = date_create($row["last_edited_on"]);
+                            $date = date_format($date, 'm-d-Y h:i');
+                            echo $row['last_edited_by'] . ' | ' . $date;
+                            ?>
+                          </td>
+                          <td>
+                            <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['sku_code']; ?>">
+                              <i class="fas fa-pencil-alt"></i>
+                              Edit Details
+                            </button>
+                            <!-- /.modal -->
+                            <div class="modal fade" id="update<?php echo $row['sku_code'] ?>">
+                              <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                  <div class="modal-header bg-info">
+                                    <h4 class="modal-title font-weight-bold">UPDATE SUPPLIER DETAILS</h4>
+                                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <form action="functions.php" method="POST">
+                                      <div class="row">
+                                        <div class="col-md-12">
+                                          <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input type="text" class="form-control " id="name" name="supplier_name" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['supplier_name'] ?>" required>
                                           </div>
                                         </div>
-                                        <div class="modal-footer justify-content-between">
-                                          <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
-                                          <input type="hidden" name="sku_code" value="<?php echo $row['sku_code'] ?>">
-                                          <input type="hidden" name="last_user" value="<?php echo $check_user ?>">
-                                          <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->
-                                          <button type="submit" class="btn btn-outline-danger" name="delete_supplier">Delete</button>
-                                          <button type="submit" class="btn btn-primary" name="modify_supplier">Save Changes</button>
-                                        </div>
-                                      </form>
-                                    </div>
+                                      </div>
+                                      <div class="modal-footer justify-content-between flex-row-reverse">
+                                        <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
+                                        <input type="hidden" name="sku_code" value="<?php echo $row['sku_code'] ?>">
+                                        <input type="hidden" name="last_user" value="<?php echo $check_user ?>">
+                                        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->                               
+                                        <button type="submit" class="btn btn-primary" name="modify_supplier">Save Changes</button>
+                                        <button type="submit" class="btn btn-outline-danger" name="delete_supplier">Delete</button>
+                                      </div>
+                                    </form>
                                   </div>
-                                  <!-- /.modal-content -->
                                 </div>
-                                <!-- /.modal-dialog -->
+                                <!-- /.modal-content -->
                               </div>
-                              <!-- /.modal -->
-                            </td>
+                              <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
+                          </td>
                         </tr>
                       <?php } ?>
                     </tbody>
