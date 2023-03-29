@@ -1,5 +1,4 @@
 <?php
-// include("templates/connections");
 session_start();
 if (isset($_SESSION['authenticated']) && $_SESSION['authenticated']) {
     // If the user is already authenticated, redirect them to another page
@@ -11,8 +10,6 @@ if (isset($_SESSION['authenticated']) && $_SESSION['authenticated']) {
       exit();
     }
 }
-
-// If the user is not authenticated, show the login page
 ?>
 
 <!DOCTYPE html>

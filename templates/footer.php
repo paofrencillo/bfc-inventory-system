@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
     die(header('location: ../500.html'));
 } else { ?>
     <footer class="main-footer">
-        <strong>Made by <a href="interns.php" target="_blank">TUP-C Interns</a>.</strong>
+        <strong>Made by <a href="tupc-interns-2023.php" target="_blank">TUP-C Interns</a>.</strong>
         <div class="float-right d-none d-sm-inline-block">
             <b>Version</b> 1.0.0
         </div>
