@@ -269,12 +269,18 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
   <script>
     $(function() {
       $("#example1").DataTable({
+        // "columnDefs": [{
+        //   "className": "text-center",
+        //   "visible": true,
+        //   "searchable": false,
+        //   "targets": [7],
+        // }],
         "columnDefs": [{
           "className": "text-center",
           "visible": false,
+          "searchable": true,
           "targets": [9],
-        }],
-        "columnDefs": [{
+        },{
           "className": "text-center",
           "visible": true,
           "searchable": false,

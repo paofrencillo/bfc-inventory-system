@@ -233,9 +233,9 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         "columnDefs": [{
           "className": "text-center",
           "visible": false,
+          "searchable": true,
           "targets": [9],
-        }],
-        "columnDefs": [{
+        },{
           "className": "text-center",
           "visible": true,
           "searchable": false,
