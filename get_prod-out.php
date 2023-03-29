@@ -188,11 +188,14 @@ if (isset($_GET["action"]) && $_GET["action"] === "mrfsearch") {
       $sql4 = "DELETE FROM endorse_final WHERE mrf ='$mrf_search';";
 
       if (mysqli_query($conn, $sql4)) {
+         $data = 'success';
+         echo json_encode($data);
          echo "Data deleted successfully";
       } else {
          echo "Error deleting data: " . mysqli_error($conn);
       }
    }
+
 }
 
 // For delete history
@@ -220,7 +223,4 @@ if (isset($_GET["action"]) && $_GET["action"] === "mrfsearch2") {
    } else {
       echo "Error deleting data: " . mysqli_error($conn);
    }
-
 }
-
-?>
