@@ -9,7 +9,7 @@ $db = "bfc_inventory";
 $conn = mysqli_connect($server, $user, $pass, $db);
 
 if (!$conn) {
-    die("<script>alert('Connection Failed.')</script>");
+  die("<script>alert('Connection Failed.')</script>");
 }
 
 header("Content-Type: text/json; charset=utf8");
@@ -26,3 +26,4 @@ while ($row = $result->fetch_assoc()) {
   $rows[] = $row;
 }
 echo json_encode($rows);
+?>

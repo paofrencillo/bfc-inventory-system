@@ -101,14 +101,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               <td><?php echo $row['remarks'] ?></td>
                               <td><?php echo $row['endorsed_date'] ?></td>
                               <td>
-                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#updatee<?php echo $row['id'] ?>">
-                                  <i class="fas fa-pencil-alt"></i>
-                                  Edit
-                                </button>
-                                <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['id'] ?>">
-                                  <i class="fas fa-eye"></i>
-                                  Details
-                                </button>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                  <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#updatee<?php echo $row['id'] ?>">
+                                    <i class="fas fa-pencil-alt"></i>
+                                    Edit
+                                  </button>
+                                </div>
+                                <!-- <div class="btn-group" role="group" aria-label="Basic example">
+                                  <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#view<?php echo $row['id'] ?>">
+                                    <i class="fas fa-eye"></i>
+                                    Details
+                                  </button>
+                                </div> -->
                               </td>
                             </tr>
 
@@ -188,6 +192,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                           <div class="form-group">
                                             <label for="remarks">Remarks:</label>
                                             <input type="text" class="form-control " id="remarks" name="remarks" value="<?php echo $row['remarks'] ?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                            <label for="endorsed_by">Endorse By:</label>
+                                            <input type="text" class="form-control " id="endorsed_by" readonly value="<?php echo $row['endorsed_by'] ?>">
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                            <label for="endorsed_date">Endorsement Date:</label>
+                                            <input type="text" class="form-control " id="endorsed_date" value="<?php echo $row['endorsed_date'] ?>" readonly>
                                           </div>
                                         </div>
                                       </div>
@@ -395,7 +411,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
               <form id="addprodout">
                 <div class="modal-body" style="overflow-y: scroll;">
                   <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6" id="branch111">
                       <div class="form-group">
                         <label for="supp">Branch Code:</label>
                         <select class="form-control select2bs4" style="width: 100%;" name="branch" id="branch" required>
@@ -410,6 +426,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <option value="<?php echo $row['code'] ?>/<?php echo $row['name'] ?>"><?php echo $row['code'] ?>/<?php echo $row['name'] ?></option>
                           <?php } ?>
                         </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-6" id="branch222" hidden>
+                      <div class="form-group">
+                        <label for="branch22">Branch Code:</label>
+                        <input type="text" class="form-control " id="branch22" name="branch22" autocomplete="off" required readonly>
                       </div>
                     </div>
                     <div class="col-sm-3">
@@ -427,7 +449,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                     <div class="col-sm-12">
                       <div class="form-group">
                         <div class="card-body table-responsive p-0" style="height: 200px;">
-                          <table class="table table-head-fixed text-center" id="myTable">
+                          <table class="table table-head-fixed table-hover text-center" id="myTable">
                             <thead>
                               <tr>
                                 <th>Barcode</th>
@@ -439,14 +461,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               </tr>
                             </thead>
                             <tbody>
-                              <!-- <tr>
-                                  <td>42428</td>
-                                  <td>Mefenamic</td>
-                                  <td>42</td>
-                                  <td>2828</td>
-                                  <td>03-25-2023</td>
-                                  <td></td>
-                                </tr> -->
+ 
                             </tbody>
                           </table>
                         </div>
@@ -481,7 +496,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                     <div class="col-sm-4">
                       <div class="form-group">
                         <label for="exp_date2">Expiration Date:</label>
-                        <input type="text" class="form-control " id="exp_date2" autocomplete="off" name="exp_date" placeholder="mm/dd/yyyy or mm/yyyy" disabled>
+                        <input type="text" class="form-control " id="exp_date2" autocomplete="off" name="exp_date" placeholder="mm/dd/yyyy or mm/yyyy or -" disabled>
                       </div>
                     </div>
                     <?php
@@ -581,7 +596,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                     <div class="col-sm-12">
                       <div class="form-group">
                         <div class="card-body table-responsive p-0" style="height: 300px;">
-                          <table id="example3" class="table table-head-fixed text-center">
+                          <table id="example33" class="table table-head-fixed text-center">
                             <thead>
                               <tr>
                                 <th>Barcode</th>
@@ -594,13 +609,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               </tr>
                             </thead>
                             <tbody>
-                              <!-- <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr> -->
+                             
                             </tbody>
                           </table>
                         </div>

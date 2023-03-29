@@ -15,6 +15,7 @@ $endorsed_by = $_POST['endorsed_by'];
 $mrf = $_POST['mrff'];
 $order_num = $_POST['order_numm'];
 $branch = $_POST['branch'];
+$branch22 = $_POST['branch22'];
 
 // Insert the values into the database
 $sql = "INSERT INTO endorse (
@@ -45,4 +46,3 @@ mysqli_query($conn, $sql);
 
 
 mysqli_close($conn);
-?>
