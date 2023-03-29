@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
         } else {
             while ($row = mysqli_fetch_array($result)) {
                 $date = date_create($row["last_edited_on"]);
-                $date = date_format($date, "d/m/Y h:i");
+                $date = date_format($date, "m-d-Y h:i");
 
                 $data = array(
                     "barcode" => $row["barcode"],

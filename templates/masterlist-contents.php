@@ -114,7 +114,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-7">
                                             <div class="form-group">
                                                 <label for="description">Product Description:</label>
-                                                <input type="text" class="form-control" name="description" id="description" autocomplete="off" required>
+                                                <input type="text" class="form-control" name="description" id="description" autocomplete="off" onkeypress="return event.keyCode !== 39 && event.keyCode !== 34;" required>
+                                                <script>
+                                                    document.getElementById("description").addEventListener("input", function(event) {
+                                                        // Get the input value and replace any single or double quotes with a sanitized version
+                                                        var inputValue = event.target.value;
+                                                        var sanitizedValue = inputValue.replace(/['"]/g, "");
+                                                        
+                                                        // Set the sanitized value back to the input field
+                                                        event.target.value = sanitizedValue;
+                                                    });
+                                                </script>
                                             </div>
                                         </div>
                                         <div class="col-sm-5">
@@ -208,7 +218,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-7">
                                             <div class="form-group">
                                                 <label for="desc-modal">Product Description:</label>
-                                                <input type="text" class="form-control modal-field" name="desc-modal" id="desc-modal" autocomplete="off" readonly>
+                                                <input type="text" class="form-control modal-field" name="desc-modal" id="desc-modal" autocomplete="off" onkeypress="return event.keyCode !== 39 && event.keyCode !== 34;" readonly>
+                                                <script>
+                                                    document.getElementById("desc-modal-details").addEventListener("input", function(event) {
+                                                        // Get the input value and replace any single or double quotes with a sanitized version
+                                                        var inputValue = event.target.value;
+                                                        var sanitizedValue = inputValue.replace(/['"]/g, "");
+                                                    
+                                                        // Set the sanitized value back to the input field
+                                                        event.target.value = sanitizedValue;
+                                                    });
+                                                </script>
                                             </div>
                                         </div>
                                         <div class="col-sm-5">
@@ -282,13 +302,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <p class="text-danger">Are you sure you want to delete this product in the
-                                                    inventory?</p>
+                                                <p class="text-danger">Deleting this product will also delete its data on the inventory. Do you want to continue?</p>
                                             </div>
                                             <div class="modal-footer justify-content-end">
-                                                <button type="button" class="btn btn-outline-secondary close-modal-delete2">Cancel</button>
-                                                <button type="button" class="btn btn-danger" onclick="deleteProduct();">Yes,
-                                                    Delete it</button>
+                                                <button type="button" class="btn btn-secondary close-modal-delete2">No, Go Back</button>
+                                                <button type="button" class="btn btn-outline-danger" onclick="deleteProduct();">Yes</button>
                                             </div>
                                         </div>
                                     </div>

@@ -51,13 +51,13 @@
                     <table id="example1" class="table table-bordered table-hover text-center">
                       <thead class="thead-dark">
                         <tr>
-                          <th>Barcode</th>
-                          <th>Product Description</th>
+                          <th>BARCODE</th>
+                          <th>PRODUCT DESCRIPTION</th>
                           <th>PRF</th>
-                          <th>Quantity</th>
-                          <th>Lot No.</th>
-                          <th>Exp. Date</th>
-                          <th>Action</th>
+                          <th>QHANTITY</th>
+                          <th>LOT NO.</th>
+                          <th>EXP. DATE</th>
+                          <th>ACTION</th>
                         </tr>
                       </thead>
                       <tbody>
