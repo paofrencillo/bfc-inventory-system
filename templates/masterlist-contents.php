@@ -140,14 +140,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-5">
                                             <div class="form-group">
                                                 <label for="supp">Supplier:</label>
-                                                <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" name="supplier" id="supp" required>
+                                                <select class="form-control selectpicker" data-container="body" data-size='5' data-live-search="true" style="width: 100%;" name="supplier" id="supp" required>
                                                     <?php
                                                     $query2 = "SELECT * FROM suppliers";
                                                     $result = mysqli_query($conn, $query2);
                                                     $check_row = mysqli_num_rows($result);
                                                     while ($row2 = mysqli_fetch_array($result)) {
                                                     ?>
-                                                    <option value="<?php echo $row2['supplier_name']?>"><?php echo $row2['supplier_name']?></option>
+                                                        <option value="<?php echo $row2['supplier_name'] ?>"><?php echo $row2['supplier_name'] ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
@@ -184,7 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                     <!-- /.modal-dialog -->
                 </div>
                 <!-- /.modal -->
-                
+
                 <div class="modal fade" id="edit">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
@@ -237,7 +237,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                     $check_row = mysqli_num_rows($result);
                                                     while ($row2 = mysqli_fetch_array($result)) {
                                                     ?>
-                                                    <option value="<?php echo $row2['supplier_name']?>"><?php echo $row2['supplier_name']?></option>
+                                                        <option value="<?php echo $row2['supplier_name'] ?>"><?php echo $row2['supplier_name'] ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
