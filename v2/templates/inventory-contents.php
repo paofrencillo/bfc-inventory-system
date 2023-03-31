@@ -1163,7 +1163,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                       </div>
                     </div>
                     <div class="col-sm-2">
-                      <div class="form-group">
+                      <div class="form-group">  
                         <label for="allo">Allocation:</label>
                         <input type="number" class="form-control " id="allo">
                       </div>
