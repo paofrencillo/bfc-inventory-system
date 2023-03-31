@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
     <footer class="main-footer">
         <strong>Made by <a href="tupc-interns-2023.php" target="_blank">TUP-C Interns</a>.</strong>
         <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 1.0.0
+            <b>Version</b> 2.0.0
         </div>
     </footer>
 <?php } ?>
