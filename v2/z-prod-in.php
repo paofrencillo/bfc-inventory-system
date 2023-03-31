@@ -241,6 +241,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
                         tr.innerHTML = `<tr>
                                             <td>${item.barcode}</td>
                                             <td>${item.description}</td>
+                                            <td>${item.rack}</td>
                                             <td>${item.in_quantity}</td>
                                             <td>${item.lot_no}</td>
                                             <td>${item.exp_date}</td>
@@ -319,6 +320,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
                 tr.innerHTML = `<tr>
                                     <td>${data.barcode}</td>
                                     <td>${data.description}</td>
+                                    <td>${data.rack}</td>
                                     <td>${data.quantity}</td>
                                     <td>${data.lot}</td>
                                     <td>${data.exp}</td>
@@ -358,15 +360,15 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
                     text: "Products were added to stocks!",
                     icon: "success",
                     confirmButtonText: "OK"
-                }).then((result) => {
+                  }).then((result) => {
                     if (result.isConfirmed) {
                         location.reload();
                     } else {
                         location.reload();
                     }
-                });
+                  });
                 // alert("Products were added to stocks!");
-            
+              
             },
             error: function(error) {
                 console.error(error);
@@ -396,7 +398,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
             error: function(error) {
                 console.log(error);
             }
-        })
+          })
     }
 
     // Edit Product Details
@@ -424,20 +426,20 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
                     console.log(data);
                     $('#update_success_text').removeClass('d-none');
                     setInterval(()=> {
-                    location.reload();
+                      location.reload();
                     }, 1000)
-                } else {
+                  } else {
                     $('#update_error_text').removeClass('d-none');
                     setTimeout(()=> {
-                    $('#update_error_text').addClass('d-none');
+                      $('#update_error_text').addClass('d-none');
                     }, 5000)
-                }
+                  }
                 },
             error: function(error, status, xhr) {
                 console.error(error, status, xhr);
                 $('#update_error_text').removeClass('d-none');
                 setTimeout(()=> {
-                $('#update_error_text').addClass('d-none');
+                  $('#update_error_text').addClass('d-none');
                 }, 5000)
             }
         });
@@ -468,29 +470,29 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         formData.append('action', 'delete_all');
 
         $.ajax({
-        type: "POST",
-        url: "prod-in-functions.php",
-        data: formData,
-        contentType: false,
-        processData:false,
-        cache: false,
-        success: function() {
+          type: "POST",
+          url: "prod-in-functions.php",
+          data: formData,
+          contentType: false,
+          processData:false,
+          cache: false,
+          success: function() {
             location.reload();     
-        },
-        error: function(error, status) {
+          },
+          error: function(error, status) {
             console.error(error, status);
-        }
+          }
         });
-    }
+      }
 
     $(function () {
         $("#example1").DataTable({
-        "order": [],
-        "columnDefs": [{"className": "dt-center", "targets": "no_sort", "orderable": false}],
-        "responsive": true, 
-        "lengthChange": true, 
-        "autoWidth": false,
-        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+          "order": [],
+          "columnDefs": [{"className": "dt-center", "targets": "no_sort", "orderable": false}],
+          "responsive": true, 
+          "lengthChange": true, 
+          "autoWidth": false,
+          // "buttons": ["copy", "csv", "excel", "pdf", "print"]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
 
@@ -504,6 +506,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         })
     })
   </script>
+
 </body>
 
 </html>

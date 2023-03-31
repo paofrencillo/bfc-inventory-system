@@ -173,7 +173,7 @@ if ($_SESSION["authenticated"] == false) {
                 </div>
                 <div class="d-flex">
                   <button type="button" class="btn btn-sm btn-primary w-100 mt-2" onclick="window.location.href = 'https://www.facebook.com/paopaolopaoloo';">
-                    <i class="bx bxl-facebook-circle me-1"></i>Contact
+                    <i class="bx bxl-facebook-circle me-1"></i>Pao Frencillo
                   </button>
                 </div>
               </div>
