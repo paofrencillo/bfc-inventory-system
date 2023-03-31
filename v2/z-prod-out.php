@@ -587,8 +587,8 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
             if (data != "Not found") {
               $("#description2").prop("readonly", false);
               $("#description2").val(data.description);
-              $("#quantity2").attr('placeholder', 'Stock: ' + data.rack_in);
-              $("#quantity2").attr('max', data.rack_in);
+              $("#quantity2").attr('placeholder', 'Stock: ' + data.stock);
+              $("#quantity2").attr('max', data.stock);
             } else {
               $("#description2").prop("readonly", true);
               $("#description2").val("Product Not Found or Out of stock");

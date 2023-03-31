@@ -25,6 +25,8 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 header('Content-Type: application/json');
 echo json_encode($data);
 
+
+
 // For endorse product
 if (isset($_GET["action"]) && $_GET["action"] === "endorse_product") {
 
@@ -195,7 +197,6 @@ if (isset($_GET["action"]) && $_GET["action"] === "mrfsearch") {
          echo "Error deleting data: " . mysqli_error($conn);
       }
    }
-
 }
 
 // For delete history
