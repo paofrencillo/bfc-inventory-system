@@ -240,6 +240,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
   <script src="plugins/select2/js/select2.full.min.js"></script>
   <script>
     $("#barcode-transfer").on("change", ()=> {
+      $("#qty-transfer").val('');
       $("#transfer-form").on("submit", (e)=> {
         e.preventDefault();
       });
@@ -249,7 +250,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         data: {"barcode": $("#barcode-transfer").val(), action: "get_product_transfer"},
         dataType: "JSON",
         success: function(data) {
-          if (data != "Not found") {
+          if (data == "Not found") {
             $("#warning-transfer-text").removeClass("d-none");
             $("#barcode-transfer").val('');
             $("#desc-transfer").val('');
@@ -274,10 +275,6 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
       });
       $("#transfer-form").unbind("submit");
     });
-
-    // ----------------------------------------------------------------------------- //
-    // ------- CHECK IF THE QUANTITY IS GREATER THAN THE RACK IN OR RACK OUT ------- //
-    // ----------------------------------------------------------------------------- //
 
     $(function() {
       $("#Generic").DataTable({

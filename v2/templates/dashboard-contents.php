@@ -72,24 +72,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
               <div class="small-box bg-danger">
                 <div class="inner">
                   <?php
-                  $date = date_create();
-                  $date = date_format($date, 'm-d-Y');
-                  $sql = "SELECT SUM(quantity) as sum FROM endorse_final WHERE endorsed_date='$date';";
+                  $date2 = date_create();
+                  $date2 = date_format($date2, 'm-d-Y');
+                  $sql2 = "SELECT SUM(quantity) as sum FROM endorse_history WHERE endorsed_date='$date2';";
                   // Execute query and get result
-                  $result = $conn->query($sql);
+                  $result2 = $conn->query($sql2);
 
                   // Fetch result and get count value
-                  if ($result->num_rows > 0) {
-                    $row = $result->fetch_assoc();
-                    $sum = $row["sum"];
+                  if ($result2->num_rows > 0) {
+                    $row2 = $result2->fetch_assoc();
+                    $sum2 = $row2["sum"];
                     // Split integer data with comma
-                    $formatted_data = number_format($sum);
+                    $formatted_data2 = number_format($sum2);
                   } else {
-                    $sum = 0;
+                    $sum2 = 0;
                   }
 
                   ?>
-                  <h3><?php echo $formatted_data ?><sup style="font-size: 20px"> Items</sup></h3>
+                  <h3><?php echo $formatted_data2 ?><sup style="font-size: 20px"> Items</sup></h3>
                   <?php ?>
                   <p>Total Product Out Today</p>
                 </div>

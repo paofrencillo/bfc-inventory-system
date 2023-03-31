@@ -253,7 +253,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
                     });
                     let fields = document.getElementById("receive-prod-form").querySelectorAll("input");
                     fields.forEach(field => {
-                        if (field.name != "entry_date" && field.name != "action" && field.name != "prf" && field.name != "added-by" && field.name != "added-on") {
+                        if (field.name != "entry_date" && field.name != "action" && field.name != "prf" && field.name != "added-by" && field.name != "added-on" && field.name != "rack") {
                             field.value = '';
                         }
                     });
@@ -329,7 +329,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
 
                 let fields = document.getElementById("receive-prod-form").querySelectorAll("input");
                 fields.forEach(field => {
-                    if (field.name != "entry_date" && field.name != "action" && field.name != "prf" && field.name != "added-by" && field.name != "added-on") {
+                    if (field.name != "entry_date" && field.name != "action" && field.name != "prf" && field.name != "added-by" && field.name != "added-on" && field.name != "rack") {
                         field.value = '';
                     }
                 });

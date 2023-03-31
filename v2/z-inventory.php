@@ -224,7 +224,8 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
   <!-- Select2 -->
   <script src="plugins/select2/js/select2.full.min.js"></script>
   <script>
-    $("#barcode-transfer").on("change", ()=> {
+      $("#barcode-transfer").on("change", ()=> {
+      $("#qty-transfer").val('');
       $("#transfer-form").on("submit", (e)=> {
         e.preventDefault();
       });
@@ -240,8 +241,8 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
             $("#desc-transfer").val('');
             $("#rack-transfer").val('');
             $("#qty-transfer").val('');
-            $("#rack-in").val(0);
-            $("#rack-out").val(0);
+            $("#rack-in").val('');
+            $("#rack-out").val('');
           }
           else {
             $("#warning-transfer-text").addClass("d-none");
@@ -259,6 +260,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
       });
       $("#transfer-form").unbind("submit");
     });
+    
     $(function() {
       $("#Generic").DataTable({
         "columnDefs": [{

@@ -1641,7 +1641,8 @@ if (isset($_POST["to_rack_out"])) {
     if ($barcode != null) {
         $conn->query("UPDATE inventory SET
                     rack_out = rack_out + '$quantity',
-                    rack_in = rack_in - '$quantity';")
+                    rack_in = rack_in - '$quantity'
+                    WHERE barcode='$barcode';")
                     or die("Error Could Not Query.");
 
         if ($is_superuser === '1') {
@@ -1736,7 +1737,8 @@ if (isset($_POST["to_rack_in"])) {
     if ($barcode != null) {
         $conn->query("UPDATE inventory SET
                     rack_in = rack_in + '$quantity',
-                    rack_out = rack_out - '$quantity';")
+                    rack_out = rack_out - '$quantity'
+                    WHERE barcode='$barcode';")
                     or die("Error Could Not Query.");
 
         if ($is_superuser === '1') {

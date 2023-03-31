@@ -1183,6 +1183,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                       <input type="number" class="form-control" name="qty-transfer" id="qty-transfer" min="0" required>
                     </div>
                     <h6 class="d-none text-warning font-weight-bold ml-2" id="warning-transfer-text">This product was not enrolled.</h6>
+                    <h6 class="d-none text-warning font-weight-bold ml-2" id="warning-ro-text">Quantity exceeds the rack-out quantity.</h6>
+                    <h6 class="d-none text-warning font-weight-bold ml-2" id="warning-ri-text">Quantity exceeds the rack-in quantity.</h6>
                   </div>
                 </form>
               </div>
