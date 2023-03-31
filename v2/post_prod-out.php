@@ -5,7 +5,7 @@ include('templates/connection.php');
 
 // Get the values from the AJAX request
 $barcode = $_POST['barcode'];
-$description = $_POST['description'];
+$description = htmlspecialchars($_POST['description']);
 $quantity = $_POST['quantity'];
 $lot = $_POST['lot'];
 $exp_date = $_POST['exp_date'];
