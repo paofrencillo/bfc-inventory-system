@@ -82,25 +82,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST["action"]) && $_POST['action'] === 'receive_prod'){
         $added_by = $_SESSION['login_user']['employee_name'];
         $last_edited_on = date("Y-m-d H:i:s");
-        $entry_date = date("m-d-Y");
+        $entry_date = $_POST["added-on"];
         $barcode = $_POST["barcode"];
         $description = $_POST["description"];
         $prf = $_POST["prf"];
         $supplier = $_POST["supp"];
+        $rack = $_POST["rack"];
+        $rack = trim($rack);
         $quantity = $_POST["quantity"];
         $lot = $_POST["lot"];
         $exp = $_POST["exp"];
         $table1 = "product_in";
         
         // Insert new products in the database 
-        $conn->query("INSERT INTO $table1 (barcode, description, supplier, prf, in_quantity, lot_no, entry_date,
-                    exp_date, added_by) VALUES ('$barcode', '$description', '$supplier', '$prf', '$quantity', '$lot',
+        $conn->query("INSERT INTO $table1 (barcode, description, supplier, rack, prf, in_quantity, lot_no, entry_date,
+                    exp_date, added_by) VALUES ('$barcode', '$description', '$supplier', '$rack', '$prf', '$quantity', '$lot',
                     '$entry_date', '$exp', '$added_by');") or die('Error Could Not Query');
 
 
         $data = array(  
             "barcode" => $barcode,
             "description" => $description,
+            "rack" => $rack,
             "quantity" => $quantity,
             "lot" => $lot,
             "exp" => $exp,
@@ -114,23 +117,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $table2 = "product_in";
         $table3 = "inventory";
 
-        // Insert new products in the database 
-        $conn->query("INSERT INTO $table1 SELECT * FROM $table2 WHERE added_by='$added_by';") or die('Error Could Not Query');
-
         // Update the product quantity in the inventory
-        $query_get = "SELECT barcode, in_quantity FROM $table2 WHERE added_by='$added_by';";
+        $query_get = "SELECT barcode, in_quantity, rack FROM $table2 WHERE added_by='$added_by';";
         $result = mysqli_query($conn, $query_get);
 
         if ($result->num_rows == 0) {   
             $data = "Not found";
             echo json_encode($data);
+            exit();
         } else {
             while ($row = mysqli_fetch_array($result)) {
                 $barcode = $row["barcode"];
                 $quantity = $row["in_quantity"];
-                $conn->query("UPDATE $table3 SET stock=stock+$quantity WHERE barcode='$barcode';") or die('Error Could Not Query');
+                $rack = $row["rack"];
+
+                if ($rack === 'N/A') {
+                    $conn->query("UPDATE $table3 SET rack_out=rack_out+$quantity WHERE barcode='$barcode';") or die('Error Could Not Query');
+                } else {
+                    $conn->query("UPDATE $table3 SET rack_in=rack_in+$quantity WHERE barcode='$barcode';") or die('Error Could Not Query');
+                }
             }
         }
+
+        // Insert new products in the database 
+        $conn->query("INSERT INTO $table1 SELECT * FROM $table2 WHERE added_by='$added_by';") or die('Error Could Not Query');
 
         // Delete the temporary products from the temporary table
         $conn->query("DELETE FROM $table2 WHERE added_by='$added_by';") or die('Error Could Not Query');
