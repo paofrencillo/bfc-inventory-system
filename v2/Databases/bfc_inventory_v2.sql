@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2023 at 03:32 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Mar 31, 2023 at 12:47 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,7 @@ CREATE TABLE `branches` (
   `company` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
   `last_edited_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `branches`
@@ -166,7 +166,7 @@ CREATE TABLE `endorse` (
   `remarks` varchar(255) NOT NULL,
   `endorsed_by` varchar(255) NOT NULL,
   `endorsed_date` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -187,7 +187,7 @@ CREATE TABLE `endorse_final` (
   `remarks` varchar(255) NOT NULL,
   `endorsed_by` varchar(255) NOT NULL,
   `endorsed_date` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -208,7 +208,7 @@ CREATE TABLE `endorse_history` (
   `remarks` varchar(255) NOT NULL,
   `endorsed_by` varchar(255) NOT NULL,
   `endorsed_date` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -223,9 +223,10 @@ CREATE TABLE `inventory` (
   `stock` decimal(10,0) GENERATED ALWAYS AS (`rack_in` + `rack_out`) VIRTUAL,
   `allocation` int(11) NOT NULL DEFAULT 0,
   `sa_percentage` decimal(10,0) GENERATED ALWAYS AS (`stock` / `allocation` * 100) VIRTUAL,
+  `rack` varchar(255) NOT NULL,
   `rack_in` int(11) NOT NULL DEFAULT 0,
   `rack_out` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -239,14 +240,15 @@ CREATE TABLE `product_in` (
   `description` varchar(255) NOT NULL,
   `prf` varchar(255) NOT NULL,
   `supplier` varchar(255) NOT NULL,
+  `rack` varchar(255) NOT NULL,
   `lot_no` varchar(255) NOT NULL,
-  `entry_date` date NOT NULL,
+  `entry_date` varchar(255) NOT NULL,
   `exp_date` varchar(255) NOT NULL,
   `in_quantity` int(11) NOT NULL,
   `added_by` varchar(255) NOT NULL,
   `last_edited_by` varchar(255) NOT NULL,
   `last_edited_on` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -260,14 +262,15 @@ CREATE TABLE `product_in_final` (
   `description` varchar(255) NOT NULL,
   `prf` varchar(255) NOT NULL,
   `supplier` varchar(255) NOT NULL,
+  `rack` varchar(255) NOT NULL,
   `lot_no` varchar(255) NOT NULL,
-  `entry_date` date NOT NULL,
+  `entry_date` varchar(255) NOT NULL,
   `exp_date` varchar(255) NOT NULL,
   `in_quantity` int(11) NOT NULL,
   `added_by` varchar(255) NOT NULL,
   `last_edited_by` varchar(255) NOT NULL,
   `last_edited_on` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -284,7 +287,7 @@ CREATE TABLE `product_masterlist` (
   `image` varchar(1000) DEFAULT NULL,
   `last_edited_by` int(11) NOT NULL,
   `last_edited_on` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -297,7 +300,7 @@ CREATE TABLE `suppliers` (
   `supplier_name` varchar(255) NOT NULL,
   `last_edited_by` varchar(255) NOT NULL,
   `last_edited_on` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `suppliers`
@@ -333,7 +336,7 @@ CREATE TABLE `users` (
   `pass` varchar(255) NOT NULL,
   `is_superuser` varchar(10) NOT NULL,
   `is_logged_in` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -341,7 +344,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `employee_name`, `user`, `pass`, `is_superuser`, `is_logged_in`) VALUES
 (2, 'Admin Account', 'admin', '$2y$10$zTe.yL5AXz.wxlf65FgP/eQQhow87ExWquDHyU2gZR.RpRE3Evisi', '1', 1),
-(12, 'name is qwe', 'qwe', '$2y$10$4JVZu0Y2XILqNQofCmuXaet7Z2N82VHtUf7ITtMx7FWtN2GSrkVdq', '0', 1);
+(12, 'name is qwe', 'qwe', '$2y$10$4JVZu0Y2XILqNQofCmuXaet7Z2N82VHtUf7ITtMx7FWtN2GSrkVdq', '0', 0),
+(13, 'nedz', 'nedz321', '$2y$10$vPRg7yBkIO1OvIbzXwMzaetWs.knOo9MbQHbPY9GBZsqTw0YIzQn.', '0', 0);
 
 --
 -- Indexes for dumped tables
@@ -447,7 +451,7 @@ ALTER TABLE `product_in_final`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
