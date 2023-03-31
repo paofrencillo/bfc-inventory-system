@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
             </div>
             <div class="card-body">
               <div class="col-md-2">
-                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addnew"><i class="fas fa-exchange-alt"></i> TRANSFER</button>
+                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#transfer"><i class="fas fa-exchange-alt"></i> TRANSFER</button>
               </div>
             </div>
             <!-- /.card-body -->
@@ -1132,17 +1132,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
         </div>
 
         <!-- Modal for transfer rack in and out -->
-        <div class="modal fade" id="addnew">
+        <div class="modal fade" id="transfer">
           <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-              <div class="modal-header bg-primary">
+              <div class="modal-header bg-info">
                 <h4 class="modal-title font-weight-bold">TRANSFER RACK IN/OUT</h4>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <form>
+                <form name="transfer-form" id="transfer-form" method="POST" action="functions.php">
                   <div class="row align-items-center">
                     <div class="col-sm-5">
                       <div class="input-group">
@@ -1152,10 +1152,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                         <input type="number" class="form-control" aria-describedby="basic-addon1" id="rack-in" value="0" readonly>
                       </div>                
                     </div>
-                    <div class="col-sm-2">
-                      <button class="btn btn-danger btn-md w-100"><i class="fas fa-arrow-right"></i></button>
-                      <!-- <input type="number" class="form-control" name="to-transfer" id="to-transfer" required> -->
-                      <button class="btn btn-primary btn-md w-100"><i class="fas fa-arrow-left"></i></button>
+                    <div class="col-sm-2 text-center">
+                      <button type="submit" class="btn btn-danger btn-md w-75 mb-1" name="to_rack_out"><i class="fas fa-arrow-right"></i></button>
+                      <button type="submit" class="btn btn-primary btn-md w-75 mt-1" name="to_rack_in"><i class="fas fa-arrow-left"></i></button>
                     </div>
                     <div class="col-sm-5">
                       <div class="input-group">
@@ -1181,8 +1180,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                     </div>
                     <div class="col-sm-2">
                       <label for="qty-transfer">Quantity:</label>
-                      <input type="number" class="form-control" name="qty-transfer" id="qty-transfer" min="0">
+                      <input type="number" class="form-control" name="qty-transfer" id="qty-transfer" min="0" required>
                     </div>
+                    <h6 class="d-none text-warning font-weight-bold ml-2" id="warning-transfer-text">This product was not enrolled.</h6>
                   </div>
                 </form>
               </div>
