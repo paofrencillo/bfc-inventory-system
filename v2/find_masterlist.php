@@ -13,7 +13,7 @@ include('templates/connection.php');
        while ($row9 = mysqli_fetch_array($result9)) {
            $data = array(
                "description" => $row9["description"],
-               "stock" => $row9["stock"]
+               "rack_in" => $row9["rack_in"]
            );
            echo json_encode($data);
        }

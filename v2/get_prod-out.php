@@ -51,7 +51,7 @@ if (isset($_GET["action"]) && $_GET["action"] === "endorse_product") {
       $quantity_to_add = $row["quantity"];
 
       // Create an SQL query to update the quantity field for the specified product
-      $sql9 = "UPDATE inventory SET stock = stock - $quantity_to_add WHERE barcode = $product_barcode";
+      $sql9 = "UPDATE inventory SET rack_in = rack_in - $quantity_to_add WHERE barcode = $product_barcode";
 
       // Execute the query
       if ($conn->query($sql9) === TRUE) {

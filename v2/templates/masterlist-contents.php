@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $query = "SELECT * FROM product_masterlist ORDER BY last_edited_on DESC;";
+                                            $query = "SELECT * FROM product_masterlist ORDER BY description ;";
                                             $result = mysqli_query($conn, $query);
                                             while ($row = mysqli_fetch_array($result)) {
                                                 $last_user = $row['last_edited_by'];

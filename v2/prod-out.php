@@ -280,7 +280,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
           "visible": false,
           "searchable": true,
           "targets": [9],
-        },{
+        }, {
           "className": "text-center",
           "visible": true,
           "searchable": false,
@@ -348,7 +348,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         // "scrollCollapse": false,
         "autoWidth": false,
         "order": [
-          [5, 'desc'] 
+          [5, 'desc']
         ],
         "buttons": [{
             extend: 'copy',
@@ -437,15 +437,15 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
             // Parse the JSON response
             var data = JSON.parse(xhr.responseText);
             console.log(data.length)
-            if (data.length >= 1){
+            if (data.length >= 1) {
               console.log('norems')
-              data.forEach(function(row){
+              data.forEach(function(row) {
                 $("#branch111").attr('hidden', true);
                 $("#branch222").attr('hidden', false);
                 $("#branch22").val(row.branch);
                 $("#branch").val(row.branch);
                 $("#branch22").prop('readonly', true);
-                
+
                 $("input[name='mrff']").val(row.mrf);
                 $("input[name='mrff']").prop('readonly', true);
                 $("input[name='order_numm']").val(row.order_num);
@@ -461,7 +461,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
               });
             } else {
               console.log('alaws')
-              data.forEach(function(row){
+              data.forEach(function(row) {
                 $("#branch111").attr('hidden', false)
                 $("#branch222").attr('hidden', true)
                 $("#branch22").val('')
@@ -505,24 +505,36 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         // Prevent the form from submitting normally
         event.preventDefault();
 
-        // Use AJAX to send the form data to your PHP script to insert it into the database
-        $.ajax({
-          url: "post_prod-out.php",
-          type: "POST",
-          data: $(this).serialize(),
-          success: function() {
-            $('#barcode2').val('');
-            $('#description2').val('');
-            $('#quantity2').val('');
-            $('#lot2').val('');
-            $('#exp_date2').val('');
-            $('#remarks2').val('');
-            // Reload the table with the updated data
-            reloadTable();
-            // Reset the values of specific input fields
+        // Get the values from the form
+        var quantity2 = $('#quantity2').val();
 
-          }
-        });
+        if (quantity2 === '0') {
+          swal.fire({
+            title: "Ooops!",
+            text: "Quantity is zero, Can't endorse product",
+            icon: "error",
+            confirmButtonText: "OK"
+          })
+        } else {
+          // Use AJAX to send the form data to your PHP script to insert it into the database
+          $.ajax({
+            url: "post_prod-out.php",
+            type: "POST",
+            data: $(this).serialize(),
+            success: function() {
+              $('#barcode2').val('');
+              $('#description2').val('');
+              $('#quantity2').val('');
+              $('#lot2').val('');
+              $('#exp_date2').val('');
+              $('#remarks2').val('');
+              // Reload the table with the updated data
+              reloadTable();
+              // Reset the values of specific input fields
+
+            }
+          });
+        }
       });
 
       // Add a click event
@@ -538,7 +550,16 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         var tableBody = document.getElementById('myTable');
         console.log(tableBody.rows.length)
 
-        $.ajax({
+        if (tableBody.rows.length <= 1) {
+          console.log("The DataTable is empty");
+          swal.fire({
+            title: "Ooops!",
+            text: "Table is empty. Please add items before endorse",
+            icon: "error",
+            confirmButtonText: "OK"
+          })
+        } else {
+          $.ajax({
           url: "get_prod-out.php",
           type: "GET",
           data: {
@@ -547,39 +568,30 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
           },
           dataType: "JSON",
           success: $(document).ready(function(data) {
-            if (tableBody.rows.length <= 1) {
-              console.log("The DataTable is empty");
-              swal.fire({
-                title: "Ooops!",
-                text: "Table is empty. Please add items before endorse",
-                icon: "error",
-                confirmButtonText: "OK"
-              })
-            } else {
-              $('#branch').val('');
-              $('#mrf').val('');
-              $('#order_num').val('');
-              $('#barcode').val('');
-              $('#description').val('');
-              $('#quantity').val('');
-              $('#lot').val('');
-              $('#exp_date').val('');
-              $('#remarks').val('');
-              swal.fire({
-                title: "Success!",
-                text: "Product successfully endorsed",
-                icon: "success",
-                confirmButtonText: "OK"
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  location.reload();
-                } else {
-                  location.reload();
+            $('#branch').val('');
+            $('#mrf').val('');
+            $('#order_num').val('');
+            $('#barcode').val('');
+            $('#description').val('');
+            $('#quantity').val('');
+            $('#lot').val('');
+            $('#exp_date').val('');
+            $('#remarks').val('');
+            swal.fire({
+              title: "Success!",
+              text: "Product successfully endorsed",
+              icon: "success",
+              confirmButtonText: "OK"
+            }).then((result) => {
+              if (result.isConfirmed) {
+                location.reload();
+              } else {
+                location.reload();
                 }
               });
-            }        
-          })
-        });
+            })
+          });
+        }  
       });
 
       // Add a click event
@@ -659,8 +671,8 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
             if (data != "Not found") {
               $("#description2").prop("readonly", false);
               $("#description2").val(data.description);
-              $("#quantity2").attr('placeholder', 'Stock: ' + data.stock);
-              $("#quantity2").attr('max', data.stock);
+              $("#quantity2").attr('placeholder', 'Stock: ' + data.rack_in);
+              $("#quantity2").attr('max', data.rack_in);
             } else {
               $("#description2").prop("readonly", true);
               $("#description2").val("Product Not Found or Out of stock");
@@ -677,7 +689,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
               })
               // .then((result) => {
               //   if (result.isConfirmed) {
-                  
+
               //   }
               // });
             }
@@ -877,7 +889,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
                   location.reload();
                 }
               });
-            }        
+            }
           })
         });
       });

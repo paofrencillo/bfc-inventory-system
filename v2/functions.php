@@ -112,7 +112,7 @@ if (isset($_POST['signin'])) {
 #ADD EMPLOYEE ACCOUNT
 if (isset($_POST['signup'])) {
     $user = $_POST['username'];
-    $name = $_POST['name'];
+    $name = htmlspecialchars($_POST['name']);
     $pass = $_POST['password'];
 
     $sql = "SELECT * FROM users WHERE (user='$user') OR (employee_name='$name');";
@@ -173,7 +173,7 @@ if (isset($_POST['signup'])) {
 #MODIFY EMPLOYEE
 if (isset($_POST['modify_employee'])) {
     $employee_modify = $_POST['employee_modify'];
-    $employee_name = $_POST['employee_name'];
+    $employee_name = htmlspecialchars($_POST['employee_name']);
     $user = $_POST['user'];
 
 
@@ -276,9 +276,9 @@ if (isset($_POST['delete_employee'])) {
 #ADD Franchisee
 if (isset($_POST['franchise'])) {
     $branchcode = $_POST['branchcode'];
-    $name = $_POST['name'];
-    $company = $_POST['company'];
-    $address = $_POST['address'];
+    $name = htmlspecialchars($_POST['name']);
+    $company = htmlspecialchars($_POST['company']);
+    $address = htmlspecialchars($_POST['address']);
     $id_lastuser = $_POST['id_lastuser'];
     $is_superuser = $_POST['is_superuser'];
 
@@ -394,9 +394,9 @@ if (isset($_POST['franchise'])) {
 if (isset($_POST['modify_franchisee'])) {
     $franchisee_modify = $_POST['franchisee_modify'];
     $branch = $_POST['branch'];
-    $name = $_POST['name'];
-    $company = $_POST['company'];
-    $add = $_POST['add'];
+    $name = htmlspecialchars($_POST['name']);
+    $company = htmlspecialchars($_POST['company']);
+    $add = htmlspecialchars($_POST['add']);
     $last_user = $_POST['last_user'];
     $is_superuser = $_POST['is_superuser'];
 
@@ -596,7 +596,7 @@ if (isset($_POST['supplier'])) {
     $last_edited_by = $_SESSION["login_user"]["employee_name"];
     $last_edited_on = date("Y-m-d H:i:s");
     $sku = $_POST['sku_code'];
-    $supplier = $_POST['supplier_name'];
+    $supplier = htmlspecialchars($_POST['supplier_name']);
     $is_superuser = $_POST['is_superuser'];
 
     $sql = "SELECT * FROM suppliers WHERE supplier_name='$supplier';";
@@ -708,7 +708,7 @@ if (isset($_POST['supplier'])) {
 #MODIFY SUPPLIER
 if (isset($_POST['modify_supplier'])) {
     $supplier_modify = $_POST['sku_code'];
-    $supplier_name = $_POST['supplier_name'];
+    $supplier_name = htmlspecialchars($_POST['supplier_name']);
     $last_user = $_POST['last_user'];
     $is_superuser = $_POST['is_superuser'];
     $last_edited_on = date("Y-m-d H:i:s");
@@ -979,7 +979,7 @@ if(isset($_POST['updateprodout'])) {
 
     // Get the values from the AJAX request
     $barcode = $_POST['barcode'];
-    $description = $_POST['description'];
+    $description = htmlspecialchars($_POST['description']);
     $quantity = $_POST['quantity'];
     $current_quantity = $_POST['current_quantity'];
     $lot = $_POST['lot']; 
@@ -994,7 +994,7 @@ if(isset($_POST['updateprodout'])) {
     if ($current_quantity < $quantity) {
         $newvalue = $quantity - $current_quantity;
         // If the quantity is negative, decrease the existing quantity in the database
-        $sql = "UPDATE inventory SET stock = stock - " . abs($newvalue) . " WHERE barcode = $barcode";        
+        $sql = "UPDATE inventory SET rack_in = rack_in - " . abs($newvalue) . " WHERE barcode = $barcode";        
         // Execute the SQL query
         $result = mysqli_query($conn, $sql);
 
@@ -1102,7 +1102,7 @@ if(isset($_POST['updateprodout'])) {
     } else if ($current_quantity > $quantity) {
         $newvalue2 = $current_quantity - $quantity;
         // If the quantity is negative, decrease the existing quantity in the database
-        $sql2 = "UPDATE inventory SET stock = stock + '$newvalue2' WHERE barcode = $barcode";    
+        $sql2 = "UPDATE inventory SET rack_in = rack_in + '$newvalue2' WHERE barcode = $barcode";    
         // Execute the SQL query
         $result = mysqli_query($conn, $sql2);    
 
@@ -1322,7 +1322,7 @@ if (isset($_POST['delete_updateprodout'])) {
     $is_superuser = $_POST['is_superuser'];
 
     if ($id_update != null) {
-        $conn->query("UPDATE inventory SET stock = stock + '$current_quantity' WHERE barcode = $barcode") or die($conn->error);
+        $conn->query("UPDATE inventory SET rack_in = rack_in + '$current_quantity' WHERE barcode = $barcode") or die($conn->error);
         $conn->query("DELETE FROM endorse_final WHERE id='$id_update';") or die($conn->error);
 
         if ($is_superuser == '1'){
@@ -1420,7 +1420,7 @@ if (isset($_POST['delete_updateprodout'])) {
 if(isset($_POST['modify_invent'])) {
 
     $barcode = $_POST['barcode'];
-    $description = $_POST['description'];
+    $description = htmlspecialchars($_POST['description']);
     $stock = $_POST['stock'];
     $allocation = $_POST['allocation']; 
     $sa_percentage = $_POST['sa_percentage'];
