@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2023 at 08:36 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Mar 31, 2023 at 03:32 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,7 @@ CREATE TABLE `branches` (
   `company` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
   `last_edited_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `branches`
@@ -166,7 +166,7 @@ CREATE TABLE `endorse` (
   `remarks` varchar(255) NOT NULL,
   `endorsed_by` varchar(255) NOT NULL,
   `endorsed_date` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -187,7 +187,7 @@ CREATE TABLE `endorse_final` (
   `remarks` varchar(255) NOT NULL,
   `endorsed_by` varchar(255) NOT NULL,
   `endorsed_date` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -208,7 +208,7 @@ CREATE TABLE `endorse_history` (
   `remarks` varchar(255) NOT NULL,
   `endorsed_by` varchar(255) NOT NULL,
   `endorsed_date` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -220,10 +220,12 @@ CREATE TABLE `inventory` (
   `barcode` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `category` varchar(255) NOT NULL,
-  `stock` int(11) NOT NULL DEFAULT 0,
+  `stock` decimal(10,0) GENERATED ALWAYS AS (`rack_in` + `rack_out`) VIRTUAL,
   `allocation` int(11) NOT NULL DEFAULT 0,
-  `sa_percentage` decimal(10,0) GENERATED ALWAYS AS (`stock` / `allocation` * 100) VIRTUAL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `sa_percentage` decimal(10,0) GENERATED ALWAYS AS (`stock` / `allocation` * 100) VIRTUAL,
+  `rack_in` int(11) NOT NULL DEFAULT 0,
+  `rack_out` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -238,13 +240,13 @@ CREATE TABLE `product_in` (
   `prf` varchar(255) NOT NULL,
   `supplier` varchar(255) NOT NULL,
   `lot_no` varchar(255) NOT NULL,
-  `entry_date` varchar(255) NOT NULL,
+  `entry_date` date NOT NULL,
   `exp_date` varchar(255) NOT NULL,
   `in_quantity` int(11) NOT NULL,
   `added_by` varchar(255) NOT NULL,
   `last_edited_by` varchar(255) NOT NULL,
-  `last_edited_on` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `last_edited_on` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -259,13 +261,13 @@ CREATE TABLE `product_in_final` (
   `prf` varchar(255) NOT NULL,
   `supplier` varchar(255) NOT NULL,
   `lot_no` varchar(255) NOT NULL,
-  `entry_date` varchar(255) NOT NULL,
+  `entry_date` date NOT NULL,
   `exp_date` varchar(255) NOT NULL,
   `in_quantity` int(11) NOT NULL,
   `added_by` varchar(255) NOT NULL,
   `last_edited_by` varchar(255) NOT NULL,
-  `last_edited_on` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `last_edited_on` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -282,7 +284,7 @@ CREATE TABLE `product_masterlist` (
   `image` varchar(1000) DEFAULT NULL,
   `last_edited_by` int(11) NOT NULL,
   `last_edited_on` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -291,10 +293,32 @@ CREATE TABLE `product_masterlist` (
 --
 
 CREATE TABLE `suppliers` (
-  `supplier_id` int(11) NOT NULL,
+  `sku_code` varchar(255) NOT NULL,
   `supplier_name` varchar(255) NOT NULL,
-  `last_edited_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `last_edited_by` varchar(255) NOT NULL,
+  `last_edited_on` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `suppliers`
+--
+
+INSERT INTO `suppliers` (`sku_code`, `supplier_name`, `last_edited_by`, `last_edited_on`) VALUES
+('VG88001', 'HOUSEBRANDS', 'Admin Account', '2023-03-29 08:46:06'),
+('VG88002', 'MEED PHARMA', 'Admin Account', '2023-03-29 08:46:37'),
+('VG88003', 'DYNA PASIG', 'Admin Account', '2023-03-29 08:46:44'),
+('VG88004', 'DYNA BINONDO', 'Admin Account', '2023-03-29 08:46:49'),
+('VG88006', 'BIOCARE LIFESCIENCES', 'Admin Account', '2023-03-29 08:46:55'),
+('VG88007', 'ABBOTT LABORATORIES', 'Admin Account', '2023-03-29 08:47:01'),
+('VG88009', 'SPECIAL ORDER', 'Admin Account', '2023-03-29 08:47:07'),
+('VG88010', 'REGIMED', 'Admin Account', '2023-03-29 08:47:14'),
+('VG88011', 'APL', 'Admin Account', '2023-03-29 08:47:20'),
+('VG88012', 'HEALTHYFIX', 'Admin Account', '2023-03-29 08:47:25'),
+('VG88015', 'PASCUAL', 'Admin Account', '2023-03-29 08:47:35'),
+('VG88016', 'TRIANON', 'Admin Account', '2023-03-29 08:47:42'),
+('VG88017', 'IPI', 'Admin Account', '2023-03-29 08:47:49'),
+('VG88018', 'JR&R', 'Admin Account', '2023-03-29 08:47:55'),
+('VG88019', 'OCSI', 'Admin Account', '2023-03-29 08:48:00');
 
 -- --------------------------------------------------------
 
@@ -309,14 +333,15 @@ CREATE TABLE `users` (
   `pass` varchar(255) NOT NULL,
   `is_superuser` varchar(10) NOT NULL,
   `is_logged_in` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`user_id`, `employee_name`, `user`, `pass`, `is_superuser`, `is_logged_in`) VALUES
-(2, 'admin accout to', 'admin', '$2y$10$zTe.yL5AXz.wxlf65FgP/eQQhow87ExWquDHyU2gZR.RpRE3Evisi', '1', 1);
+(2, 'Admin Account', 'admin', '$2y$10$zTe.yL5AXz.wxlf65FgP/eQQhow87ExWquDHyU2gZR.RpRE3Evisi', '1', 1),
+(12, 'name is qwe', 'qwe', '$2y$10$4JVZu0Y2XILqNQofCmuXaet7Z2N82VHtUf7ITtMx7FWtN2GSrkVdq', '0', 1);
 
 --
 -- Indexes for dumped tables
@@ -375,7 +400,8 @@ ALTER TABLE `product_masterlist`
 -- Indexes for table `suppliers`
 --
 ALTER TABLE `suppliers`
-  ADD PRIMARY KEY (`supplier_id`);
+  ADD PRIMARY KEY (`sku_code`),
+  ADD UNIQUE KEY `supplier_id` (`sku_code`);
 
 --
 -- Indexes for table `users`
@@ -418,16 +444,10 @@ ALTER TABLE `product_in_final`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `suppliers`
---
-ALTER TABLE `suppliers`
-  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
