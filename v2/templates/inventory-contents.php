@@ -1143,61 +1143,48 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
               </div>
               <div class="modal-body">
                 <form>
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <div class="form-group">
-                        <label for="barcode">Barcode:</label>
-                        <input type="text" class="form-control " id="barcode">
-                      </div>
-                    </div>
-                    <div class="col-sm-8">
-                      <div class="form-group">
-                        <label for="prod">Product Description:</label>
-                        <input type="text" class="form-control " id="prod">
-                      </div>
+                  <div class="row align-items-center">
+                    <div class="col-sm-5">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text bg-info" id="basic-addon1">Rack In</span>
+                        </div>
+                        <input type="number" class="form-control" aria-describedby="basic-addon1" id="rack-in" value="0" readonly>
+                      </div>                
                     </div>
                     <div class="col-sm-2">
-                      <div class="form-group">
-                        <label for="stock">Stock:</label>
-                        <input type="number" class="form-control " id="stock">
-                      </div>
+                      <button class="btn btn-danger btn-md w-100"><i class="fas fa-arrow-right"></i></button>
+                      <!-- <input type="number" class="form-control" name="to-transfer" id="to-transfer" required> -->
+                      <button class="btn btn-primary btn-md w-100"><i class="fas fa-arrow-left"></i></button>
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text bg-info" id="basic-addon2">Rack Out</span>
+                        </div>
+                        <input type="number" class="form-control" aria-describedby="basic-addon2" id="rack-out" value="0" readonly>
+                      </div>                
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-sm-3">
+                      <label for="barcode-transfer">Barcode:</label>
+                      <input type="text" class="form-control" name="barcode-transfer" id="barcode-transfer">
+                    </div>
+                    <div class="col-sm-4">
+                      <label for="desc-transfer">Description:</label>
+                      <input type="text" class="form-control" id="desc-transfer" readonly>
+                    </div>
+                    <div class="col-sm-3">
+                      <label for="rack-transfer">Rack Position:</label>
+                      <input type="text" class="form-control" id="rack-transfer" readonly>
                     </div>
                     <div class="col-sm-2">
-                      <div class="form-group">  
-                        <label for="allo">Allocation:</label>
-                        <input type="number" class="form-control " id="allo">
-                      </div>
-                    </div>
-                    <div class="col-sm-4">
-                      <div class="form-group">
-                        <label for="lot">Lot Number:</label>
-                        <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();">
-                      </div>
-                    </div>
-                    <div class="col-sm-4">
-                      <div class="form-group">
-                        <label for="supp">Supplier:</label>
-                        <input type="text" class="form-control " id="supp">
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <label for="exp">Expiration Date:</label>
-                        <input type="date" class="form-control " id="exp">
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <label for="supp">Entry Date:</label>
-                        <input type="date" class="form-control " id="supp" disabled>
-                      </div>
+                      <label for="qty-transfer">Quantity:</label>
+                      <input type="number" class="form-control" name="qty-transfer" id="qty-transfer" min="0">
                     </div>
                   </div>
                 </form>
-              </div>
-              <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Add Product</button>
               </div>
             </div>
             <!-- /.modal-content -->
