@@ -23,6 +23,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
       </div><!-- /.container-fluid -->
       <section class="content">
         <div class="container-fluid">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">RACK IN/OUT</h3>
+            </div>
+            <div class="card-body">
+              <div class="col-md-2">
+                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addnew"><i class="fas fa-exchange-alt"></i> TRANSFER</button>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+
           <div class="row">
             <div class="col-12">
               <div class="card card-primary card-tabs">
@@ -61,8 +73,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <th>BARCODE</th>
                             <th>DESCRIPTION</th>
                             <th>STOCK</th>
-                            <th>ALLOCATION</th>
+                            <th>ALLOC.</th>
                             <th>S/A %</th>
+                            <th>RACK-IN</th>
+                            <th>RACK-OUT</th>
+                            <th>RACK</th>
                             <th>ACTION</th>
                           </tr>
                         </thead>
@@ -117,6 +132,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                   ?>
                                 </div>
                               </td>
+                              <td><?php echo $row['rack_in'] ?></td>
+                              <td><?php echo $row['rack_out'] ?></td>
+                              <td><?php echo $row['rack'] ?></td>
                               <td>
                                 <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode'] ?>">
                                   <i class="fas fa-pencil-alt"></i>
@@ -152,22 +170,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                             <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description'] ?>" readonly>
                                           </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-2">
                                           <div class="form-group">
                                             <label for="stock">Stock</label>
-                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>">
+                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>" readonly>
                                           </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-2">
                                           <div class="form-group">
                                             <label for="allo">Allocation</label>
                                             <input type="number" class="form-control " id="allo" name="allocation" value="<?php echo $row['allocation'] ?>">
                                           </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-2">
                                           <div class="form-group">
                                             <label for="sa_percentage">S/A%</label>
                                             <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage'] ?>%" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                            <label for="rack">Rack</label>
+                                            <input type="text" class="form-control " id="rack" name="rack" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" value="<?php echo $row['rack'] ?>">
                                           </div>
                                         </div>
                                       </div>
@@ -201,8 +225,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <th>BARCODE</th>
                             <th>DESCRIPTION</th>
                             <th>STOCK</th>
-                            <th>ALLOCATION</th>
+                            <th>ALLOC.</th>
                             <th>S/A %</th>
+                            <th>RACK-IN</th>
+                            <th>RACK-OUT</th>
+                            <th>RACK</th>
                             <th>ACTION</th>
                           </tr>
                         </thead>
@@ -257,6 +284,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                   ?>
                                 </div>
                               </td>
+                              <td><?php echo $row['rack_in'] ?></td>
+                              <td><?php echo $row['rack_out'] ?></td>
+                              <td><?php echo $row['rack'] ?></td>
                               <td>
                                 <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode'] ?>">
                                   <i class="fas fa-pencil-alt"></i>
@@ -295,7 +325,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-4">
                                           <div class="form-group">
                                             <label for="stock">Stock</label>
-                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>">
+                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>" readonly>
                                           </div>
                                         </div>
                                         <div class="col-sm-4">
@@ -308,6 +338,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                           <div class="form-group">
                                             <label for="sa_percentage">S/A%</label>
                                             <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage'] ?>%" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                            <label for="rack">Rack</label>
+                                            <input type="text" class="form-control " id="rack" name="rack" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" value="<?php echo $row['rack'] ?>">
                                           </div>
                                         </div>
                                       </div>
@@ -341,8 +377,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <th>BARCODE</th>
                             <th>DESCRIPTION</th>
                             <th>STOCK</th>
-                            <th>ALLOCATION</th>
+                            <th>ALLOC.</th>
                             <th>S/A %</th>
+                            <th>RACK-IN</th>
+                            <th>RACK-OUT</th>
+                            <th>RACK</th>
                             <th>ACTION</th>
                           </tr>
                         </thead>
@@ -396,6 +435,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                   ?>
                                 </div>
                               </td>
+                              <td><?php echo $row['rack_in'] ?></td>
+                              <td><?php echo $row['rack_out'] ?></td>
+                              <td><?php echo $row['rack'] ?></td>
                               <td>
                                 <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode'] ?>">
                                   <i class="fas fa-pencil-alt"></i>
@@ -434,7 +476,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-4">
                                           <div class="form-group">
                                             <label for="stock">Stock</label>
-                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>">
+                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>" readonly>
                                           </div>
                                         </div>
                                         <div class="col-sm-4">
@@ -447,6 +489,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                           <div class="form-group">
                                             <label for="sa_percentage">S/A%</label>
                                             <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage'] ?>%" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                            <label for="rack">Rack</label>
+                                            <input type="text" class="form-control " id="rack" name="rack" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" value="<?php echo $row['rack'] ?>">
                                           </div>
                                         </div>
                                       </div>
@@ -480,8 +528,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <th>BARCODE</th>
                             <th>DESCRIPTION</th>
                             <th>STOCK</th>
-                            <th>ALLOCATION</th>
+                            <th>ALLOC.</th>
                             <th>S/A %</th>
+                            <th>RACK-IN</th>
+                            <th>RACK-OUT</th>
+                            <th>RACK</th>
                             <th>ACTION</th>
                           </tr>
                         </thead>
@@ -535,6 +586,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                   ?>
                                 </div>
                               </td>
+                              <td><?php echo $row['rack_in'] ?></td>
+                              <td><?php echo $row['rack_out'] ?></td>
+                              <td><?php echo $row['rack'] ?></td>
                               <td>
                                 <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode'] ?>">
                                   <i class="fas fa-pencil-alt"></i>
@@ -573,7 +627,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-4">
                                           <div class="form-group">
                                             <label for="stock">Stock</label>
-                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>">
+                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>" readonly>
                                           </div>
                                         </div>
                                         <div class="col-sm-4">
@@ -586,6 +640,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                           <div class="form-group">
                                             <label for="sa_percentage">S/A%</label>
                                             <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage'] ?>%" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                            <label for="rack">Rack</label>
+                                            <input type="text" class="form-control " id="rack" name="rack" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" value="<?php echo $row['rack'] ?>">
                                           </div>
                                         </div>
                                       </div>
@@ -619,8 +679,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <th>BARCODE</th>
                             <th>DESCRIPTION</th>
                             <th>STOCK</th>
-                            <th>ALLOCATION</th>
+                            <th>ALLOC.</th>
                             <th>S/A %</th>
+                            <th>RACK-IN</th>
+                            <th>RACK-OUT</th>
+                            <th>RACK</th>
                             <th>ACTION</th>
                           </tr>
                         </thead>
@@ -674,6 +737,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                   ?>
                                 </div>
                               </td>
+                              <td><?php echo $row['rack_in'] ?></td>
+                              <td><?php echo $row['rack_out'] ?></td>
+                              <td><?php echo $row['rack'] ?></td>
                               <td>
                                 <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode'] ?>">
                                   <i class="fas fa-pencil-alt"></i>
@@ -712,7 +778,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-4">
                                           <div class="form-group">
                                             <label for="stock">Stock</label>
-                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>">
+                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>" readonly>
                                           </div>
                                         </div>
                                         <div class="col-sm-4">
@@ -725,6 +791,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                           <div class="form-group">
                                             <label for="sa_percentage">S/A%</label>
                                             <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage'] ?>%" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                            <label for="rack">Rack</label>
+                                            <input type="text" class="form-control " id="rack" name="rack" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" value="<?php echo $row['rack'] ?>">
                                           </div>
                                         </div>
                                       </div>
@@ -758,8 +830,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <th>BARCODE</th>
                             <th>DESCRIPTION</th>
                             <th>STOCK</th>
-                            <th>ALLOCATION</th>
+                            <th>ALLOC.</th>
                             <th>S/A %</th>
+                            <th>RACK-IN</th>
+                            <th>RACK-OUT</th>
+                            <th>RACK</th>
                             <th>ACTION</th>
                           </tr>
                         </thead>
@@ -813,6 +888,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                   ?>
                                 </div>
                               </td>
+                              <td><?php echo $row['rack_in'] ?></td>
+                              <td><?php echo $row['rack_out'] ?></td>
+                              <td><?php echo $row['rack'] ?></td>
                               <td>
                                 <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode'] ?>">
                                   <i class="fas fa-pencil-alt"></i>
@@ -851,7 +929,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-4">
                                           <div class="form-group">
                                             <label for="stock">Stock</label>
-                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>">
+                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>" readonly>
                                           </div>
                                         </div>
                                         <div class="col-sm-4">
@@ -864,6 +942,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                           <div class="form-group">
                                             <label for="sa_percentage">S/A%</label>
                                             <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage'] ?>%" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                            <label for="rack">Rack</label>
+                                            <input type="text" class="form-control " id="rack" name="rack" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" value="<?php echo $row['rack'] ?>">
                                           </div>
                                         </div>
                                       </div>
@@ -897,8 +981,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <th>BARCODE</th>
                             <th>DESCRIPTION</th>
                             <th>STOCK</th>
-                            <th>ALLOCATION</th>
+                            <th>ALLOC.</th>
                             <th>S/A %</th>
+                            <th>RACK-IN</th>
+                            <th>RACK-OUT</th>
+                            <th>RACK</th>
                             <th>ACTION</th>
                           </tr>
                         </thead>
@@ -952,6 +1039,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                   ?>
                                 </div>
                               </td>
+                              <td><?php echo $row['rack_in'] ?></td>
+                              <td><?php echo $row['rack_out'] ?></td>
+                              <td><?php echo $row['rack'] ?></td>
                               <td>
                                 <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['barcode'] ?>">
                                   <i class="fas fa-pencil-alt"></i>
@@ -990,7 +1080,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-4">
                                           <div class="form-group">
                                             <label for="stock">Stock</label>
-                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>">
+                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>" readonly>
                                           </div>
                                         </div>
                                         <div class="col-sm-4">
@@ -1003,6 +1093,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                           <div class="form-group">
                                             <label for="sa_percentage">S/A%</label>
                                             <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage'] ?>%" readonly>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                            <label for="rack">Rack</label>
+                                            <input type="text" class="form-control " id="rack" name="rack" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" value="<?php echo $row['rack'] ?>">
                                           </div>
                                         </div>
                                       </div>
@@ -1035,13 +1131,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
           </div>
         </div>
 
-
+        <!-- Modal for transfer rack in and out -->
         <div class="modal fade" id="addnew">
           <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">ENROLL NEW PRODUCTS</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <div class="modal-header bg-primary">
+                <h4 class="modal-title font-weight-bold">TRANSFER RACK IN/OUT</h4>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -1109,168 +1205,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
           <!-- /.modal-dialog -->
         </div>
 
-
-        <div class="modal fade" id="update<?php echo $row['barcode'] ?>">
-          <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">UPDATE PRODUCT DETAILS</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form>
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <div class="form-group">
-                        <label for="barcode">Barcode:</label>
-                        <input type="text" class="form-control " id="barcode" readonly>
-                      </div>
-                    </div>
-                    <div class="col-sm-8">
-                      <div class="form-group">
-                        <label for="prod">Product Description:</label>
-                        <input type="text" class="form-control " id="prod">
-                      </div>
-                    </div>
-                    <div class="col-sm-2">
-                      <div class="form-group">
-                        <label for="stock">Stock:</label>
-                        <input type="number" class="form-control " id="stock">
-                      </div>
-                    </div>
-                    <div class="col-sm-2">
-                      <div class="form-group">
-                        <label for="allo">Allocation:</label>
-                        <input type="number" class="form-control " id="allo">
-                      </div>
-                    </div>
-                    <div class="col-sm-3">
-                      <div class="form-group">
-                        <label for="lot">Lot Number:</label>
-                        <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();">
-                      </div>
-                    </div>
-                    <div class="col-sm-5">
-                      <div class="form-group">
-                        <label for="supp">Supplier:</label>
-                        <select class="form-control select2bs4" style="width: 100%;">
-                          <option selected="selected" disabled>Please Select Supplier</option>
-                          <option>Supplier A</option>
-                          <option>Supplier B</option>
-                          <option>Supplier C</option>
-                          <option>Supplier D</option>
-                          <option>Supplier E</option>
-                          <option>Supplier F</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <label for="exp">Expiration Date:</label>
-                        <input type="date" class="form-control " id="exp">
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <label for="supp">Entry Date:</label>
-                        <input type="date" class="form-control " id="supp">
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Update</button>
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
-
-        <div class="modal fade" id="view<?php echo $row['barcode'] ?>">
-          <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">VIEW PRODUCT DETAILS</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form>
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <div class="form-group">
-                        <label for="barcode">Barcode:</label>
-                        <input type="text" class="form-control" id="barcode" value="<?php echo $row['barcode'] ?>" readonly>
-                      </div>
-                    </div>
-                    <div class="col-sm-8">
-                      <div class="form-group">
-                        <label for="prod">Product Description:</label>
-                        <input type="text" class="form-control " id="prod" readonly>
-                      </div>
-                    </div>
-                    <div class="col-sm-2">
-                      <div class="form-group">
-                        <label for="stock">Stock:</label>
-                        <input type="number" class="form-control " id="stock" readonly>
-                      </div>
-                    </div>
-                    <div class="col-sm-2">
-                      <div class="form-group">
-                        <label for="allo">Allocation:</label>
-                        <input type="number" class="form-control " id="allo" readonly>
-                      </div>
-                    </div>
-                    <div class="col-sm-3">
-                      <div class="form-group">
-                        <label for="lot">Lot Number:</label>
-                        <input type="text" class="form-control" id="lot" onkeyup="this.value = this.value.toUpperCase();" readonly>
-                      </div>
-                    </div>
-                    <div class="col-sm-5">
-                      <div class="form-group">
-                        <label for="supp">Supplier:</label>
-                        <select class="form-control select2bs4" style="width: 100%;" disabled>
-                          <option selected="selected" disabled>Please Select Supplier</option>
-                          <option>Supplier A</option>
-                          <option>Supplier B</option>
-                          <option>Supplier C</option>
-                          <option>Supplier D</option>
-                          <option>Supplier E</option>
-                          <option>Supplier F</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <label for="exp">Expiration Date:</label>
-                        <input type="date" class="form-control " id="exp" readonly>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <label for="supp">Entry Date:</label>
-                        <input type="date" class="form-control " id="supp" readonly>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
 
       </section>
     </div>

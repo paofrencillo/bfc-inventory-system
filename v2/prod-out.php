@@ -560,38 +560,38 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
           })
         } else {
           $.ajax({
-          url: "get_prod-out.php",
-          type: "GET",
-          data: {
-            "endorsed_by": $("#endorsed_by").val(),
-            action: "endorse_product"
-          },
-          dataType: "JSON",
-          success: $(document).ready(function(data) {
-            $('#branch').val('');
-            $('#mrf').val('');
-            $('#order_num').val('');
-            $('#barcode').val('');
-            $('#description').val('');
-            $('#quantity').val('');
-            $('#lot').val('');
-            $('#exp_date').val('');
-            $('#remarks').val('');
-            swal.fire({
-              title: "Success!",
-              text: "Product successfully endorsed",
-              icon: "success",
-              confirmButtonText: "OK"
-            }).then((result) => {
-              if (result.isConfirmed) {
-                location.reload();
-              } else {
-                location.reload();
+            url: "get_prod-out.php",
+            type: "GET",
+            data: {
+              "endorsed_by": $("#endorsed_by").val(),
+              action: "endorse_product"
+            },
+            dataType: "JSON",
+            success: $(document).ready(function(data) {
+              $('#branch').val('');
+              $('#mrf').val('');
+              $('#order_num').val('');
+              $('#barcode').val('');
+              $('#description').val('');
+              $('#quantity').val('');
+              $('#lot').val('');
+              $('#exp_date').val('');
+              $('#remarks').val('');
+              swal.fire({
+                title: "Success!",
+                text: "Product successfully endorsed",
+                icon: "success",
+                confirmButtonText: "OK"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  location.reload();
+                } else {
+                  location.reload();
                 }
               });
             })
           });
-        }  
+        }
       });
 
       // Add a click event

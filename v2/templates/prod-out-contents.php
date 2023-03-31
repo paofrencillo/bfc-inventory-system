@@ -216,27 +216,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delete_modal<?php echo $row['id'] ?>">Delete</button>
                                       </div>
 
-                                      <div class="modal fade" name="delete_modal" id="delete_modal<?php echo $row['id'] ?>" >
-                                          <div class="modal-dialog modal-sm modal-dialog-centered">
-                                              <div class="modal-content">
-                                                  <div class="modal-header">
-                                                      <h5 class="modal-title font-weight-bold text-danger">DELETE PRODUCT</h5>
-                                                      <button type="button" class="close close-modal-delete1" aria-label="Close">
-                                                          <span aria-hidden="true">&times;</span>
-                                                      </button>
-                                                  </div>
-                                                  <div class="modal-body">
-                                                      <p class="text-danger">Are you sure you want to delete ?</p>
-                                                  </div>
-                                                  <div class="modal-footer justify-content-between">
-                                                      <button type="button" class="btn btn-outline-secondary close-modal-delete2">Cancel</button>
-                                                      <button type="submit" class="btn btn-danger" id="delete_updateprodout" name="delete_updateprodout">Yes,
-                                                          Delete it</button>
-                                                  </div>
-                                              </div>
+                                      <div class="modal fade" name="delete_modal" id="delete_modal<?php echo $row['id'] ?>">
+                                        <div class="modal-dialog modal-sm modal-dialog-centered">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title font-weight-bold text-danger">DELETE PRODUCT</h5>
+                                              <button type="button" class="close close-modal-delete1" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                              <p class="text-danger">Are you sure you want to delete ?</p>
+                                            </div>
+                                            <div class="modal-footer justify-content-between">
+                                              <button type="button" class="btn btn-outline-secondary close-modal-delete2">Cancel</button>
+                                              <button type="submit" class="btn btn-danger" id="delete_updateprodout" name="delete_updateprodout">Yes,
+                                                Delete it</button>
+                                            </div>
                                           </div>
+                                        </div>
                                       </div>
-                                      
+
                                     </form>
                                   </div>
                                 </div>
@@ -461,7 +461,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               </tr>
                             </thead>
                             <tbody>
- 
+
                             </tbody>
                           </table>
                         </div>
@@ -609,7 +609,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               </tr>
                             </thead>
                             <tbody>
-                             
+
                             </tbody>
                           </table>
                         </div>
