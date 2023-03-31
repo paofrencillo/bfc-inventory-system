@@ -54,7 +54,7 @@
                           <th>BARCODE</th>
                           <th>PRODUCT DESCRIPTION</th>
                           <th>PRF</th>
-                          <th>QHANTITY</th>
+                          <th>QTY</th>
                           <th>LOT NO.</th>
                           <th>EXP. DATE</th>
                           <th>ACTION</th>
@@ -233,7 +233,8 @@
                               <tr>
                                 <th>BARCODE</th>
                                 <th>PRODUCT DESCRIPTION</th>
-                                <th>QUANTITY</th>
+                                <th>RACK</th>
+                                <th>QTY</th>
                                 <th>LOT NO.</th>
                                 <th>EXP. DATE </th>
                               </tr>
@@ -247,13 +248,13 @@
                     </div>
                     <input type="hidden" name="action" value="receive_prod">
                     <div class="row">
-                      <div class="col-sm-4">
+                      <div class="col-sm-3">
                         <div class="form-group">
                           <label for="barcode">Barcode:</label>
                           <input type="text" class="form-control" id="barcode" name="barcode" onmouseover="this.focus();" autocomplete="off" required>
                         </div>
                       </div>
-                      <div class="col-sm-6">
+                      <div class="col-sm-4">
                         <div class="form-group">
                           <label for="prod">Product Description:</label>
                           <input type="text" class="form-control" id="description" name="description" autocomplete="off" readonly required>
@@ -275,6 +276,12 @@
                         <div class="form-group">
                           <label for="supp">Supplier</label>
                           <input type="text" class="form-control" id="supp" name="supp" onmouseover="this.focus();" autocomplete="off" readonly required>
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="rack">Rack:</label>
+                          <input type="text" class="form-control" id="rack" name="rack" onkeyup="this.value=this.value.toUpperCase();" onmouseover="this.focus();" value="N/A" required>
                         </div>
                       </div>
                       <div class="col-sm-3">

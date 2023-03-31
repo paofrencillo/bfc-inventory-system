@@ -252,6 +252,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
                         tr.innerHTML = `<tr>
                                             <td>${item.barcode}</td>
                                             <td>${item.description}</td>
+                                            <td>${item.rack}</td>
                                             <td>${item.in_quantity}</td>
                                             <td>${item.lot_no}</td>
                                             <td>${item.exp_date}</td>
@@ -330,6 +331,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
                 tr.innerHTML = `<tr>
                                     <td>${data.barcode}</td>
                                     <td>${data.description}</td>
+                                    <td>${data.rack}</td>
                                     <td>${data.quantity}</td>
                                     <td>${data.lot}</td>
                                     <td>${data.exp}</td>
