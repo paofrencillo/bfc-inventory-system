@@ -151,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                             $check_row = mysqli_num_rows($result9);
                                             while ($row9 = mysqli_fetch_array($result9)) {
                                             ?>
-                                              <small class="text-info">On Stock: <?php echo $row9['stock'] ?></small>
+                                              <small class="text-info">On Stock: <?php echo $row9['rack_in'] ?></small>
                                             <?php } ?>
                                           </div>
                                         </div>
