@@ -36,7 +36,7 @@ if (isset($_POST['signin'])) {
                 $conn->query("UPDATE users SET is_logged_in=1 WHERE user_id='$user_id';") or die("Error Could Not Query");
                 header('location:z-dashboard.php');
             } else {
-?>
+            ?>
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
                 <script>
@@ -279,7 +279,7 @@ if (isset($_POST['franchise'])) {
     $name = htmlspecialchars($_POST['name']);
     $company = htmlspecialchars($_POST['company']);
     $address = htmlspecialchars($_POST['address']);
-    $id_lastuser = $_POST['id_lastuser'];
+    $id_lastuser = $_SESSION["login_user"]["employee_name"];
     $is_superuser = $_POST['is_superuser'];
 
     $sql = "SELECT * FROM branches WHERE (code='$branchcode');";
@@ -394,7 +394,7 @@ if (isset($_POST['modify_franchisee'])) {
     $name = htmlspecialchars($_POST['name']);
     $company = htmlspecialchars($_POST['company']);
     $add = htmlspecialchars($_POST['add']);
-    $last_user = $_POST['last_user'];
+    $last_user = $_SESSION["login_user"]["employee_name"];
     $is_superuser = $_POST['is_superuser'];
 
     if ($franchisee_modify != null) {
@@ -702,7 +702,7 @@ if (isset($_POST['supplier'])) {
 if (isset($_POST['modify_supplier'])) {
     $supplier_modify = $_POST['sku_code'];
     $supplier_name = htmlspecialchars($_POST['supplier_name']);
-    $last_user = $_POST['last_user'];
+    $last_user = $_SESSION["login_user"]["employee_name"];
     $is_superuser = $_POST['is_superuser'];
     $last_edited_on = date("Y-m-d H:i:s");
 
@@ -926,7 +926,7 @@ if (isset($_POST['pass_admin'])) {
     <?php
     } else {
         $conn->query("UPDATE users SET pass='" . password_hash($pass, PASSWORD_BCRYPT) . "' WHERE user_id='$id_pass'") or die($conn->error);
-        session_destroy();
+
     ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -940,15 +940,17 @@ if (isset($_POST['pass_admin'])) {
                     confirmButtonText: 'Okay'
                 }).then((result) => {
                     if (result.isConfirmed) {
+                        session_destroy();
                         window.location.href = "index.php";
                     } else {
+                        session_destroy();
                         window.location.href = "index.php";
                     }
                 })
 
             })
         </script>
-        <?php
+    <?php
     }
 }
 
@@ -958,7 +960,7 @@ if (isset($_POST['pass_admin'])) {
     $pass = $_POST['password'];
     $pass2 = $_POST['confirmpass'];
     if ($pass != $pass2) {
-        ?>
+    ?>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script>
@@ -1014,6 +1016,63 @@ if (isset($_GET['logout'])) {
     $conn->query("UPDATE users SET is_logged_in=0 WHERE user_id='$user_id';") or die("Error Could Not Query");
     session_destroy();
     header('location:index.php');
+}
+
+#VERIFY OTP FOR RESET PASS
+if (isset($_POST['send_otp'])) {
+    $otp = $_POST['otp'];
+    $otp_input = $_POST['otp_input'];
+
+    if ($otp != $otp_input){
+        ?>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                Swal.fire({
+                icon: 'error',
+                title: 'An error occured!',
+                text: 'Default OTP does not match',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Okay'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "resetpass.php";
+                    }else{
+                        window.location.href = "resetpass.php";
+                    }
+                })      
+            })
+        </script>
+        <?php
+    }else{
+        $default_pass = 'admin';
+        $def_pass = password_hash($default_pass, PASSWORD_BCRYPT);
+
+        $conn->query("UPDATE users SET pass='$def_pass' WHERE user='admin'") or die($conn->error);
+            ?>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Password reset to default',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "index.php";
+                        } else {
+                            window.location.href = "index.php";
+                        }
+                    })
+                })
+            </script>
+        <?php
+    }
 }
 
 #MODIFY ENDORSE

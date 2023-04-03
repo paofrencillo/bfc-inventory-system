@@ -186,7 +186,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                                                     <button type="submit" class="btn btn-primary" name="modify_franchisee">Save Changes</button>
                                                                                 </div>
 
-                                                                                <div class="modal fade" name="delete_modal" id="delete_modal<?php echo $row['code'] ?>" >
+                                                                                <div class="modal fade" name="delete_modal" id="delete_modal<?php echo $row['code'] ?>">
                                                                                     <div class="modal-dialog modal-sm modal-dialog-centered">
                                                                                         <div class="modal-content">
                                                                                             <div class="modal-header">
@@ -206,7 +206,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                      
+
 
                                                                             </form>
                                                                         </div>
