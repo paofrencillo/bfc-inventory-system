@@ -624,6 +624,11 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
             $('#lot').val('');
             $('#exp_date').val('');
             $('#remarks').val('');
+
+            $("#branch111").attr('hidden', false);
+            $("#branch222").attr('hidden', true);
+            $("#branch22").val('')
+
             console.log(data)
             swal.fire({
               title: "Success!",

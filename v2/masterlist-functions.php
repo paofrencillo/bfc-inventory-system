@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 
                 $data = array(
                     "barcode" => $row["barcode"],
-                    "description" => $row["description"],
+                    "description" => htmlspecialchars_decode($row["description"]),
                     "generic_name" => $row["generic_name"],
                     "category" => $row["category"],
                     "supplier" => $row["supplier"],
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //PRODUCT ENROLLMENT
     if (isset($_POST['action']) && $_POST['action'] === 'enroll') {
         $barcode = $_POST["barcode"];
-        $description = $_POST["description"];
+        $description = htmlspecialchars($_POST["description"]);
         $generic_name = $_POST["generic_name"];
         $category = $_POST["category"];
         $supplier = $_POST["supplier"];
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // PRODUCT UPDATE DETAILS
     else if (isset($_POST['action']) && $_POST['action'] === 'update') {
         $barcode = $_POST["barcode-modal"];
-        $description = $_POST["desc-modal"];
+        $description = htmlspecialchars($_POST["desc-modal"]);
         $generic_name = $_POST["gen-modal"];
         $category = $_POST["cat-modal"];
         $supplier = $_POST["supp-modal"];
@@ -159,4 +159,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-?>

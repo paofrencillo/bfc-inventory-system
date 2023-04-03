@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
         } else {
             while ($row = mysqli_fetch_array($result)) {
                 $data = array(
-                    "description" => $row["description"],
+                    "description" => htmlspecialchars_decode($row["description"]),
                     "supplier" => $row["supplier"],
                 );
                 echo json_encode($data);
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 $data = array(
                     "id" => $row["id"],
                     "barcode" => $row["barcode"],
-                    "description" => $row["description"],
+                    "description" => htmlspecialchars_decode($row["description"]),
                     "in_quantity" => $row["in_quantity"],
                     "lot_no" => $row["lot_no"],
                     "exp_date" => $row["exp_date"],
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $last_edited_on = date("Y-m-d H:i:s");
         $entry_date = $_POST["added-on"];
         $barcode = $_POST["barcode"];
-        $description = $_POST["description"];
+        $description = htmlspecialchars($_POST["description"]);
         $prf = $_POST["prf"];
         $supplier = $_POST["supp"];
         $rack = $_POST["rack"];

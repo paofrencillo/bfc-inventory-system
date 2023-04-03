@@ -952,6 +952,61 @@ if (isset($_POST['pass_admin'])) {
     }
 }
 
+#RESET PASSWORD ADMIN
+if (isset($_POST['pass_admin'])) {
+    $id_pass = $_POST['id_password'];
+    $pass = $_POST['password'];
+    $pass2 = $_POST['confirmpass'];
+    if ($pass != $pass2) {
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Your password does not match',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "admin.php";
+                    } else {
+                        window.location.href = "admin.php";
+                    }
+                })
+
+            })
+        </script>
+    <?php
+    } else {
+        $conn->query("UPDATE users SET pass='" . password_hash($pass, PASSWORD_BCRYPT) . "' WHERE user_id='$id_pass'") or die($conn->error);
+        session_destroy();
+    ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Successfully Updated your Password',
+                    text: 'Please login your new created password',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "index.php";
+                    } else {
+                        window.location.href = "index.php";
+                    }
+                })
+
+            })
+        </script>
+        <?php
+    }
+}
+
 #LOGOUT
 if (isset($_GET['logout'])) {
     $_SESSION["authenticated"] = false;
@@ -1601,7 +1656,7 @@ if (isset($_POST['modify_invent'])) {
                         })
                     })
                 </script>
-<?php
+            <?php
             }
         }
     }
@@ -1643,10 +1698,10 @@ if (isset($_POST["to_rack_out"])) {
                     rack_out = rack_out + '$quantity',
                     rack_in = rack_in - '$quantity'
                     WHERE barcode='$barcode';")
-                    or die("Error Could Not Query.");
+            or die("Error Could Not Query.");
 
         if ($is_superuser === '1') {
-           ?>
+            ?>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
             <script>
@@ -1665,12 +1720,11 @@ if (isset($_POST["to_rack_out"])) {
                     })
                 })
             </script>
-        <?php }
-        else if ($is_superuser === '0') {
-            ?>
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <script>
+        <?php } else if ($is_superuser === '0') {
+        ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
                 $(document).ready(function() {
                     Swal.fire({
                         icon: 'success',
@@ -1686,47 +1740,44 @@ if (isset($_POST["to_rack_out"])) {
                     })
                 })
             </script>
-            <?php }
-        } 
-        
-        else {
-            ?>
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <script>
-                    $(document).ready(function() {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'An Error Occured',
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'Okay'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                <?php
-                                    if ($is_superuser === '1') {
-                                        die(header('location: inventory.php'));
-                                    } 
-                                    else if ($is_superuser === '0') {
-                                        die(header('location: z-inventory.php'));
-                                    }
-                                ?>
-                            } else {
-                                <?php
-                                    if ($is_superuser === '1') {
-                                        die(header('location: inventory.php'));
-                                    } 
-                                    else if ($is_superuser === '0') {
-                                        die(header('location: z-inventory.php'));
-                                    }
-                                ?>
-                            }
-                        })
-                    })
-                </script>
-            <?php
-        }
+        <?php }
+    } else {
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occured',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        <?php
+                        if ($is_superuser === '1') {
+                            die(header('location: inventory.php'));
+                        } else if ($is_superuser === '0') {
+                            die(header('location: z-inventory.php'));
+                        }
+                        ?>
+                    } else {
+                        <?php
+                        if ($is_superuser === '1') {
+                            die(header('location: inventory.php'));
+                        } else if ($is_superuser === '0') {
+                            die(header('location: z-inventory.php'));
+                        }
+                        ?>
+                    }
+                })
+            })
+        </script>
+    <?php
+    }
     ?>
-<?php }
+    <?php }
+
 
 #TRANSFER QUANTITY TO RACK IN
 if (isset($_POST["to_rack_in"])) {
@@ -1739,10 +1790,10 @@ if (isset($_POST["to_rack_in"])) {
                     rack_in = rack_in + '$quantity',
                     rack_out = rack_out - '$quantity'
                     WHERE barcode='$barcode';")
-                    or die("Error Could Not Query.");
+            or die("Error Could Not Query.");
 
         if ($is_superuser === '1') {
-           ?>
+    ?>
             <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
             <script>
@@ -1761,12 +1812,11 @@ if (isset($_POST["to_rack_in"])) {
                     })
                 })
             </script>
-        <?php }
-        else if ($is_superuser === '0') {
-            ?>
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <script>
+        <?php } else if ($is_superuser === '0') {
+        ?>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
                 $(document).ready(function() {
                     Swal.fire({
                         icon: 'success',
@@ -1782,45 +1832,41 @@ if (isset($_POST["to_rack_in"])) {
                     })
                 })
             </script>
-            <?php }
-        } 
-        
-        else {
-            ?>
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <script>
-                    $(document).ready(function() {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'An Error Occured',
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'Okay'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                <?php
-                                    if ($is_superuser === '1') {
-                                        die(header('location: inventory.php'));
-                                    } 
-                                    else if ($is_superuser === '0') {
-                                        die(header('location: z-inventory.php'));
-                                    }
-                                ?>
-                            } else {
-                                <?php
-                                    if ($is_superuser === '1') {
-                                        die(header('location: inventory.php'));
-                                    } 
-                                    else if ($is_superuser === '0') {
-                                        die(header('location: z-inventory.php'));
-                                    }
-                                ?>
-                            }
-                        })
-                    })
-                </script>
-            <?php
-        }
+        <?php }
+    } else {
+        ?>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'An Error Occured',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        <?php
+                        if ($is_superuser === '1') {
+                            die(header('location: inventory.php'));
+                        } else if ($is_superuser === '0') {
+                            die(header('location: z-inventory.php'));
+                        }
+                        ?>
+                    } else {
+                        <?php
+                        if ($is_superuser === '1') {
+                            die(header('location: inventory.php'));
+                        } else if ($is_superuser === '0') {
+                            die(header('location: z-inventory.php'));
+                        }
+                        ?>
+                    }
+                })
+            })
+        </script>
+    <?php
+    }
     ?>
 <?php }
 

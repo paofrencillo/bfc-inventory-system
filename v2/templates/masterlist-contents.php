@@ -77,10 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                             <i class="fas fa-pencil-alt"></i>
                                                             Edit
                                                         </button>
-                                                        <button class="btn btn-secondary btn-sm" data-id="<?php echo $row["barcode"]; ?>" data-toggle="modal" data-target="#details" onclick="viewModal1(this);">
-                                                            <i class="fas fa-eye"></i>
-                                                            Details
-                                                        </button>
+          
                                                     </td>
                                                 </tr>
                                             <?php } ?>
@@ -114,17 +111,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-7">
                                             <div class="form-group">
                                                 <label for="description">Product Description:</label>
-                                                <input type="text" class="form-control" name="description" id="description" autocomplete="off" onkeypress="return event.keyCode !== 39 && event.keyCode !== 34;" required>
-                                                <script>
-                                                    document.getElementById("description").addEventListener("input", function(event) {
-                                                        // Get the input value and replace any single or double quotes with a sanitized version
-                                                        var inputValue = event.target.value;
-                                                        var sanitizedValue = inputValue.replace(/['"]/g, "");
-                                                        
-                                                        // Set the sanitized value back to the input field
-                                                        event.target.value = sanitizedValue;
-                                                    });
-                                                </script>
+                                                <input type="text" class="form-control" name="description" id="description" autocomplete="off"  required>
+    
                                             </div>
                                         </div>
                                         <div class="col-sm-5">
@@ -136,7 +124,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-7">
                                             <div class="form-group mb-3">
                                                 <label for="category">Category:</label>
-                                                <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" name="category" id="category" required>
+                                                <select class="form-control selectpicker1" data-size='5' data-live-search="true" style="width: 100%;" name="category" id="category" required>
+                                                    <option selected value="" disabled>Please Select Category</option>
                                                     <option value="GENERIC">GENERIC</option>
                                                     <option value="BRANDED">BRANDED</option>
                                                     <option value="MEDICAL DEVICE">MEDICAL DEVICE</option>
@@ -144,13 +133,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                     <option value="SPECIAL ORDER">SPECIAL ORDER</option>
                                                     <option value="HOUSE BRANDS">HOUSE BRANDS</option>
                                                     <option value="HEALTHY FIX">HEALTHY FIX</option>
+
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-5">
                                             <div class="form-group">
                                                 <label for="supp">Supplier:</label>
-                                                <select class="form-control selectpicker" data-container="body" data-size='5' data-live-search="true" style="width: 100%;" name="supplier" id="supp" required>
+                                                <select class="form-control selectpicker2" data-container="body" data-size='5' data-live-search="true" style="width: 100%;" name="supplier" id="supp" required>
+                                                    <option selected value="" disabled>Please Select Supplier</option>
                                                     <?php
                                                     $query2 = "SELECT * FROM suppliers";
                                                     $result = mysqli_query($conn, $query2);
@@ -159,6 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                     ?>
                                                         <option value="<?php echo $row2['supplier_name'] ?>"><?php echo $row2['supplier_name'] ?></option>
                                                     <?php } ?>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -218,17 +210,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-7">
                                             <div class="form-group">
                                                 <label for="desc-modal">Product Description:</label>
-                                                <input type="text" class="form-control modal-field" name="desc-modal" id="desc-modal" autocomplete="off" onkeypress="return event.keyCode !== 39 && event.keyCode !== 34;" readonly>
-                                                <script>
-                                                    document.getElementById("desc-modal-details").addEventListener("input", function(event) {
-                                                        // Get the input value and replace any single or double quotes with a sanitized version
-                                                        var inputValue = event.target.value;
-                                                        var sanitizedValue = inputValue.replace(/['"]/g, "");
-                                                    
-                                                        // Set the sanitized value back to the input field
-                                                        event.target.value = sanitizedValue;
-                                                    });
-                                                </script>
+                                                <input type="text" class="form-control modal-field" name="desc-modal" id="desc-modal" autocomplete="off" readonly>
+                                                
                                             </div>
                                         </div>
                                         <div class="col-sm-5">
@@ -238,7 +221,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                             </div>
                                             <div class="form-group">
                                                 <label for="cat-modal">Category:</label>
-                                                <select class="form-control selectpicker" data-live-search="true" style="width: 100%;" name="cat-modal" id="cat-modal">
+                                                <select class="form-control selectpicker3" data-live-search="true" style="width: 100%;" name="cat-modal" id="cat-modal">
                                                     <option value="GENERIC">GENERIC</option>
                                                     <option value="BRANDED">BRANDED</option>
                                                     <option value="MEDICAL DEVICE">MEDICAL DEVICE</option>
@@ -250,7 +233,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                             </div>
                                             <div class="form-group">
                                                 <label for="supp-modal">Supplier:</label>
-                                                <select class="form-control selectpicker" data-container="body" data-size='5' data-live-search="true" style="width: 100%;" name="supp-modal" id="supp-modal">
+                                                <select class="form-control selectpicker4" data-container="body" data-size='5' data-live-search="true" style="width: 100%;" name="supp-modal" id="supp-modal">
                                                     <?php
                                                     $query2 = "SELECT * FROM suppliers";
                                                     $result = mysqli_query($conn, $query2);
@@ -297,7 +280,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title font-weight-bold text-danger">Delete Product</h5>
-                                                <button type="button" class="close close-modal-delete1"  aria-label="Close">
+                                                <button type="button" class="close close-modal-delete1" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
@@ -317,82 +300,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                     </div>
                     <!-- /.modal-dialog -->
                 </div>
-                <!-- /.modal -->
-                <div class="modal fade" id="details">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header bg-secondary">
-                                <h4 class="modal-title font-weight-bold">PRODUCT DETAILS</h4>
-                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="barcode-modal-details">Barcode:</label>
-                                            <input type="text" class="form-control modal-field-details" id="barcode-modal-details" autocomplete="off" readonly>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="cat-modal-details">Category:</label>
-                                            <input type="text" class="form-control modal-field-details" id="cat-modal-details" autocomplete="off" readonly>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="supp-modal-details">Supplier:</label>
-                                            <input type="text" class="form-control modal-field-details" id="supp-modal-details" autocomplete="off" readonly>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="edited-modal-details">Last Edited By:</label>
-                                            <input type="text" class="form-control modal-field-details" id="edited-modal-details" autocomplete="off" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="desc-modal-details">Product Description:</label>
-                                            <input type="text" class="form-control modal-field-details" id="desc-modal-details" autocomplete="off" readonly>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="gen-modal-details">Generic Name:</label>
-                                            <input type="text" class="form-control modal-field-details" id="gen-modal-details" autocomplete="off" readonly>
-                                        </div>
-                                        <div class="position-relative">
-                                            <div class="w-100">
-                                                <label for="img-modal-details">Image:</label>
-                                                <img alt="Product photo" class="img-fluid modal-field" id="img-modal-details" style="height: 100%; width: 100%;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="modal fade" tabindex="-1" id="delete-modal" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-sm modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title font-weight-bold text-danger">Delete Product</h5>
-                                                <button type="button" class="close close-modal-delete1" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p class="text-danger">Are you sure you want to delete this product in the
-                                                    inventory?</p>
-                                            </div>
-                                            <div class="modal-footer justify-content-end">
-                                                <button type="button" class="btn btn-outline-secondary close-modal-delete2">Cancel</button>
-                                                <button type="button" class="btn btn-danger" onclick="deleteProduct();">Yes,
-                                                    Delete it</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-                <!-- /.modal -->
             </section>
         </div>
         <!-- /.content-header -->
