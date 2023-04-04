@@ -26,6 +26,9 @@ if ($_SESSION["authenticated"] == false) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
     <link rel="stylesheet" media="screen" href="/v2/plugins/particles.js-master/demo/css/style.css" />
     <style type="text/css">
+      * {
+        scroll-behavior: smooth;
+      }
       body {
         background-color: rgb(200, 167, 167);
       }
@@ -55,34 +58,48 @@ if ($_SESSION["authenticated"] == false) {
         -webkit-backdrop-filter: blur(1px);
         border-radius: 10px;
         border: 1px solid rgba(255, 255, 255, 0.5);
-        transition: transform 1s;
-      
+        /* transition: transform 1s; */
+        position: relative;
+transform-origin: center;
+animation: spin 0.5s linear infinite;
       }
 
       .card:hover {
-        transform: scale(1.075);
+        /* background: rgba(109, 82, 82, 0.7);
+        transform: scale(1.075); */
         /* transform: rotate(360deg); */
       }
 
       img {
         height: 100px !important;
-        animation: float 3s ease-in-out infinite;
         object-fit: cover;
       }
 
-      @keyframes float {
-      0% {
+      @keyframes spin {
+        100% {
+transform: rotate(360deg);
+}
+50% {
+transform: rotate(180deg);
+}
+0% {
+transform: rotate(0deg);
+}
+      /* 0% {
+        transform: rotate(90);
         box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
         transform: translatey(0px);
       }
       50% {
         box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);
         transform: translatey(-10px);
+        transform: rotate(180);
       }
       100% {
         box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
         transform: translatey(0px);
-      }
+        transform: rotate(360);
+      } */
     }
     </style>
   </head>
