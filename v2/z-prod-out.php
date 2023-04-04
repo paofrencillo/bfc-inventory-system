@@ -230,6 +230,12 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
   <script>
     $(function() {
       $("#example1").DataTable({
+        // "columnDefs": [{
+        //   "className": "text-center",
+        //   "visible": true,
+        //   "searchable": false,
+        //   "targets": [7],
+        // }],
         "columnDefs": [{
           "className": "text-center",
           "visible": false,
@@ -240,7 +246,14 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
           "visible": true,
           "searchable": false,
           "targets": [7],
-        }],
+        },{ "width": "15%", "targets": 0, "data":"description",
+          render: function(data, type, row, meta) {
+           if (type === 'display') {
+             data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
+           }
+            return data;
+        } }
+      ],
         "responsive": true,
         "lengthChange": true,
         // "scrollY": '500px',
@@ -296,7 +309,14 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         "columnDefs": [{
           "className": "dt-center",
           "targets": "_all"
-        }],
+        },{ "width": "15%", "targets": 0, "data":"description",
+          render: function(data, type, row, meta) {
+           if (type === 'display') {
+             data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
+           }
+            return data;
+        } }
+      ],
         "responsive": true,
         "lengthChange": true,
         // "scrollY": '500px',
@@ -305,7 +325,45 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         "order": [
           [5, 'desc']
         ],
-        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+        "buttons": [{
+            extend: 'copy',
+            title: function() {
+              var printTitle = 'ENDORSEMENT FORM ';
+              return printTitle
+            },
+            exportOptions: {
+              columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            }
+          },
+          {
+            extend: 'excel',
+            title: function() {
+              var printTitle = 'ENDORSEMENT FORM ';
+              return printTitle
+            },
+            exportOptions: {
+              columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            }
+          },
+          {
+            extend: 'print',
+            exportOptions: {
+              columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            },
+            title: function() {
+              var printTitle = 'ENDORSEMENT FORM ';
+              return printTitle
+            },
+            customize: function(win) {
+              $(win.document.body).find('table').addClass('display').css('font-size', '10px');
+              $(win.document.body).find('tr:nth-child(odd) td').each(function(index) {
+                $(this).css('background-color', '#D0D0D0');
+              });
+              $(win.document.body).find('h1').css('text-align', 'center');
+            }
+          },
+        ]
+        // "buttons": ["copy", "excel", "pdf", "print"]
       }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
     });
 
@@ -315,7 +373,14 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
           "className": "dt-center",
           "targets": "_all",
           "orderable": false
-        }],
+        },{ "width": "15%", "targets": 0, "data":"description",
+          render: function(data, type, row, meta) {
+           if (type === 'display') {
+             data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
+           }
+            return data;
+        } }
+      ],
         "searching": false,
         "info": false,
         "responsive": true,
@@ -339,6 +404,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
       })
     })
   </script>
+
 
   <script>
     $(document).ready(function() {

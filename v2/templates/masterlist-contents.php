@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                 $date = date_format($date, "d/m/Y h:i");
                                             ?>
                                                 <tr class="text-center">
-                                                    <td>
+                                                    <td style="text-overflow: ellipsis;" title="<?php echo $row["barcode"] ?>">
                                                         <?php echo $row["barcode"] ?>
                                                     </td>
                                                     <td>
@@ -73,11 +73,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                         <?php echo $row["category"] ?>
                                                     </td>
                                                     <td>
-                                                        <button class="btn btn-info btn-sm" data-id="<?php echo $row["barcode"]; ?>" data-toggle="modal" data-target="#edit" onclick="viewModal2(this);">
+                                                        <button class="btn btn-info btn-sm" data-id="<?php echo $row["id"]; ?>" data-toggle="modal" data-target="#edit" onclick="viewModal(this);">
                                                             <i class="fas fa-pencil-alt"></i>
                                                             Edit
                                                         </button>
-          
+
                                                     </td>
                                                 </tr>
                                             <?php } ?>
@@ -111,8 +111,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-7">
                                             <div class="form-group">
                                                 <label for="description">Product Description:</label>
-                                                <input type="text" class="form-control" name="description" id="description" autocomplete="off"  required>
-    
+                                                <input type="text" class="form-control" name="description" id="description" autocomplete="off" required>
+
                                             </div>
                                         </div>
                                         <div class="col-sm-5">
@@ -126,8 +126,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                 <label for="category">Category:</label>
                                                 <select class="form-control selectpicker1" data-size='5' data-live-search="true" style="width: 100%;" name="category" id="category" required>
                                                     <option selected value="" disabled>Please Select Category</option>
-                                                    <option value="GENERIC">GENERIC</option>
+                                                    <option value="GENERIC CAT 1">GENERIC CAT 1</option>
+                                                    <option value="GENERIC CAT 2">GENERIC CAT 2</option>
                                                     <option value="BRANDED">BRANDED</option>
+                                                    <option value="VAL RECOMMEND 1">VAL RECOMMEND 1</option>
                                                     <option value="MEDICAL DEVICE">MEDICAL DEVICE</option>
                                                     <option value="NON-PHARMA">NON-PHARMA</option>
                                                     <option value="SPECIAL ORDER">SPECIAL ORDER</option>
@@ -198,7 +200,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             </div>
                             <div class="modal-body">
                                 <form name="update_masterlist_form" id="update_masterlist_form" method="post" enctype="multipart/form-data">
-                                    <input type="hidden" name="barcode-hidden" id="barcode-hidden">
+                                    <input type="hidden" name="id-hidden" id="id-hidden">
                                     <input type="hidden" name="action" value="update">
                                     <div class="row">
                                         <div class="col-sm-5">
@@ -211,7 +213,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                             <div class="form-group">
                                                 <label for="desc-modal">Product Description:</label>
                                                 <input type="text" class="form-control modal-field" name="desc-modal" id="desc-modal" autocomplete="off" readonly>
-                                                
+
                                             </div>
                                         </div>
                                         <div class="col-sm-5">
@@ -222,8 +224,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                             <div class="form-group">
                                                 <label for="cat-modal">Category:</label>
                                                 <select class="form-control selectpicker3" data-live-search="true" style="width: 100%;" name="cat-modal" id="cat-modal">
-                                                    <option value="GENERIC">GENERIC</option>
+                                                    <option value="GENERIC CAT 1">GENERIC CAT 1</option>
+                                                    <option value="GENERIC CAT 2">GENERIC CAT 2</option>
                                                     <option value="BRANDED">BRANDED</option>
+                                                    <option value="VAL RECOMMEND 1">VAL RECOMMEND 1</option>
                                                     <option value="MEDICAL DEVICE">MEDICAL DEVICE</option>
                                                     <option value="NON-PHARMA">NON-PHARMA</option>
                                                     <option value="SPECIAL ORDER">SPECIAL ORDER</option>

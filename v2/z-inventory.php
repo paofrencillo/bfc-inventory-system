@@ -224,15 +224,18 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
   <!-- Select2 -->
   <script src="plugins/select2/js/select2.full.min.js"></script>
   <script>
-      $("#barcode-transfer").on("change", ()=> {
+    $("#barcode-transfer").on("change", () => {
       $("#qty-transfer").val('');
-      $("#transfer-form").on("submit", (e)=> {
+      $("#transfer-form").on("submit", (e) => {
         e.preventDefault();
       });
       $.ajax({
         type: "GET",
         url: "functions.php",
-        data: {"barcode": $("#barcode-transfer").val(), action: "get_product_transfer"},
+        data: {
+          "barcode": $("#barcode-transfer").val(),
+          action: "get_product_transfer"
+        },
         dataType: "JSON",
         success: function(data) {
           if (data == "Not found") {
@@ -243,8 +246,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
             $("#qty-transfer").val('');
             $("#rack-in").val('');
             $("#rack-out").val('');
-          }
-          else {
+          } else {
             $("#warning-transfer-text").addClass("d-none");
             $("#barcode-transfer").val(data.barcode);
             $("#desc-transfer").val(data.description);
@@ -260,12 +262,22 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
       });
       $("#transfer-form").unbind("submit");
     });
-    
+
     $(function() {
       $("#Generic").DataTable({
         "columnDefs": [{
           "className": "dt-center",
           "targets": "_all"
+        }, {
+          "width": "15%",
+          "targets": 0,
+          "data": "description",
+          render: function(data, type, row, meta) {
+            if (type === 'display') {
+              data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
+            }
+            return data;
+          }
         }],
         "responsive": true,
         "lengthChange": true,
@@ -284,6 +296,16 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         "columnDefs": [{
           "className": "dt-center",
           "targets": "_all"
+        }, {
+          "width": "15%",
+          "targets": 0,
+          "data": "description",
+          render: function(data, type, row, meta) {
+            if (type === 'display') {
+              data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
+            }
+            return data;
+          }
         }],
         "responsive": true,
         "lengthChange": true,
@@ -302,6 +324,16 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         "columnDefs": [{
           "className": "dt-center",
           "targets": "_all"
+        }, {
+          "width": "15%",
+          "targets": 0,
+          "data": "description",
+          render: function(data, type, row, meta) {
+            if (type === 'display') {
+              data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
+            }
+            return data;
+          }
         }],
         "responsive": true,
         "lengthChange": true,
@@ -320,6 +352,16 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         "columnDefs": [{
           "className": "dt-center",
           "targets": "_all"
+        }, {
+          "width": "15%",
+          "targets": 0,
+          "data": "description",
+          render: function(data, type, row, meta) {
+            if (type === 'display') {
+              data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
+            }
+            return data;
+          }
         }],
         "responsive": true,
         "lengthChange": true,
@@ -338,6 +380,16 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         "columnDefs": [{
           "className": "dt-center",
           "targets": "_all"
+        }, {
+          "width": "15%",
+          "targets": 0,
+          "data": "description",
+          render: function(data, type, row, meta) {
+            if (type === 'display') {
+              data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
+            }
+            return data;
+          }
         }],
         "responsive": true,
         "lengthChange": true,
@@ -356,6 +408,16 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         "columnDefs": [{
           "className": "dt-center",
           "targets": "_all"
+        }, {
+          "width": "15%",
+          "targets": 0,
+          "data": "description",
+          render: function(data, type, row, meta) {
+            if (type === 'display') {
+              data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
+            }
+            return data;
+          }
         }],
         "responsive": true,
         "lengthChange": true,
@@ -374,6 +436,16 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         "columnDefs": [{
           "className": "dt-center",
           "targets": "_all"
+        }, {
+          "width": "15%",
+          "targets": 0,
+          "data": "description",
+          render: function(data, type, row, meta) {
+            if (type === 'display') {
+              data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
+            }
+            return data;
+          }
         }],
         "responsive": true,
         "lengthChange": true,

@@ -90,7 +90,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             $bar = $row['barcode']
                           ?>
                             <tr>
-                              <td><?php echo $row['barcode'] ?></td>
+                              <td style="text-overflow: ellipsis;" title="<?php echo $row["barcode"] ?>">
+                                  <?php echo $row["barcode"] ?>
+                              </td>
                               <td><?php echo $row['description'] ?></td>
                               <td><?php echo $row['lot'] ?></td>
                               <td><?php echo $row['exp_date'] ?></td>
@@ -376,7 +378,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                           while ($row = mysqli_fetch_array($result)) {
                           ?>
                             <tr>
-                              <td><?php echo $row['barcode'] ?></td>
+                              <td style="text-overflow: ellipsis;" title="<?php echo $row["barcode"] ?>">
+                                <?php echo $row["barcode"] ?>
+                              </td>
                               <td><?php echo $row['description'] ?></td>
                               <td><?php echo $row['quantity'] ?></td>
                               <td><?php echo $row['lot'] ?></td>

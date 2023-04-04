@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 $date = date_format($date, "m-d-Y h:i");
 
                 $data = array(
+                    "id" => $row["id"], 
                     "barcode" => $row["barcode"],
                     "description" => htmlspecialchars_decode($row["description"]),
                     "generic_name" => $row["generic_name"],
@@ -34,7 +35,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 echo json_encode($data);
             }
         }
-    } else {
+    }
+    if (isset($_GET["action"]) && $_GET['action'] === 'get_product_view') {
+        $id = $_GET["id"];
+        $table = "product_masterlist";
+        $query_get = "SELECT * FROM $table WHERE id=$id;";
+        $result = mysqli_query($conn, $query_get);
+    
+        if ($result->num_rows == 0) {
+            $data = "Not found";
+            echo json_encode($data);
+        } else {
+            while ($row = mysqli_fetch_array($result)) {
+                $date = date_create($row["last_edited_on"]);
+                $date = date_format($date, "m-d-Y h:i");
+
+                $data = array(
+                    "id" => $row["id"], 
+                    "barcode" => $row["barcode"],
+                    "description" => htmlspecialchars_decode($row["description"]),
+                    "generic_name" => $row["generic_name"],
+                    "category" => $row["category"],
+                    "supplier" => $row["supplier"],
+                    "image" => $row["image"],
+                    "last_edited" => $row["last_edited_by"] . ' | ' .  $date,
+                );
+                echo json_encode($data);
+            }
+        }
+    }
+    else {
         /* 
         Up to you which header to send, some prefer 404 even if 
         the files does exist for security
@@ -106,6 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     // PRODUCT UPDATE DETAILS
     else if (isset($_POST['action']) && $_POST['action'] === 'update') {
+        $id = $_POST["id-hidden"];
         $barcode = $_POST["barcode-modal"];
         $description = htmlspecialchars($_POST["desc-modal"]);
         $generic_name = $_POST["gen-modal"];
@@ -128,17 +159,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $path = "product-imgs/" . $name; // image upload path
                 move_uploaded_file($_FILES["imageFile2"]["tmp_name"], $path);
     
-                $conn->query("UPDATE $table1 SET description='$description', generic_name='$generic_name',
+                $conn->query("UPDATE $table1 SET barcode='$barcode', description='$description', generic_name='$generic_name',
                             category='$category', supplier='$supplier', image='$path', last_edited_by='$last_edited_by',
-                            last_edited_on='$last_edited_on' WHERE barcode='$barcode';");
+                            last_edited_on='$last_edited_on' WHERE id=$id;");
             }
         } else if ($_FILES["imageFile2"]["name"] == '') { // if image was not updated
-            $conn->query("UPDATE $table1 SET description='$description', generic_name='$generic_name',
+            $conn->query("UPDATE $table1 SET barcode='$barcode', description='$description', generic_name='$generic_name',
                         category='$category', supplier='$supplier', last_edited_by='$last_edited_by',
-                        last_edited_on='$last_edited_on' WHERE barcode='$barcode';");
+                        last_edited_on='$last_edited_on' WHERE id=$id;");
         }
 
-        $conn->query("UPDATE $table2 SET description='$description', category='$category' WHERE barcode='$barcode';") or die('Error Could Not Query');
+        $conn->query("UPDATE $table2 SET barcode='$barcode', description='$description', category='$category' WHERE id=$id;") or die('Error Could Not Query');
     
         if(!mysqli_error($conn)) {
             // raise error
@@ -147,12 +178,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     // DELETE PRODUCT
     else if (isset($_POST['action']) && $_POST['action'] === 'delete') {
-        $barcode = $_POST["barcode"];
+        $id = $_POST["id"];
         $table1 = "product_masterlist";
         $table2 = "inventory";
 
-        $conn->query("DELETE FROM $table1 WHERE barcode='$barcode';") or die('Error Could Not Query');
-        $conn->query("DELETE FROM $table2 WHERE barcode='$barcode';") or die('Error Could Not Query');
+        $conn->query("DELETE FROM $table1 WHERE id=$id;") or die('Error Could Not Query');
+        $conn->query("DELETE FROM $table2 WHERE id=$id;") or die('Error Could Not Query');
 
         if(!mysqli_error($conn)) {
             echo json_encode("success");

@@ -67,8 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                       while ($row = mysqli_fetch_array($result)) {
                       ?>
                         <tr>
-                          <td>
-                            <?php echo $row["barcode"]; ?>
+                          <td style="text-overflow: ellipsis;" title="<?php echo $row["barcode"] ?>">
+                            <?php echo $row["barcode"] ?>
                           </td>
                           <td>
                             <?php echo $row["description"]; ?>

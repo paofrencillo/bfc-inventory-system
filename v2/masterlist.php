@@ -256,42 +256,17 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
     });
 
     // View product details
-    function viewModal1(el) {
+    function viewModal(el) {
       $.ajax({
         type: "GET",
         url: "masterlist-functions.php",
         data: {
-          "barcode": el.getAttribute("data-id"),
-          action: "get_product"
+          id: el.getAttribute("data-id"),
+          action: "get_product_view"
         },
         dataType: "JSON",
         success: function(data) {
-          $("#barcode-modal-details").val(data.barcode);
-          $("#desc-modal-details").val(data.description);
-          $("#gen-modal-details").val(data.generic_name);
-          $("#cat-modal-details").val(data.category);
-          $("#supp-modal-details").val(data.supplier);
-          $("#edited-modal-details").val(data.last_edited);
-          $("#img-modal-details").attr("src", data.image);
-        },
-        error: function(error) {
-          console.log(error);
-        }
-      })
-    }
-
-    // View product details
-    function viewModal2(el) {
-      $.ajax({
-        type: "GET",
-        url: "masterlist-functions.php",
-        data: {
-          "barcode": el.getAttribute("data-id"),
-          action: "get_product"
-        },
-        dataType: "JSON",
-        success: function(data) {
-          $("#barcode-hidden").val(data.barcode);
+          $("#id-hidden").val(data.id);
           $("#barcode-modal").val(data.barcode);
           $("#desc-modal").val(data.description);
           $("#gen-modal").val(data.generic_name);
@@ -317,11 +292,9 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
 
       modal_fields.forEach(field => {
 
-        if (field.id != "barcode-modal") {
-          field.removeAttribute("readonly");
-          if (field.id == "imageFile2") {
-            $("#img-update-field").removeClass("d-none");
-          }
+        field.removeAttribute("readonly");
+        if (field.id == "imageFile2") {
+          $("#img-update-field").removeClass("d-none");
         }
       });
     }
@@ -345,10 +318,10 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
 
     // ------ Delete product
     function deleteProduct() {
-      let barcode = $("#barcode-hidden").val();
+      let id = $("#id-hidden").val();
       let formData = new FormData();
       formData.append('action', 'delete');
-      formData.append('barcode', barcode);
+      formData.append('id', id);
 
       $.ajax({
         type: "POST",
@@ -376,12 +349,10 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
 
       modal_fields = document.getElementById("edit").querySelectorAll("input");
       modal_fields.forEach(field => {
-        if (field.id != "barcode-modal") {
-          field.setAttribute("readonly", "");
-
-          if (field.id == "imageFile2") {
-            $("#img-update-field").addClass("d-none")
-          }
+  
+        field.setAttribute("readonly", "");
+        if (field.id == "imageFile2") {
+          $("#img-update-field").addClass("d-none")
         }
       });
     })
@@ -459,6 +430,51 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
       })
     });
 
+    // ------ Check if product is already enrolled
+    $("#barcode-modal").on("change", () => {
+      $("update_masterlist_form").on("submit", (e) => {
+        e.preventDefault();
+      });
+      $.ajax({
+        type: "GET",
+        url: "masterlist-functions.php",
+        data: {
+          "barcode": $("#barcode").val(),
+          action: "get_product"
+        },
+        dataType: "JSON",
+        success: function(data) {
+          if (data != "Not found") {
+            $("#description").attr("disabled", "");
+            $("#generic_name").attr("disabled", "");
+            document.getElementsByClassName("dropdown-toggle")[0].setAttribute("disabled", true);
+            document.getElementsByClassName("dropdown-toggle")[1].setAttribute("disabled", true);
+            $("#imageFile").attr("disabled", "");
+
+            $("#barcode").val(data.barcode);
+            $("#description").val(data.description);
+            $("#generic_name").val(data.generic_name);
+            $("#category").selectpicker('val', data.category);
+            $('#supp').selectpicker('val', data.supplier);
+            let imgName = data.image;
+            let strip_imgName = imgName.replace("product-imgs/", '')
+            $("#file-label").html(strip_imgName);
+            $("#enroll_warning_text").removeClass("d-none");
+            $("#enroll-btn").attr("disabled", "");
+          } else {
+            $("#enroll_warning_text").addClass("d-none");
+            $("#enroll-btn").removeAttr("disabled");
+            document.getElementById("description").focus();
+            removeAttrInputs();
+          }
+        },
+        error: function(error) {
+          console.error(error);
+        }
+      })
+    });
+
+
     // ------ Enrolling new product
     $("#enroll_form").on("submit", function(e) {
       e.preventDefault();
@@ -523,7 +539,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         "columnDefs": [{
           "className": "dt-center",
           "targets": "no_sort",
-          "orderable": false
+          "orderable": false,
         }],
         "responsive": true,
         "lengthChange": true,

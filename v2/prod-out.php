@@ -285,7 +285,14 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
           "visible": true,
           "searchable": false,
           "targets": [7],
-        }],
+        },{ "width": "15%", "targets": 0, "data":"description",
+          render: function(data, type, row, meta) {
+           if (type === 'display') {
+             data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
+           }
+            return data;
+        } }
+      ],
         "responsive": true,
         "lengthChange": true,
         // "scrollY": '500px',
@@ -341,7 +348,14 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         "columnDefs": [{
           "className": "dt-center",
           "targets": "_all"
-        }],
+        },{ "width": "15%", "targets": 0, "data":"description",
+          render: function(data, type, row, meta) {
+           if (type === 'display') {
+             data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
+           }
+            return data;
+        } }
+      ],
         "responsive": true,
         "lengthChange": true,
         // "scrollY": '500px',
@@ -398,7 +412,14 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
           "className": "dt-center",
           "targets": "_all",
           "orderable": false
-        }],
+        },{ "width": "15%", "targets": 0, "data":"description",
+          render: function(data, type, row, meta) {
+           if (type === 'display') {
+             data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
+           }
+            return data;
+        } }
+      ],
         "searching": false,
         "info": false,
         "responsive": true,
@@ -477,7 +498,12 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
             data.forEach(function(row) {
               console.log(row)
               var tr = document.createElement('tr');
-              tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
+              tr.innerHTML = `<td style="overflow: hidden;
+                  text-overflow: ellipsis;
+                  display: -webkit-box;
+                  -webkit-line-clamp: 1;
+                          line-clamp: 0;
+                  -webkit-box-orient: vertical;" title=${row.barcode}>` + row.barcode + '</td><td>' +
                 row.description + '</td><td>' +
                 row.quantity + '</td><td>' +
                 row.lot + '</td><td>' +
