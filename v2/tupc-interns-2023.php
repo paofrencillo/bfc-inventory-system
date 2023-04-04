@@ -69,6 +69,27 @@ if ($_SESSION["authenticated"] == false) {
         transform: scale(1.075); */
         /* transform: rotate(360deg); */
         animation: none !important;
+        animation-name: stretch;
+        transform: scale(1);
+        /* animation-duration: 2.0s;
+        animation-timing-function: ease-out;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
+        animation-play-state: running; */
+      }
+
+      @keyframes stretch {
+        0% {
+          transform: scale(.5);
+        }
+
+        50% {
+          /* background-color: orange; */
+        }
+
+        100% {
+          transform: scale(2.0);
+        }
       }
 
       img {
@@ -78,14 +99,16 @@ if ($_SESSION["authenticated"] == false) {
 
       @keyframes spin {
         100% {
-transform: rotate(360deg);
-}
-50% {
-transform: rotate(180deg);
-}
-0% {
-transform: rotate(0deg);
-}
+      transform: rotate(360deg);
+      }
+      50% {
+      transform: rotate(180deg);
+      }
+      0% {
+      transform: rotate(0deg);
+      }
+
+      
       /* 0% {
         transform: rotate(90);
         box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
