@@ -60,14 +60,15 @@ if ($_SESSION["authenticated"] == false) {
         border: 1px solid rgba(255, 255, 255, 0.5);
         /* transition: transform 1s; */
         position: relative;
-transform-origin: center;
-animation: spin 0.5s linear infinite;
+        transform-origin: center;
+        animation: spin 0.75s linear infinite;
       }
 
       .card:hover {
         /* background: rgba(109, 82, 82, 0.7);
         transform: scale(1.075); */
         /* transform: rotate(360deg); */
+        animation: none !important;
       }
 
       img {
@@ -105,13 +106,6 @@ transform: rotate(0deg);
   </head>
 
   <body>
-    <!-- count particles -->
-    <div class="count-particles">
-      <span class="js-count-particles">--</span> particles
-    </div>
-
-    <!-- particles.js container -->
-    <div id="particles-js">
 
       <main>
         <div class="container p-5">
@@ -135,7 +129,7 @@ transform: rotate(0deg);
                     <div><img src="dist/img/cj-avatar.jpg" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                     <div class="flex-1 ms-3">
                       <h5 class="font-size-16 text-white mb-1 text-decoration-underline">CJ Areglado</h5>
-                      <small class="font-size-10 text-white mb-1">Endorsement</small>
+                      <small class="font-size-10 text-white mb-1">RDU Supervisor</small>
                     </div>
                   </div>
                   <div class="mt-3 pt-1">
@@ -159,7 +153,7 @@ transform: rotate(0deg);
                     <div><img src="dist/img/rey-avatar.jpg" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                     <div class="flex-1 ms-3">
                       <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Rey Asilo</h5>
-                      <small class="font-size-10 text-white mb-1">--position--</small>
+                      <small class="font-size-10 text-white mb-1">Accounting Specialist</small>
                     </div>
                   </div>
                   <div class="mt-3 pt-1">
@@ -183,7 +177,7 @@ transform: rotate(0deg);
                     <div><img src="dist/img/nedz-avatar.jpg" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                     <div class="flex-1 ms-3">
                       <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Nedz Baybay</h5>
-                      <small class="font-size-10 text-white mb-1">--position--</small>
+                      <small class="font-size-10 text-white mb-1">SO God Specialist</small>
                     </div>
                   </div>
                   <div class="mt-3 pt-1">
@@ -230,7 +224,7 @@ transform: rotate(0deg);
                     <div><img src="dist/img/ryan-avatar.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                     <div class="flex-1 ms-3">
                       <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Ryan Dela Cruz</h5>
-                      <small class="font-size-10 text-white mb-1">Endorsement</small>
+                      <small class="font-size-10 text-white mb-1">Inventory Master</small>
                     </div>
                   </div>
                   <div class="mt-3 pt-1">
@@ -254,7 +248,7 @@ transform: rotate(0deg);
                     <div><img src="dist/img/cef-avatar.jpg" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                     <div class="flex-1 ms-3">
                       <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Cefrin Paanod</h5>
-                      <small class="font-size-10 text-white mb-1">Endorsement</small>
+                      <small class="font-size-10 text-white mb-1">Inventory Manager</small>
                     </div>
                   </div>
                   <div class="mt-3 pt-1">
@@ -278,7 +272,7 @@ transform: rotate(0deg);
                     <div><img src="dist/img/ron-avatar.jpg" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                     <div class="flex-1 ms-3">
                       <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Roniel Kilario</h5>
-                      <small class="font-size-10 text-white mb-1">Endorsement</small>
+                      <small class="font-size-10 text-white mb-1">SO God Specialist</small>
                     </div>
                   </div>
                   <div class="mt-3 pt-1">
@@ -302,7 +296,7 @@ transform: rotate(0deg);
                     <div><img src="dist/img/miole.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                     <div class="flex-1 ms-3">
                       <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Chrichelle Miole</h5>
-                      <small class="font-size-10 text-white mb-1">Endorsement</small>
+                      <small class="font-size-10 text-white mb-1">RDU Specialist</small>
                     </div>
                   </div>
                   <div class="mt-3 pt-1">
@@ -326,7 +320,7 @@ transform: rotate(0deg);
                     <div><img src="dist/img/corpuz.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                     <div class="flex-1 ms-3">
                       <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Celyna Corpuz</h5>
-                      <small class="font-size-10 text-white mb-1">Endorsement</small>
+                      <small class="font-size-10 text-white mb-1">RDU Specialist</small>
                     </div>
                   </div>
                   <div class="mt-3 pt-1">
@@ -350,7 +344,7 @@ transform: rotate(0deg);
                     <div><img src="dist/img/tomas.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                     <div class="flex-1 ms-3">
                       <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Nefetina Tomas</h5>
-                      <small class="font-size-10 text-white mb-1">Endorsement</small>
+                      <small class="font-size-10 text-white mb-1">RDU Specialist</small>
                     </div>
                   </div>
                   <div class="mt-3 pt-1">
@@ -397,7 +391,7 @@ transform: rotate(0deg);
                     <div><img src="dist/img/mel-avatar.jpg" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                     <div class="flex-1 ms-3">
                       <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Melisa Manalili</h5>
-                      <small class="font-size-10 text-white mb-1">PRF Organizer</small>
+                      <small class="font-size-10 text-white mb-1">PRF Master Organizer</small>
                     </div>
                   </div>
                   <div class="mt-3 pt-1">
@@ -420,7 +414,7 @@ transform: rotate(0deg);
                     <div><img src="dist/img/mico-avatar.jpg" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                     <div class="flex-1 ms-3">
                       <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Mico San Pablo</h5>
-                      <small class="font-size-10 text-white mb-1">Endorsement</small>
+                      <small class="font-size-10 text-white mb-1">Inventory Big Boy</small>
                     </div>
                   </div>
                   <div class="mt-3 pt-1">
@@ -444,7 +438,7 @@ transform: rotate(0deg);
                     <div><img src="dist/img/lerry-avatar.jpg" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                     <div class="flex-1 ms-3">
                       <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Lerry Laungayan</h5>
-                      <small class="font-size-10 text-white mb-1">Endorsement</small>
+                      <small class="font-size-10 text-white mb-1">Inventory Silencer</small>
                     </div>
                   </div>
                   <div class="mt-3 pt-1">
@@ -468,7 +462,7 @@ transform: rotate(0deg);
                     <div><img src="dist/img/dante-avatar.jpg" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                     <div class="flex-1 ms-3">
                       <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Dante Tiagan</h5>
-                      <small class="font-size-10 text-white mb-1">Endorsement</small>
+                      <small class="font-size-10 text-white mb-1">Endorsement Big Boss</small>
                     </div>
                   </div>
                   <div class="mt-3 pt-1">
@@ -492,7 +486,7 @@ transform: rotate(0deg);
                     <div><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                     <div class="flex-1 ms-3">
                       <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Monique Mana-ay</h5>
-                      <small class="font-size-10 text-white mb-1">Endorsement</small>
+                      <small class="font-size-10 text-white mb-1">Accounting Specialist</small>
                     </div>
                   </div>
                   <div class="mt-3 pt-1">
@@ -516,7 +510,7 @@ transform: rotate(0deg);
                     <div><img src="dist/img/mark-avatar.jpg" alt="" width="100px" class="avatar-md rounded-circle img-thumbnail" /></div>
                     <div class="flex-1 ms-3">
                       <h5 class="font-size-16 text-white mb-1 text-decoration-underline">Mark Orcullo</h5>
-                      <small class="font-size-10 text-white mb-1">Endorsement</small>
+                      <small class="font-size-10 text-white mb-1">Buraot God Specialist Supervisor</small>
                     </div>
                   </div>
                   <div class="mt-3 pt-1">

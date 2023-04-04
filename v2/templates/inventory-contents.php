@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                           $check_user =  $_SESSION['login_user']['user_id'];
                           $user =  $_SESSION['login_user']['employee_name'];
 
-                          $query = "SELECT * FROM inventory ";
+                          $query = "SELECT * FROM inventory ORDER BY description";
                           $result = mysqli_query($conn, $query);
                           $check_row = mysqli_num_rows($result);
                           while ($row = mysqli_fetch_array($result)) {
@@ -141,13 +141,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               <td><?php echo $row['rack_out'] ?></td>
                               <td><?php echo $row['rack'] ?></td>
                               <td>
-                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#update<?php echo $row['id'] ?>">
+                                <button class="btn btn-info btn-sm" onclick="editInv(this);" data-id="<?php echo $row['id'] ?>">
                                   <i class="fas fa-pencil-alt"></i>
                                   Edit
                                 </button>
                               </td>
                             </tr>
-                            <!-- <div class="modal fade" id="update<?php echo $row['id'] ?>" role="dialog">
+                            <?php } ?>
+                            <div class="modal fade" id="editInvModal" role="dialog">
                               <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content">
                                   <div class="modal-header bg-info">
@@ -157,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                     </button>
                                   </div>
                                   <div class="modal-body">
-                                    <form action="functions.php" method="POST">
+                                    <form action="functions.php" method="POST" id="invModalForm">
                                       <div class="row">
                                         <div class="col-sm-5">
                                           <div class="form-group">
@@ -168,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-7">
                                           <div class="form-group">
                                             <label for="prod">Product Description</label>
-                                            <input type="text" class="form-control " id="prod" name="description" value="<?php echo $row['description'] ?>" readonly>
+                                            <input type="text" class="form-control " id="prod" name="prod" value="<?php echo $row['description'] ?>" readonly>
                                           </div>
                                         </div>
                                         <div class="col-sm-2">
@@ -180,7 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <div class="col-sm-2">
                                           <div class="form-group">
                                             <label for="allo">Allocation</label>
-                                            <input type="number" class="form-control " id="allo" name="allocation" value="<?php echo $row['allocation'] ?>">
+                                            <input type="number" class="form-control " id="allo" name="allo" value="<?php echo $row['allocation'] ?>">
                                           </div>
                                         </div>
                                         <div class="col-sm-2">
@@ -207,6 +208,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <?php
                                         $is_superuser =  $_SESSION['login_user']['is_superuser'];
                                         ?>
+                                        <input type="hidden" name="product_id" id="product_id">
                                         <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
                                         <button type="submit" class="btn btn-primary" name="modify_invent">Update Details</button>
                                       </div>
@@ -214,9 +216,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                   </div>
                                 </div>
                               </div>
-                            </div> -->
+                            </div>
 
-                          <?php } ?>
+                          
                         </tbody>
                       </table>
                     </div>

@@ -333,7 +333,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
 
       modal_fields = document.getElementById("edit").querySelectorAll("input");
       modal_fields.forEach(field => {
-  
+
         field.setAttribute("readonly", "");
         if (field.id == "imageFile2") {
           $("#img-update-field").addClass("d-none")
@@ -524,6 +524,16 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
           "className": "dt-center",
           "targets": "no_sort",
           "orderable": false,
+        }, {
+          "width": "15%",
+          "targets": 0,
+          "data": "description",
+          render: function(data, type, row, meta) {
+            if (type === 'display') {
+              data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
+            }
+            return data;
+          }
         }],
         "responsive": true,
         "lengthChange": true,
@@ -535,7 +545,6 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
     $(function() {
       bsCustomFileInput.init();
     });
-  </script>
   </script>
 </body>
 

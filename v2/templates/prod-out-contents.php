@@ -499,8 +499,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                     </div>
                     <div class="col-sm-4">
                       <div class="form-group">
-                        <label for="exp_date2">Expiration Date:</label>
-                        <input type="text" class="form-control " id="exp_date2" autocomplete="off" name="exp_date" placeholder="mm/dd/yyyy or mm/yyyy or -" disabled>
+                        <label for="exp_date2">Expiration Date:</label>-
+                        <input type="text" class="form-control " id="exp_date2" autocomplete="off" name="exp_date" placeholder="mm-dd-yyyy or mm-yyyy or -" disabled>
                       </div>
                     </div>
                     <?php

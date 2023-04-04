@@ -1512,26 +1512,50 @@ if (isset($_POST['delete_updateprodout'])) {
     }
 }
 
+
+#GET PRODUCT FOR MODAL IN INVENTORY
+if (isset($_GET["action"]) && $_GET["action"] === 'get_product_inv') {
+    header("Content-Type: text/json; charset=utf8");
+    $id = $_GET["id"];
+    $table = "inventory";
+    $query_get = "SELECT * FROM $table WHERE id='$id';";
+    $result = mysqli_query($conn, $query_get);
+
+    if ($result->num_rows == 0) {
+        $data = "Not found";
+        echo json_encode($data);
+    } else {
+        while ($row = mysqli_fetch_array($result)) {
+            $data = array(
+                "id" => $row['id'],
+                "barcode" => $row["barcode"],
+                "description" => htmlspecialchars_decode($row["description"]),
+                "category" => $row['category'],
+                "rack" => $row["rack"],
+                "stock" => $row['stock'],
+                "allocation" => $row["allocation"],
+                "sa_percentage" => $row["sa_percentage"],
+            );
+            echo json_encode($data);
+        }
+    }
+}
+
 #MODIFY INVENTORY
 if (isset($_POST['modify_invent'])) {
 
-    $barcode = $_POST['barcode'];
-    $description = htmlspecialchars($_POST['description']);
-    $stock = $_POST['stock'];
-    $allocation = $_POST['allocation'];
-    $sa_percentage = $_POST['sa_percentage'];
+    $id = $_POST['product_id'];
+    $allocation = $_POST['allo'];
     $rack = htmlspecialchars($_POST['rack']);
     $is_superuser = $_POST['is_superuser'];
 
     if ($allocation != 0) {
-        if ($barcode != null) {
+        if ($id != null) {
             // Insert the values into the database
             $conn->query("UPDATE inventory 
-                SET barcode = '$barcode', 
-                description = '$description',
+                SET  
                 rack = '$rack', 
-                stock = '$stock', 
-                allocation = '$allocation' WHERE barcode = '$barcode'") or die($conn->error);
+                allocation = '$allocation' WHERE id = $id") or die($conn->error);
             if ($is_superuser == '1') {
             ?>
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -1622,14 +1646,11 @@ if (isset($_POST['modify_invent'])) {
         }
     } else {
 
-        if ($barcode != null) {
+        if ($id != null) {
             // Insert the values into the database
             $conn->query("UPDATE inventory 
-                SET barcode = '$barcode', 
-                description = '$description', 
-                rack = '$rack', 
-                stock = '$stock', 
-                allocation = '$allocation' WHERE barcode = '$barcode'") or die($conn->error);
+                SET rack = '$rack', 
+                allocation = '$allocation' WHERE id = $id") or die($conn->error);
             if ($is_superuser == '1') {
             ?>
                 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

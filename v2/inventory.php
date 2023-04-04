@@ -239,6 +239,40 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
   <!-- Select2 -->
   <script src="plugins/select2/js/select2.full.min.js"></script>
   <script>
+    function editInv(button) {
+      let id = $(button).attr('data-id');
+      console.log(id);
+
+      $.ajax({
+        type: "GET",
+        url: "functions.php",
+        data: {
+          id: id,
+          action: "get_product_inv"
+        },
+        dataType: "JSON",
+        success: function(data) {
+          if (data == "Not found") {
+            alert("Product Not Found!");
+          } else {
+            console.log(data)
+            $("#product_id").val(data.id);
+            $("#barcode").val(data.barcode);
+            $("#prod").val(data.description);
+            $("#stock").val(data.stock);
+            $("#allo").val(data.allocation);
+            $("#sa_percentage").val(data.sa_percentage);
+            $("#Category").val(data.category);
+            $("#rack").val(data.rack);
+            $('#editInvModal').modal('show');
+          }
+        },
+        error: function(error) {
+          console.error(error);
+        }
+      });
+    }
+
     $("#barcode-transfer").on("change", () => {
       $("#qty-transfer").val('');
       $("#transfer-form").on("submit", (e) => {
@@ -281,7 +315,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
 
     $(function() {
       $("#Generic").DataTable({
-        
+
         "order": [],
         "columnDefs": [{
           "className": "dt-center",
@@ -306,202 +340,6 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         // "buttons": ["copy", "csv", "excel", "pdf", "print"]
       }).buttons().container().appendTo('#Generic_wrapper .col-md-6:eq(0)');
     });
-
-    // $(function() {
-    //   $("#branded").DataTable({
-    //     "columnDefs": [{
-    //       "className": "dt-center",
-    //       "targets": "_all"
-    //     }, {
-    //       "width": "15%",
-    //       "targets": 0,
-    //       "data": "description",
-    //       render: function(data, type, row, meta) {
-    //         if (type === 'display') {
-    //           data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
-    //         }
-    //         return data;
-    //       }
-    //     }],
-    //     "responsive": true,
-    //     "lengthChange": true,
-    //     // "scrollY": '500px',
-    //     // "scrollCollapse": true,
-    //     "autoWidth": false,
-    //     "order": [
-    //       [1, 'asc']
-    //     ],
-    //     // "buttons": ["copy", "csv", "excel", "pdf", "print"]
-    //   }).buttons().container().appendTo('#branded_wrapper .col-md-6:eq(0)');
-    // });
-
-    // $(function() {
-    //   $("#val_rec").DataTable({
-    //     "columnDefs": [{
-    //       "className": "dt-center",
-    //       "targets": "_all"
-    //     }, {
-    //       "width": "15%",
-    //       "targets": 0,
-    //       "data": "description",
-    //       render: function(data, type, row, meta) {
-    //         if (type === 'display') {
-    //           data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
-    //         }
-    //         return data;
-    //       }
-    //     }],
-    //     "responsive": true,
-    //     "lengthChange": true,
-    //     // "scrollY": '500px',
-    //     // "scrollCollapse": true,
-    //     "autoWidth": false,
-    //     "order": [
-    //       [1, 'asc']
-    //     ],
-    //     // "buttons": ["copy", "csv", "excel", "pdf", "print"]
-    //   }).buttons().container().appendTo('#val_rec_wrapper .col-md-6:eq(0)');
-    // });
-
-    // $(function() {
-    //   $("#medical").DataTable({
-    //     "columnDefs": [{
-    //       "className": "dt-center",
-    //       "targets": "_all"
-    //     }, {
-    //       "width": "15%",
-    //       "targets": 0,
-    //       "data": "description",
-    //       render: function(data, type, row, meta) {
-    //         if (type === 'display') {
-    //           data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
-    //         }
-    //         return data;
-    //       }
-    //     }],
-    //     "responsive": true,
-    //     "lengthChange": true,
-    //     // "scrollY": '500px',
-    //     // "scrollCollapse": true,
-    //     "autoWidth": false,
-    //     "order": [
-    //       [1, 'asc']
-    //     ],
-    //     // "buttons": ["copy", "csv", "excel", "pdf", "print"]
-    //   }).buttons().container().appendTo('#medical_wrapper .col-md-6:eq(0)');
-    // });
-
-    // $(function() {
-    //   $("#non-pharma").DataTable({
-    //     "columnDefs": [{
-    //       "className": "dt-center",
-    //       "targets": "_all"
-    //     }, {
-    //       "width": "15%",
-    //       "targets": 0,
-    //       "data": "description",
-    //       render: function(data, type, row, meta) {
-    //         if (type === 'display') {
-    //           data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
-    //         }
-    //         return data;
-    //       }
-    //     }],
-    //     "responsive": true,
-    //     "lengthChange": true,
-    //     // "scrollY": '500px',
-    //     // "scrollCollapse": true,
-    //     "autoWidth": false,
-    //     "order": [
-    //       [1, 'asc']
-    //     ],
-    //     // "buttons": ["copy", "csv", "excel", "pdf", "print"]
-    //   }).buttons().container().appendTo('#non-pharma_wrapper .col-md-6:eq(0)');
-    // });
-
-    // $(function() {
-    //   $("#special").DataTable({
-    //     "columnDefs": [{
-    //       "className": "dt-center",
-    //       "targets": "_all"
-    //     }, {
-    //       "width": "15%",
-    //       "targets": 0,
-    //       "data": "description",
-    //       render: function(data, type, row, meta) {
-    //         if (type === 'display') {
-    //           data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
-    //         }
-    //         return data;
-    //       }
-    //     }],
-    //     "responsive": true,
-    //     "lengthChange": true,
-    //     // "scrollY": '500px',
-    //     // "scrollCollapse": true,
-    //     "autoWidth": false,
-    //     "order": [
-    //       [1, 'asc']
-    //     ],
-    //     // "buttons": ["copy", "csv", "excel", "pdf", "print"]
-    //   }).buttons().container().appendTo('#special_wrapper .col-md-6:eq(0)');
-    // });
-
-    // $(function() {
-    //   $("#house").DataTable({
-    //     "columnDefs": [{
-    //       "className": "dt-center",
-    //       "targets": "_all"
-    //     }, {
-    //       "width": "15%",
-    //       "targets": 0,
-    //       "data": "description",
-    //       render: function(data, type, row, meta) {
-    //         if (type === 'display') {
-    //           data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
-    //         }
-    //         return data;
-    //       }
-    //     }],
-    //     "responsive": true,
-    //     "lengthChange": true,
-    //     // "scrollY": '500px',
-    //     // "scrollCollapse": true,
-    //     "autoWidth": false,
-    //     "order": [
-    //       [1, 'asc']
-    //     ],
-    //     // "buttons": ["copy", "csv", "excel", "pdf", "print"]
-    //   }).buttons().container().appendTo('#house_wrapper .col-md-6:eq(0)');
-    // });
-
-    // $(function() {
-    //   $("#health").DataTable({
-    //     "columnDefs": [{
-    //       "className": "dt-center",
-    //       "targets": "_all"
-    //     }, {
-    //       "width": "15%",
-    //       "targets": 0,
-    //       "data": "description",
-    //       render: function(data, type, row, meta) {
-    //         if (type === 'display') {
-    //           data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
-    //         }
-    //         return data;
-    //       }
-    //     }],
-    //     "responsive": true,
-    //     "lengthChange": true,
-    //     // "scrollY": '500px',
-    //     // "scrollCollapse": true,
-    //     "autoWidth": false,
-    //     "order": [
-    //       [1, 'asc']
-    //     ],
-    //     // "buttons": ["copy", "csv", "excel", "pdf", "print"]
-    //   }).buttons().container().appendTo('#health_wrapper .col-md-6:eq(0)');
-    // });
 
 
     $(function() {
