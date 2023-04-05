@@ -92,47 +92,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                           $query = "SELECT * FROM inventory ORDER BY description";
                           $result = mysqli_query($conn, $query);
                           $check_row = mysqli_num_rows($result);
-                          while ($row = mysqli_fetch_array($result)) {
+                            while ($row = mysqli_fetch_array($result)) {
+                              $stock = $row['stock'];
+                              $per = $row['sa_percentage'];
                           ?>
                             <tr>
                               <td style="text-overflow: ellipsis;" title="<?php echo $row["barcode"] ?>">
                                   <?php echo $row["barcode"] ?>
                               </td>
                               <td><?php echo $row['description'] ?></td>
-                              <td><?php echo $row['stock'] ?></td>
+                              <td><?php echo $stock ?></td>
                               <td><?php echo $row['allocation'] ?></td>
                               <td>
                                 <div class="project_progress">
                                   <?php
-                                  if ($row['sa_percentage'] == NULL) {
+                                  if ($per == NULL) {
                                     echo '<div class="progress progress-sm progress-bar-secondary bg-secondary" style = "width:100%"></div>';
-                                  } else if ($row['sa_percentage'] >= 100) {
+                                  } else if ($per >= 100) {
                                     echo '<div class="progress progress-sm progress-bar-primary bg-primary" style = "width:100%"></div>';
-                                  } else if ($row['sa_percentage'] <= 20) {
-                                    echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:' . $row['sa_percentage'] . '%"></div>';
-                                  } else if ($row['sa_percentage'] <= 30) {
-                                    echo '<div class="progress progress-sm progress-bar-warning bg-warning" style = "width:' . $row['sa_percentage'] . '%"></div>';
-                                  } else if ($row['sa_percentage'] >= 70) {
-                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                  } else if ($per <= 20) {
+                                    echo '<div class="progress progress-sm progress-bar-danger bg-danger" style = "width:' . $per . '%"></div>';
+                                  } else if ($per <= 30) {
+                                    echo '<div class="progress progress-sm progress-bar-warning bg-warning" style = "width:' . $per . '%"></div>';
+                                  } else if ($per >= 70) {
+                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:' . $per. '%"></div>';
                                   } else {
-                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:' . $row['sa_percentage'] . '%"></div>';
+                                    echo '<div class="progress progress-sm progress-bar-success bg-success" style = "width:' . $per . '%"></div>';
                                   }
                                   ?>
                                 </div>
                                 <div>
                                   <?php
-                                  if ($row['sa_percentage'] == NULL) {
+                                  if ($per == NULL) {
                                     echo "<span class='badge bg-secondary font-weight-bold'>0%</span>";
-                                  } else if ($row['sa_percentage'] >= 100) {
-                                    echo "<span class='badge bg-primary font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
-                                  } else if ($row['sa_percentage'] <= 20) {
-                                    echo "<span class='badge bg-danger font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
-                                  } else if ($row['sa_percentage'] <= 30) {
-                                    echo "<span class='badge bg-warning font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
-                                  } else if ($row['sa_percentage'] >= 70) {
-                                    echo "<span class='badge bg-success font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                  } else if ($per >= 100) {
+                                    echo "<span class='badge bg-primary font-weight-bold'>" . $per . '%</span>';
+                                  } else if ($per <= 20) {
+                                    echo "<span class='badge bg-danger font-weight-bold'>" .$per . '%</span>';
+                                  } else if ($per <= 30) {
+                                    echo "<span class='badge bg-warning font-weight-bold'>" . $per . '%</span>';
+                                  } else if ($per >= 70) {
+                                    echo "<span class='badge bg-success font-weight-bold'>" . $per . '%</span>';
                                   } else {
-                                    echo "<span class='badge bg-success font-weight-bold'>" . $row["sa_percentage"] . '%</span>';
+                                    echo "<span class='badge bg-success font-weight-bold'>" . $per . '%</span>';
                                   }
                                   ?>
                                 </div>
@@ -148,79 +150,78 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               </td>
                             </tr>
                             <?php } ?>
-                            <div class="modal fade" id="editInvModal" role="dialog">
-                              <div class="modal-dialog modal-dialog-centered modal-lg">
-                                <div class="modal-content">
-                                  <div class="modal-header bg-info">
-                                    <h4 class="modal-title font-weight-bold">UPDATE PRODUCT DETAILS</h4>
-                                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <form action="functions.php" method="POST" id="invModalForm">
-                                      <div class="row">
-                                        <div class="col-sm-5">
-                                          <div class="form-group">
-                                            <label for="barcode">Barcode</label>
-                                            <input type="text" class="form-control " id="barcode" name="barcode" value="<?php echo $row['barcode'] ?>" readonly>
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-7">
-                                          <div class="form-group">
-                                            <label for="prod">Product Description</label>
-                                            <input type="text" class="form-control " id="prod" name="prod" value="<?php echo $row['description'] ?>" readonly>
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                          <div class="form-group">
-                                            <label for="stock">Stock</label>
-                                            <input type="number" class="form-control " id="stock" name="stock" value="<?php echo $row['stock'] ?>" readonly>
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                          <div class="form-group">
-                                            <label for="allo">Allocation</label>
-                                            <input type="number" class="form-control " id="allo" name="allo" value="<?php echo $row['allocation'] ?>">
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                          <div class="form-group">
-                                            <label for="sa_percentage">S/A%</label>
-                                            <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" value="<?php echo $row['sa_percentage'] ?>%" readonly>
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                          <div class="form-group">
-                                            <label for="Category">Category</label>
-                                            <input type="text" class="form-control " id="Category" name="Category" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" value="<?php echo $row['category'] ?>" readonly>
-                                          </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                          <div class="form-group">
-                                            <label for="rack">Rack</label>
-                                            <input type="text" class="form-control " id="rack" name="rack" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" value="<?php echo $row['rack'] ?>">
-                                          </div>
-                                        </div>
-                                      </div>
-
-                                      <div class="modal-footer ">
-                                        <?php
-                                        $is_superuser =  $_SESSION['login_user']['is_superuser'];
-                                        ?>
-                                        <input type="hidden" name="product_id" id="product_id">
-                                        <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
-                                        <button type="submit" class="btn btn-primary" name="modify_invent">Update Details</button>
-                                      </div>
-                                    </form>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                          
+           
                         </tbody>
                       </table>
+                      <div class="modal fade" id="editInvModal" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                          <div class="modal-content">
+                            <div class="modal-header bg-info">
+                              <h4 class="modal-title font-weight-bold">UPDATE PRODUCT DETAILS</h4>
+                              <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <form action="functions.php" method="POST" id="invModalForm">
+                                <div class="row">
+                                  <div class="col-sm-5">
+                                    <div class="form-group">
+                                      <label for="barcode">Barcode</label>
+                                      <input type="text" class="form-control " id="barcode" name="barcode" readonly>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-7">
+                                    <div class="form-group">
+                                      <label for="prod">Product Description</label>
+                                      <input type="text" class="form-control " id="prod" name="prod" readonly>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-2">
+                                    <div class="form-group">
+                                      <label for="stock">Stock</label>
+                                      <input type="number" class="form-control " id="stock" name="stock" readonly>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-2">
+                                    <div class="form-group">
+                                      <label for="allo">Allocation</label>
+                                      <input type="number" class="form-control " id="allo" name="allo">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-2">
+                                    <div class="form-group">
+                                      <label for="sa_percentage">S/A%</label>
+                                      <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" readonly>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <div class="form-group">
+                                      <label for="Category">Category</label>
+                                      <input type="text" class="form-control " id="Category" name="Category" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" readonly>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <div class="form-group">
+                                      <label for="rack">Rack</label>
+                                      <input type="text" class="form-control " id="rack" name="rack" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off">
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="modal-footer ">
+                                  <?php
+                                  $is_superuser =  $_SESSION['login_user']['is_superuser'];
+                                  ?>
+                                  <input type="hidden" name="product_id" id="product_id">
+                                  <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
+                                  <button type="submit" class="btn btn-primary" name="modify_invent">Update Details</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
                     <!-- <div class="tab-pane fade show" id="bran" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2023 at 03:40 AM
+-- Generation Time: Apr 05, 2023 at 04:44 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -221,9 +221,9 @@ CREATE TABLE `inventory` (
   `barcode` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `category` varchar(255) NOT NULL,
-  `stock` decimal(10,0) GENERATED ALWAYS AS (`rack_in` + `rack_out`) VIRTUAL,
+  `stock` decimal(10,0) GENERATED ALWAYS AS (`rack_in` + `rack_out`) STORED,
   `allocation` int(11) NOT NULL DEFAULT 0,
-  `sa_percentage` decimal(10,0) GENERATED ALWAYS AS (`stock` / `allocation` * 100) VIRTUAL,
+  `sa_percentage` decimal(10,0) GENERATED ALWAYS AS (`stock` / `allocation` * 100) STORED,
   `rack` varchar(255) NOT NULL DEFAULT 'N/A',
   `rack_in` int(11) NOT NULL DEFAULT 0,
   `rack_out` int(11) NOT NULL DEFAULT 0
