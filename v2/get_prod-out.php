@@ -53,54 +53,55 @@ if (isset($_GET["action"]) && $_GET["action"] === "endorse_product") {
       $quantity_to_add = $row["quantity"];
 
       // Create an SQL query to update the quantity field for the specified product
-      $sql9 = "UPDATE inventory SET rack_in = rack_in - $quantity_to_add WHERE barcode = $product_barcode";
+      $sql9 = "UPDATE inventory SET rack_in = rack_in - $quantity_to_add WHERE barcode = '$product_barcode'";
 
       // Execute the query
       if ($conn->query($sql9) === TRUE) {
          echo "Quantity updated successfully";
+         $sql2 = "INSERT INTO endorse_final (
+            barcode, 
+            description, 
+            quantity, 
+            lot,
+            branch, 
+            mrf,
+            order_num, 
+            exp_date,
+            remarks, 
+            endorsed_by,
+            endorsed_date) 
+            VALUES (
+            '" . $row["barcode"] . "', 
+            '" . $row["description"] . "', 
+            '" . $row["quantity"] . "', 
+            '" . $row["lot"] . "',
+            '" . $row["branch"] . "', 
+            '" . $row["mrf"] . "',
+            '" . $row["order_num"] . "', 
+            '" . $row["exp_date"] . "',
+            '" . $row["remarks"] . "', 
+            '" . $row["endorsed_by"] . "',
+            '" . $row["endorsed_date"] . "')";
+   
+            if (mysqli_query($conn, $sql2)) {
+               $data = 'success';
+               echo json_encode($data);
+            } else {
+               echo "Error inserting data: " . mysqli_error($conn);
+            }
+   
+         $sql3 = "DELETE FROM endorse WHERE endorsed_by='$endorsed_by';";
+   
+            if (mysqli_query($conn, $sql3)) {
+               echo "Data deleted successfully";
+            } else {
+               echo "Error deleting data: " . mysqli_error($conn);
+            }
       } else {
          echo "Error updating quantity" . $conn->error;
       }
 
-      $sql2 = "INSERT INTO endorse_final (
-         barcode, 
-         description, 
-         quantity, 
-         lot,
-         branch, 
-         mrf,
-         order_num, 
-         exp_date,
-         remarks, 
-         endorsed_by,
-         endorsed_date) 
-         VALUES (
-         '" . $row["barcode"] . "', 
-         '" . $row["description"] . "', 
-         '" . $row["quantity"] . "', 
-         '" . $row["lot"] . "',
-         '" . $row["branch"] . "', 
-         '" . $row["mrf"] . "',
-         '" . $row["order_num"] . "', 
-         '" . $row["exp_date"] . "',
-         '" . $row["remarks"] . "', 
-         '" . $row["endorsed_by"] . "',
-         '" . $row["endorsed_date"] . "')";
-
-      if (mysqli_query($conn, $sql2)) {
-         $data = 'success';
-         echo json_encode($data);
-      } else {
-         echo "Error inserting data: " . mysqli_error($conn);
-      }
-
-      $sql3 = "DELETE FROM endorse WHERE endorsed_by='$endorsed_by';";
-
-      if (mysqli_query($conn, $sql3)) {
-         echo "Data deleted successfully";
-      } else {
-         echo "Error deleting data: " . mysqli_error($conn);
-      }
+      
    }
 
    // if (!$result->num_rows > 0){

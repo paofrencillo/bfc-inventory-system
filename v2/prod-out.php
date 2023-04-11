@@ -285,14 +285,17 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
           "visible": true,
           "searchable": false,
           "targets": [7],
-        },{ "width": "15%", "targets": 0, "data":"description",
+        }, {
+          "width": "15%",
+          "targets": 0,
+          "data": "description",
           render: function(data, type, row, meta) {
-           if (type === 'display') {
-             data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
-           }
+            if (type === 'display') {
+              data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
+            }
             return data;
-        } }
-      ],
+          }
+        }],
         "responsive": true,
         "lengthChange": true,
         // "scrollY": '500px',
@@ -348,14 +351,17 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         "columnDefs": [{
           "className": "dt-center",
           "targets": "_all"
-        },{ "width": "15%", "targets": 0, "data":"description",
+        }, {
+          "width": "15%",
+          "targets": 0,
+          "data": "description",
           render: function(data, type, row, meta) {
-           if (type === 'display') {
-             data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
-           }
+            if (type === 'display') {
+              data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
+            }
             return data;
-        } }
-      ],
+          }
+        }],
         "responsive": true,
         "lengthChange": true,
         // "scrollY": '500px',
@@ -412,14 +418,17 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
           "className": "dt-center",
           "targets": "_all",
           "orderable": false
-        },{ "width": "15%", "targets": 0, "data":"description",
+        }, {
+          "width": "15%",
+          "targets": 0,
+          "data": "description",
           render: function(data, type, row, meta) {
-           if (type === 'display') {
-             data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
-           }
+            if (type === 'display') {
+              data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
+            }
             return data;
-        } }
-      ],
+          }
+        }],
         "searching": false,
         "info": false,
         "responsive": true,

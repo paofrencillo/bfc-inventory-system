@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                           ?>
                             <tr>
                               <td style="text-overflow: ellipsis;" title="<?php echo $row["barcode"] ?>">
-                                  <?php echo $row["barcode"] ?>
+                                <?php echo $row["barcode"] ?>
                               </td>
                               <td><?php echo $row['description'] ?></td>
                               <td><?php echo $row['lot'] ?></td>

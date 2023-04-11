@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2023 at 04:44 AM
+-- Generation Time: Apr 11, 2023 at 02:38 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -6815,7 +6815,7 @@ INSERT INTO `product_masterlist` (`id`, `barcode`, `description`, `generic_name`
 (2533, '', 'EFFICASCENT EXTREME w/ Lavander Oil 100ml-6', '', 'NON-PHARMA', 'IPI', 'product-imgs/valuemed-logo1.png', 'admin', '2023-04-04 09:50:00'),
 (2534, '', '&quot;New&quot; EFFICASCENT RELAXSCENT OIL 3ml-12', '', 'NON-PHARMA', 'IPI', 'product-imgs/valuemed-logo1.png', 'admin', '2023-04-04 09:50:00'),
 (2535, '', '&quot;New&quot; EFFICASCENT RELAXSCENT OIL 6ml-6', '', 'NON-PHARMA', 'IPI', 'product-imgs/valuemed-logo1.png', 'admin', '2023-04-04 09:50:00'),
-(2536, '', '&quot;New&quot; EFFICASCENT RELAXSCENT OIL 12ml-6', '', 'NON-PHARMA', 'IPI', 'product-imgs/valuemed-logo1.png', 'admin', '2023-04-04 09:50:00'),
+(2536, '', '&quot;New&quot; EFFICASCENT RELAXSCENT OIL 12ml-6', '', 'NON-PHARMA', 'IPI', 'product-imgs/valuemed-logo1.png', 'Admin', '2023-04-05 22:24:00'),
 (2537, '', 'EFFICASCENT OINTMENT 10g-12', '', 'NON-PHARMA', 'IPI', 'product-imgs/valuemed-logo1.png', 'admin', '2023-04-04 09:50:00'),
 (2538, '', 'HERBYCIN 60ml-6', '', 'NON-PHARMA', 'IPI', 'product-imgs/valuemed-logo1.png', 'admin', '2023-04-04 09:50:00'),
 (2539, '', 'Cheers Baby Oil (BG) 25ml-12', '', 'NON-PHARMA', 'IPI', 'product-imgs/valuemed-logo1.png', 'admin', '2023-04-04 09:50:00'),
