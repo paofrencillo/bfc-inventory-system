@@ -297,35 +297,25 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
       $("#transfer-form").unbind("submit");
     });
 
-
     $(function() {
       $("#Generic").DataTable({
-
         "order": [],
         "columnDefs": [{
           "className": "dt-center",
           "targets": "_all"
-        }, {
-          "width": "15%",
-          "targets": 0,
-          "data": "description",
-          render: function(data, type, row, meta) {
-            if (type === 'display') {
-              data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
-            }
-            return data;
-          }
         }],
         "responsive": true,
         "lengthChange": true,
         "autoWidth": false,
+        "processing": true,
+        "serverSide": true,
+        "ajax": "fetchDataInventory.php",
         "order": [
           [1, 'asc']
         ],
         // "buttons": ["copy", "csv", "excel", "pdf", "print"]
       }).buttons().container().appendTo('#Generic_wrapper .col-md-6:eq(0)');
     });
-
 
     $(function() {
       //Initialize Select2 Elements

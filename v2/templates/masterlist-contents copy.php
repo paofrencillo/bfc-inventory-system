@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <div class="card">
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <table id="example1" class="table table-bordered table-hover text-center">
+                                    <table id="example1" class="table table-bordered table-hover">
                                         <thead class="thead-dark">
                                             <tr class=text-center>
                                                 <th>BARCODE</th>
@@ -50,6 +50,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                 <th>ACTION</th>
                                             </tr>
                                         </thead>
+                                        <tbody>
+                                            <?php
+                                            $query = "SELECT * FROM product_masterlist ORDER BY description ;";
+                                            $result = mysqli_query($conn, $query);
+                                            while ($row = mysqli_fetch_array($result)) {
+                                                $last_user = $row['last_edited_by'];
+                                                $date = date_create($row["last_edited_on"]);
+                                                $date = date_format($date, "d/m/Y h:i");
+                                            ?>
+                                                <tr class="text-center">
+                                                    <td style="text-overflow: ellipsis;" title="<?php echo $row["barcode"] ?>">
+                                                        <?php echo $row["barcode"] ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $row["description"] ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $row["generic_name"] ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $row["category"] ?>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-info btn-sm" data-id="<?php echo $row["id"]; ?>" data-toggle="modal" data-target="#edit" onclick="viewModal(this);">
+                                                            <i class="fas fa-pencil-alt"></i>
+                                                            Edit
+                                                        </button>
+
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>

@@ -533,30 +533,22 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
       });
     });
 
-    $(function() {
+    $(document).ready(function(){    
       $("#example1").DataTable({
-        "order": [],
-        "columnDefs": [{
-          "className": "dt-center",
-          "targets": "no_sort",
-          "orderable": false,
-        }, {
-          "width": "15%",
-          "targets": 0,
-          "data": "description",
-          render: function(data, type, row, meta) {
-            if (type === 'display') {
-              data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
-            }
-            return data;
-          }
-        }],
-        "responsive": true,
-        "lengthChange": true,
-        "autoWidth": false,
-        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    });
+        "processing": true,
+        "serverSide": true,
+        "ajax": "fetchDataMaster.php",
+       "order": [],
+       "columnDefs": [{
+         "targets": 4,
+         "orderable": false,
+       }],
+       "responsive": true,
+       "lengthChange": true,
+       "autoWidth": false,
+       // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });    
 
     $(function() {
       bsCustomFileInput.init();

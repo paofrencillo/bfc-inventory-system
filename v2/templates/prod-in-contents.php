@@ -59,37 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                         <th>ACTION</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <?php
-                      $query = "SELECT * FROM product_in_final ORDER BY last_edited_on DESC;";
-
-                      $result = mysqli_query($conn, $query);
-                      while ($row = mysqli_fetch_array($result)) {
-                      ?>
-                        <tr>
-                          <td style="text-overflow: ellipsis;" title="<?php echo $row["barcode"] ?>">
-                            <?php echo $row["barcode"] ?>
-                          </td>
-                          <td>
-                            <?php echo $row["description"]; ?>
-                          </td>
-                          <td>
-                            <?php echo $row["prf"]; ?>
-                          </td>
-                          <td>
-                            <?php echo $row["in_quantity"]; ?>
-                          </td>
-                          <td><?php echo $row["lot_no"]; ?></td>
-                          <td><?php echo $row["exp_date"]; ?></td>
-                          <td>
-                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#details" onclick="viewModal(this);" data-id="<?php echo $row["id"]; ?>">
-                              <i class="fas fa-eye"></i>
-                              Details
-                            </button>
-                          </td>
-                        <?php } ?>
-                        </tr>
-                    </tbody>
                   </table>
                 </div>
                 <!-- /.card-body -->

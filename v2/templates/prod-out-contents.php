@@ -354,7 +354,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                           </button>
                         </ul>
                       </div>
-                      <table id="example2" class="table table-bordered table-hover dt-center">
+                      <table id="example2" class="table table-bordered table-hover text-center">
                         <thead class="bg-dark">
                           <tr>
                             <th>BARCODE</th>

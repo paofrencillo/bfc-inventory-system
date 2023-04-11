@@ -237,28 +237,26 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         //   "targets": [7],
         // }],
         "columnDefs": [{
-          "className": "text-center",
           "visible": false,
           "searchable": true,
           "targets": [9],
         }, {
-          "className": "text-center",
           "visible": true,
           "searchable": false,
           "targets": [7],
-        },{ "width": "15%", "targets": 0, "data":"description",
-          render: function(data, type, row, meta) {
-           if (type === 'display') {
-             data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
-           }
-            return data;
-        } }
-      ],
+        }, {
+          "visible": true,
+          "orderable": false,
+          "targets": [10],
+        }],
         "responsive": true,
         "lengthChange": true,
         // "scrollY": '500px',
         // "scrollCollapse": true,
         "autoWidth": false,
+        "processing": true,
+        "serverSide": true,
+        "ajax": "fetchDataProdOut.php",
         "order": [
           [6, 'desc']
         ],
@@ -307,21 +305,16 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
     $(function() {
       $("#example2").DataTable({
         "columnDefs": [{
-          "className": "dt-center",
           "targets": "_all"
-        },{ "width": "15%", "targets": 0, "data":"description",
-          render: function(data, type, row, meta) {
-           if (type === 'display') {
-             data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
-           }
-            return data;
-        } }
-      ],
+        }],
         "responsive": true,
         "lengthChange": true,
         // "scrollY": '500px',
         // "scrollCollapse": false,
         "autoWidth": false,
+        "processing": true,
+        "serverSide": true,
+        "ajax": "fetchDataProdOutFinal.php",
         "order": [
           [5, 'desc']
         ],
@@ -373,14 +366,17 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
           "className": "dt-center",
           "targets": "_all",
           "orderable": false
-        },{ "width": "15%", "targets": 0, "data":"description",
+        }, {
+          "width": "15%",
+          "targets": 0,
+          "data": "description",
           render: function(data, type, row, meta) {
-           if (type === 'display') {
-             data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
-           }
+            if (type === 'display') {
+              data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
+            }
             return data;
-        } }
-      ],
+          }
+        }],
         "searching": false,
         "info": false,
         "responsive": true,
@@ -404,7 +400,6 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
       })
     })
   </script>
-
 
   <script>
     $(document).ready(function() {

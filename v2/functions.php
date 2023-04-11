@@ -1095,7 +1095,7 @@ if (isset($_POST['updateprodout'])) {
     if ($current_quantity < $quantity) {
         $newvalue = $quantity - $current_quantity;
         // If the quantity is negative, decrease the existing quantity in the database
-        $sql = "UPDATE inventory SET rack_in = rack_in - " . abs($newvalue) . " WHERE barcode = $barcode";
+        $sql = "UPDATE inventory SET rack_in = rack_in - " . $newvalue . " WHERE barcode = '$barcode'";
         // Execute the SQL query
         $result = mysqli_query($conn, $sql);
 
@@ -1202,7 +1202,7 @@ if (isset($_POST['updateprodout'])) {
     } else if ($current_quantity > $quantity) {
         $newvalue2 = $current_quantity - $quantity;
         // If the quantity is negative, decrease the existing quantity in the database
-        $sql2 = "UPDATE inventory SET rack_in = rack_in + '$newvalue2' WHERE barcode = $barcode";
+        $sql2 = "UPDATE inventory SET rack_in = rack_in + '$newvalue2' WHERE barcode = '$barcode'";
         // Execute the SQL query
         $result = mysqli_query($conn, $sql2);
 

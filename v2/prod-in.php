@@ -508,21 +508,19 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
       $("#example1").DataTable({
         "order": [],
         "columnDefs": [{
-          "className": "dt-center",
-          "targets": "no_sort",
+          "targets": 6,
           "orderable": false
-        },{ "width": "15%", "targets": 0, "data":"description",
-          render: function(data, type, row, meta) {
-           if (type === 'display') {
-             data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
-           }
-            return data;
-        } }
-      ],
+        }],
         "responsive": true,
         "lengthChange": true,
         "autoWidth": false,
-        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
+        "processing": true,
+        "serverSide": true,
+        "ajax": "fetchDataProdIn.php",
+        "order": [
+          [2, 'desc']
+        ],
+        // "buttons": ["copy", "excel", "print"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
 

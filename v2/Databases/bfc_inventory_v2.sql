@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2023 at 02:38 AM
+-- Generation Time: Apr 11, 2023 at 08:55 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -4273,7 +4273,7 @@ CREATE TABLE `product_masterlist` (
 --
 
 INSERT INTO `product_masterlist` (`id`, `barcode`, `description`, `generic_name`, `category`, `supplier`, `image`, `last_edited_by`, `last_edited_on`) VALUES
-(1, '4806524147896', 'Folic Acid 5Mg Cap 100S (Foliz)', '', 'GENERIC CAT 2', 'MEED', 'product-imgs/valuemed-logo1.png', 'admin', '2023-04-04 09:50:00'),
+(1, '4806524147896', 'Folic Acid 5Mg Cap 100S (Foliz)', '', 'GENERIC CAT 2', 'MEED', 'product-imgs/valuemed-logo1.png', 'Admin', '2023-04-11 13:15:03'),
 (2, '4806524147926', 'Loperamide 2Mg Cap Diacure 100S(Amb)', '', 'GENERIC CAT 2', 'MEED', 'product-imgs/valuemed-logo1.png', 'admin', '2023-04-04 09:50:00'),
 (3, '4806524147803', 'Aspirin 80Mg Tab 100S (Philprin)', '', 'GENERIC CAT 2', 'MEED', 'product-imgs/valuemed-logo1.png', 'admin', '2023-04-04 09:50:00'),
 (4, '4806524141108', 'Simvastatin 10Mg Tab 100S (Philstat-10)', '', 'GENERIC CAT 2', 'MEED', 'product-imgs/valuemed-logo1.png', 'admin', '2023-04-04 09:50:00'),
@@ -4344,7 +4344,7 @@ INSERT INTO `product_masterlist` (`id`, `barcode`, `description`, `generic_name`
 (69, '4806524772227', 'Budesonide Nebule 35S (Budeson)', '', 'GENERIC CAT 2', 'MEED', 'product-imgs/valuemed-logo1.png', 'admin', '2023-04-04 09:50:00'),
 (70, '71', 'Butamirate 50Mg Tab Anticof Sr 100S', '', 'GENERIC CAT 2', 'MEED', 'product-imgs/valuemed-logo1.png', 'admin', '2023-04-04 09:50:00'),
 (71, '4806530500029', 'Butamirate 50Mg Tab 100S (Mefecod)', '', 'GENERIC CAT 2', 'MEED', 'product-imgs/valuemed-logo1.png', 'admin', '2023-04-04 09:50:00'),
-(72, 'ZINCAP755', 'Butamirate 7*5Mg Syr 120Ml (Zincap)', '', 'GENERIC CAT 2', 'MEED', 'product-imgs/valuemed-logo1.png', 'admin', '2023-04-04 09:50:00'),
+(72, 'ZINCAP755', 'Butamirate 7*5Mg Syr 120Ml (Zincap)', '', 'GENERIC CAT 2', 'MEED', 'product-imgs/valuemed-logo1.png', 'Admin', '2023-04-11 11:54:07'),
 (73, '8906043321633 CALCISAPH 500MG TABLET SAPPHIRE LIFESCIENCES PVT LTD 5 x 20 TABLETS NELPA', 'Calcium Carbonate 500Mg Tab 100S (Calcisaph)', '', 'GENERIC CAT 2', 'MEED', 'product-imgs/valuemed-logo1.png', 'admin', '2023-04-04 09:50:00'),
 (74, '4806523431040', 'Candesartan Cilexetil 16Mg Tab 30S (Giran-16)', '', 'GENERIC CAT 2', 'MEED', 'product-imgs/valuemed-logo1.png', 'admin', '2023-04-04 09:50:00'),
 (75, '4806524781007', 'Candesartan 8Mg Tab 30S (Babapress-8)', '', 'GENERIC CAT 2', 'MEED', 'product-imgs/valuemed-logo1.png', 'admin', '2023-04-04 09:50:00'),
@@ -8306,7 +8306,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `employee_name`, `user`, `pass`, `is_superuser`, `is_logged_in`, `otp`) VALUES
-(2, 'Admin', 'admin', '$2y$10$hl0kcikUSDGAs00KsgTDwupTrFBH5HuFBMqjxiX7M//5dJZpTRAgC', '1', 1, '8882555'),
+(2, 'Admin', 'admin', '$2y$10$hl0kcikUSDGAs00KsgTDwupTrFBH5HuFBMqjxiX7M//5dJZpTRAgC', '1', 0, '8882555'),
 (14, 'Paolo Frencillo', 'paopao', '$2y$10$5xyOCRcsuE4CHGvETURIXuQMzxb.N/PFv5U8XkWqUZM2eCCX1CRCy', '0', 0, '');
 
 --
