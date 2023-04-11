@@ -55,17 +55,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 <div class="card-body">
                   <div class="tab-content" id="custom-tabs-one-tabContent">
                     <div class="tab-pane fade show active" id="example11" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
-                      <div class="card-tools">
+                      <div class="card-tools mx-0" >
                         <ul class="pagination pagination-sm">
+                          <div class="mr-2" id="card-tools">
+                          </div>
                           <button class="btn btn-success btn-md" data-toggle="modal" data-target="#dispatch">
                             <i class="fas fa-truck"></i>
                             Dispatch Items
                           </button>
                         </ul>
                       </div>
-                      <table id="example1" class="table table-bordered table-hover text-center">
+                      <table id="example1" class="table table-hover text-center">
                         <thead class="bg-dark">
-                          <tr>
+                          <tr style="font-size:15px;">
                             <th>BARCODE</th>
                             <th>DESCRIPTION</th>
                             <th>LN</th>
@@ -76,10 +78,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <th>INV/ORDER</th>
                             <th>REMARKS</th>
                             <th>ENDORSED DATE</th>
-                            <th>ACTION</th>
+                            <th></th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="font-size:14px;">
                           <?php
                           $check_user =  $_SESSION['login_user']['user_id'];
                           $user =  $_SESSION['login_user']['employee_name'];
@@ -209,7 +211,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                           </div>
                                         </div>
                                       </div>
-                                      <div class="modal-footer justify-content-between flex-row-reverse">
+                                      <div class="modal-footer justify-content-between flex-row-reverse px-0">
                                         <input type="hidden" name="id_update" value="<?php echo $row['id'] ?>">
                                         <input type="hidden" name="is_superuser" value="<?php echo $is_superuser ?>">
                                         <input type="hidden" name="current_quantity" value="<?php echo $row['quantity'] ?>">
@@ -346,17 +348,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                       </table>
                     </div>
                     <div class="tab-pane fade" id="example22" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
-                      <div class="card-tools">
-                        <ul class="pagination pagination-sm">
+                      <div class="card-tools mx-0">
+                        <ul class="pagination pagination-sm" >
+                          <div class="mr-2" id="card-tools2">
+                          </div>
                           <button class="btn btn-danger btn-md" data-toggle="modal" data-target="#delete_history">
                             <i class="fas fa-trash"></i>
                             Delete Items
                           </button>
                         </ul>
                       </div>
-                      <table id="example2" class="table table-bordered table-hover text-center">
+                      <table id="example2" class="table table-hover text-center">
                         <thead class="bg-dark">
-                          <tr>
+                          <tr style="font-size:15px;">
                             <th>BARCODE</th>
                             <th>DESCRIPTION</th>
                             <th>QTY</th>
@@ -369,7 +373,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <th>ENDORSED BY</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="font-size:14px;">
                           <?php
                           $check_user =  $_SESSION['login_user']['user_id'];
                           $query = "SELECT * FROM endorse_history ORDER BY endorsed_date";

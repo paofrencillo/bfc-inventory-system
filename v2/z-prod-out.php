@@ -230,25 +230,23 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
   <script>
     $(function() {
       $("#example1").DataTable({
-        // "columnDefs": [{
-        //   "className": "text-center",
-        //   "visible": true,
-        //   "searchable": false,
-        //   "targets": [7],
-        // }],
+        "dom": 'Bfrtip',
         "columnDefs": [{
           "visible": false,
           "searchable": true,
           "targets": [9],
-        }, {
+        }, 
+        {
           "visible": true,
           "searchable": false,
-          "targets": [7],
-        }, {
+          "targets": [0,1,2,3,4,5,7,8,9,10],
+        },
+        {
           "visible": true,
           "orderable": false,
           "targets": [10],
-        }],
+        },
+        ],
         "responsive": true,
         "lengthChange": true,
         // "scrollY": '500px',
@@ -304,6 +302,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
 
     $(function() {
       $("#example2").DataTable({
+        "dom": 'Bfrtip',
         "columnDefs": [{
           "targets": "_all"
         }],
@@ -354,9 +353,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
               });
               $(win.document.body).find('h1').css('text-align', 'center');
             }
-          },
-        ]
-        // "buttons": ["copy", "excel", "pdf", "print"]
+          }]
       }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
     });
 

@@ -44,6 +44,4 @@ require 'ssp.class.php';
 // Output data as json format 
 echo json_encode( 
     SSP::simple( $_GET, $dbDetails, $table, $primaryKey, $columns ) 
-); 
- 
-?>
+);

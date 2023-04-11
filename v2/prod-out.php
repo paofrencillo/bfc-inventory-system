@@ -269,29 +269,25 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
   <script>
     $(function() {
       $("#example1").DataTable({
-        // "columnDefs": [{
-        //   "className": "text-center",
-        //   "visible": true,
-        //   "searchable": false,
-        //   "targets": [7],
-        // }],
+        "dom": "B<'row'<'col-6'l><'col-6 text-right'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12'ip>>",
         "columnDefs": [{
           "visible": false,
           "searchable": true,
           "targets": [9],
-        }, {
+        }, 
+        {
           "visible": true,
           "searchable": false,
-          "targets": [7],
-        }, {
+          "targets": [0,1,2,3,4,5,7,8,9,10],
+        },
+        {
           "visible": true,
           "orderable": false,
           "targets": [10],
-        }],
+        },
+        ],
         "responsive": true,
         "lengthChange": true,
-        // "scrollY": '500px',
-        // "scrollCollapse": true,
         "autoWidth": false,
         "processing": true,
         "serverSide": true,
@@ -329,7 +325,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
               return printTitle
             },
             customize: function(win) {
-              $(win.document.body).find('table').addClass('display').css('font-size', '10px');
+              $(win.document.body).find('table').addClass('display').css('font-size', '11px');
               $(win.document.body).find('tr:nth-child(odd) td').each(function(index) {
                 $(this).css('background-color', '#D0D0D0');
               });
@@ -338,7 +334,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
           },
         ]
         // "buttons": ["copy", "excel", "print"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      }).buttons().container().appendTo($('#card-tools'));
     });
 
     $(function() {
@@ -393,10 +389,10 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
               });
               $(win.document.body).find('h1').css('text-align', 'center');
             }
-          },
-        ]
-        // "buttons": ["copy", "excel", "pdf", "print"]
-      }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+          }],
+          "dom": "B<'row'<'col-6'l><'col-6 text-right'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12'ip>>",
+      })
+      .buttons().container().appendTo($('#card-tools2'));
     });
 
     $(function() {
