@@ -159,76 +159,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 </div>
                 <div class="card-body p-0">
                   <div class="table-responsive table-hover table-sm table-borderless table-md text-center">
-                    <table class="table m-0">
+                    <table id="tableout" class="table table-hover text-center m-0">
                       <thead class="thead-light ">
-                        <tr>
+                        <tr style="font-size: 15px">
                           <th>Description</th>
                           <th>Category</th>
                           <th>Quantity</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <?php
-
-                        // Query to get maximum value of the column
-                        // $sql_max = "SELECT MAX(allocation) as max_value FROM inventory";
-
-                        // // Execute query and get result
-                        // $result_max = $conn->query($sql_max);
-
-                        // // Define low quantity threshold
-                        // $low_quantity_threshold = 100;
-
-                        // Check if there is any data
-                        // if ($result_max->num_rows > 0) {
-                        //   // Get the maximum value
-                        //   $row_max = mysqli_fetch_assoc($result_max);
-                        //   $max_value = $row_max["max_value"];
-
-                        //   // Calculate 20% of the maximum value
-                        //   $low_quantity_threshold = $max_value * 0.3;
-
-                        // Query to get low quantity data
-                        $sql = "SELECT * FROM inventory WHERE sa_percentage <= 40 ORDER BY stock ASC LIMIT 15";
-
-                        // Execute query and get result
-                        $result = $conn->query($sql);
-
-                        // Check if there is any data
-                        if ($result->num_rows > 0) {
-                          // Display low quantity data
-                          while ($row = mysqli_fetch_assoc($result)) {
-                            // echo "ID: " . $row["id"] . " - Quantity: " . $row["yourcolumn"] . "<br>";                       
-                        ?>
-                            <tr>
-                              <td><?php echo $row["description"] ?></td>
-                              <td><?php echo $row["category"] ?></td>
-                              <td>
-                                <div class="sparkbar text-danger font-weight-bold" data-color="#00a65a" data-height="20"><?php echo $row["stock"] ?> </div>
-                              </td>
-                            </tr>
-                        <?php
-                          }
-                        } else {
-                          echo "No data found.";
-                        }
-                        // } else {
-                        //   echo "No data found.";
-                        // }
-                        ?>
+                      <tbody style="font-size: 14px">
+                       
                       </tbody>
                     </table>
 
                   </div>
                 </div>
-                <div class="card-footer clearfix bg-secondary">
+                <div class="card-footer clearfix bg-secondary" id="footer-card">
                   <a href=<?php
-                          if ($_SESSION["login_user"]["is_superuser"] == '1') {
-                            echo 'inventory.php';
-                          } else if ($_SESSION["login_user"]["is_superuser"] == '0') {
-                            echo 'z-inventory.php';
-                          }
-                          ?> class="btn btn-sm btn-info float-right">View All Product</a>
+                    if ($_SESSION["login_user"]["is_superuser"] == '1') {
+                      echo 'inventory.php';
+                    } else if ($_SESSION["login_user"]["is_superuser"] == '0') {
+                      echo 'z-inventory.php';
+                    }
+                    ?> class="btn btn-sm btn-info float-right">View All Product</a>
                 </div>
               </div>
             </div>
@@ -251,7 +204,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                     $date = date_create();
                     $date = date_format($date, 'm-d-Y');
                     // Query to get recent data
-                    $sql = "SELECT * FROM endorse_history ORDER BY quantity AND endorsed_date ASC LIMIT 3";
+                    $sql = "SELECT * FROM endorse_history ORDER BY quantity AND endorsed_date ASC LIMIT 5";
 
                     // Execute query and get result
                     $result = $conn->query($sql);
@@ -277,13 +230,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                           </div>
                           <div class="product-info">
                             <a href=<?php
-                                    if ($_SESSION["login_user"]["is_superuser"] == '1') {
-                                      echo 'masterlist.php';
-                                    } else if ($_SESSION["login_user"]["is_superuser"] == '0') {
-                                      echo 'z-masterlist.php';
-                                    }
-                                    ?> class="product-title"><?php echo $row["description"] ?></a>
+                              if ($_SESSION["login_user"]["is_superuser"] == '1') {
+                                echo 'masterlist.php';
+                              } else if ($_SESSION["login_user"]["is_superuser"] == '0') {
+                                echo 'z-masterlist.php';
+                              }
+                              ?> class="product-title"><?php echo $row["description"] ?></a>
                             <span class="badge badge-success float-right"><?php echo $row["barcode"] ?></span>
+                            <span class="product-description">Quantity:
+                              <?php echo $row["quantity"] ?>
+                            </span>
                             <?php
                             $query3 = "SELECT generic_name FROM product_masterlist WHERE barcode = '$barcode2'";
                             $result3 = mysqli_query($conn, $query3);
@@ -293,6 +249,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                               <span class="product-description">
                                 <?php echo $row3["generic_name"] ?>
                               </span>
+                             
                             <?php } ?>
                           </div>
                         </li>
@@ -329,7 +286,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                   <ul class="products-list product-list-in-card pl-2 pr-2">
                     <?php
                     // Query to get recent data
-                    $sql = "SELECT * FROM product_in_final ORDER BY last_edited_on DESC LIMIT 3";
+                    $sql = "SELECT * FROM product_in_final ORDER BY last_edited_on DESC LIMIT 5";
 
                     // Execute query and get result
                     $result = $conn->query($sql);

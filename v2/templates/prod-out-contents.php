@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 <div class="card-body">
                   <div class="tab-content" id="custom-tabs-one-tabContent">
                     <div class="tab-pane fade show active" id="example11" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
-                      <div class="card-tools mx-0" >
+                      <div class="card-tools mx-0">
                         <ul class="pagination pagination-sm">
                           <div class="mr-2" id="card-tools">
                           </div>
@@ -349,7 +349,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                     </div>
                     <div class="tab-pane fade" id="example22" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
                       <div class="card-tools mx-0">
-                        <ul class="pagination pagination-sm" >
+                        <ul class="pagination pagination-sm">
                           <div class="mr-2" id="card-tools2">
                           </div>
                           <button class="btn btn-danger btn-md" data-toggle="modal" data-target="#delete_history">

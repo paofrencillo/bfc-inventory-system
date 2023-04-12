@@ -535,7 +535,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
 
     $(document).ready(function() {
       $("#example1").DataTable({
-        "dom": 'Blftipr',
+        // "dom": 'Blftipr',
         "processing": true,
         "serverSide": true,
         "ajax": "fetchDataMaster.php",
@@ -547,7 +547,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         "responsive": true,
         "lengthChange": true,
         "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print"]
+        // "buttons": ["copy", "csv", "excel", "pdf", "print"]
       }).buttons().container().appendTo('#example1_filter .col-md-6:eq(0)');
     });
 

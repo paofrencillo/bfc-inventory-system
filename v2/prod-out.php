@@ -271,20 +271,20 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
       $("#example1").DataTable({
         "dom": "B<'row'<'col-6'l><'col-6 text-right'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12'ip>>",
         "columnDefs": [{
-          "visible": false,
-          "searchable": true,
-          "targets": [9],
-        }, 
-        {
-          "visible": true,
-          "searchable": false,
-          "targets": [0,1,2,3,4,5,7,8,9,10],
-        },
-        {
-          "visible": true,
-          "orderable": false,
-          "targets": [10],
-        },
+            "visible": false,
+            "searchable": true,
+            "targets": [9],
+          },
+          {
+            "visible": true,
+            "searchable": false,
+            "targets": [0, 1, 2, 3, 4, 5, 7, 8, 9, 10],
+          },
+          {
+            "visible": true,
+            "orderable": false,
+            "targets": [10],
+          },
         ],
         "responsive": true,
         "lengthChange": true,
@@ -339,60 +339,61 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
 
     $(function() {
       $("#example2").DataTable({
-        "columnDefs": [{
-          "targets": "_all"
-        }],
-        "responsive": true,
-        "lengthChange": true,
-        // "scrollY": '500px',
-        // "scrollCollapse": false,
-        "autoWidth": false,
-        "processing": true,
-        "serverSide": true,
-        "ajax": "fetchDataProdOutFinal.php",
-        "order": [
-          [5, 'desc']
-        ],
-        "buttons": [{
-            extend: 'copy',
-            title: function() {
-              var printTitle = 'ENDORSEMENT FORM ';
-              return printTitle
-            },
-            exportOptions: {
-              columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-            }
-          },
-          {
-            extend: 'excel',
-            title: function() {
-              var printTitle = 'ENDORSEMENT FORM ';
-              return printTitle
-            },
-            exportOptions: {
-              columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-            }
-          },
-          {
-            extend: 'print',
-            exportOptions: {
-              columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-            },
-            title: function() {
-              var printTitle = 'ENDORSEMENT FORM ';
-              return printTitle
-            },
-            customize: function(win) {
-              $(win.document.body).find('table').addClass('display').css('font-size', '10px');
-              $(win.document.body).find('tr:nth-child(odd) td').each(function(index) {
-                $(this).css('background-color', '#D0D0D0');
-              });
-              $(win.document.body).find('h1').css('text-align', 'center');
-            }
+          "columnDefs": [{
+            "targets": "_all"
           }],
+          "responsive": true,
+          "lengthChange": true,
+          // "scrollY": '500px',
+          // "scrollCollapse": false,
+          "autoWidth": false,
+          "processing": true,
+          "serverSide": true,
+          "ajax": "fetchDataProdOutFinal.php",
+          "order": [
+            [5, 'desc']
+          ],
+          "buttons": [{
+              extend: 'copy',
+              title: function() {
+                var printTitle = 'ENDORSEMENT FORM ';
+                return printTitle
+              },
+              exportOptions: {
+                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+              }
+            },
+            {
+              extend: 'excel',
+              title: function() {
+                var printTitle = 'ENDORSEMENT FORM ';
+                return printTitle
+              },
+              exportOptions: {
+                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+              }
+            },
+            {
+              extend: 'print',
+              exportOptions: {
+                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+              },
+              title: function() {
+                var printTitle = 'ENDORSEMENT FORM ';
+                return printTitle
+              },
+              customize: function(win) {
+                $(win.document.body).find('table').addClass('display').css('font-size', '10px');
+                $(win.document.body).find('tr:nth-child(odd) td').each(function(index) {
+                  $(this).css('background-color', '#D0D0D0');
+                });
+                $(win.document.body).find('h1').css('text-align', 'center');
+              }
+            }
+          ],
           "dom": "B<'row'<'col-6'l><'col-6 text-right'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12'ip>>",
-      })
-      .buttons().container().appendTo($('#card-tools2'));
+        })
+        .buttons().container().appendTo($('#card-tools2'));
     });
 
     $(function() {

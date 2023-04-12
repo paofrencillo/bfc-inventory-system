@@ -37,15 +37,19 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
   <link rel="icon" type="image/png" href="dist/img/valuemed-logo1.png">
+   <!-- DataTables -->
+   <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
     <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
+    <!-- <div class="preloader flex-column justify-content-center align-items-center">
       <img class="animation__shake" src="dist/img/valuemed logo final logo.png" alt="AdminLTELogo" height="500" width="550">
-    </div>
+    </div> -->
 
     <?php
     // ------ Navbar
@@ -54,10 +58,10 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-light-blue elevation-4">
-    <!-- Brand Logo -->
-    <a href="dashboard.php" class="brand-link text-center">
-      <img src="dist/img/valuemed-logo.png" alt="valuemedlogo" style="width: 70%">
-    </a>
+      <!-- Brand Logo -->
+      <a href="dashboard.php" class="brand-link text-center">
+        <img src="dist/img/valuemed-logo.png" alt="valuemedlogo" style="width: 70%">
+      </a>
 
       <!-- Sidebar -->
       <div class="sidebar">
@@ -223,6 +227,95 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
   <script src="dist/js/pages/dashboard.js"></script>
   <!-- ChartJS -->
   <script src="../../plugins/chart.js/Chart.min.js"></script>
+  <!-- DataTables  & Plugins -->
+  <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+  <script src="plugins/jszip/jszip.min.js"></script>
+  <script src="plugins/pdfmake/pdfmake.min.js"></script>
+  <script src="plugins/pdfmake/vfs_fonts.js"></script>
+  <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+  <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+  <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+  <script>
+    $(function() {
+      $("#tableout").DataTable({
+        "columnDefs": [{
+          "className": "text-center",
+          "targets": "_all",
+          "orderable": false
+        }, {
+          "width": "45%",
+          "targets": 0,
+          // "data": "description",
+          // render: function(data, type, row, meta) {
+          //   if (type === 'display') {
+          //     data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
+          //   }
+          //   return data;
+          // }
+        }],
+        "searching": false,
+        "info": false,
+        "responsive": true,
+        "lengthChange": false,
+        "paging": false,
+        "autoWidth": false,
+        "order": [],
+        "scrollY": 400,
+        "scroller": true,
+        // "deferRender":    true,
+        "dom": 'Blftipr',
+        "processing": true,
+        "serverSide": true,
+        "ajax": "fetchDataoutofstock.php",
+        "buttons": [{
+            extend: 'copy',
+            title: function() {
+              var printTitle = 'Running out of stocks';
+              return printTitle
+            },
+            exportOptions: {
+              columns: [0, 1, 2]
+            }
+          },
+          {
+            extend: 'excel',
+            title: function() {
+              var printTitle = 'Running out of stocks';
+              return printTitle
+            },
+            exportOptions: {
+              columns: [0, 1, 2]
+            }
+          },
+          {
+            extend: 'print',
+            exportOptions: {
+              columns: [0, 1, 2]
+            },
+            title: function() {
+              var printTitle = 'Running out of stocks';
+              return printTitle
+            },
+            customize: function(win) {
+              $(win.document.body).find('table').addClass('display').css('font-size', '14px');
+              $(win.document.body).find('tr:nth-child(odd) td').each(function(index) {
+                $(this).css('background-color', '#D0D0D0');
+              });
+              $(win.document.body).find('h1').css('text-align', 'center');
+            }
+          },
+        ]
+       
+      }).buttons().container().appendTo($('#footer-card'));
+    });
+
+  </script>
 
 </body>
 
