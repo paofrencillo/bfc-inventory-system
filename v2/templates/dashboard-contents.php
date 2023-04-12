@@ -236,7 +236,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                 echo 'z-masterlist.php';
                               }
                               ?> class="product-title"><?php echo $row["description"] ?></a>
-                            <span class="badge badge-success float-right"><?php echo $row["barcode"] ?></span>
+                           
                             <span class="product-description">Quantity:
                               <?php echo $row["quantity"] ?>
                             </span>
