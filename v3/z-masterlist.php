@@ -377,19 +377,20 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
 
     // ------ Check if product is already enrolled
     $("#barcode").on("change", () => {
-      $("enroll_form").on("submit", (e) => {
+      $("#enroll_form").on("submit", (e) => {
         e.preventDefault();
       });
       $.ajax({
         type: "GET",
         url: "masterlist-functions.php",
         data: {
-          "barcode": $("#barcode").val(),
+          barcode: $("#barcode").val(),
           action: "get_product"
         },
         dataType: "JSON",
         success: function(data) {
           if (data != "Not found") {
+            $("#enroll-submit-btn").attr("disabled", true);
             $("#description").attr("disabled", "");
             $("#generic_name").attr("disabled", "");
             document.getElementsByClassName("dropdown-toggle")[0].setAttribute("disabled", true);
@@ -407,6 +408,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
             $("#enroll_warning_text").removeClass("d-none");
             $("#enroll-btn").attr("disabled", "");
           } else {
+            $("#enroll-submit-btn").attr("disabled", false);
             $("#enroll_warning_text").addClass("d-none");
             $("#enroll-btn").removeAttr("disabled");
             document.getElementById("description").focus();
@@ -607,16 +609,16 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
       e.preventDefault();
 
       var x = document.getElementById("myAudio");
-      x.play(); 
+      x.play();
 
-      $('#save_excel_data').attr('disabled',true);
+      $('#save_excel_data').attr('disabled', true);
       $('#name_upload').attr('hidden', false);
       $('#file_group').attr('hidden', true);
 
       let up_name = document.getElementById("excel").files[0].name
 
       $('#upload_name').val(up_name);
-      $('#import_file_button').attr('disabled',true);
+      $('#import_file_button').attr('disabled', true);
       $('#save_excel_data').html('<i class="fas fa-spinner fa-pulse"></i> Importing...');
       $('#gif').css('display', 'block');
 
@@ -652,58 +654,59 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
               imageHeight: 300,
               imageAlt: 'Custom image',
             }).then((result) => {
-                if (result.isConfirmed) {
-                  x.pause(); 
-                  window.location.href = "z-masterlist.php";
-                } else {
-                  x.pause(); 
-                  window.location.href = "z-masterlist.php";
-                }
+              if (result.isConfirmed) {
+                x.pause();
+                window.location.href = "z-masterlist.php";
+              } else {
+                x.pause();
+                window.location.href = "z-masterlist.php";
+              }
             })
           })
         },
         error: function(error) {
           console.error(error);
         }
-        
+
       });
     });
-
   </script>
 
 
   <script type="text/javascript">
     function DownloadFile(fileName) {
-        //Set the File URL.
-        var url = "Databases/" + fileName;
+      //Set the File URL.
+      var url = "Databases/" + fileName;
 
-        //Create XMLHTTP Request.
-        var req = new XMLHttpRequest();
-        req.open("GET", url, true);
-        req.responseType = "blob";
-        req.onload = function () {
-            //Convert the Byte Data to BLOB object.
-            var blob = new Blob([req.response], { type: "application/octetstream" });
+      //Create XMLHTTP Request.
+      var req = new XMLHttpRequest();
+      req.open("GET", url, true);
+      req.responseType = "blob";
+      req.onload = function() {
+        //Convert the Byte Data to BLOB object.
+        var blob = new Blob([req.response], {
+          type: "application/octetstream"
+        });
 
-            //Check the Browser type and download the File.
-            var isIE = false || !!document.documentMode;
-            if (isIE) {
-                window.navigator.msSaveBlob(blob, fileName);
-            } else {
-                var url = window.URL || window.webkitURL;
-                link = url.createObjectURL(blob);
-                var a = document.createElement("a");
-                a.setAttribute("download", fileName);
-                a.setAttribute("href", link);
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-            }
-        };
-        req.send();
+        //Check the Browser type and download the File.
+        var isIE = false || !!document.documentMode;
+        if (isIE) {
+          window.navigator.msSaveBlob(blob, fileName);
+        } else {
+          var url = window.URL || window.webkitURL;
+          link = url.createObjectURL(blob);
+          var a = document.createElement("a");
+          a.setAttribute("download", fileName);
+          a.setAttribute("href", link);
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }
+      };
+      req.send();
     };
 
-    $("#excel").on("change", ()=> {
+    $("#excel").on("change", () => {
       // web-system-masterlist-template.xlsx
       let file = document.getElementById("excel")
       if (file.files.length === 0) {
@@ -712,8 +715,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         let fileUploaded = file.files[0].name
         if (fileUploaded === 'web-system-masterlist-template.xlsx') {
           $("#save_excel_data").removeAttr("disabled");
-        }
-        else {
+        } else {
           file.value = ''
           $("#excel-label").html('Choose File')
           $("#save_excel_data").attr("disabled", true);
@@ -725,7 +727,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
       bsCustomFileInput.init();
     });
   </script>
-  
+
 </body>
 
 </html>

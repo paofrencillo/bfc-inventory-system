@@ -44,53 +44,12 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
-
-
   
   <style>
     td {
       vertical-align: middle !important;
     }
   </style>
-
-  
-  <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  
-  <script>
-    document.onreadystatechange = () => {
-      if (document.readyState != 'complete') {
-        console.log("di pa")
-        let timerInterval
-        Swal.fire({
-          title: 'Auto close alert!',
-          html: 'I will close in <b></b> milliseconds.',
-          timer: 20000,
-          timerProgressBar: true,
-          didOpen: () => {
-            Swal.showLoading()
-            const b = Swal.getHtmlContainer().querySelector('b')
-            // timerInterval = setInterval(() => {
-            //   b.textContent = Swal.getTimerLeft()
-            // }, 100)
-          },
-          // willClose: () => {
-          //   clearInterval(timerInterval)
-          // }
-        }).then((result) => {
-          /* Read more about handling dismissals below */
-          if (document.readyState === 'complete') {
-            Swal.DismissReason.timer
-            console.log('I was closed by the timer')
-          }
-        })
-      } else {
-        console.log("oks na")
-        
-      }
-    };
-</script> -->
-
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -288,8 +247,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
 
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
-  <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/i18n/defaults-*.min.js"></script>
+
   <script>
     $(document).ready(function() {
       $('.selectpicker1').selectpicker();
@@ -433,19 +391,20 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
 
     // ------ Check if product is already enrolled
     $("#barcode").on("change", () => {
-      $("enroll_form").on("submit", (e) => {
+      $("#enroll_form").on("submit", (e) => {
         e.preventDefault();
       });
       $.ajax({
         type: "GET",
         url: "masterlist-functions.php",
         data: {
-          "barcode": $("#barcode").val(),
+          barcode: $("#barcode").val(),
           action: "get_product"
         },
         dataType: "JSON",
         success: function(data) {
           if (data != "Not found") {
+            $("#enroll-submit-btn").attr("disabled", true);
             $("#description").attr("disabled", "");
             $("#generic_name").attr("disabled", "");
             document.getElementsByClassName("dropdown-toggle")[0].setAttribute("disabled", true);
@@ -463,6 +422,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
             $("#enroll_warning_text").removeClass("d-none");
             $("#enroll-btn").attr("disabled", "");
           } else {
+            $("#enroll-submit-btn").attr("disabled", false);
             $("#enroll_warning_text").addClass("d-none");
             $("#enroll-btn").removeAttr("disabled");
             document.getElementById("description").focus();
@@ -685,19 +645,6 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         cache: false,
         success: function(data) {
           $(document).ready(function() {
-            // Swal.fire({
-            //     icon: 'success',
-            //     title: 'Successfully Uploaded File',
-            //     confirmButtonColor: '#3085d6',
-            //     confirmButtonText: 'Okay'
-            // }).then((result) => {
-            //     if (result.isConfirmed) {
-            //         window.location.href = "masterlist.php";
-            //     } else {
-            //         window.location.href = "masterlist.php";
-            //     }
-            // })
-
             Swal.fire({
               title: 'Successfully Uploaded File',
               text: 'File has been successfully imported',

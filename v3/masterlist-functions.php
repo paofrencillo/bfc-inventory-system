@@ -32,11 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                     "image" => $row["image"],
                     "last_edited" => $row["last_edited_by"] . ' | ' .  $date,
                 );
+                
                 echo json_encode($data);
             }
         }
     }
-    if (isset($_GET["action"]) && $_GET['action'] === 'get_product_view') {
+    else if (isset($_GET["action"]) && $_GET['action'] === 'get_product_view') {
         $id = $_GET["id"];
         $table = "product_masterlist";
         $query_get = "SELECT * FROM $table WHERE id=$id;";
@@ -74,6 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
         die(header('location: 500.html'));
     }
 }
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //PRODUCT ENROLLMENT

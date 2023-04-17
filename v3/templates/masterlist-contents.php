@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                     </div>
                                     <div class="modal-footer justify-content-between px-0 mx-0">
                                         <button type="button" class="btn btn-default mx-0" data-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn btn-primary mx-0">Add Product</button>
+                                        <button type="submit" id="enroll-submit-btn" class="btn btn-primary mx-0" disabled>Add Product</button>
                                     </div>
                                 </form>
                             </div>
