@@ -265,11 +265,10 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
                             <td><?php echo $row['employee_name'] ?></td>
                             <td><?php echo $row['user'] ?></td>
                             <td>
-                              <button class="btn btn-info btn-sm" style="border-radius: 50%;" data-toggle="modal" data-target="#update<?php echo $row['user_id'] ?>">
+                              <button title="Change Details" class="btn btn-info btn-sm" style="border-radius: 50%;" data-toggle="modal" data-target="#update<?php echo $row['user_id'] ?>">
                                 <i class="fas fa-pencil-alt"></i>
                               </button>
 
-                              <!-- /.modal -->
                               <div class="modal fade" id="update<?php echo $row['user_id'] ?>">
                                 <div class="modal-dialog modal-dialog-centered modal-lg">
                                   <div class="modal-content">
@@ -294,8 +293,9 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
                                               <input type="text" class="form-control " id="user" name="user" autocomplete="off" value="<?php echo $row['user'] ?>">
                                             </div>
                                           </div>
+                                          
                                         </div>
-                                        <div class="modal-footer justify-content-between">
+                                        <div class="modal-footer justify-content-between px-0">
                                           <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> -->
                                           <input type="hidden" name="employee_modify" value="<?php echo $row['user_id'] ?>">
                                           <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delete_modal<?php echo $row['user'] ?>">Delete</button>
@@ -322,16 +322,13 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
                                               </div>
                                           </div>
                                       </div>
-
                                       </form>
                                     </div>
-                                    <!-- /.modal-content -->
                                   </div>
-                                  <!-- /.modal-dialog -->
                                 </div>
-                                <!-- /.modal -->
-
+                              </div>
                             </td>
+                          
                           </tr>
                         <?php } ?>
                       </tbody>
