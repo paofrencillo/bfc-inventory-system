@@ -154,10 +154,10 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
                   </a>
                 </li>
                 <li class="nav-item">
-                    <a href="z-admin.php" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Change Password </p>
-                    </a>
+                  <a href="z-admin.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Change Password </p>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -258,10 +258,17 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
             $("#prod").val(data.description);
             $("#stock").val(data.stock);
             $("#allo").val(data.allocation);
-            $("#sa_percentage").val(data.sa_percentage);
             $("#Category").val(data.category);
             $("#rack").val(data.rack);
+            $("#rack_in").val(data.rack_in);
+            $("#rack_out").val(data.rack_out);
             $('#editInvModal').modal('show');
+            if (data.sa_percentage === null) {
+              $("#sa_percentage").val('0%');
+            } else {
+              $("#sa_percentage").val(data.sa_percentage + '%');
+            }
+
           }
         },
         error: function(error) {
@@ -313,15 +320,15 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
       $("#Generic").DataTable({
         "order": [],
         "columnDefs": [{
-          "className": "dt-center",
-          "targets": "_all"
+          "targets": 8,
+          "orderable": false
         }],
         "responsive": true,
         "lengthChange": true,
-        lengthMenu: [10, 50, 100, 500, 1000],
         "autoWidth": false,
         "processing": true,
         "serverSide": true,
+        lengthMenu: [10, 50, 100, 500, 1000],
         "ajax": "fetchDataInventory.php",
         "order": [
           [1, 'asc']

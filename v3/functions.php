@@ -1853,7 +1853,7 @@ if (isset($_GET["action"]) && $_GET["action"] === 'get_product_transfer') {
         while ($row = mysqli_fetch_array($result)) {
             $data = array(
                 "barcode" => $row["barcode"],
-                "description" => $row["description"],
+                "description" => htmlspecialchars_decode($row["description"]),
                 "rack" => $row["rack"],
                 "rack_in" => $row["rack_in"],
                 "rack_out" => $row["rack_out"],

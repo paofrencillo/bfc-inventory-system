@@ -272,12 +272,12 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
             $("#rack_in").val(data.rack_in);
             $("#rack_out").val(data.rack_out);
             $('#editInvModal').modal('show');
-            if (data.sa_percentage === null){
+            if (data.sa_percentage === null) {
               $("#sa_percentage").val('0%');
             } else {
               $("#sa_percentage").val(data.sa_percentage + '%');
             }
-            
+
           }
         },
         error: function(error) {

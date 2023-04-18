@@ -176,8 +176,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                       </div>
                     </div>
                     <div class="col-sm-2 text-center">
-                      <button type="submit" class="btn btn-danger btn-md w-75 mb-1" name="to_rack_out"><i class="fas fa-arrow-right"></i></button>
-                      <button type="submit" class="btn btn-primary btn-md w-75 mt-1" name="to_rack_in"><i class="fas fa-arrow-left"></i></button>
+                      <button type="submit" class="btn btn-danger btn-md w-75 mb-1" name="to_rack_out" id="to_rack_out"><i class="fas fa-arrow-right"></i></button>
+                      <button type="submit" class="btn btn-primary btn-md w-75 mt-1" name="to_rack_in" id="to_rack_in"><i class="fas fa-arrow-left"></i></button>
                     </div>
                     <div class="col-sm-5">
                       <div class="input-group">
