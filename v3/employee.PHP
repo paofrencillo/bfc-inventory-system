@@ -281,16 +281,22 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
                                     <div class="modal-body">
                                       <form action="functions.php" method="POST">
                                         <div class="row">
-                                          <div class="col-sm-6">
+                                          <div class="col-sm-4">
                                             <div class="form-group">
                                               <label for="name">Name</label>
                                               <input type="text" class="form-control " id="employee_name" name="employee_name" autocomplete="off" value="<?php echo $row['employee_name'] ?>">
                                             </div>
                                           </div>
-                                          <div class="col-sm-6">
+                                          <div class="col-sm-4">
                                             <div class="form-group">
                                               <label for="name">Username</label>
                                               <input type="text" class="form-control " id="user" name="user" autocomplete="off" value="<?php echo $row['user'] ?>">
+                                            </div>
+                                          </div>
+                                          <div class="col-sm-4">
+                                            <div class="form-group">
+                                              <label for="res_code">Reset Pass Code</label>
+                                              <input type="text" class="form-control " id="res_code" name="res_code" autocomplete="off" value="<?php echo $row['otp'] ?>" readonly>
                                             </div>
                                           </div>
                                           

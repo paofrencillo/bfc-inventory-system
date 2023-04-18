@@ -75,43 +75,40 @@ if (isset($_SESSION['authenticated']) && $_SESSION['authenticated']) {
   <div class="login-box" style="position: fixed;">
     <!-- /.login-logo -->
     <div id="login-card" class="card card-outline card-primary" style="background-color: rgba(216, 221, 236, 0.75) !important;">
-        <div class="card-header text-center">
-            <div href="index.php" class="">
-            <img src="dist/img/valuemed-logo.png" alt="" style="width: 90%;">
-            <div class="text-blue">
-                Inventory System
-            </div>
-            </div>
+      <div class="card-header text-center">
+        <div href="index.php" class="">
+          <img src="dist/img/valuemed-logo.png" alt="" style="width: 90%;">
+          <div class="text-blue">
+            Inventory System
+          </div>
         </div>
-        <div class="card-body">
-            <form action="functions.php" method="post">
-                <div class="input-group mb-2">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-hashtag"></span>
-                        </div>
-                    </div>
-                    <input type="text" class="form-control" name="otp_input" placeholder="Enter OTP Code" required autocomplete="off">
-                </div>
-                <!-- /.col -->
-                <?php
-                  include('templates/connection.php');
-                  $sql = "SELECT * FROM users WHERE user='admin'";
-                  $result = mysqli_query($conn, $sql);
-                  $check_row = mysqli_num_rows($result);
-                    while ($row = mysqli_fetch_array($result)) {
-                  
-                ?>
-                <input type="hidden" name="otp" value="<?php echo $row['otp'] ?>">
-                <?php
-                  }
-                ?>
-                <div class="text-center d-flex justify-content-center align align-items-center">
-                    <button type="submit" class="btn btn-primary btn-block" name="send_otp">Submit</button>
-                </div>
-            </form>
-                <!-- /.col -->
-        </div>
+      </div>
+      <div class="card-body">
+        <form action="functions.php" method="post">
+          <div class="input-group mb-2">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+            <input type="text" class="form-control" name="user_input" placeholder="Enter Username" required autocomplete="off">
+          </div>
+          <div class="input-group mb-2">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-hashtag"></span>
+              </div>
+            </div>
+            <input type="text" class="form-control" name="otp_input" placeholder="Enter Reset Code" required autocomplete="off">
+          </div>
+          <!-- /.col -->
+          
+          <div class="text-center d-flex justify-content-center align align-items-center">
+            <button type="submit" class="btn btn-primary btn-block" name="send_otp">Submit</button>
+          </div>
+        </form>
+        <!-- /.col -->
+      </div>
 
       <!-- /.social-auth-links -->
 

@@ -2,7 +2,7 @@
 include('templates/connection.php');
 include('templates/session.php');
 
-if ($_SESSION['login_user']['is_superuser'] == '0') {
+if ($_SESSION['login_user']['is_superuser'] == '1') {
   header('HTTP/1.0 403 Forbidden', TRUE, 403);
   die(header('location: 403.html'));
 }
@@ -50,7 +50,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-light-blue elevation-4">
       <!-- Brand Logo -->
-      <a href="dashboard.php" class="brand-link text-center">
+      <a href="z-dashboard.php" class="brand-link text-center">
         <img src="dist/img/valuemed-logo.png" alt="valuemedlogo" style="width: 70%">
       </a>
 
@@ -63,7 +63,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item ">
-              <a href="dashboard.php" class="nav-link ">
+              <a href="z-dashboard.php" class="nav-link ">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Dashboard
@@ -81,13 +81,13 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="inventory.php" class="nav-link ">
+                  <a href="z-inventory.php" class="nav-link ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Inventory</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="masterlist.php" class="nav-link">
+                  <a href="z-masterlist.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Masterlist</p>
                   </a>
@@ -105,13 +105,13 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="prod-in.php" class="nav-link">
+                  <a href="z-prod-in.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Product In</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="prod-out.php" class="nav-link">
+                  <a href="z-prod-out.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Product Out</p>
                   </a>
@@ -129,19 +129,13 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="employee.php" class="nav-link ">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Employee Accounts</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="franchisee.php" class="nav-link">
+                  <a href="z-franchisee.php" class="nav-link">
                     <i class="far fa-circle nav-icon "></i>
                     <p>Franchisee List</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="supplier.php" class="nav-link ">
+                  <a href="z-supplier.php" class="nav-link ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Supplier</p>
                   </a>
@@ -197,7 +191,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
                           <span class="fas fa-lock"></span>
                         </div>
                       </div>
-                      <input type="password" class="form-control" placeholder="Password" name="password" required>
+                      <input type="password" class="form-control" placeholder="Password" name="password_emp" required>
                     </div>
                     <div class="input-group mb-3">
                       <div class="input-group-append">
@@ -205,12 +199,12 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
                           <span class="fas fa-lock"></span>
                         </div>
                       </div>
-                      <input type="password" class="form-control" placeholder="Confirm Password" name="confirmpass" required>
+                      <input type="password" class="form-control" placeholder="Confirm Password" name="confirmpass_emp" required>
                     </div>
 
                     <div class="col-12">
-                      <input type="hidden" name="id_password" value="<?php echo $row['user_id'] ?>">
-                      <button type="submit" class="btn btn-primary btn-md" name="pass_admin">Save Changes</button>
+                      <input type="hidden" name="id_password_emp" value="<?php echo $row['user_id'] ?>">
+                      <button type="submit" class="btn btn-primary btn-md" name="pass_emp">Save Changes</button>
                     </div>
                   </form>
                 <?php } ?>
@@ -258,10 +252,6 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
   <script src="plugins/summernote/summernote-bs4.min.js"></script>
   <!-- overlayScrollbars -->
   <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="dist/js/adminlte.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="dist/js/demo.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="dist/js/pages/dashboard.js"></script>
 

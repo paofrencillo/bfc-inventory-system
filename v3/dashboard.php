@@ -46,11 +46,6 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
-    <!-- Preloader -->
-    <!-- <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="" alt="AdminLTELogo" style="width: 100%; height: 100%;">
-    </div> -->
-
     <?php
     // ------ Navbar
     include("templates/navbar.php");
@@ -251,13 +246,6 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         }, {
           "width": "45%",
           "targets": 0,
-          // "data": "description",
-          // render: function(data, type, row, meta) {
-          //   if (type === 'display') {
-          //     data = typeof data === 'string' && data.length > 15 ? data.substring(0, 15) + '...' : data;
-          //   }
-          //   return data;
-          // }
         }],
         "searching": false,
         "info": false,

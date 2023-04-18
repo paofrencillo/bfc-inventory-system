@@ -270,7 +270,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                           }
                           ?> class="uppercase text-light">View All Products</a>
                 </div>
-              </div>
+              </div>  
 
               <div class="card">
                 <div class="card-header bg-info">
@@ -331,7 +331,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                         </li>
                   <?php  }
                           }
-                        }
+                        } else {
+                      echo "No data found.";
+                    }
                   ?>
                   </ul>
                 </div>
@@ -345,8 +347,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                           ?> class="uppercase text-light">View All Products</a>
                 </div>
               </div>
-            </div>
 
+            </div>
           </div>
         </div>
       </section>

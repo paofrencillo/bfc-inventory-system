@@ -33,7 +33,7 @@ require 'ssp.class.php';
  
 // Output data as json format 
 echo json_encode( 
-    SSP::complex( $_GET, $dbDetails, $table, $primaryKey, $columns, null, "sa_percentage <= 40" ) 
+    SSP::complex( $_GET, $dbDetails, $table, $primaryKey, $columns, null, "sa_percentage <= 40 OR stock <= 20" ) 
 ); 
  
 ?>

@@ -267,10 +267,17 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
             $("#prod").val(data.description);
             $("#stock").val(data.stock);
             $("#allo").val(data.allocation);
-            $("#sa_percentage").val(data.sa_percentage);
             $("#Category").val(data.category);
             $("#rack").val(data.rack);
+            $("#rack_in").val(data.rack_in);
+            $("#rack_out").val(data.rack_out);
             $('#editInvModal').modal('show');
+            if (data.sa_percentage === null){
+              $("#sa_percentage").val('0%');
+            } else {
+              $("#sa_percentage").val(data.sa_percentage + '%');
+            }
+            
           }
         },
         error: function(error) {
@@ -330,6 +337,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         "autoWidth": false,
         "processing": true,
         "serverSide": true,
+        lengthMenu: [10, 50, 100, 500, 1000],
         "ajax": "fetchDataInventory.php",
         "order": [
           [1, 'asc']

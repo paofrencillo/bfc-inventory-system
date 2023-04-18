@@ -76,16 +76,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <div class="modal-body">
                               <form action="functions.php" method="POST" id="invModalForm">
                                 <div class="row">
-                                  <div class="col-sm-5">
+                                  <div class="col-sm-4">
                                     <div class="form-group">
                                       <label for="barcode">Barcode</label>
                                       <input type="text" class="form-control " id="barcode" name="barcode" readonly>
                                     </div>
                                   </div>
-                                  <div class="col-sm-7">
+                                  <div class="col-sm-5">
                                     <div class="form-group">
                                       <label for="prod">Product Description</label>
                                       <input type="text" class="form-control " id="prod" name="prod" readonly>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <div class="form-group">
+                                      <label for="Category">Category</label>
+                                      <input type="text" class="form-control " id="Category" name="Category" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" readonly>
                                     </div>
                                   </div>
                                   <div class="col-sm-2">
@@ -106,16 +112,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                       <input type="text" class="form-control" id="sa_percentage" name="sa_percentage" onkeyup="this.value = this.value.toUpperCase();" readonly>
                                     </div>
                                   </div>
-                                  <div class="col-sm-3">
-                                    <div class="form-group">
-                                      <label for="Category">Category</label>
-                                      <input type="text" class="form-control " id="Category" name="Category" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off" readonly>
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-3">
+                                 
+                                  <div class="col-sm-2">
                                     <div class="form-group">
                                       <label for="rack">Rack</label>
                                       <input type="text" class="form-control " id="rack" name="rack" onkeyup="this.value = this.value.toUpperCase();" autocomplete="off">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-2">
+                                    <div class="form-group">
+                                      <label for="rack_in">Rack In</label>
+                                      <input type="number" class="form-control " id="rack_in" name="rack_in"  autocomplete="off">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-2">
+                                    <div class="form-group">
+                                      <label for="rack_out">Rack Out</label>
+                                      <input type="number" class="form-control " id="rack_out" name="rack_out"  autocomplete="off">
                                     </div>
                                   </div>
                                 </div>
@@ -160,7 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                           <span class="input-group-text bg-info" id="basic-addon1">Rack In</span>
                         </div>
                         <input type="number" class="form-control" aria-describedby="basic-addon1" id="rack-in" value="0" readonly>
-                      </div>                
+                      </div>
                     </div>
                     <div class="col-sm-2 text-center">
                       <button type="submit" class="btn btn-danger btn-md w-75 mb-1" name="to_rack_out"><i class="fas fa-arrow-right"></i></button>
@@ -172,7 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                           <span class="input-group-text bg-info" id="basic-addon2">Rack Out</span>
                         </div>
                         <input type="number" class="form-control" aria-describedby="basic-addon2" id="rack-out" value="0" readonly>
-                      </div>                
+                      </div>
                     </div>
                   </div>
                   <div class="row mt-3">

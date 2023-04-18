@@ -158,6 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                 This product was already enrolled.
                                             </h6>
                                         </div>
+                                        <small class="text-info font-weight-bold mx-2">Note: Some products has no barcode. Please check the product description to avoid duplication.</small>
                                     </div>
                                     <div class="modal-footer justify-content-between px-0 mx-0">
                                         <button type="button" class="btn btn-default mx-0" data-dismiss="modal">Cancel</button>
@@ -301,12 +302,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                 <span id="message"></span>
                                 <form id="sample_form"  enctype="multipart/form-data">
                                     <input type="hidden" name="action" value="upload">
-                                    <div class="row">
+                                    <div class="row px-3">
                                         <div class="custom-file form-group" id="file_group">
                                             <input type="file" class="custom-file-input" id="excel" accept=".csv,.xlsx,.xls" name="import_file">
                                             <label class="custom-file-label" for="excel" id="excel-label">Choose
                                                 File</label>
-                                        </div> 
+                                        </div>
+                                        <small class="text-info font-weight-bold mx-0 my-2"> Note: Please use the template provided. Click 'Download Template'</small>
                                         <div class="form-group w-100" id="name_upload" hidden>
                                             <input type="text" class="form-control w-100" name="upload_name" id="upload_name" autocomplete="off" readonly>
                                         </div> 
@@ -316,12 +318,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                         <img src="dist\img\waiting.gif" style="width:100%; height:250px; object-fit:cover;" alt="waiting">
                                     </div>
                                                                  
-                                    <div class="modal-footer justify-content-between px-0 mx-0">
-                                        <small class="w-100">
-                                            Note: Please use the template provided. Click 'Download Template'
-                                        </small> 
-                                        <input type="button" value="Download Template" name="import_file_button" id="import_file_button" onclick="DownloadFile('web-system-masterlist-template.xlsx')" class="btn btn-secondary mt-3" />
-                                        <button type="submit" name="save_excel_data" id="save_excel_data" class="btn btn-primary mt-3"  disabled>Import</button>
+                                    <div class="modal-footer justify-content-between w-100">
+                                        <input type="button" value="Download Template" name="import_file_button" id="import_file_button" onclick="DownloadFile('web-system-masterlist-template.xlsx')" class="btn btn-secondary mx-0" />
+                                        <button type="submit" name="save_excel_data" id="save_excel_data" class="btn btn-primary mx-0"  disabled>Import</button>
                                     </div>
                                 </form>
                                 <audio id="myAudio">

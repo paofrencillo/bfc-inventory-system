@@ -43,11 +43,6 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
-    <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="dist/img/valuemed logo final logo.png" alt="AdminLTELogo" height="500" width="500">
-    </div>
-
     <?php
     // ------ Navbar
     include("templates/navbar.php");
@@ -146,6 +141,12 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
                                     <p>Supplier</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="z-admin.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Change Password </p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -207,6 +208,88 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
   <script src="dist/js/demo.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="dist/js/pages/dashboard.js"></script>
+  <!-- DataTables  & Plugins -->
+  <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+  <script src="plugins/jszip/jszip.min.js"></script>
+  <script src="plugins/pdfmake/pdfmake.min.js"></script>
+  <script src="plugins/pdfmake/vfs_fonts.js"></script>
+  <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+  <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+  <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+  <script>
+    $(function() {
+      $("#tableout").DataTable({
+        "columnDefs": [{
+          "className": "text-center",
+          "targets": "_all",
+          "orderable": false
+        }, {
+          "width": "45%",
+          "targets": 0,
+        }],
+        "searching": false,
+        "info": false,
+        "responsive": true,
+        "lengthChange": false,
+        "paging": false,
+        "autoWidth": false,
+        "order": [],
+        "scrollY": 400,
+        "scroller": true,
+        // "deferRender":    true,
+        "dom": 'Blftipr',
+        "processing": true,
+        "serverSide": true,
+        "ajax": "fetchDataoutofstock.php",
+        "buttons": [{
+            extend: 'copy',
+            title: function() {
+              var printTitle = 'Running out of stocks';
+              return printTitle
+            },
+            exportOptions: {
+              columns: [0, 1, 2]
+            }
+          },
+          {
+            extend: 'excel',
+            title: function() {
+              var printTitle = 'Running out of stocks';
+              return printTitle
+            },
+            exportOptions: {
+              columns: [0, 1, 2]
+            }
+          },
+          {
+            extend: 'print',
+            exportOptions: {
+              columns: [0, 1, 2]
+            },
+            title: function() {
+              var printTitle = 'Running out of stocks';
+              return printTitle
+            },
+            customize: function(win) {
+              $(win.document.body).find('table').addClass('display').css('font-size', '14px');
+              $(win.document.body).find('tr:nth-child(odd) td').each(function(index) {
+                $(this).css('background-color', '#D0D0D0');
+              });
+              $(win.document.body).find('h1').css('text-align', 'center');
+            }
+          },
+        ]
+       
+      }).buttons().container().appendTo($('#footer-card'));
+    });
+
+  </script>
 </body>
 
 </html>
