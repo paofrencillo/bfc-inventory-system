@@ -720,6 +720,12 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
           file.value = ''
           $("#excel-label").html('Choose File')
           $("#save_excel_data").attr("disabled", true);
+          Swal.fire({
+              icon: 'error',
+              title: 'Please use the template provided',
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Okay',
+            });
         }
       }
     });

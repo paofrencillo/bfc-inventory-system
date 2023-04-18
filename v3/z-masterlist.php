@@ -712,7 +712,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
       req.send();
     };
 
-    $("#excel").on("change", () => {
+    $("#excel").on("change", ()=> {
       // web-system-masterlist-template.xlsx
       let file = document.getElementById("excel")
       if (file.files.length === 0) {
@@ -721,10 +721,17 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         let fileUploaded = file.files[0].name
         if (fileUploaded === 'web-system-masterlist-template.xlsx') {
           $("#save_excel_data").removeAttr("disabled");
-        } else {
+        }
+        else {
           file.value = ''
           $("#excel-label").html('Choose File')
           $("#save_excel_data").attr("disabled", true);
+          Swal.fire({
+              icon: 'error',
+              title: 'Please use the template provided',
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Okay',
+            });
         }
       }
     });
