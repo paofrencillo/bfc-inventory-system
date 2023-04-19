@@ -36,9 +36,10 @@ $columns = array(
     array( 'db' => 'in_quantity',     'dt' => 4 ),
     array( 'db' => 'lot_no',     'dt' => 5 ),
     array( 'db' => 'exp_date',     'dt' => 6 ),
+    array( 'db' => 'entry_date',     'dt' => 7 ),
     array( 
         'db'        => 'id', 
-        'dt'        => 7, 
+        'dt'        => 8, 
         'formatter' => function( $d, $row ) { 
             return '
             <button type="button" class="btn btn-secondary btn-sm" style="border-radius: 50%;" data-toggle="modal" data-target="#details" onclick="viewModal(this);" data-id="' .$d. '">

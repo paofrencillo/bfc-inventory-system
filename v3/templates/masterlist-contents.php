@@ -50,11 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <!-- /.card-header -->
                                 <div class="card-body">
-                                    <div class="card-tools mx-0">
-                                        <ul class="pagination pagination-sm">
-                                            <div class="mr-2" id="card_toolss">
+                                    <div class="card-tools mx-0 mt-0">
+                                        <ul class="pagination pagination-sm mt-0">
+                                            <div class="mr-2 mt-0" id="card_toolss">
                                             </div>
                                         </ul>
                                     </div>
@@ -70,7 +69,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                                                 <th></th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tablebody2"></tbody>
+                                        <tbody id="tablebody2" style=" vertical-align: middle; font-size:15px;">
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>

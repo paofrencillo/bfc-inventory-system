@@ -40,14 +40,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 </button>
               </div>
             </div>
-            <!-- /.card-body -->
           </div>
-
+          
           <div class="row">
             <div class="col-12">
               <div class="card">
-                <!-- /.card-header -->
                 <div class="card-body">
+                  <div class="card-tools mx-0">
+                    <ul class="pagination pagination-sm">
+                        <div class="mr-2" id="card_toolss">
+                        </div>
+                    </ul>
+                  </div>
                   <table id="example1" class="table table-striped table-hover text-center" style="font-size: 15px;">
                     <thead class="thead-dark" id="tablebody">
                       <tr style="font-size:15px;">
@@ -58,15 +62,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                         <th>QTY</th>
                         <th>LOT NO.</th>
                         <th>EXP. DATE</th>
+                        <th>ENTRY DATE</th>
                         <th></th>
                       </tr>
                     </thead>
                     <tbody id="tablebody2" style=" vertical-align: middle; font-size:15px;">
-
                     </tbody>
                   </table>
                 </div>
-                <!-- /.card-body -->
               </div>
             </div>
           </div>

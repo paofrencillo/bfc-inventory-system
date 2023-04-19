@@ -304,7 +304,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         processData: false,
         cache: false,
         success: function(data) {
-          console.log("Deleted");   
+          console.log("Deleted");
         },
         error: function(error, status, xhr) {
           console.error(error, status, xhr);
@@ -538,14 +538,16 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
 
     $(document).ready(function() {
       var table = $("#example1").DataTable({
+        "dom": "B<'row'<'col-6 mt-3'l><'col-6 text-right'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12'ip>>",
         "columnDefs": [{
-          "targets": [7,0],
+          "targets": [7, 0],
           "orderable": false
-        },{   key:        'select',
-            allowHTML:  true, // to avoid HTML escaping
-            label:      '<input type="checkbox" class="protocol-select-all" title="Toggle ALL records"/>',
-            formatter:      '<input type="checkbox" checked/>',
-            emptyCellValue: '<input type="checkbox"/>'
+        }, {
+          key: 'select',
+          allowHTML: true, // to avoid HTML escaping
+          label: '<input type="checkbox" class="protocol-select-all" title="Toggle ALL records"/>',
+          formatter: '<input type="checkbox" checked/>',
+          emptyCellValue: '<input type="checkbox"/>'
         }],
         "responsive": true,
         "select": true,
@@ -557,35 +559,72 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         "order": [
           [3, 'desc']
         ],
+        "buttons": [{
+            extend: 'copy',
+            title: function() {
+              var printTitle = 'PRODUCT IN';
+              return printTitle
+            },
+            exportOptions: {
+              columns: [1, 2, 3, 4, 5, 6, 7]
+            }
+          },
+          {
+            extend: 'excel',
+            title: function() {
+              var printTitle = 'PRODUCT IN';
+              return printTitle
+            },
+            exportOptions: {
+              columns: [1, 2, 3, 4, 5, 6, 7]
+            }
+          },
+          {
+            extend: 'print',
+            exportOptions: {
+              columns: [1, 2, 3, 4, 5, 6, 7]
+            },
+            title: function() {
+              var printTitle = 'PRODUCT IN';
+              return printTitle
+            },
+            customize: function(win) {
+              $(win.document.body).find('table').addClass('display').css('font-size', '11px');
+              $(win.document.body).find('tr:nth-child(odd) td').each(function(index) {
+                $(this).css('background-color', '#D0D0D0');
+              });
+              $(win.document.body).find('h1').css('text-align', 'center');
+            }
+          },
+        ]
         // "buttons": ["copy", "excel", "print"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)'); 
+      }).buttons().container().appendTo($('#card-toolss'));
     });
 
-    $("#tablebody2").on("change", ()=> {
+    $("#tablebody2").on("change", () => {
       const selectRows = document.querySelectorAll('.selectRow');
-      for (i=0; i<selectRows.length; i++) {
+      for (i = 0; i < selectRows.length; i++) {
         if (selectRows[i].checked) {
           $('#delete-items').prop("disabled", false)
           $('#selectAll').prop("checked", false)
           break
-        }
-        else if (!selectRows[i].checked) {
+        } else if (!selectRows[i].checked) {
           $('#delete-items').prop("disabled", true)
         }
       }
     })
 
-    $("#selectAll").on("click", ()=> {
+    $("#selectAll").on("click", () => {
       const selectAll = document.getElementById('selectAll');
       const selectRows = document.querySelectorAll('.selectRow');
       selectAll.addEventListener('change', function() {
         if (selectAll.checked) {
-            selectRows.forEach(function(row) {
+          selectRows.forEach(function(row) {
             row.checked = selectAll.checked;
           });
-          $('#delete-items').prop("disabled", false)        
+          $('#delete-items').prop("disabled", false)
         } else if (!selectAll.checked) {
-            selectRows.forEach(function(row) {
+          selectRows.forEach(function(row) {
             row.checked = selectAll.checked;
           });
           $('#delete-items').prop("disabled", true)
@@ -593,19 +632,19 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
       });
     })
 
-    $("#delete-items").on("click", ()=> {
+    $("#delete-items").on("click", () => {
       const selectRows = document.querySelectorAll('.selectRow');
       let prod_ids = []
       let data = new FormData()
       selectRows.forEach(function(row) {
         if (row.checked) {
-          prod_ids.push(parseInt(row.value));  
-        }  
+          prod_ids.push(parseInt(row.value));
+        }
       });
-        
-        data.append("prod_ids", prod_ids)
-        data.append("action", "delete_items")
-        $.ajax({
+
+      data.append("prod_ids", prod_ids)
+      data.append("action", "delete_items")
+      $.ajax({
         type: "POST",
         url: "prod-in-functions.php",
         data: data,
@@ -621,7 +660,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         }
       });
     });
-  
+
 
     $(function() {
       //Initialize Select2 Elements
