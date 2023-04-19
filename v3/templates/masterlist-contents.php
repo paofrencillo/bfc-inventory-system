@@ -52,6 +52,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                             <div class="card">
                                 <!-- /.card-header -->
                                 <div class="card-body">
+                                    <div class="card-tools mx-0">
+                                        <ul class="pagination pagination-sm">
+                                            <div class="mr-2" id="card_toolss">
+                                            </div>
+                                        </ul>
+                                    </div>
                                     <table id="example1" class="table table-striped table-hover text-center" style="font-size: 15px;">
                                         <thead class="thead-dark">
                                             <tr class=text-center>

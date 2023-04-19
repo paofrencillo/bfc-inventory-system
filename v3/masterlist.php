@@ -44,7 +44,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
-  
+
   <style>
     td {
       vertical-align: middle !important;
@@ -540,7 +540,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
 
     $(document).ready(function() {
       $("#example1").DataTable({
-        // "dom": 'Blftipr',
+        "dom": "B<'row'<'col-6'l><'col-6 text-right'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12'ip>>",
         "processing": true,
         "serverSide": true,
         "ajax": "fetchDataMaster.php",
@@ -555,8 +555,46 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         "lengthChange": true,
         "autoWidth": false,
         lengthMenu: [10, 50, 100, 500, 1000],
+        "buttons": [{
+            extend: 'copy',
+            title: function() {
+              var printTitle = 'ENDORSEMENT FORM ';
+              return printTitle
+            },
+            exportOptions: {
+              columns: [0, 1, 2, 3, 4, 5, 6, 7]
+            }
+          },
+          {
+            extend: 'excel',
+            title: function() {
+              var printTitle = 'ENDORSEMENT FORM ';
+              return printTitle
+            },
+            exportOptions: {
+              columns: [0, 1, 2, 3, 4, 5, 6, 7]
+            }
+          },
+          {
+            extend: 'print',
+            exportOptions: {
+              columns: [0, 1, 2, 3, 4, 5, 6, 7]
+            },
+            title: function() {
+              var printTitle = 'ENDORSEMENT FORM ';
+              return printTitle
+            },
+            customize: function(win) {
+              $(win.document.body).find('table').addClass('display').css('font-size', '11px');
+              $(win.document.body).find('tr:nth-child(odd) td').each(function(index) {
+                $(this).css('background-color', '#D0D0D0');
+              });
+              $(win.document.body).find('h1').css('text-align', 'center');
+            }
+          },
+        ]
         // "buttons": ["copy", "csv", "excel", "pdf", "print"]
-      }).buttons().container().appendTo('#example1_filter .col-md-6:eq(0)');
+      }).buttons().container().appendTo($('#card_toolss'));
     });
 
     $("#tablebody2").on("change", () => {
@@ -623,16 +661,16 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
       e.preventDefault();
 
       var x = document.getElementById("myAudio");
-      x.play(); 
+      x.play();
 
-      $('#save_excel_data').attr('disabled',true);
+      $('#save_excel_data').attr('disabled', true);
       $('#name_upload').attr('hidden', false);
       $('#file_group').attr('hidden', true);
 
       let up_name = document.getElementById("excel").files[0].name
 
       $('#upload_name').val(up_name);
-      $('#import_file_button').attr('disabled',true);
+      $('#import_file_button').attr('disabled', true);
       $('#save_excel_data').html('<i class="fas fa-spinner fa-pulse"></i> Importing...');
       $('#gif').css('display', 'block');
 
@@ -655,58 +693,59 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
               imageHeight: 300,
               imageAlt: 'Custom image',
             }).then((result) => {
-                if (result.isConfirmed) {
-                  x.pause(); 
-                  window.location.href = "masterlist.php";
-                } else {
-                  x.pause(); 
-                  window.location.href = "masterlist.php";
-                }
+              if (result.isConfirmed) {
+                x.pause();
+                window.location.href = "masterlist.php";
+              } else {
+                x.pause();
+                window.location.href = "masterlist.php";
+              }
             })
           })
         },
         error: function(error) {
           console.error(error);
         }
-        
+
       });
     });
-
   </script>
 
 
   <script type="text/javascript">
     function DownloadFile(fileName) {
-        //Set the File URL.
-        var url = "Databases/" + fileName;
+      //Set the File URL.
+      var url = "Databases/" + fileName;
 
-        //Create XMLHTTP Request.
-        var req = new XMLHttpRequest();
-        req.open("GET", url, true);
-        req.responseType = "blob";
-        req.onload = function () {
-            //Convert the Byte Data to BLOB object.
-            var blob = new Blob([req.response], { type: "application/octetstream" });
+      //Create XMLHTTP Request.
+      var req = new XMLHttpRequest();
+      req.open("GET", url, true);
+      req.responseType = "blob";
+      req.onload = function() {
+        //Convert the Byte Data to BLOB object.
+        var blob = new Blob([req.response], {
+          type: "application/octetstream"
+        });
 
-            //Check the Browser type and download the File.
-            var isIE = false || !!document.documentMode;
-            if (isIE) {
-                window.navigator.msSaveBlob(blob, fileName);
-            } else {
-                var url = window.URL || window.webkitURL;
-                link = url.createObjectURL(blob);
-                var a = document.createElement("a");
-                a.setAttribute("download", fileName);
-                a.setAttribute("href", link);
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-            }
-        };
-        req.send();
+        //Check the Browser type and download the File.
+        var isIE = false || !!document.documentMode;
+        if (isIE) {
+          window.navigator.msSaveBlob(blob, fileName);
+        } else {
+          var url = window.URL || window.webkitURL;
+          link = url.createObjectURL(blob);
+          var a = document.createElement("a");
+          a.setAttribute("download", fileName);
+          a.setAttribute("href", link);
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }
+      };
+      req.send();
     };
 
-    $("#excel").on("change", ()=> {
+    $("#excel").on("change", () => {
       // web-system-masterlist-template.xlsx
       let file = document.getElementById("excel")
       if (file.files.length === 0) {
@@ -715,17 +754,16 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         let fileUploaded = file.files[0].name
         if (fileUploaded === 'web-system-masterlist-template.xlsx') {
           $("#save_excel_data").removeAttr("disabled");
-        }
-        else {
+        } else {
           file.value = ''
           $("#excel-label").html('Choose File')
           $("#save_excel_data").attr("disabled", true);
           Swal.fire({
-              icon: 'error',
-              title: 'Please use the template provided',
-              confirmButtonColor: '#3085d6',
-              confirmButtonText: 'Okay',
-            });
+            icon: 'error',
+            title: 'Please use the template provided',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Okay',
+          });
         }
       }
     });
@@ -734,8 +772,8 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
       bsCustomFileInput.init();
     });
   </script>
-  
- 
+
+
 </body>
 
 </html>

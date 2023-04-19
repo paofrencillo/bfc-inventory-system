@@ -327,6 +327,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
 
     $(function() {
       $("#Generic").DataTable({
+        "dom": "B<'row'<'col-6'l><'col-6 text-right'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12'ip>>",
         "order": [],
         "columnDefs": [{
           "targets": 8,
@@ -342,8 +343,46 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         "order": [
           [1, 'asc']
         ],
+        "buttons": [{
+            extend: 'copy',
+            title: function() {
+              var printTitle = 'ENDORSEMENT FORM ';
+              return printTitle
+            },
+            exportOptions: {
+              columns: [0, 1, 2, 3, 4, 5, 6, 7]
+            }
+          },
+          {
+            extend: 'excel',
+            title: function() {
+              var printTitle = 'ENDORSEMENT FORM ';
+              return printTitle
+            },
+            exportOptions: {
+              columns: [0, 1, 2, 3, 4, 5, 6, 7]
+            }
+          },
+          {
+            extend: 'print',
+            exportOptions: {
+              columns: [0, 1, 2, 3, 4, 5, 6, 7]
+            },
+            title: function() {
+              var printTitle = 'ENDORSEMENT FORM ';
+              return printTitle
+            },
+            customize: function(win) {
+              $(win.document.body).find('table').addClass('display').css('font-size', '11px');
+              $(win.document.body).find('tr:nth-child(odd) td').each(function(index) {
+                $(this).css('background-color', '#D0D0D0');
+              });
+              $(win.document.body).find('h1').css('text-align', 'center');
+            }
+          },
+        ]
         // "buttons": ["copy", "csv", "excel", "pdf", "print"]
-      }).buttons().container().appendTo('#Generic_wrapper .col-md-6:eq(0)');
+      }).buttons().container().appendTo($('#card_toolss'));
     });
 
     $(function() {

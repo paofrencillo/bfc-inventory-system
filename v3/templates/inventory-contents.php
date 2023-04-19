@@ -49,7 +49,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                 <div class="card-body">
                   <div class="tab-content" id="custom-tabs-one-tabContent">
                     <div class="tab-pane fade show active" id="gen" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
-                      <table id="Generic" class="table table-striped table-hover display text-center" style="font-size: 15px;">
+                      <div class="card-tools mx-0">
+                        <ul class="pagination pagination-sm">
+                          <div class="mr-2" id="card_toolss">
+                          </div>
+                        </ul>
+                      </div>
+                      <table id="Generic" class="table table-striped table-hover text-center" style="font-size: 15px;">
                         <thead class="bg-dark">
                           <tr>
                             <th>BARCODE</th>
