@@ -346,7 +346,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         "buttons": [{
             extend: 'copy',
             title: function() {
-              var printTitle = 'ENDORSEMENT FORM ';
+              var printTitle = 'INVENTORY';
               return printTitle
             },
             exportOptions: {
@@ -356,7 +356,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
           {
             extend: 'excel',
             title: function() {
-              var printTitle = 'ENDORSEMENT FORM ';
+              var printTitle = 'INVENTORY';
               return printTitle
             },
             exportOptions: {
@@ -369,7 +369,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
               columns: [0, 1, 2, 3, 4, 5, 6, 7]
             },
             title: function() {
-              var printTitle = 'ENDORSEMENT FORM ';
+              var printTitle = 'INVENTORY';
               return printTitle
             },
             customize: function(win) {

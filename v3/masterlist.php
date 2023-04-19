@@ -558,30 +558,30 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         "buttons": [{
             extend: 'copy',
             title: function() {
-              var printTitle = 'ENDORSEMENT FORM ';
+              var printTitle = 'MASTERLIST';
               return printTitle
             },
             exportOptions: {
-              columns: [0, 1, 2, 3, 4, 5, 6, 7]
+              columns: [1, 2, 3, 4, 5]
             }
           },
           {
             extend: 'excel',
             title: function() {
-              var printTitle = 'ENDORSEMENT FORM ';
+              var printTitle = 'MASTERLIST';
               return printTitle
             },
             exportOptions: {
-              columns: [0, 1, 2, 3, 4, 5, 6, 7]
+              columns: [1, 2, 3, 4, 5]
             }
           },
           {
             extend: 'print',
             exportOptions: {
-              columns: [0, 1, 2, 3, 4, 5, 6, 7]
+              columns: [1, 2, 3, 4, 5]
             },
             title: function() {
-              var printTitle = 'ENDORSEMENT FORM ';
+              var printTitle = 'MASTERLIST';
               return printTitle
             },
             customize: function(win) {
