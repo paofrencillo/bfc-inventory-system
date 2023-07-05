@@ -25,11 +25,11 @@ $columns = array(
     array(
         'db' => 'barcode',
         'dt' => 1,
-    //     'formatter' => function( $d, $row ) {
+        'formatter' => function( $d, $row ) {
             
-    //         $data = strlen($d) > 15 ? substr($d, 0, 15)."..." : $d;
-    //         return $data;
-    // }
+            $data = strlen($d) > 15 ? substr($d, 0, 15)."..." : $d;
+            return $data;
+    }
     ), 
     array( 'db' => 'description',  'dt' => 2 ), 
     array( 'db' => 'prf',      'dt' => 3 ), 

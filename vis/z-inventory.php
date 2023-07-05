@@ -277,45 +277,6 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
       });
     }
 
-    $("#barcode-transfer").on("change", () => {
-      $("#qty-transfer").val('');
-      $("#transfer-form").on("submit", (e) => {
-        e.preventDefault();
-      });
-      $.ajax({
-        type: "GET",
-        url: "functions.php",
-        data: {
-          "barcode": $("#barcode-transfer").val(),
-          action: "get_product_transfer"
-        },
-        dataType: "JSON",
-        success: function(data) {
-          if (data == "Not found") {
-            $("#warning-transfer-text").removeClass("d-none");
-            $("#barcode-transfer").val('');
-            $("#desc-transfer").val('');
-            $("#rack-transfer").val('');
-            $("#qty-transfer").val('');
-            $("#rack-in").val('');
-            $("#rack-out").val('');
-          } else {
-            $("#warning-transfer-text").addClass("d-none");
-            $("#barcode-transfer").val(data.barcode);
-            $("#desc-transfer").val(data.description);
-            $("#rack-transfer").val(data.rack);
-            $("#qty-transfer").val('');
-            $("#rack-in").val(data.rack_in);
-            $("#rack-out").val(data.rack_out);
-          }
-        },
-        error: function(error) {
-          console.error(error);
-        }
-      });
-      $("#transfer-form").unbind("submit");
-    });
-
     $(function() {
       $("#Generic").DataTable({
         "order": [],

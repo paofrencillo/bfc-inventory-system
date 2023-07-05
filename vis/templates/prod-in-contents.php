@@ -228,7 +228,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="barcode">Barcode:</label>
-                          <input type="text" class="form-control" id="barcode" name="barcode" onmouseover="this.focus();" autocomplete="off" required>
+                          <input type="text" class="form-control" id="barcode" name="barcode" autocomplete="off" required>
                         </div>
                       </div>
                       <div class="col-sm-4">
@@ -240,31 +240,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                       <div class="col-sm-2">
                         <div class="form-group">
                           <label for="quan">Quantity:</label>
-                          <input type="number" class="form-control" id="quantity" name="quantity" onmouseover="this.focus();" min="0" required>
+                          <input type="number" class="form-control" id="quantity" name="quantity" min="0" required>
                         </div>
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="lot">Lot Number:</label>
-                          <input type="text" class="form-control" id="lot" name="lot" onkeyup="this.value=this.value.toUpperCase();" onmouseover="this.focus();" autocomplete="off" required>
+                          <input type="text" class="form-control" id="lot" name="lot" onkeyup="this.value=this.value.toUpperCase();" autocomplete="off" required>
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label for="supp">Supplier</label>
-                          <input type="text" class="form-control" id="supp" name="supp" onmouseover="this.focus();" autocomplete="off" readonly required>
+                          <input type="text" class="form-control" id="supp" name="supp" autocomplete="off" readonly required>
                         </div>
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="rack">Rack:</label>
-                          <input type="text" class="form-control" id="rack" name="rack" onkeyup="this.value=this.value.toUpperCase();" onmouseover="this.focus();" value="N/A" required>
+                          <input type="text" class="form-control" id="rack" name="rack" onkeyup="this.value=this.value.toUpperCase();" value="N/A" required>
                         </div>
                       </div>
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="exp">Expiration Date:</label>
-                          <input type="text" class="form-control" id="exp" name="exp" placeholder="mm-dd-yyyy or mm-yyyy" autocomplete="off" onmouseover="this.focus();" required>
+                          <input type="text" class="form-control" id="exp" name="exp" placeholder="mm-dd-yyyy or mm-yyyy" autocomplete="off" required>
                         </div>
                       </div>
                       <div class="col-sm-2">

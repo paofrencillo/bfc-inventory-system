@@ -82,6 +82,8 @@ if (isset($_GET["action"]) && $_GET["action"] === "endorse_product") {
             '" . $row["remarks"] . "', 
             '" . $row["endorsed_by"] . "',
             '" . $row["endorsed_date"] . "')";
+
+            
    
             if (mysqli_query($conn, $sql2)) {
                $data = 'success';

@@ -26,8 +26,16 @@ $columns = array(
             return '
                 <p title="'.$d.'" style="margin-bottom: 0;">'.$data.'</p>
             ';
-    }), 
-    array( 'db' => 'description',  'dt' => 1 ), 
+    }
+), 
+    array( 'db' => 'description', 
+           'dt' => 1,
+           'formatter' => function( $d, $row ) {
+            $data = htmlspecialchars_decode($d);
+            return 
+                $data
+            ;
+    }),
     array( 'db' => 'lot',      'dt' => 2 ), 
     array( 'db' => 'exp_date',     'dt' => 3 ),
     array( 'db' => 'quantity',     'dt' => 4 ),
@@ -41,7 +49,7 @@ $columns = array(
         'dt'        => 10, 
         'formatter' => function( $d, $row ) { 
             return '
-            <button class="btn btn-info btn-sm" style="border-radius: 50%;" data-toggle="modal" data-target="#updatee'.$d.'">
+            <button type="button" class="btn btn-info btn-sm" style="border-radius: 50%;" data-toggle="modal" data-target="#updatee" onclick="viewModalOut(this);" data-id="' .$d. ' ">
                 <i class="fas fa-pencil-alt"></i> 
             </button>'; 
         } 

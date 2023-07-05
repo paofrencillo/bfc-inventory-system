@@ -291,14 +291,14 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
           {
             extend: 'print',
             exportOptions: {
-              columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+              columns: [1, 2, 3, 4, 5, 6, 7, 8, 9]
             },
             title: function() {
               var printTitle = 'ENDORSEMENT FORM ';
               return printTitle
             },
             customize: function(win) {
-              $(win.document.body).find('table').addClass('display').css('font-size', '11px');
+              $(win.document.body).find('table').addClass('display').css('font-size', '14px');
               $(win.document.body).find('tr:nth-child(odd) td').each(function(index) {
                 $(this).css('background-color', '#D0D0D0');
               });
@@ -408,6 +408,41 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         theme: 'bootstrap4'
       })
     })
+  </script>
+
+  <script>
+      // View product details
+      function viewModalOut(el) {
+      $.ajax({
+        type: "GET",
+        url: "prod-in-functions.php",
+        data: {
+          "id": el.getAttribute("data-id"),
+          action: "get_product_out"
+        },
+        dataType: "JSON",
+        success: function(data) {
+          $("#id_update-det").val(data.id);
+          $("#barcode-det").val(data.barcode);
+          $("#description-det").attr("value",data.description2);
+          $("#quantity-det").val(data.quantity);
+          $("#quantity-det").prop('max',data.stock);
+          $("#lot-det").val(data.lot);
+          $("#branch-det").val(data.branch);
+          $("#mrf-det").val(data.mrf);
+          $("#order_num-det").val(data.order_num);
+          $("#exp_date-det").val(data.exp_date);
+          $("#remarks-det").val(data.remarks);
+          $("#endorsed_by-det").val(data.endorsed_by);
+          $("#endorsed_date-det").val(data.endorsed_date);
+          $("#stock-det").text("On Stock: " + data.stock);
+          $("#current_quantity").val(data.quantity);
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      })
+    }
   </script>
 
   <script>
@@ -978,6 +1013,24 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         if (currentValue > max) {
           // Set the value of the input field to the maximum allowed value
           quantityInput.val(max);
+        }
+      });
+
+       // Get the input field
+      var quantityInput2 = $("#quantity-det");
+
+      // Listen for the "keyup" event on the input field
+      quantityInput2.keyup(function() {
+        // Get the maximum allowed value
+        var max = parseInt(quantityInput2.attr("max"));
+
+        // Get the current value of the input field
+        var currentValue2 = parseInt(quantityInput2.val());
+
+        // If the current value is greater than the maximum allowed value
+        if (currentValue2 > max) {
+          // Set the value of the input field to the maximum allowed value
+          quantityInput2.val(max);
         }
       });
 

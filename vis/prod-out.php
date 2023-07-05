@@ -264,8 +264,6 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
   <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
   <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
   <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="dist/js/demo.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="dist/js/pages/dashboard.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
@@ -444,6 +442,41 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
   </script>
 
   <script>
+      // View product details
+      function viewModalOut(el) {
+      $.ajax({
+        type: "GET",
+        url: "prod-in-functions.php",
+        data: {
+          "id": el.getAttribute("data-id"),
+          action: "get_product_out"
+        },
+        dataType: "JSON",
+        success: function(data) {
+          $("#id_update-det").val(data.id);
+          $("#barcode-det").val(data.barcode);
+          $("#description-det").attr("value",data.description2);
+          $("#quantity-det").val(data.quantity);
+          $("#quantity-det").prop('max', parseInt(data.stock) + parseInt(data.quantity));
+          $("#lot-det").val(data.lot);
+          $("#branch-det").val(data.branch);
+          $("#mrf-det").val(data.mrf);
+          $("#order_num-det").val(data.order_num);
+          $("#exp_date-det").val(data.exp_date);
+          $("#remarks-det").val(data.remarks);
+          $("#endorsed_by-det").val(data.endorsed_by);
+          $("#endorsed_date-det").val(data.endorsed_date);
+          $("#stock-det").text("On Stock: " + data.stock);
+          $("#current_quantity").val(data.quantity);
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      })
+    }
+  </script>
+
+  <script>
     $(document).ready(function() {
       // Function to reload the table
       function reloadTable() {
@@ -456,9 +489,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
           if (xhr.status === 200) {
             // Parse the JSON response
             var data = JSON.parse(xhr.responseText);
-            console.log(data.length)
             if (data.length >= 1) {
-              console.log('norems')
               data.forEach(function(row) {
                 $("#branch111").attr('hidden', true);
                 $("#branch222").attr('hidden', false);
@@ -480,7 +511,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
                 $("#remarks2").prop("disabled", false);
               });
             } else {
-              console.log('alaws')
+             
               data.forEach(function(row) {
                 $("#branch111").attr('hidden', false)
                 $("#branch222").attr('hidden', true)
@@ -495,7 +526,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
             tableBody.innerHTML = '';
             // Populate the table with the new data
             data.forEach(function(row) {
-              console.log(row)
+         
               var tr = document.createElement('tr');
               tr.innerHTML = `<td style="overflow: hidden;
                   text-overflow: ellipsis;
@@ -508,6 +539,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
                 row.lot + '</td><td>' +
                 row.exp_date + '</td><td>' +
                 row.remarks + '</td>'
+                // `<td><button type="button" class="btn btn-sm btn-danger delete-btn" style="border-radius: 50%;" id="${row.id}" onclick="deleteProductIn(this);"><i class="fas fa-trash"></i></button></td>`
               tableBody.appendChild(tr);
             });
           } else {
@@ -573,7 +605,6 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         var order_num = $('#order_num').val();
 
         var tableBody = document.getElementById('myTable');
-        console.log(tableBody.rows.length)
 
         if (tableBody.rows.length <= 1) {
           console.log("The DataTable is empty");
@@ -654,7 +685,6 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
             $("#branch222").attr('hidden', true);
             $("#branch22").val('')
 
-            console.log(data)
             swal.fire({
               title: "Success!",
               text: "Product successfully deleted",
@@ -686,7 +716,6 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
 
       $("#barcode2").on("change", function() {
         var barcode2 = $(this).val();
-        console.log(barcode2)
 
         $.ajax({
           type: "GET",
@@ -697,7 +726,6 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
           },
           dataType: "JSON",
           success: function(data) {
-            console.log(data)
             if (data != "Not found") {
               $("#description2").prop("readonly", false);
               $("#description2").val(data.description);
@@ -741,7 +769,6 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
           dataType: 'json',
           data: $('#search_form').serialize(),
           success: function(data) {
-            console.log(data)
             // Clear old data from the table
             // $('#example3 tbody').empty();
             var mrf = $('#mrf_search');
@@ -757,7 +784,6 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
               }).then((result) => {
                 if (result.isConfirmed) {
                   mrf.val('');
-                  console.log(tableBody)
                 } else {
                   mrf.val('');
                 }
@@ -773,7 +799,6 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
                   row.mrf + '</td>'
                 tableBody.appendChild(tr);
               });
-              console.log(tableBody)
             }
           }
         });
@@ -785,11 +810,8 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
 
         // Get the values from the form
         var mrf_search = $('#mrf_search').val();
-        console.log(mrf_search)
 
         var tableBody = document.getElementById('example33');
-        console.log(tableBody.rows.length)
-
 
         $.ajax({
           url: "get_prod-out.php",
@@ -800,8 +822,6 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
           },
           dataType: "JSON",
           success: $(document).ready(function(data) {
-            console.log('data')
-            console.log(data)
 
             if (tableBody.rows.length <= 1) {
               console.log("The DataTable is empty");
@@ -843,7 +863,6 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
           dataType: 'json',
           data: $('#search_form2').serialize(),
           success: function(data) {
-            console.log(data)
             // Clear old data from the table
             // $('#example3 tbody').empty();
             var mrf = $('#mrf_search2');
@@ -884,11 +903,9 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         event.preventDefault();
 
         var tableBody = document.getElementById('example8');
-        console.log(tableBody.rows.length)
 
         // Get the values from the form
         var mrf_search2 = $('#mrf_search2').val();
-        console.log(mrf_search2)
         $.ajax({
           url: "get_prod-out.php",
           type: "GET",
@@ -1025,6 +1042,29 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         }
       });
 
+       // Get the input field
+      var quantityInput2 = $("#quantity-det");
+
+      // Listen for the "keyup" event on the input field
+      quantityInput2.keyup(function() {
+        // Get the maximum allowed value
+        var max = parseInt(quantityInput2.attr("max"));
+
+        // Get the current value of the input field
+        var currentValue2 = parseInt(quantityInput2.val());
+
+        // If the current value is greater than the maximum allowed value
+        if (currentValue2 > max) {
+          // Set the value of the input field to the maximum allowed value
+          quantityInput2.val(max);
+          // swal.fire({
+          //   title: "Ooops!",
+          //   text: "Quantity must lest than the stock",
+          //   icon: "error",
+          //   confirmButtonText: "OK"
+          // });
+        }
+      });
 
     });
   </script>

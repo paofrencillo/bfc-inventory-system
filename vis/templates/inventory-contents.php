@@ -17,23 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Inventory Tables</h1>
+            <h1 class="m-0 mb-3">Inventory Tables</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
       <section class="content">
         <div class="container-fluid">
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">RACK IN/OUT</h3>
-            </div>
-            <div class="card-body">
-              <div class="col-md-2">
-                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#transfer"><i class="fas fa-exchange-alt"></i> TRANSFER</button>
-              </div>
-            </div>
-            <!-- /.card-body -->
-          </div>
 
           <div class="row">
             <div class="col-12">
@@ -158,69 +147,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- Modal for transfer rack in and out -->
-        <div class="modal fade" id="transfer">
-          <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-              <div class="modal-header bg-info">
-                <h4 class="modal-title font-weight-bold">TRANSFER RACK IN/OUT</h4>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form name="transfer-form" id="transfer-form" method="POST" action="functions.php">
-                  <div class="row align-items-center">
-                    <div class="col-sm-5">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text bg-info" id="basic-addon1">Rack In</span>
-                        </div>
-                        <input type="number" class="form-control" aria-describedby="basic-addon1" id="rack-in" value="0" readonly>
-                      </div>
-                    </div>
-                    <div class="col-sm-2 text-center">
-                      <button type="submit" class="btn btn-danger btn-md w-75 mb-1" name="to_rack_out" id="to_rack_out"><i class="fas fa-arrow-right"></i></button>
-                      <button type="submit" class="btn btn-primary btn-md w-75 mt-1" name="to_rack_in" id="to_rack_in"><i class="fas fa-arrow-left"></i></button>
-                    </div>
-                    <div class="col-sm-5">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text bg-info" id="basic-addon2">Rack Out</span>
-                        </div>
-                        <input type="number" class="form-control" aria-describedby="basic-addon2" id="rack-out" value="0" readonly>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row mt-3">
-                    <div class="col-sm-3">
-                      <label for="barcode-transfer">Barcode:</label>
-                      <input type="text" class="form-control" name="barcode-transfer" id="barcode-transfer">
-                    </div>
-                    <div class="col-sm-4">
-                      <label for="desc-transfer">Description:</label>
-                      <input type="text" class="form-control" id="desc-transfer" readonly>
-                    </div>
-                    <div class="col-sm-3">
-                      <label for="rack-transfer">Rack Position:</label>
-                      <input type="text" class="form-control" id="rack-transfer" readonly>
-                    </div>
-                    <div class="col-sm-2">
-                      <label for="qty-transfer">Quantity:</label>
-                      <input type="number" class="form-control" name="qty-transfer" id="qty-transfer" min="0" required>
-                    </div>
-                    <h6 class="d-none text-warning font-weight-bold ml-2" id="warning-transfer-text">This product was not enrolled.</h6>
-                    <h6 class="d-none text-warning font-weight-bold ml-2" id="warning-ro-text">Quantity exceeds the rack-out quantity.</h6>
-                    <h6 class="d-none text-warning font-weight-bold ml-2" id="warning-ri-text">Quantity exceeds the rack-in quantity.</h6>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
         </div>
 
       </section>

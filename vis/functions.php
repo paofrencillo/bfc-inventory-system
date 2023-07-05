@@ -1167,18 +1167,21 @@ if (isset($_POST['send_otp'])) {
 if (isset($_POST['updateprodout'])) {
 
     // Get the values from the AJAX request
-    $barcode = $_POST['barcode'];
-    $description = htmlspecialchars($_POST['description']);
-    $quantity = $_POST['quantity'];
-    $current_quantity = $_POST['current_quantity'];
-    $lot = $_POST['lot'];
-    $mrf = $_POST['mrf'];
-    $order_num = $_POST['order_num'];
-    $exp_date = $_POST['exp_date'];
-    $remarks = $_POST['remarks'];
-    $id_update = $_POST['id_update'];
+    $barcode = $_POST['barcode-det'];
+    $description = htmlspecialchars($_POST['description-det']);
+    $quantity = intval($_POST['quantity-det']);
+    $current_quantity = intval($_POST['current_quantity']);
+    $lot = $_POST['lot-det'];
+    $mrf = $_POST['mrf-det'];
+    $order_num = $_POST['order_num-det'];
+    $exp_date = $_POST['exp_date-det'];
+    $remarks = $_POST['remarks-det'];
+    $id_update = $_POST['id_update-det'];
     $is_superuser = $_POST['is_superuser'];
 
+    // echo($quantity);
+    // echo("----------");
+    // echo($current_quantity);
     // Check if the user input is to increase or decrease the quantity
     if ($current_quantity < $quantity) {
         $newvalue = $quantity - $current_quantity;
@@ -1500,14 +1503,17 @@ if (isset($_POST['updateprodout'])) {
 }
 
 #DELETE ENDORSE
-if (isset($_POST['delete_updateprodout'])) {
-    $id_update = $_POST['id_update'];
-    $barcode = $_POST['barcode'];
-    $current_quantity = $_POST['current_quantity'];
+if (isset($_POST['delete_updateprodout'])) {    
+    $id_update = $_POST['id_update-det'];
+    $barcode = $_POST['barcode-det'];
+    $current_quantity = intval($_POST['current_quantity']);
     $is_superuser = $_POST['is_superuser'];
+    
+    echo($current_quantity);
 
     if ($id_update != null) {
-        $conn->query("UPDATE inventory SET rack_in = rack_in + '$current_quantity' WHERE barcode = $barcode") or die($conn->error);
+        $conn->query("UPDATE inventory SET rack_in = rack_in + '$current_quantity' WHERE barcode = '$barcode'") or die($conn->error);
+
         $conn->query("DELETE FROM endorse_final WHERE id='$id_update';") or die($conn->error);
 
         if ($is_superuser == '1') {
@@ -1837,220 +1843,6 @@ if (isset($_POST['modify_invent'])) {
         }
     }
 }
-
-#GET THE PRODUCT DETAILS FOR THE RACK VALUE TO CHANGE
-if (isset($_GET["action"]) && $_GET["action"] === 'get_product_transfer') {
-    header("Content-Type: text/json; charset=utf8");
-    $barcode = $_GET["barcode"];
-    $table = "inventory";
-    $query_get = "SELECT * FROM $table WHERE barcode='$barcode';";
-    $result = mysqli_query($conn, $query_get);
-
-    if ($result->num_rows == 0) {
-        $data = "Not found";
-        echo json_encode($data);
-    } else {
-        while ($row = mysqli_fetch_array($result)) {
-            $data = array(
-                "barcode" => $row["barcode"],
-                "description" => htmlspecialchars_decode($row["description"]),
-                "rack" => $row["rack"],
-                "rack_in" => $row["rack_in"],
-                "rack_out" => $row["rack_out"],
-            );
-            echo json_encode($data);
-        }
-    }
-}
-
-#TRANSFER QUANTITY TO RACK OUT
-if (isset($_POST["to_rack_out"])) {
-
-    $barcode = $_POST["barcode-transfer"];
-    $quantity = $_POST["qty-transfer"];
-    $is_superuser = $_SESSION["login_user"]["is_superuser"];
-
-    if ($barcode != null) {
-        $conn->query("UPDATE inventory SET
-                    rack_out = rack_out + '$quantity',
-                    rack_in = rack_in - '$quantity'
-                    WHERE barcode='$barcode';")
-            or die("Error Could Not Query.");
-
-        if ($is_superuser === '1') {
-            ?>
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Transfer Success',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Okay'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "inventory.php";
-                        } else {
-                            window.location.href = "inventory.php";
-                        }
-                    })
-                })
-            </script>
-        <?php } else if ($is_superuser === '0') {
-        ?>
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Transfer Success',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Okay'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "z-inventory.php";
-                        } else {
-                            window.location.href = "z-inventory.php";
-                        }
-                    })
-                })
-            </script>
-        <?php }
-    } else {
-        ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'An Error Occured',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        <?php
-                        if ($is_superuser === '1') {
-                            die(header('location: inventory.php'));
-                        } else if ($is_superuser === '0') {
-                            die(header('location: z-inventory.php'));
-                        }
-                        ?>
-                    } else {
-                        <?php
-                        if ($is_superuser === '1') {
-                            die(header('location: inventory.php'));
-                        } else if ($is_superuser === '0') {
-                            die(header('location: z-inventory.php'));
-                        }
-                        ?>
-                    }
-                })
-            })
-        </script>
-    <?php
-    }
-    ?>
-    <?php
-}
-
-
-#TRANSFER QUANTITY TO RACK IN
-if (isset($_POST["to_rack_in"])) {
-
-    $barcode = $_POST["barcode-transfer"];
-    $quantity = $_POST["qty-transfer"];
-    $is_superuser = $_SESSION["login_user"]["is_superuser"];
-
-    if ($barcode != null) {
-        $conn->query("UPDATE inventory SET
-                    rack_in = rack_in + '$quantity',
-                    rack_out = rack_out - '$quantity'
-                    WHERE barcode='$barcode';")
-            or die("Error Could Not Query.");
-
-        if ($is_superuser === '1') {
-    ?>
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Transfer Success',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Okay'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "inventory.php";
-                        } else {
-                            window.location.href = "inventory.php";
-                        }
-                    })
-                })
-            </script>
-        <?php
-        } else if ($is_superuser === '0') {
-        ?>
-            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Transfer Success',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Okay'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "z-inventory.php";
-                        } else {
-                            window.location.href = "z-inventory.php";
-                        }
-                    })
-                })
-            </script>
-        <?php }
-    } else {
-        ?>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'An Error Occured',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        <?php
-                        if ($is_superuser === '1') {
-                            die(header('location: inventory.php'));
-                        } else if ($is_superuser === '0') {
-                            die(header('location: z-inventory.php'));
-                        }
-                        ?>
-                    } else {
-                        <?php
-                        if ($is_superuser === '1') {
-                            die(header('location: inventory.php'));
-                        } else if ($is_superuser === '0') {
-                            die(header('location: z-inventory.php'));
-                        }
-                        ?>
-                    }
-                })
-            })
-        </script>
-    <?php
-    }
-    ?>
-<?php
-}
-
 
 if (isset($_POST['action']) && $_POST['action'] === 'upload') {
     $server = "localhost";
