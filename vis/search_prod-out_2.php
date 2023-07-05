@@ -1,0 +1,27 @@
+<?php
+date_default_timezone_set('Asia/Manila');
+
+$server = "localhost";
+$user = "root";
+$pass = "";
+$db = "bfc_inventory";
+
+$conn = mysqli_connect($server, $user, $pass, $db);
+
+if (!$conn) {
+    die("<script>alert('Connection Failed.')</script>");
+}
+
+header("Content-Type: text/json; charset=utf8");
+
+$mrf_search2 = $_POST['mrf_search2'];
+
+// Query your MySQL database and retrieve the data
+$query = "SELECT * FROM endorse_history WHERE mrf = '$mrf_search2' ORDER BY description";
+$result = $conn->query($query);
+// Convert result set to JSON format
+$rows = array();
+while ($row = $result->fetch_assoc()) {
+  $rows[] = $row;
+}
+echo json_encode($rows);
