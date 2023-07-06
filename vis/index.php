@@ -37,10 +37,16 @@ if (isset($_SESSION['authenticated']) && $_SESSION['authenticated']) {
 <body class="hold-transition login-page">
 
   </div>
-  <div class="carousel slide" data-ride="carousel" data-interval="3500">
+  <div class="carousel slide" data-ride="carousel" data-interval="4000">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="dist/img/carousel-pics/c-pic1.jpg" alt="">
+      </div>
+      <div class="carousel-item">
+        <img src="dist/img/carousel-pics/c-pic12.jpg" alt="">
+      </div>
+      <div class="carousel-item">
+        <img src="dist/img/carousel-pics/c-pic14.jpg" alt="">
       </div>
       <div class="carousel-item">
         <img src="dist/img/carousel-pics/c-pic2.png" alt="">
@@ -49,13 +55,25 @@ if (isset($_SESSION['authenticated']) && $_SESSION['authenticated']) {
         <img src="dist/img/carousel-pics/c-pic3.jpeg" alt="">
       </div>
       <div class="carousel-item">
-        <img src="dist/img/carousel-pics/c-pic4.jpeg" alt="">
-      </div>
-      <div class="carousel-item">
         <img src="dist/img/carousel-pics/c-pic5.jpeg" alt="">
       </div>
       <div class="carousel-item">
-        <img src="dist/img/carousel-pics/c-pic6.jpg" alt="">
+        <img src="dist/img/carousel-pics/c-pic15.jpg" alt="">
+      </div>
+      <div class="carousel-item">
+        <img src="dist/img/carousel-pics/c-pic10.jpg" alt="">
+      </div>
+      <div class="carousel-item">
+        <img src="dist/img/carousel-pics/c-pic9.jpg" alt="">
+      </div>
+      <div class="carousel-item">
+        <img src="dist/img/carousel-pics/c-pic14.jpg" alt="">
+      </div>
+      <div class="carousel-item">
+        <img src="dist/img/carousel-pics/c-pic9.jpg" alt="">
+      </div>
+      <div class="carousel-item">
+        <img src="dist/img/carousel-pics/c-pic4.jpeg" alt="">
       </div>
       <div class="carousel-item">
         <img src="dist/img/carousel-pics/c-pic7.jpg" alt="">
@@ -64,13 +82,9 @@ if (isset($_SESSION['authenticated']) && $_SESSION['authenticated']) {
         <img src="dist/img/carousel-pics/c-pic8.jpg" alt="">
       </div>
       <div class="carousel-item">
-        <img src="dist/img/carousel-pics/c-pic9.jpg" alt="">
-      </div>
-      <div class="carousel-item">
-        <img src="dist/img/carousel-pics/c-pic10.jpg" alt="">
+        <img src="dist/img/carousel-pics/c-pic11.jpg" alt="">
       </div>
     </div>
-
   </div>
   <div class="login-box" style="position: fixed;">
     <!-- /.login-logo -->

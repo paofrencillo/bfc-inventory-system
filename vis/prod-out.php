@@ -446,7 +446,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
       function viewModalOut(el) {
       $.ajax({
         type: "GET",
-        url: "prod-in-functions.php",
+        url: "product-out-functions.php",
         data: {
           "id": el.getAttribute("data-id"),
           action: "get_product_out"
@@ -455,7 +455,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         success: function(data) {
           $("#id_update-det").val(data.id);
           $("#barcode-det").val(data.barcode);
-          $("#description-det").attr("value",data.description2);
+          $("#description-det").val(data.description2);
           $("#quantity-det").val(data.quantity);
           $("#quantity-det").prop('max', parseInt(data.stock) + parseInt(data.quantity));
           $("#lot-det").val(data.lot);
@@ -538,8 +538,8 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
                 row.quantity + '</td><td>' +
                 row.lot + '</td><td>' +
                 row.exp_date + '</td><td>' +
-                row.remarks + '</td>'
-                // `<td><button type="button" class="btn btn-sm btn-danger delete-btn" style="border-radius: 50%;" id="${row.id}" onclick="deleteProductIn(this);"><i class="fas fa-trash"></i></button></td>`
+                row.remarks + `</td><td><button type="button" class="btn btn-sm btn-danger delete-btn" style="border-radius: 50%;" id="${row.id}" onclick="deleteProductOut(this);"><i class="fas fa-trash"></i></button></td>
+                `
               tableBody.appendChild(tr);
             });
           } else {
@@ -1067,6 +1067,30 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
       });
 
     });
+  </script>
+
+  <!-- For deleting a product in endorse form -->
+  <script>
+    function deleteProductOut(btn) {
+      $(btn).parent().parent().remove();
+      let data = new FormData();
+      data.append("id", $(btn).attr("id"));
+      data.append("action", "delete")
+      $.ajax({
+        type: "POST",
+        url: "prod-out-functions.php",
+        data: data,
+        contentType: false,
+        processData: false,
+        cache: false,
+        success: function(data) {
+          console.log(data);
+        },
+        error: function(error, status, xhr) {
+          console.error(error, status, xhr);
+        }
+      });
+    }
   </script>
 
   <script>

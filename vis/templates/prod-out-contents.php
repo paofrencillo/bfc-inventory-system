@@ -352,7 +352,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                     <div class="col-sm-3">
                       <div class="form-group">
                         <label for="barcode2">Barcode:</label>
-                        <input type="text" class="form-control " id="barcode2" onmouseover="this.focus();" name="barcode" autocomplete="off" required disabled>
+                        <input type="text" class="form-control " id="barcode2" name="barcode" autocomplete="off" required disabled>
                       </div>
                     </div>
                     <div class="col-sm-5">
@@ -380,11 +380,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                       </div>
                     </div>
                     <?php
-                    // $month = date('m');
-                    // $day = date('d');
-                    // $year = date('Y');
-
-                    // $today = $month . '-' . $day . '-' . $year;
                     date_default_timezone_set('Asia/Manila');
                     $current_date = date('m-d-Y');
                     ?>

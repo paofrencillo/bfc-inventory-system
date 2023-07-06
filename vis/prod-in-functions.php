@@ -230,7 +230,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Delete Product added by user
-
     else if (isset($_POST['action']) && $_POST['action'] === 'delete') {
         $id = $_POST["id"];
         $added_by = $_SESSION['login_user']['employee_name'];

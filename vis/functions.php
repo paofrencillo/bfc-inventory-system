@@ -1606,7 +1606,6 @@ if (isset($_POST['delete_updateprodout'])) {
     }
 }
 
-
 #GET PRODUCT FOR MODAL IN INVENTORY
 if (isset($_GET["action"]) && $_GET["action"] === 'get_product_inv') {
     header("Content-Type: text/json; charset=utf8");

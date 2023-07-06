@@ -458,9 +458,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
           if (xhr.status === 200) {
             // Parse the JSON response
             var data = JSON.parse(xhr.responseText);
-            console.log(data.length)
             if (data.length >= 1) {
-              console.log('norems')
               data.forEach(function(row) {
                 $("#branch111").attr('hidden', true);
                 $("#branch222").attr('hidden', false);
@@ -482,7 +480,6 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
                 $("#remarks2").prop("disabled", false);
               });
             } else {
-              console.log('alaws')
               data.forEach(function(row) {
                 $("#branch111").attr('hidden', false)
                 $("#branch222").attr('hidden', true)
@@ -497,16 +494,21 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
             tableBody.innerHTML = '';
             // Populate the table with the new data
             data.forEach(function(row) {
-              console.log(row)
-              var tr = document.createElement('tr');
-              tr.innerHTML = '<td>' + row.barcode + '</td><td>' +
-                row.description + '</td><td>' +
-                row.quantity + '</td><td>' +
-                row.lot + '</td><td>' +
-                row.exp_date + '</td><td>' +
-                row.remarks + '</td>'
-              tableBody.appendChild(tr);
-            });
+            var tr = document.createElement('tr');
+            tr.innerHTML = `<td style="overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                        line-clamp: 0;
+                -webkit-box-orient: vertical;" title=${row.barcode}>` + row.barcode + '</td><td>' +
+              row.description + '</td><td>' +
+              row.quantity + '</td><td>' +
+              row.lot + '</td><td>' +
+              row.exp_date + '</td><td>' +
+              row.remarks + `</td><td><button type="button" class="btn btn-sm btn-danger delete-btn" style="border-radius: 50%;" id="${row.id}" onclick="deleteProductOut(this);"><i class="fas fa-trash"></i></button></td>
+              `
+            tableBody.appendChild(tr);
+          });
           } else {
             alert('Error: ' + xhr.status);
           }
@@ -569,7 +571,6 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         var order_num = $('#order_num').val();
 
         var tableBody = document.getElementById('myTable');
-        console.log(tableBody.rows.length)
 
         if (tableBody.rows.length <= 1) {
           console.log("The DataTable is empty");
@@ -645,7 +646,6 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
             $('#lot').val('');
             $('#exp_date').val('');
             $('#remarks').val('');
-            console.log(data)
             swal.fire({
               title: "Success!",
               text: "Product successfully deleted",
@@ -677,7 +677,6 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
 
       $("#barcode2").on("change", function() {
         var barcode2 = $(this).val();
-        console.log(barcode2)
 
         $.ajax({
           type: "GET",
@@ -688,7 +687,6 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
           },
           dataType: "JSON",
           success: function(data) {
-            console.log(data)
             if (data != "Not found") {
               $("#description2").prop("readonly", false);
               $("#description2").val(data.description);
@@ -732,7 +730,6 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
           dataType: 'json',
           data: $('#search_form').serialize(),
           success: function(data) {
-            console.log(data)
             // Clear old data from the table
             // $('#example3 tbody').empty();
             var mrf = $('#mrf_search');
@@ -748,7 +745,6 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
               }).then((result) => {
                 if (result.isConfirmed) {
                   mrf.val('');
-                  console.log(tableBody)
                 } else {
                   mrf.val('');
                 }
@@ -764,7 +760,6 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
                   row.mrf + '</td>'
                 tableBody.appendChild(tr);
               });
-              console.log(tableBody)
             }
           }
         });
@@ -776,11 +771,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
 
         // Get the values from the form
         var mrf_search = $('#mrf_search').val();
-        console.log(mrf_search)
-
         var tableBody = document.getElementById('example33');
-        console.log(tableBody.rows.length)
-
 
         $.ajax({
           url: "get_prod-out.php",
@@ -791,9 +782,6 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
           },
           dataType: "JSON",
           success: $(document).ready(function(data) {
-            console.log('data')
-            console.log(data)
-
             if (tableBody.rows.length <= 1) {
               console.log("The DataTable is empty");
               swal.fire({
@@ -834,7 +822,6 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
           dataType: 'json',
           data: $('#search_form2').serialize(),
           success: function(data) {
-            console.log(data)
             // Clear old data from the table
             // $('#example3 tbody').empty();
             var mrf = $('#mrf_search2');
@@ -875,11 +862,9 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         event.preventDefault();
 
         var tableBody = document.getElementById('example8');
-        console.log(tableBody.rows.length)
 
         // Get the values from the form
         var mrf_search2 = $('#mrf_search2').val();
-        console.log(mrf_search2)
         $.ajax({
           url: "get_prod-out.php",
           type: "GET",
@@ -915,6 +900,28 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         });
       });
     });
+  </script>
+    <!-- For deleting a product in endorse form -->
+  <script>
+    function deleteProductOut(btn) {
+      $(btn).parent().parent().remove();
+      let data = new FormData();
+      data.append("id", $(btn).attr("id"));
+      data.append("action", "delete")
+      $.ajax({
+        type: "POST",
+        url: "prod-out-functions.php",
+        data: data,
+        contentType: false,
+        processData: false,
+        cache: false,
+        success: function(data) {
+        },
+        error: function(error, status, xhr) {
+          console.error(error, status, xhr);
+        }
+      });
+    }
   </script>
 
   <script>

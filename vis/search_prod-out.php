@@ -18,7 +18,7 @@ $mrf_search = $_POST['mrf_search'];
 $endorsed_by = $_POST['endorsed_by'];
 
 // Query your MySQL database and retrieve the data
-$query = "SELECT * FROM endorse_final WHERE mrf = '$mrf_search' and endorsed_by = '$endorsed_by' ORDER BY description";
+$query = "SELECT * FROM endorse_final WHERE mrf = '$mrf_search' ORDER BY description";
 $result = $conn->query($query);
 // Convert result set to JSON format
 $rows = array();

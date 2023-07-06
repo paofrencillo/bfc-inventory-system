@@ -72,7 +72,7 @@ if (isset($_GET["action"]) && $_GET["action"] === "endorse_product") {
             endorsed_date) 
             VALUES (
             '" . $row["barcode"] . "', 
-            '" . $row["description"] . "', 
+            '" . htmlspecialchars($row["description"]) . "', 
             '" . $row["quantity"] . "', 
             '" . $row["lot"] . "',
             '" . $row["branch"] . "', 
@@ -83,8 +83,6 @@ if (isset($_GET["action"]) && $_GET["action"] === "endorse_product") {
             '" . $row["endorsed_by"] . "',
             '" . $row["endorsed_date"] . "')";
 
-            
-   
             if (mysqli_query($conn, $sql2)) {
                $data = 'success';
                echo json_encode($data);
@@ -101,18 +99,8 @@ if (isset($_GET["action"]) && $_GET["action"] === "endorse_product") {
             }
       } else {
          echo "Error updating quantity" . $conn->error;
-      }
-
-      
+      }    
    }
-
-   // if (!$result->num_rows > 0){
-
-   // } else {
-   //    $data = 'nodata';
-   //    echo json_encode($data);
-   // }
-
 }
 
 // For cancel endorse product
@@ -172,7 +160,7 @@ if (isset($_GET["action"]) && $_GET["action"] === "mrfsearch") {
          endorsed_date) 
          VALUES (
          '" . $row2["barcode"] . "', 
-         '" . $row2["description"] . "', 
+         '" . htmlspecialchars($row2["description"]) . "', 
          '" . $row2["quantity"] . "', 
          '" . $row2["lot"] . "',
          '" . $row2["branch"] . "', 

@@ -27,7 +27,12 @@ $columns = array(
                 <p title="'.$d.'" style="margin-bottom: 0;">'.$data.'</p>
             ';
     }), 
-    array( 'db' => 'description', 'dt' => 1 ),
+    array( 'db' => 'description', 
+        'dt' => 1,
+        'formatter' => function( $d, $row ) {
+        $data = htmlspecialchars_decode($d);
+        return $data;
+    }),
     array( 'db' => 'quantity', 'dt' => 2 ),
     array( 'db' => 'lot', 'dt' => 3 ),
     array( 'db' => 'branch', 'dt' => 4 ),
