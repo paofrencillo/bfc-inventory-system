@@ -284,7 +284,6 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
 
         // Delete Product In before add to stocks
         function deleteProductIn(btn) {
-        console.log($(btn).attr("id"));
         $(btn).parent().parent().remove();
         let data = new FormData();
         data.append("id", $(btn).attr("id"));
@@ -334,6 +333,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
                 }, 2000);
             } else {
                 $("#description").val(data.description);
+                $("#rack").val(data.rack);
                 $("#supp").val(data.supplier);
             }
             },
@@ -370,7 +370,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
 
             let fields = document.getElementById("receive-prod-form").querySelectorAll("input");
             fields.forEach(field => {
-                if (field.name != "entry_date" && field.name != "action" && field.name != "prf" && field.name != "added-by" && field.name != "added-on" && field.name != 'rack') {
+                if (field.name != "entry_date" && field.name != "action" && field.name != "prf" && field.name != "added-by" && field.name != "added-on") {
                 field.value = '';
                 }
             });

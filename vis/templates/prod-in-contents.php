@@ -258,7 +258,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                       <div class="col-sm-3">
                         <div class="form-group">
                           <label for="rack">Rack:</label>
-                          <input type="text" class="form-control" id="rack" name="rack" onkeyup="this.value=this.value.toUpperCase();" value="N/A" required>
+                          <input type="text" class="form-control" id="rack" name="rack" onkeyup="this.value=this.value.toUpperCase();" required>
                         </div>
                       </div>
                       <div class="col-sm-3">

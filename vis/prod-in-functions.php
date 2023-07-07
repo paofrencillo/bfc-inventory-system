@@ -24,7 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
     } else if (isset($_GET["action"]) && $_GET['action'] === 'get_product') {
         $barcode = $_GET["barcode"];
         $table = "product_masterlist";
-        $query_get = "SELECT description, supplier FROM $table WHERE barcode='$barcode';";
+        $table2 = "inventory";
+        
+        $query_get = "SELECT $table.description, $table.supplier, $table2.rack
+                        FROM $table INNER JOIN $table2 ON $table.barcode=$table2.barcode WHERE $table.barcode='$barcode';";
         $result = mysqli_query($conn, $query_get);
 
         if ($result->num_rows == 0) {
@@ -34,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
             while ($row = mysqli_fetch_array($result)) {
                 $data = array(
                     "description" => htmlspecialchars_decode($row["description"]),
+                    "rack" => $row["rack"],
                     "supplier" => $row["supplier"],
                 );
                 echo json_encode($data);
