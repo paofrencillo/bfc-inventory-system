@@ -254,7 +254,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
         "paging": false,
         "autoWidth": false,
         "order": [],
-        "scrollY": 400,
+        "scrollY": 700,
         "scroller": true,
         // "deferRender":    true,
         "dom": 'Blftipr',

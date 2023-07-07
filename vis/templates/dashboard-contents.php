@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                   <?php
                   $date2 = date_create();
                   $date2 = date_format($date2, 'm-d-Y');
-                  $sql2 = "SELECT SUM(quantity) as sum FROM endorse_history WHERE endorsed_date='$date2';";
+                  $sql2 = "SELECT SUM(quantity) as sum FROM endorse_final WHERE endorsed_date='$date2';";
                   // Execute query and get result
                   $result2 = $conn->query($sql2);
 
@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
             <div class="col-md-8">
               <div class="card ">
                 <div class="card-header border-transparent bg-secondary">
-                  <h3 class="card-title font-weight-bold">Running out of stock items</h3>
+                  <h3 class="card-title font-weight-bold">Running out of stock items <span></span></h3>
 
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -158,9 +158,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                   </div>
                 </div>
                 <div class="card-body p-0">
-                  <div class="table-responsive table-hover table-sm table-borderless table-md text-center">
+                  <div class="table-responsive table-hover table-borderless table-md text-center">
                     <table id="tableout" class="table table-hover text-center m-0">
-                      <thead class="thead-light ">
+                      <thead class="thead-light">
                         <tr style="font-size: 15px">
                           <th>Description</th>
                           <th>Category</th>
@@ -204,7 +204,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                     $date = date_create();
                     $date = date_format($date, 'm-d-Y');
                     // Query to get recent data
-                    $sql = "SELECT * FROM endorse_history ORDER BY quantity AND endorsed_date ASC LIMIT 5";
+                    $sql = "SELECT * FROM endorse_final ORDER BY quantity AND endorsed_date ASC LIMIT 7";
 
                     // Execute query and get result
                     $result = $conn->query($sql);
@@ -286,7 +286,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                   <ul class="products-list product-list-in-card pl-2 pr-2">
                     <?php
                     // Query to get recent data
-                    $sql = "SELECT * FROM product_in_final ORDER BY last_edited_on DESC LIMIT 5";
+                    $sql = "SELECT * FROM product_in_final ORDER BY entry_date DESC LIMIT 7";
 
                     // Execute query and get result
                     $result = $conn->query($sql);
@@ -296,7 +296,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
                       // Display data
                       while ($row = mysqli_fetch_assoc($result)) {
                         $barcode = $row["barcode"];
-                        // echo "ID: " . $row["id"] . " - Name: " . $row["name"] . " - Date: " . $row["date_column"] . "<br>";
                     ?>
                         <li class="item">
                           <div class="product-img">
