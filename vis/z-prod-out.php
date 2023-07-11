@@ -415,7 +415,7 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
       function viewModalOut(el) {
       $.ajax({
         type: "GET",
-        url: "prod-in-functions.php",
+        url: "prod-out-functions.php",
         data: {
           "id": el.getAttribute("data-id"),
           action: "get_product_out"
