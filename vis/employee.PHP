@@ -322,7 +322,7 @@ if ($_SESSION['login_user']['is_superuser'] == '0') {
                                                   </div>
                                                   <div class="modal-footer justify-content-between">
                                                     <button type="button" class="btn btn-secondary close-modal-delete2">Cancel</button>
-                                                    <button type="submit" class="btn btn-outline-danger" name="delete_supplier">Yes,
+                                                    <button type="submit" class="btn btn-outline-danger" name="delete_employee">Yes,
                                                       Delete it</button>
                                                   </div>
                                               </div>
