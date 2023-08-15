@@ -347,23 +347,36 @@ if ($_SESSION['login_user']['is_superuser'] == '1') {
         // Submit receive products
         $("#receive-prod-form").on("submit", function(e) {
         e.preventDefault();
+        data = new FormData();
+        data.append("action", "receive_prod")
+        data.append("added-on", $("#added-on").val())
+        data.append("barcode", $("#barcode").val())
+        data.append("description", $("#description").val())
+        data.append("prf", $("#prf").val())
+        data.append("supp", $("#supp").val())
+        data.append("rack", $("#rack").val())
+        data.append("quantity", $("#quantity").val())
+        data.append("lot", $("#lot").val())
+        data.append("exp", $("#exp").val())
+        
         $.ajax({
             type: "POST",
             url: "prod-in-functions.php",
-            data: new FormData(this),
+            data: data,
             contentType: false,
             processData: false,
             cache: false,
             success: function(data) {
+            let json = JSON.parse(data)
             let tbody = document.getElementById("modal-tbody");
             let tr = document.createElement("tr");
             tr.innerHTML = `<tr>
-                                        <td>${data.barcode}</td>
-                                        <td>${data.description}</td>
-                                        <td>${data.rack}</td>
-                                        <td>${data.quantity}</td>
-                                        <td>${data.lot}</td>
-                                        <td>${data.exp}</td>
+                                        <td>${json.barcode}</td>
+                                        <td>${json.description}</td>
+                                        <td>${json.rack}</td>
+                                        <td>${json.quantity}</td>
+                                        <td>${json.lot}</td>
+                                        <td>${json.exp}</td>
                                         <td><button type="button" class="btn btn-sm btn-danger delete-btn" style="border-radius: 50%;" id="${data.id}" onclick="deleteProductIn(this);"><i class="fas fa-trash"></i></button></td>
                                     </tr>`
             tbody.appendChild(tr);
