@@ -1,6 +1,7 @@
 ## BFC-VMG Inventory System
 
-This is a web-based inventory system that keep tracks company's products as well as the order processing and dispatching of items.
+This is a web-based inventory system that keep tracks company's products as well as the order processing and dispatching of items. This project was made during our internship at Bargn Farmaceutici Phils. Co.
+<br>
 <br>
 Created using: PHP, MySQL, JavaScript, HTML, CSS and Bootstrap
 
