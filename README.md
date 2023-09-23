@@ -4,6 +4,8 @@ This is a web-based inventory system that keep tracks company's products as well
 <br>
 Created using: PHP, MySQL, JavaScript, HTML, CSS and Bootstrap
 
+### https://vmginventory.000webhostapp.com/
+
 **!!THIS IS A TESTING SITE. NOT THE ACTUAL DOMAIN OF THE SYSTEM!!**
 <br>
 
