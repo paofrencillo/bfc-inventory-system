@@ -6,7 +6,7 @@ Created using: PHP, MySQL, JavaScript, HTML, CSS and Bootstrap
 
 ### https://vmginventory.000webhostapp.com/
 
-**!!THIS IS A TESTING SITE. NOT THE ACTUAL DOMAIN OF THE SYSTEM!!**
+**!!THIS IS A DEMO SITE. NOT THE ACTUAL DOMAIN OF THE SYSTEM!!**
 <br>
 
 >Login Page
@@ -40,7 +40,7 @@ Created using: PHP, MySQL, JavaScript, HTML, CSS and Bootstrap
 <br>
 • List of the product's name, supplier, and images.
 <br>
-• !! Note: Uploading of data was not functioning on this testing site.
+• !! Note: Uploading of data was not available on this demo site.
 
 <br>
 <br>
